@@ -1,0 +1,447 @@
+// This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+// file COPYRIGHT for a list of authors, copyright holders, licensing,
+// and other details. All rights reserved.
+// 
+// ======================================================================
+
+
+////////////////////////////////////////////////////////////
+// Oracle //////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+cond qufunct cAddNum(quconst control, quvoid out, quconst inpu, 
+                     int vector num, int n) {
+  
+  quscratch scratch[n];
+
+  int index;
+  int maskbit = 0;
+  
+  if (control[0] and inpu[0]) {
+    Not(out[0]);
+  }
+  
+  if (num[maskbit] != 0) {
+    if (control[0]) {
+      Not(out[0]);
+    }
+    if (inpu[0]) {
+      Not(scratch[0]);
+    }
+  }
+  
+  for index=1 to (n-1) {
+      maskbit = index;
+      
+      if (control[0] and inpu[index]) {
+        Not(out[index]);
+      }
+      if ((num[maskbit] != 0) and control[0]) {
+        Not(out[index]);
+      }
+      if (control[0] and scratch[index-1]) {
+        Not(out[index]);
+      }
+      if ((num[maskbit] != 0) and inpu[index]) {
+          Not(scratch[index]);
+      }
+      if (inpu[index] and scratch[index-1]) {
+          Not(scratch[index]);
+      }
+      if ((num[maskbit] != 0) and scratch[index-1]) {
+          Not(scratch[index]);
+      }
+    }
+}
+
+
+
+cond qufunct cSubNum(quconst control, quvoid out, quconst inpu, 
+                     int vector num, int n) {
+
+  int index;
+  int maskbit = 0;
+  
+  quscratch scratch[n];
+  
+  if (control[0] and inpu[0]) {
+    Not(out[0]);
+  }
+  
+  if (num[maskbit] != 0) {
+    if (control[0]) {
+      Not(out[0]);
+    }
+    if (not inpu[0]) {
+      Not(scratch[0]);
+    }
+  }
+
+  for index=1 to (n-1) {
+      maskbit = index;
+      
+      if (control[0] and inpu[index]) {
+        Not(out[index]);
+      }
+      if ((num[maskbit] != 0) and control[0]) {
+        Not(out[index]);
+      }
+      if (control[0] and scratch[index-1]) {
+        Not(out[index]);
+      }
+      if ((num[maskbit] != 0) and (not inpu[index])) {
+          Not(scratch[index]);
+      }
+      if ((not inpu[index]) and scratch[index-1]) {
+          Not(scratch[index]);
+      }
+      if ((num[maskbit] != 0) and scratch[index-1]) {
+          Not(scratch[index]);
+      }
+    }
+}
+
+cond qufunct doWeld1(quconst a, quvoid b, quconst weldctrl, 
+                     int vector f, int n) {
+
+  quscratch addsub[1];
+  
+  if (weldctrl[0] and (not a[n+1])) {
+    Not(addsub);
+  }
+  cAddNum(addsub, b, a, f, n);
+  
+  if (weldctrl[0]) {
+    Not(addsub);
+  }
+  cSubNum(addsub, b, a, f, n);
+}
+
+
+cond qufunct doWeld0(quconst a, quvoid b, quconst weldctrl, 
+                     int vector g, int n) {
+  int index;
+  
+  for index=0 to (n-1) {
+      if (weldctrl[0] and ((g[index] == 1) xor a[index])) {
+          Not(b[index]);
+      }
+    }
+}
+
+
+cond qufunct setWeld(quconst a, quvoid b, quconst childctrl,
+                     quconst direction,
+                     int vector f, int vector g, int n) {
+  
+  quscratch weldctrl[1];
+
+  if (childctrl[0] and (not direction[0])) {
+    Not(weldctrl);
+  }
+  doWeld0(a, b, weldctrl, f, n);
+
+  if (childctrl[0]) {
+    Not(weldctrl);
+  }
+  doWeld1(a, b, weldctrl, g, n);
+  
+  if (childctrl[0] and a[n+1]) {
+    Not(b[n+1]);
+  }
+  if (childctrl[0]){
+    Not(b[n]);
+    Not(b[n+1]);
+  }
+}
+
+
+cond qufunct setChildInTree(quconst a, quvoid b, quconst childctrl,
+                            quconst direction, int n) {
+  int index;
+  
+  if (childctrl[0] and direction[0]) {
+    Not(b[0]);
+  }
+  for index=1 to n {
+      if (childctrl[0] and a[index-1]) {
+        Not(b[index]);
+      }
+    }
+  if (childctrl[0] and a[n+1]) {
+    Not(b[n+1]);
+  }
+}
+
+
+
+cond qufunct setChild(quconst a, quvoid b, quconst ischild,
+                      quconst direction, 
+                      int vector f, int vector g, int n) {
+
+  quscratch childctrl[1];
+  
+  if (ischild[0] and a[n]) {
+    Not(childctrl);
+  }
+  setWeld(a, b, childctrl, direction, f, g, n);
+  
+  if (ischild[0]) {
+    Not(childctrl);
+  }
+  setChildInTree(a, b, childctrl, direction, n);
+}
+
+
+
+
+
+cond qufunct parseNodeRoot(quconst a, quvoid root, quvoid even, int n) {
+  quscratch scratch[n+1];
+  int index;
+  
+  for index=n to 1 step -1 {
+      if ((not scratch[index]) and a[index]) {
+        Not(scratch[index-1]);
+      }
+      if (scratch[index]) {
+        Not(scratch[index-1]);
+      }
+    }
+  if (not scratch[0]) {
+    Not(root);
+    Not(even);
+  }
+}
+
+
+cond qufunct parseNodeEven(quconst a, quvoid even, int n) {
+  quscratch scratch[n+1];
+  int index;
+  
+  for index=n to 1 step -1 {
+      if ((not scratch[n]) and a[index]) {
+        Not(scratch[index-1]);
+        if ((index mod 2) == 0) {
+          Not(even);
+        }
+      }
+      if (scratch[index-1]) {
+        Not(scratch[n]);
+      }
+    }
+}
+
+cond qufunct testIsParent(quconst a, quconst root, quconst even, 
+                          quvoid isparent, 
+                          int vector color, int n, int really, 
+                          quvoid ismatch) {
+   if (really == 0) {  
+    if ((not root[0]) and ismatch[0]) {
+      Not(isparent);
+    }
+  }
+  if (color[1] == 1) {
+    if (color[0] == 1) {
+      if (even[0] and a[0]) {
+        Not(ismatch);
+      }
+    }
+    else {
+      if (even[0] and (not a[0])) {
+        Not(ismatch);
+      }
+    }
+  }
+  else {
+    if (color[0] == 1) {
+      if ((not even[0]) and a[0]) {
+        Not(isparent);
+      }
+    }
+    else {
+      if ((not even[0]) and (not a[0])) {
+        Not(isparent);
+      }
+    }
+  }
+  if ((not root[0]) and ismatch[0]) {
+    Not(isparent);
+  }
+}
+
+
+cond qufunct testIsChild(qureg even, qureg ischild, qureg direction,
+                         int vector color, int n) {
+  if (color[1] == 1) {
+    if (not even[0]) {
+      Not(ischild);
+    }
+  }
+  else {
+    if (even[0]) {
+      Not(ischild);
+    }
+  }
+  if (color[0] == 1) {
+    Not(direction);
+  }
+}
+
+
+cond qufunct setParent(quconst a, quvoid b, quconst isparent, int n) {
+  int index;
+  
+  for index=0 to (n-1) {
+      if (isparent[0] and a[index+1]) {
+        Not(b[index]);
+      }
+    }
+  if (isparent[0] and a[n+1]) {
+    Not(b[n+1]);
+  }
+}
+
+
+
+
+
+
+
+
+cond qufunct oraclefun(int c, quconst a, quvoid b, quvoid r,
+                  int vector f, int vector g) {
+  int vector color[2];
+  int n = #f;
+  
+  quscratch root[1];
+  quscratch even[1];
+  quscratch isparent[1];
+  quscratch ischild[1];
+  quscratch direction[1];
+  quscratch ismatch[1];
+  
+  if (c == 0) { color[0] = 0; color[1] = 0; }
+  if (c == 1) { color[0] = 1; color[1] = 0; }
+  if (c == 2) { color[0] = 0; color[1] = 1; }
+  if (c == 3) { color[0] = 1; color[1] = 1; }
+  
+  parseNodeRoot(a, root, even, n);
+  parseNodeEven(a, even, n);
+  testIsParent(a, root, even, isparent, color, n, 1, ismatch);
+  testIsChild(even, ischild, direction, color, n);
+
+  setParent(a, b, isparent, n);
+  setChild(a, b, ischild, direction, f, g, n);
+  if ((not isparent[0]) and (not ischild[0])) {
+    Not(r);
+  }  
+}
+
+
+
+////////////////////////////////////////////////////////////
+// Timestep ////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+operator wGateInv(qureg a, qureg b) {
+  Matrix4x4(1,0,0,0,
+            0,sqrt(2)/2,sqrt(2)/2,0,
+            0,sqrt(2)/2,-sqrt(2)/2,0,
+            0,0,0,1,
+            a[0]&b[0]);
+}
+
+operator toffoliGate(qureg a, qureg b, qureg h){
+  Not(b[0]);
+  CNot(h[0],a[0]&b[0]);
+  Not(b[0]);
+}
+
+
+operator controlledExpGate(real dt, qureg r, qureg h){
+  Not(r[0]);
+  Matrix4x4(1,0,0,0,
+            0,1,0,0,
+            0,0,exp(-(0,1)*dt),0,
+            0,0,0,exp((0,1)*dt),
+            r[0]&h[0]);
+  Not(r[0]);
+}
+
+
+operator timestep(qureg a, qureg b, qureg r, real dt, int m) {
+  qureg h[1];
+  
+  int i;
+  
+  for i=0 to (m-1) {
+      !wGateInv(a[i], b[i]);
+    }
+  for i=0 to (m-1) {
+      toffoliGate(a[i], b[i], h);
+    }
+  
+  controlledExpGate(dt, r, h);
+  
+  for i=(m-1) to 0 step -1 {
+      toffoliGate(a[i], b[i], h);
+    }
+
+  for i=(m-1) to 0 step -1 {
+      wGateInv(a[i], b[i]);
+    }
+}
+
+
+////////////////////////////////////////////////////////////
+// Main procedure //////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+
+procedure quinit(qureg a) {
+  Not(a[#a-1]);
+  Not(a[0]);  
+}
+
+
+
+procedure bwt(int n, int s, real dt) {  
+  
+  int k = 4;
+  int m = n+2;
+  
+  qureg a[m];
+  qureg b[m];
+  qureg r[1];
+  
+  int vector f[n];
+  int vector g[n];
+  
+  int j;
+  int c;
+  
+  reset;
+  quinit(a);
+  
+  g[n-1] = 1;
+  
+  for j=0 to (s-1) {
+      for c=0 to (k-1) {
+          oraclefun(c, a, b, r, f, g);
+          timestep(a, b, r, dt, m);
+          !oraclefun(c, a, b, r, f, g);
+        }
+    }
+}
+
+bwt(4,1,0.1);
+
+
+/*
+qureg a[11];
+qureg e[1];
+qureg r[1];
+
+parseNodeRoot(a, r, e, 9);
+*/
