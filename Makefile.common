@@ -1,0 +1,104 @@
+# This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+# file COPYRIGHT for a list of authors, copyright holders, licensing,
+# and other details. All rights reserved.
+# 
+# ======================================================================
+
+# COMMON MAKEFILE - this is included by the Algorithm, Libraries, and
+# Programs Makefiles.
+# 
+# ----------------------------------------------------------------------
+# Setting up compilers and compiler flags. These can be overridden on
+# the command line, e.g. "make QUIPPER=/path/to/quipper"
+
+THISDIR=$(CURDIR)
+BASEDIR_REL:=$(THISDIR)/$(BASEDIR)
+BASEDIR_ABS:=$(shell cd "$(BASEDIR_REL)"; pwd -P)
+QUIPPERDIR:=$(BASEDIR_ABS)/quipper
+
+QUIPPER:="$(QUIPPERDIR)/scripts/quipper"
+
+# resource related compiler options
+QUIPPER_RES_OPTS:=-rtsopts -with-rtsopts=-K50m
+
+# optimization related compiler options
+QUIPPER_OPT_OPTS:=-O
+
+# import related compiler options
+QUIPPER_I_OPTS:=-i"$(QUIPPERDIR)" -i"$(BASEDIR_ABS)"
+
+# other compiler options
+QUIPPER_GEN_OPTS:=-fwarn-incomplete-patterns -Werror
+
+# default options
+QUIPPER_OPTS:=$(QUIPPER_OPT_OPTS) $(QUIPPER_RES_OPTS) $(QUIPPER_I_OPTS) $(QUIPPER_GEN_OPTS)
+
+# ----------------------------------------------------------------------
+# Restrict the search path for make
+.SUFFIXES:
+.SUFFIXES: .hs .html
+
+# ----------------------------------------------------------------------
+# Default rule
+
+all: $(TARGET)
+
+# ----------------------------------------------------------------------
+# Faster compilation: "make fast <target>" will skip optimization
+
+fast: 
+	$(eval QUIPPER_OPT_OPTS :=)
+
+# ----------------------------------------------------------------------
+# Building the main executable
+
+ifdef MAIN
+
+# Build a program
+$(TARGET): $(MODULES)
+	@if test -z "$(SUBDIR)"; then echo "Error: SUBDIR must be set" >& 2; exit 1; fi	
+	echo "import qualified $(MAIN_IS)" > MainStub.hs
+	echo "main = $(MAIN_IS).main" >> MainStub.hs
+	cd $(BASEDIR_ABS); $(QUIPPER) $(QUIPPER_OPTS) -o "$(SUBDIR)/$(TARGET)" "$(SUBDIR)/MainStub.hs" && touch -c "$(SUBDIR)/$(TARGET)"
+	rm -f MainStub.hs
+
+else
+ifdef MULTIPLE_MAINS
+
+# Build multiple programs
+$(TARGET): $(MODULES)
+	@if test -z "$(SUBDIR)"; then echo "Error: SUBDIR must be set" >& 2; exit 1; fi	
+	cd $(BASEDIR_ABS); $(QUIPPER) $(QUIPPER_OPTS) -i"$(SUBDIR)" "$(@:%=$(SUBDIR)/%.hs)" && touch -c "$(@:%=$(SUBDIR)/%)"
+
+else
+
+# Build libraries
+$(TARGET):
+	@if test -z "$(SUBDIR)"; then echo "Error: SUBDIR must be set" >& 2; exit 1; fi	
+	cd $(BASEDIR_ABS); $(QUIPPER) $(QUIPPER_OPTS) $(@:%.hi=$(SUBDIR)/%.hs) && touch -c $(@:%.hi=$(SUBDIR)/%.hi)
+
+endif
+endif
+
+# ----------------------------------------------------------------------
+# Dependencies
+
+include Makefile.dep
+
+# ----------------------------------------------------------------------
+# Integrate with other Makefiles
+
+$(QUIPPERDIR)/Quipper.hi: 
+	cd $(QUIPPERDIR); $(MAKE) Quipper.hi
+
+# ----------------------------------------------------------------------
+# Cleaning
+
+tidy:
+	for dir in . $(CLEAN_SUBDIRS); do \
+	    rm -f "$$dir"/*.o "$$dir"/*.hi; \
+	done
+	rm -f MainStub.hs
+
+clean: tidy
+	rm -f $(TARGET) $(TARGET:%=%.exe)

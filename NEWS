@@ -1,0 +1,32 @@
+This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+file COPYRIGHT for a list of authors, copyright holders, licensing,
+and other details. All rights reserved.
+
+======================================================================
+
+September 2, 2013: Release 0.5
+
+ * Portability: fixed GHC 7.6.2 incompatibility bugs.
+ * Portability: fixed Windows incompatibility bug. Handling of Ctrl-C
+   may or may not work on Windows, depending on console.
+ * Added quipperi script, analogous to ghci.
+ * New library QuipperLib.ClassicalOptim: algebraic optimization of
+   auto-generated classical circuits. Added "optimized" oracle to BWT
+   algorithm.
+ * QuipperLib.Decompose: Added decomposition into a "standard" gate
+   set, consisting of X, Y, Z, H, S, S-dagger, T, T-dagger, and CNOT.
+   Added KeepPhase flag to some transformers.
+ * QuipperLib.GateDecompositions: added more gates.
+ * New library Libraries.Synthesis.RotationDecomposition: implements a
+   variant of the algorithm from Nielsen and Chuang to decompose an
+   nxn unitary operator into one- and two-level rotations.
+ * New library QuipperLib.Unboxing: unboxing transformers.
+ * Updated ASCII output format; improved circuit parser efficiency.
+ * Miscellaneous bug fixes: malformed W-gates, qdata_of_qubits,
+   floorlog.
+ * Fixed handling of iterated subroutines in depth transformer.
+ * Documentation updates and minor refactoring.
+
+June 19, 2013: Release 0.4
+
+ First public release.

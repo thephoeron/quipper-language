@@ -1,0 +1,86 @@
+This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+file COPYRIGHT for a list of authors, copyright holders, licensing,
+and other details. All rights reserved.
+
+======================================================================
+
+
+                  INSTALLATION INSTRUCTIONS ON LINUX
+
+
+I. Operating system
+   ================
+
+Quipper has been tested on Ubuntu 12.10 and OpenSUZE 12.2. It should
+run on many different flavors of Linux and other POSIX-like systems.
+
+
+II. Prerequisites
+    =============
+
+The following should be installed:
+
+ * bash
+ * make
+ * sed
+ * gawk
+ * ghc
+ * cabal-install
+ * acroread
+
+Installed, they should provide all the tools described below.
+
+
+III. Programming resources to assemble/compile/interpret the code
+     ============================================================
+
+The versions of software listed below are what we used for
+testing. Chances are that Quipper will work with other (especially
+later) versions as well.
+
+ * A POSIX command line environment, with at least:
+     + GNU bash v.4.2.10
+     + GNU make v.3.82
+     + GNU sed v.4.2.1
+     + GNU gawk v.4.0.0
+   Vendor: Free Software Foundation
+ 
+ * The Glasgow Haskell Compiler (ghc), v.7.4.2
+   Vendor: The University Court of the University of Glasgow.
+ 
+ * cabal v.0.14.0
+   Prepackaged with ghc.
+   Vendor: The University Court of the University of Glasgow.
+
+
+For preview features:
+
+ * X Server v.1.10.4
+   Vendor: X.Org
+
+ * Acrobat Reader (for preview feature)
+   v.9.2
+   Vendor: Adobe
+
+
+IV. Programming resources used to create and debug the code
+    =======================================================
+
+A text editor, e.g:
+
+ * GNU emacs v.24.2
+   Vendor: Free Software Foundation
+
+A web browser for reading the documentation, e.g:
+
+ * Firefox v.17
+   Vendor: Mozilla Foundation
+
+
+There is also an optional Haskell mode for emacs. You can get it at:
+http://projects.haskell.org/haskellmode-emacs/haskell-mode-2.8.0.tar.gz
+
+V. Further Instructions
+   ====================
+
+Continue with the instructions in the file "README".

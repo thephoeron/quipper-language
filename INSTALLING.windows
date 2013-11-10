@@ -1,0 +1,282 @@
+This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+file COPYRIGHT for a list of authors, copyright holders, licensing,
+and other details. All rights reserved.
+
+======================================================================
+
+
+                 INSTALLATION INSTRUCTIONS ON WINDOWS
+
+             Benoit Valiron <benoit.valiron@monoidal.net>
+
+
+I. Introduction
+   ============
+
+We have tested the installation on a Lenovo Thinkpad X220 with Windows
+7 Professional, Service Pack 1. Other configurations will likely also
+work.  Please note that version numbers of software listed below
+reflects the versions that we used for testing. Other versions
+(especially newer ones) will likely also work. 
+
+Prerequisites. The following tools are needed for Quipper to compile
+and run:
+
+ * The Glasgow Haskell Compiler (ghc), v.7.4.2
+   Vendor: The University Court of the University of Glasgow.
+
+ * cabal.exe v.0.14.0
+   Prepackaged with ghc.
+   Vendor: The University Court of the University of Glasgow.
+
+ * The bundle of POSIX tools in MSYS v.1.0.11. In particular:
+      bash v.3.1.17 (original vendor: Free Software Foundation)
+      make v.3.81 (original vendor: Free Software Foundation)
+      sed v.4.2.1 (original vendor: Free Software Foundation)
+      gawk v.3.1.7 (original vendor: Free Software Foundation)
+   Vendor: MSYS.org
+
+ * Acrobat Reader v.11.0
+   Vendor: Adobe
+
+
+Under Windows, the software development environment consists of
+
+ * A Windows operating system:
+   Microsoft Windows 7 x64
+   Vendor: Microsoft
+
+ * The DOS command line 
+   cmd.exe, v.6.1.7601
+
+ * A text editor, e.g.
+   Notepad v.6.1, bundled with Windows 7
+   Vendor: Microsoft
+
+ * A web browser for reading the documentation, e.g.
+   Firefox v.17
+   Vendor: Mozilla Foundation
+
+Note that the above components are sufficient to create, debug, and
+assemble/compile/interpret the original source code of Quipper and the
+accompanying libraries, algorithm implementations, and other
+accompanying programs.
+
+
+Optionally, you can use the Emacs text editor, and the optional
+Haskell mode for Emacs:
+
+ * Emacs v.2.24.2
+   Vendor: Free Software Foundation
+
+ * haskell-mode for emacs, v.2.8.0
+   Vendor: Free Software Foundation
+
+
+In the following, we'll go step by step on installing the compilation
+tools, and we briefly mention how to configure the optional Emacs
+interface.
+
+
+II. Installation
+    ============
+
+1. GHC
+   ---
+
+General webpage: http://www.haskell.org/ghc/
+
+Direct link for download: 
+http://www.haskell.org/ghc/dist/7.4.2/ghc-7.4.2-i386-windows.exe
+
+You can change the default path for installation, but you must choose
+a path name that does not contain any white space characters.
+
+Otherwise, just keep the defaults.
+
+
+2. cabal.exe
+   ---------
+
+General webpage: http://www.haskell.org/cabal/download.html
+
+Direct link for download:
+http://www.haskell.org/cabal/release/cabal-install-0.10.2/cabal.exe
+
+Download it and place it in the bin directory the ghc installation
+path. E.g., if you stayed with the default place it in
+
+      c:\ghc\ghc-7.4.2\bin
+
+Test that everything went well by going to the 
+
+task bar -> all programs -> GHC -> 7.4.2 -> ghci
+
+and make sure you get a prompt.
+
+
+3. Acrobat Reader
+   --------------
+
+You probably already have that one, but just in case:
+http://get.adobe.com/reader/
+
+
+4. POSIX tools
+   -----------
+
+a. Download and installation
+   .........................
+
+For these, I suggest MSYS.
+Webpage:
+http://www.mingw.org/wiki/MSYS
+
+Direct download:
+http://downloads.sourceforge.net/mingw/MSYS-1.0.11.exe
+
+The installation proposes c:\msys\1.0 as the installation directory;
+this is a good choice. If you change it, again I suggest using a path
+name that does not contain any white space characters.
+
+A post-installation script performs some checks. When prompted, answer
+saying you do not have MinGW.
+
+
+b. Update of the PATH variable
+   ...........................
+
+Go in the system properties, select advanced -> environment variables
+(at the bottom) -> edit the user variable PATH by adding at the end
+ 
+   ;c:\msys\1.0\bin
+
+Note: Now, there should be msys in your path.
+
+
+c. Check
+   .....
+
+Open a console and type "sh --login -i". You should see a new prompt. Type
+"make". You should see the message "make *** no targets specified"
+
+You can also use the bat file c:\msys\1.0\msys.bat.
+
+I'll refer to this shell as the msys-shell.
+
+
+
+d. (OPTIONAL) Configure to use with Emacs
+   ......................................
+
+In Emacs, open ~/.profile and write the following:
+
+    export PS1="\n\w\n\u@\h $ "
+
+It will set the prompt to black-and-white, more manageable by
+Emacs. \w is the working directory, \u is the user name and \h the
+name of the machine. \n is the new line.
+
+Now, instead of the console you can use the emacs command "M-x shell"
+and run
+
+  sh --login -i
+
+inside if you prefer.
+
+
+
+
+5. (OPTIONAL) Haskell Mode
+   -----------------------
+
+Webpage: http://projects.haskell.org/haskellmode-emacs/
+Direct download link:
+http://projects.haskell.org/haskellmode-emacs/haskell-mode-2.8.0.tar.gz
+
+Uncompress the tarball, for example with 7zip v.9.20 (vendor: 7-zip.org),
+and you should have a directory "haskell-mode-2.8.0".
+
+Move it to a directory of lisp files, for example .emacs.d/lisp/, or
+to the directory site-lisp of your emacs directory structure.
+
+Then open your init file (for example, ~/.emacs), and place the
+following in it:
+
+   (load "PATH_TO_HASKELL_MODE/haskell-site-file")
+
+   (add-hook 'haskell-mode-hook
+          '(lambda ()
+             (local-set-key "\C-c\C-c" 'compile)))
+
+The first line sets up the coloring.  The second line is to remap
+C-cC-c to the default compilation mode (the haskell mode has a
+different, but bad, idea: it remaps it to the interpreter).
+
+Now, when you open any ".hs" file in Emacs, it should automatically be
+colored according to syntactic classes.
+
+
+
+III. Configuration of GHC for compiling Quipper
+     ==========================================
+
+In the msys-shell, perform the following:
+
+cabal update
+
+then:
+
+cabal install random
+cabal install mtl
+cabal install primes
+cabal install Lattices
+cabal install zlib
+cabal install fixedprec
+cabal install containers
+cabal install set-monad
+cabal install quickcheck
+
+You now have all the necessary Haskell libraries.
+
+If you go (with the command cd) to the directory where you unzipped
+Quipper, you can run the command "make" and it should produce an
+executable file in each Algorithm subdirectory.
+
+Special note for GHC 7.4.2:
+===========================
+
+The combination of GHC 7.4.2 and Template Haskell 2.8.0.0 is not
+possible, because it triggers a GHC bug. If you get a compilation
+error of the form: "ghc: panic! (the 'impossible' happened)", follow
+these steps:
+
+# Remove Template Haskell 2.8.0.0:
+
+ghc-pkg unregister --force template-haskell-2.8.0.0
+
+# Reinstall quickcheck (because of a broken dependency). This will
+# also install template-haskell-2.7.0.0:
+
+cabal install quickcheck
+
+
+IV. Auxiliary files
+    ===============
+
+Quipper has a "preview" function for visualizing circuits in PDF. For
+it to work, one needs to place the batch file acroread.bat (located in
+the "scripts" directory) somewhere in the PATH, for example in
+c:\msys\1.0\bin.
+
+There is also a batch file quipper.bat for compiling Quipper
+programs. For convenience, one can add the scripts directory to the
+PATH to easily use them. If you move the batch files around, make sure
+to move the other scripts to the same directory as the batch files,
+and to update QUIPPER_BASE in the "quipper" and "quipperi" scripts to
+point to the directory where the Quipper sources are located.
+
+V. Further Instructions
+   ====================
+
+Continue with the instructions in the file "README".
