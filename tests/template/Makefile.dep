@@ -1,0 +1,18 @@
+# This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+# file COPYRIGHT for a list of authors, copyright holders, licensing,
+# and other details. All rights reserved.
+# 
+# ======================================================================
+
+Test1 Test1.hi: Test1.hs ../../Libraries/Template.hs ../../Libraries/Template/Lifting.hs ../../Libraries/Template/Auxiliary.hs ../../Libraries/Template/LiftQ.hs ../../Libraries/Template/ErrorMsgQ.hs ../../Libraries/Auxiliary.hs
+Test2 Test2.hi: Test2.hs ../../Libraries/Template.hs ../../Libraries/Template/Lifting.hs ../../Libraries/Template/Auxiliary.hs ../../Libraries/Template/LiftQ.hs ../../Libraries/Template/ErrorMsgQ.hs ../../Libraries/Auxiliary.hs
+Test1.hi: Test1.hs ../../Libraries/Template.hi
+../../Libraries/Template.hi: ../../Libraries/Template.hs ../../Libraries/Template/Lifting.hi ../../Libraries/Template/Auxiliary.hi
+../../Libraries/Template/Lifting.hi: ../../Libraries/Template/Lifting.hs ../../Libraries/Template/LiftQ.hi
+../../Libraries/Template/LiftQ.hi: ../../Libraries/Template/LiftQ.hs ../../Libraries/Template/ErrorMsgQ.hi ../../Libraries/Template/ErrorMsgQ.hi
+../../Libraries/Template/ErrorMsgQ.hi: ../../Libraries/Template/ErrorMsgQ.hs
+../../Libraries/Template/Auxiliary.hi: ../../Libraries/Template/Auxiliary.hs ../../Libraries/Auxiliary.hi
+../../Libraries/Auxiliary.hi: ../../Libraries/Auxiliary.hs
+Test2.hi: Test2.hs ../../Libraries/Template.hi
+Test1Import.hi: Test1Import.hs
+Test2Import.hi: Test2Import.hs
