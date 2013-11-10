@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>QuipperLib.GateDecompositions</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_QuipperLib-GateDecompositions.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/QuipperLib/GateDecompositions.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">QuipperLib.GateDecompositions</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Decomposition of gates
+</a></li><li><a href="#g:2">Decomposition of controls
+</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>This library contains special decompositions of particular gates
+ into particular gate bases. It also contains functions for
+ decomposing multiple controls.
+</p><p>For example, we provide particular decompositions of the Toffoli,
+ Fredkin, doubly-controlled <em>iX</em>-gate, and certain other controlled
+ Clifford gates, into the Clifford+<em>T</em> base. In some cases, we
+ provide more than one decomposition.
+</p><p>Many of these decompositions are taken or adapted from the
+ literature, for example, from:
+</p><ul><li> M. A. Nielsen and I. L. Chuang, 
+ <em>Quantum Computation and Quantum Information</em>,
+ Cambridge University Press, 2002.
+</li><li> M. Amy, D. Maslov, M. Mosca, and M. Roetteler,
+ A meet-in-the-middle algorithm for fast synthesis 
+ of depth-optimal quantum circuits,
+ <em>IEEE Transactions on Computer-Aided Design of</em> 
+ <em>Integrated Circuits and Systems</em> 32(6):818-830.
+ Also available from <a href="http://arxiv.org/abs/1206.0758">http://arxiv.org/abs/1206.0758</a>.
+</li><li> A. Barenco, C. H. Bennett, R. Cleve, D. P. DiVincenzo,
+ N. Margolus, P. Shor, T. Sleator, J. A. Smolin, and H. Weinfurter,
+ Elementary gates for quantum computation,
+ <em>Physical Review A</em> 52(5):3457-3467, 1995. 
+ Also available from <a href="http://arxiv.org/abs/quantph/9503016">http://arxiv.org/abs/quantph/9503016</a>.
+</li><li> P. Selinger, Quantum circuits of T-depth one,
+ <em>Physical Review A</em> 87, 042302 (4 pages), 2013.
+ Also available from <a href="http://arxiv.org/abs/1210.0974">http://arxiv.org/abs/1210.0974</a>.
+</li><li> B. Giles and P. Selinger, Exact synthesis of multiqubit
+ Clifford+T circuits, <em>Physical Review A</em> 87, 032332 (7 pages),
+ 2013.  Also available from <a href="http://arxiv.org/abs/1212.0506">http://arxiv.org/abs/1212.0506</a>.
+</li></ul></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><a href="#v:toffoli_NC_at">toffoli_NC_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:toffoli_AMMR_at">toffoli_AMMR_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:toffoli_V_at">toffoli_V_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:toffoli_S_at">toffoli_S_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:cc_iX_at">cc_iX_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:cc_iX_simple_at">cc_iX_simple_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:cc_iX_S_at">cc_iX_S_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:ccZ_AMMR_at">ccZ_AMMR_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:ccZ_S_at">ccZ_S_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:fredkin_at">fredkin_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:cH_AMMR_at">cH_AMMR_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:controlled_W_at">controlled_W_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:gate_W_CliffordT_at">gate_W_CliffordT_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:controlled_iX_at">controlled_iX_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:controlled_S_at">controlled_S_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:controlled_T_at">controlled_T_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:controlled_V_at">controlled_V_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:controlled_E_at">controlled_E_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:controlled_YY_at">controlled_YY_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:toffoli_plain_at">toffoli_plain_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:cc_iX_plain_at">cc_iX_plain_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:multi_cnot_barenco_at">multi_cnot_barenco_at</a> :: (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:multi_ciX_noancilla_at">multi_ciX_noancilla_at</a> :: (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:partition_controls">partition_controls</a> :: &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93; -&gt; (&#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93;, &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Bit">Bit</a>&#93;)</li><li class="src short"><a href="#v:with_signed_qubit">with_signed_qubit</a> ::  <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b</li><li class="src short"><a href="#v:with_combined_controls">with_combined_controls</a> ::  (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93; -&gt; (&#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> a) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> a</li></ul></div><div id="interface"><h1 id="g:1">Decomposition of gates
+</h1><div class="top"><p class="src"><a name="v:toffoli_NC_at" class="def">toffoli_NC_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-53" class="link">Source</a></p><div class="doc"><p>Decomposition of the Toffoli gate into the Clifford+<em>T</em> base,
+ from Nielsen and Chuang (Figure 4.9). The first argument is the
+ target, and the other two are the controls. The controls can be
+ positive or negative.
+</p><p><img src="images/toffoli_NC.png">
+</p></div></div><div class="top"><p class="src"><a name="v:toffoli_AMMR_at" class="def">toffoli_AMMR_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-86" class="link">Source</a></p><div class="doc"><p>Decomposition of the Toffoli gate into the Clifford+<em>T</em> base,
+ from Amy et al. (<a href="http://arxiv.org/abs/1206.0758v3">http://arxiv.org/abs/1206.0758v3</a>, Figure
+ 13). The first argument is the target, and the other two are the
+ controls. The controls can be positive or negative.
+</p><p><img src="images/toffoli_AMMR.png">
+</p></div></div><div class="top"><p class="src"><a name="v:toffoli_V_at" class="def">toffoli_V_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-100" class="link">Source</a></p><div class="doc"><p>Decomposition of the Toffoli gate using controlled Clifford
+ operators, from Nielsen and Chuang (Figure 4.8). The controls can be
+ positive or negative.
+</p><p><img src="images/toffoli_V.png">
+</p></div></div><div class="top"><p class="src"><a name="v:toffoli_S_at" class="def">toffoli_S_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-119" class="link">Source</a></p><div class="doc"><p>Decomposition of the Toffoli gate into the Clifford+<em>T</em> base,
+ using <em>T</em>-depth 1 and four ancillas. From
+ <a href="http://arxiv.org/abs/1210.0974">http://arxiv.org/abs/1210.0974</a> (Figure 1). The first argument is
+ the target, and the other two are the controls. The controls can be
+ positive or negative.
+</p><p><img src="images/toffoli_S.png">
+</p></div></div><div class="top"><p class="src"><a name="v:cc_iX_at" class="def">cc_iX_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-135" class="link">Source</a></p><div class="doc"><p>Decomposition of the doubly-controlled <em>iX</em>-gate into the
+ Clifford+<em>T</em> base, using <em>T</em>-count 4 and <em>T</em>-depth 2. Adapted from
+ (<a href="http://arxiv.org/abs/1210.0974">http://arxiv.org/abs/1210.0974</a>, Figure 10). The first argument
+ is the target, and the other two are the controls. The controls can
+ be positive or negative.
+</p><p><img src="images/cc_iX.png">
+</p></div></div><div class="top"><p class="src"><a name="v:cc_iX_simple_at" class="def">cc_iX_simple_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-166" class="link">Source</a></p><div class="doc"><p>Decomposition of the doubly-controlled <em>iX</em>-gate into the
+ Clifford+<em>T</em> base, using <em>T</em>-count 4, and using the control qubits
+ only as controls. Derived from Nielsen and Chuang (Figure 4.9). The
+ controls can be positive or negative.
+</p><p><img src="images/cc_iX_simple.png">
+</p></div></div><div class="top"><p class="src"><a name="v:cc_iX_S_at" class="def">cc_iX_S_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-188" class="link">Source</a></p><div class="doc"><p>Decomposition of the doubly-controlled <em>iX</em>-gate into the
+ Clifford+<em>T</em> base, using <em>T</em>-depth 1 and one ancilla. Adapted from
+ (<a href="http://arxiv.org/abs/1210.0974">http://arxiv.org/abs/1210.0974</a>, Figure 9). The first argument
+ is the target, and the other two are the controls. The controls can
+ be positive or negative.
+</p><p><img src="images/cc_iX_S.png">
+</p></div></div><div class="top"><p class="src"><a name="v:ccZ_AMMR_at" class="def">ccZ_AMMR_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-224" class="link">Source</a></p><div class="doc"><p>Decomposition of the doubly-controlled <em>Z</em>-gate into the
+ Clifford+<em>T</em> base. Adapted from Amy et
+ al. (<a href="http://arxiv.org/abs/1206.0758v3">http://arxiv.org/abs/1206.0758v3</a>, Figure 13). The controls can
+ be positive or negative.
+</p><p><img src="images/ccZ_AMMR.png">
+</p></div></div><div class="top"><p class="src"><a name="v:ccZ_S_at" class="def">ccZ_S_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-255" class="link">Source</a></p><div class="doc"><p>Decomposition of the doubly-controlled <em>Z</em>-gate into the
+ Clifford+<em>T</em> base, using <em>T</em>-depth 1 and four ancillas. From
+ Selinger (<a href="http://arxiv.org/abs/1210.0974">http://arxiv.org/abs/1210.0974</a>, Figure 1). The controls
+ can be positive or negative.
+</p><p><img src="images/ccZ_S.png">
+</p></div></div><div class="top"><p class="src"><a name="v:fredkin_at" class="def">fredkin_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-296" class="link">Source</a></p><div class="doc"><p>Decomposition of the Fredkin (controlled-Swap) gate into the
+ Clifford+<em>T</em> base. The first two arguments are the targets, and the
+ last one the control. The controls can be positive or negative.
+</p><p><img src="images/fredkin.png">
+</p></div></div><div class="top"><p class="src"><a name="v:cH_AMMR_at" class="def">cH_AMMR_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-311" class="link">Source</a></p><div class="doc"><p>Decomposition of a controlled <em>H</em>-gate into the Clifford+<em>T</em>
+ base. From Amy et al. (<a href="http://arxiv.org/abs/1206.0758v3">http://arxiv.org/abs/1206.0758v3</a>, Figure
+ 5(a)). The first argument is the target and the second one the
+ control. The control can be positive or negative.
+</p><p><img src="images/cH_AMMR.png">
+</p></div></div><div class="top"><p class="src"><a name="v:controlled_W_at" class="def">controlled_W_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-328" class="link">Source</a></p><div class="doc"><p>Decomposition of a controlled <em>W</em>-gate into the Clifford+<em>T</em>
+ base. The first two arguments are the targets, and the last
+ argument is the control. The control can be positive or negative.
+</p><p><img src="images/controlled_W.png">
+</p></div></div><div class="top"><p class="src"><a name="v:gate_W_CliffordT_at" class="def">gate_W_CliffordT_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-346" class="link">Source</a></p><div class="doc"><p>Decomposition of a <em>W</em>-gate into the Clifford+<em>T</em> base.
+</p><p><img src="images/gate_W_CliffordT.png">
+</p></div></div><div class="top"><p class="src"><a name="v:controlled_iX_at" class="def">controlled_iX_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-360" class="link">Source</a></p><div class="doc"><p>Decomposition of a controlled <em>iX</em>-gate into the Clifford+<em>T</em>
+ base. The first argument is the target, and the second one is the
+ control. The control can be positive or negative.
+</p><p><img src="images/controlled_iX.png">
+</p></div></div><div class="top"><p class="src"><a name="v:controlled_S_at" class="def">controlled_S_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-378" class="link">Source</a></p><div class="doc"><p>Decomposition of a controlled <em>S</em>-gate into the Clifford+<em>T</em>
+ base. From Amy et al. (<a href="http://arxiv.org/abs/1206.0758v3">http://arxiv.org/abs/1206.0758v3</a>, Figure
+ 5(b)). The first argument is the target, and the second one is the
+ control. The control can be positive or negative.
+</p><p><img src="images/controlled_S.png">
+</p></div></div><div class="top"><p class="src"><a name="v:controlled_T_at" class="def">controlled_T_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-395" class="link">Source</a></p><div class="doc"><p>Decomposition of a controlled <em>T</em>-gate into the Clifford+<em>T</em>
+ base. The first argument is the target, and the second one is the
+ control. The control can be positive or negative.
+</p><p><img src="images/controlled_T.png">
+</p></div></div><div class="top"><p class="src"><a name="v:controlled_V_at" class="def">controlled_V_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-412" class="link">Source</a></p><div class="doc"><p>Decomposition of a controlled <em>V</em>-gate into the Clifford+<em>T</em>
+ base. Adapted from Amy et al. (<a href="http://arxiv.org/abs/1206.0758v3">http://arxiv.org/abs/1206.0758v3</a>,
+ Figure 5(c)). Our <em>V</em>-gate is <em>H</em><em>S</em><sup>&#8224;</sup><em>H</em> as in Nielsen and
+ Chuang. The first argument is the target, and the second one is the
+ control. The control can be positive or negative.
+</p><p><img src="images/controlled_V.png">
+</p></div></div><div class="top"><p class="src"><a name="v:controlled_E_at" class="def">controlled_E_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-431" class="link">Source</a></p><div class="doc"><p>Decomposition of a controlled <em>E</em>-gate into the Clifford+<em>T</em>
+ base. The first argument is the target, and the second one is the
+ control. The control can be positive or negative.
+</p><p><img src="images/controlled_E.png">
+</p></div></div><div class="top"><p class="src"><a name="v:controlled_YY_at" class="def">controlled_YY_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-458" class="link">Source</a></p><div class="doc"><p>Decomposition of a controlled <b>Y</b>-gate into the Clifford+<em>T</em>
+ base. The gate is from the Ground State Estimation algorithm and is
+ defined as <b>Y</b> = <em>SHS</em>, or equivalently,
+</p><p><img src="images/Y.png">
+</p><p>It should not be confused with the Pauli <em>Y</em> gate.
+ The first argument is the target, and the second one is the
+ control. The control can be positive or negative.
+</p><p><img src="images/controlled_YY.png">
+</p></div></div><div class="top"><p class="src"><a name="v:toffoli_plain_at" class="def">toffoli_plain_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-473" class="link">Source</a></p><div class="doc"><p>A &quot;plain&quot; Toffoli gate, not decomposed. This is provided for
+ convenience, for example to use with <code><a href="QuipperLib-GateDecompositions.html#v:with_combined_controls">with_combined_controls</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:cc_iX_plain_at" class="def">cc_iX_plain_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-480" class="link">Source</a></p><div class="doc"><p>A &quot;plain&quot; doubly-controlled <em>iX</em>-gate, not decomposed. This is
+ provided for convenience, for example to use with
+ <code><a href="QuipperLib-GateDecompositions.html#v:with_combined_controls">with_combined_controls</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:multi_cnot_barenco_at" class="def">multi_cnot_barenco_at</a> :: (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-506" class="link">Source</a></p><div class="doc"><p>Decomposition of an <em>m</em>-times controlled not-gate, using <em>m</em>&#8722;2
+ ancillas that do not need be initialized in a particular
+ state. Adapted from Barenco et al.
+ (<a href="http://arxiv.org/abs/quantph/9503016">http://arxiv.org/abs/quantph/9503016</a>, Lemma 7.2).
+</p><p>In addition to what is shown in Barenco et al., this function
+ permits some Toffoli gates to be replaced by doubly-controlled
+ <em>iX</em>-gates. This may be beneficial in gate bases, such as
+ Clifford+<em>T</em>, where a doubly-controlled <em>iX</em>-gate has a simpler
+ representation than a Toffoli gate.
+</p><p>The first argument is a Toffoli gate to use in the
+ decomposition. The second argument may be either a Toffoli gate or
+ a doubly-controlled <em>iX</em> gate. The third argument is the target,
+ the fourth argument is a list of qubits to be used as ancillas, and
+ the fifth argument is a list of signed controls. The ancillas need
+ not be initialized, and are returned in their original state.
+</p><p>The size of this circuit is linear in the number of controls; the
+ decomposition uses 4<em>m</em>&#8722;8 doubly-controlled gates for <em>m</em> &#8805; 3.
+</p><p><img src="images/multi_cnot_barenco.png">
+</p></div></div><div class="top"><p class="src"><a name="v:multi_ciX_noancilla_at" class="def">multi_ciX_noancilla_at</a> :: (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/GateDecompositions.html#line-548" class="link">Source</a></p><div class="doc"><p>Decomposition of a multiply-controlled <em>iX</em>-gate, using no
+ ancillas. Adapted from Giles and Selinger
+ (<a href="http://arxiv.org/abs/1212.0506">http://arxiv.org/abs/1212.0506</a>, Section 5.2).
+</p><p>The first argument is a Toffoli gate or a doubly-controlled
+ <em>iX</em>-gate. The third argument is the target, and the fourth
+ argument is a list of signed controls.
+</p><p>The size of this circuit is linear in the number of controls; the
+ decomposition uses 8<em>m</em>&#8722;32 doubly-controlled gates, 4 <em>T</em>-gates,
+ and 2 <em>H</em>-gates, for <em>m</em> &#8805; 6.
+</p><p><img src="images/multi_ciX_noancilla.png">
+</p></div></div><h1 id="g:2">Decomposition of controls
+</h1><div class="top"><p class="src"><a name="v:partition_controls" class="def">partition_controls</a> :: &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93; -&gt; (&#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93;, &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Bit">Bit</a>&#93;)<a href="src/QuipperLib/GateDecompositions.html#line-573" class="link">Source</a></p><div class="doc"><p>Partition a list of controls into quantum and classical.
+</p></div></div><div class="top"><p class="src"><a name="v:with_signed_qubit" class="def">with_signed_qubit</a> ::  <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b<a href="src/QuipperLib/GateDecompositions.html#line-587" class="link">Source</a></p><div class="doc"><p>Given a function that expects a qubit (typically as a control),
+ turn it into a function that can handle a <em>signed</em> (positive or
+ negative) qubit. This is done by conjugating the circuit with
+ negations on both sides, if the sign is negative. Usage:
+</p><pre> with_signed_qubit c $ \q -&gt; do
+   &lt;&lt;&lt;code using q&gt;&gt;&gt;
+</pre><p><img src="images/with_signed_qubit.png">
+</p></div></div><div class="top"><p class="src"><a name="v:with_combined_controls" class="def">with_combined_controls</a> ::  (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; &#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93; -&gt; (&#91;<a href="Quipper-Circuit.html#t:Signed">Signed</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> a) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> a<a href="src/QuipperLib/GateDecompositions.html#line-625" class="link">Source</a></p><div class="doc"><p>Decompose quantum controls recursively until at most <em>n</em> remain,
+ and then pass these reduced controls to the given circuit.
+ Precondition: <em>n</em> &#8805; 1.  
+</p><p>The decomposition is done using a Toffoli-like gate that is given
+ as the first argument. This should be either a Toffoli gate, a
+ doubly-controlled <em>iX</em>-gate, a decomposition thereof, or any other
+ reversible ternary gate with the behavior
+</p><ul><li> |000&#9002; &#8614; |0&#9002;|&#966;<sub>0</sub>&#9002;
+</li><li> |001&#9002; &#8614; |0&#9002;|&#966;<sub>1</sub>&#9002;
+</li><li> |010&#9002; &#8614; |0&#9002;|&#966;<sub>2</sub>&#9002;
+</li><li> |011&#9002; &#8614; |1&#9002;|&#966;<sub>3</sub>&#9002;,
+</li></ul><p>where the states |&#966;<sub>0</sub>&#9002;, &#8230;, |&#966;<sub>3</sub>&#9002; are arbitrary.
+</p><p>For example, when <em>n</em>=2, this typically yields a circuit such as
+ the following (here shown using the doubly-controlled <em>iX</em>-gate):
+</p><p><img src="images/with_combined_controls2.png">
+</p><p>And for <em>n</em>=1, the circuit typically looks like this:
+</p><p><img src="images/with_combined_controls1.png">
+</p><p>Classical controls are not decomposed, but are applied to the
+ resulting circuit directly.
+</p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Quipper.QData</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_Quipper-QData.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/Quipper/QData.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">Quipper.QData</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Introduction
+</a></li><li><a href="#g:2">Primitive definitions
+</a><ul><li><a href="#g:3">The QCType operation
+</a></li><li><a href="#g:4">The QTypeB operation
+</a></li><li><a href="#g:5">The QCData class
+</a></li><li><a href="#g:6">The SimpleType class
+</a></li></ul></li><li><a href="#g:7">Type conversions
+</a></li><li><a href="#g:8">Shape parameters
+</a></li><li><a href="#g:9">Homogeneous types
+</a><ul><li><a href="#g:10">The QData class
+</a></li><li><a href="#g:11">Derived combinators on QData
+</a></li><li><a href="#g:12">The CData and BData classes
+</a></li><li><a href="#g:13">The QShape class
+</a></li></ul></li><li><a href="#g:14">Heterogeneous types
+</a><ul><li><a href="#g:15">Derived combinators on QCData
+</a></li><li><a href="#g:16">The QCDataPlus class
+</a></li><li><a href="#g:17">Fixed size QCDataPlus
+</a></li><li><a href="#g:18">The QCLeaf class
+</a></li><li><a href="#g:19">Canonical string representation
+</a></li></ul></li><li><a href="#g:20">Defining new QCData instances
+</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>This module provides type classes for dealing with various
+ &quot;shaped&quot; quantum and classical data structures. Examples of data
+ structures are tuples, lists, records, registers, arrays, indexed
+ arrays, etc. Is it convenient to extend certain operations to
+ arbitrary quantum data structures; for example, instead of
+ measuring a single qubit and obtaining a bit, one may measure an
+ <em>n</em>-tuple of qubits and obtain an <em>n</em>-tuple of bits. We call an
+ operation &quot;generic&quot; if it can act on arbitrary data structures. 
+</p><p>This module provides shaped types and low-level combinators, in
+ terms of which higher-level generic quantum operations can be
+ defined. 
+</p><p>The low-level combinators provided by this module (with names
+ <em>qcdata_*</em> and <em>qdata_*</em>) should never be used directly in user
+ code (and for this reason, they are not re-exported by
+ <a href="Quipper.html">Quipper</a>). Instead, they are intended as building blocks for
+ user-level generic functions (in <a href="Quipper-Generic.html">Quipper.Generic</a> and related
+ modules). The only exception is that the functions may be used in
+ libraries or user-level code to define new quantum data
+ constructors. Modules that contain such definitions should import
+ <code><a href="Quipper.html#t:Internal">Internal</a></code>.
+</p></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">type family</span> <a href="#t:QCType">QCType</a> x y a </li><li class="src short"><span class="keyword">type family</span> <a href="#t:QTypeB">QTypeB</a> a </li><li class="src short"><span class="keyword">class</span> (<a href="Quipper-Labels.html#t:Labelable">Labelable</a> qc <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Typeable-Internal.html#t:Typeable">Typeable</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> (<a href="Quipper-QData.html#t:LType">LType</a> qc), qc ~ <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> qc, <a href="Quipper-QData.html#t:CType">CType</a> (<a href="Quipper-QData.html#t:QType">QType</a> qc) ~ <a href="Quipper-QData.html#t:CType">CType</a> qc, <a href="Quipper-QData.html#t:BType">BType</a> (<a href="Quipper-QData.html#t:CType">CType</a> qc) ~ <a href="Quipper-QData.html#t:BType">BType</a> qc, <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> (<a href="Quipper-QData.html#t:CType">CType</a> qc) ~ <a href="Quipper-QData.html#t:BType">BType</a> qc) =&gt; <a href="#t:QCData">QCData</a> qc  <span class="keyword">where</span><ul class="subs"><li><a href="#v:qcdata_mapM">qcdata_mapM</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m =&gt; qc -&gt; (q -&gt; m q') -&gt; (c -&gt; m c') -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; m (<a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc)</li><li><a href="#v:qcdata_zip">qcdata_zip</a> ::  qc -&gt; q -&gt; c -&gt; q' -&gt; c' -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> (q, q') (c, c') qc</li><li><a href="#v:qcdata_promote">qcdata_promote</a> :: <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; qc -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc</li></ul></li><li class="src short"><span class="keyword">class</span> <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="#t:SimpleType">SimpleType</a> qc  <span class="keyword">where</span><ul class="subs"><li><a href="#v:fs_shape">fs_shape</a> :: qc</li></ul></li><li class="src short"><span class="keyword">type</span> <a href="#t:QType">QType</a> a = <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> a</li><li class="src short"><span class="keyword">type</span> <a href="#t:CType">CType</a> a = <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> a</li><li class="src short"><span class="keyword">type</span> <a href="#t:BType">BType</a> a = <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> a</li><li class="src short"><span class="keyword">type</span> <a href="#t:HType">HType</a> leaf qa = <a href="Quipper-QData.html#t:QCType">QCType</a> leaf leaf (<a href="Quipper-QData.html#t:QType">QType</a> qa)</li><li class="src short"><a href="#v:dummy">dummy</a> ::  a</li><li class="src short"><a href="#v:qubit">qubit</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a></li><li class="src short"><a href="#v:bit">bit</a> :: <a href="Quipper-Monad.html#t:Bit">Bit</a></li><li class="src short"><a href="#v:bool">bool</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></li><li class="src short"><a href="#v:shapetype_q">shapetype_q</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:QType">QType</a> qa -&gt; qa</li><li class="src short"><a href="#v:shapetype_c">shapetype_c</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:CType">CType</a> qa -&gt; qa</li><li class="src short"><a href="#v:shapetype_b">shapetype_b</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qa -&gt; qa</li><li class="src short"><a href="#v:shape">shape</a> ::  a -&gt; a</li><li class="src short"><span class="keyword">class</span> (qa ~ <a href="Quipper-QData.html#t:QType">QType</a> (<a href="Quipper-QData.html#t:CType">CType</a> qa), qa ~ <a href="Quipper-QData.html#t:QTypeB">QTypeB</a> (<a href="Quipper-QData.html#t:BType">BType</a> qa), qa ~ <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> qa, qa ~ <a href="Quipper-QData.html#t:QType">QType</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> (<a href="Quipper-QData.html#t:CType">CType</a> qa)) =&gt; <a href="#t:QData">QData</a> qa </li><li class="src short"><a href="#v:qdata_mapM">qdata_mapM</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> qa, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; qa -&gt; (x -&gt; m y) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x qa -&gt; m (<a href="Quipper-QData.html#t:HType">HType</a> y qa)</li><li class="src short"><a href="#v:qdata_zip">qdata_zip</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; x -&gt; y -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x qa -&gt; <a href="Quipper-QData.html#t:HType">HType</a> y qa -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:HType">HType</a> (x, y) qa</li><li class="src short"><a href="#v:qdata_promote">qdata_promote</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qa -&gt; qa -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qa</li><li class="src short"><a href="#v:qdata_unzip">qdata_unzip</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; x -&gt; y -&gt; <a href="Quipper-QData.html#t:HType">HType</a> (x, y) s -&gt; (<a href="Quipper-QData.html#t:HType">HType</a> x s, <a href="Quipper-QData.html#t:HType">HType</a> y s)</li><li class="src short"><a href="#v:qdata_map">qdata_map</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; (x -&gt; y) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; <a href="Quipper-QData.html#t:HType">HType</a> y s</li><li class="src short"><a href="#v:qdata_fold">qdata_fold</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; (x -&gt; w -&gt; w) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; w -&gt; w</li><li class="src short"><a href="#v:qdata_fold_map">qdata_fold_map</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; (x -&gt; w -&gt; (y, w)) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; w -&gt; (<a href="Quipper-QData.html#t:HType">HType</a> y s, w)</li><li class="src short"><a href="#v:qdata_foldM">qdata_foldM</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> s, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; s -&gt; (x -&gt; w -&gt; m w) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; w -&gt; m w</li><li class="src short"><a href="#v:qdata_fold_mapM">qdata_fold_mapM</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> s, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; s -&gt; (x -&gt; w -&gt; m (y, w)) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; w -&gt; m (<a href="Quipper-QData.html#t:HType">HType</a> y s, w)</li><li class="src short"><a href="#v:qdata_sequentialize">qdata_sequentialize</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; &#91;x&#93;</li><li class="src short"><a href="#v:qdata_unsequentialize">qdata_unsequentialize</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; &#91;x&#93; -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s</li><li class="src short"><a href="#v:qdata_makeshape">qdata_makeshape</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; a -&gt; <a href="Quipper-QData.html#t:HType">HType</a> a qa -&gt; qa</li><li class="src short"><a href="#v:qdata_mapM_op">qdata_mapM_op</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> s, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; s -&gt; (x -&gt; m y) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; m (<a href="Quipper-QData.html#t:HType">HType</a> y s)</li><li class="src short"><a href="#v:qdata_promote_c">qdata_promote_c</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; <a href="Quipper-QData.html#t:BType">BType</a> s -&gt; <a href="Quipper-QData.html#t:CType">CType</a> s -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:BType">BType</a> s</li><li class="src short"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QType">QType</a> ca), <a href="Quipper-QData.html#t:CType">CType</a> (<a href="Quipper-QData.html#t:QType">QType</a> ca) ~ ca) =&gt; <a href="#t:CData">CData</a> ca </li><li class="src short"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QTypeB">QTypeB</a> ba), <a href="Quipper-QData.html#t:BType">BType</a> (<a href="Quipper-QData.html#t:QTypeB">QTypeB</a> ba) ~ ba) =&gt; <a href="#t:BData">BData</a> ba </li><li class="src short"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QData">QData</a> qa, <a href="Quipper-QData.html#t:CType">CType</a> qa ~ ca, <a href="Quipper-QData.html#t:BType">BType</a> qa ~ ba) =&gt; <a href="#t:QShape">QShape</a> ba qa ca | ba -&gt; qa, qa -&gt; ca, ca -&gt; ba</li><li class="src short"><a href="#v:qcdata_unzip">qcdata_unzip</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; q -&gt; c -&gt; q' -&gt; c' -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> (q, q') (c, c') qc -&gt; (<a href="Quipper-QData.html#t:QCType">QCType</a> q c qc, <a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc)</li><li class="src short"><a href="#v:qcdata_map">qcdata_map</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; (q -&gt; q') -&gt; (c -&gt; c') -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc</li><li class="src short"><a href="#v:qcdata_fold">qcdata_fold</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; (q -&gt; w -&gt; w) -&gt; (c -&gt; w -&gt; w) -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; w -&gt; w</li><li class="src short"><a href="#v:qcdata_fold_map">qcdata_fold_map</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; (q -&gt; w -&gt; (q', w)) -&gt; (c -&gt; w -&gt; (c', w)) -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; w -&gt; (<a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc, w)</li><li class="src short"><a href="#v:qcdata_foldM">qcdata_foldM</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; qc -&gt; (q -&gt; w -&gt; m w) -&gt; (c -&gt; w -&gt; m w) -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; w -&gt; m w</li><li class="src short"><a href="#v:qcdata_fold_mapM">qcdata_fold_mapM</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; qc -&gt; (q -&gt; w -&gt; m (q', w)) -&gt; (c -&gt; w -&gt; m (c', w)) -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; w -&gt; m (<a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc, w)</li><li class="src short"><a href="#v:qcdata_sequentialize">qcdata_sequentialize</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; &#91;<a href="Quipper-Transformer.html#t:B_Endpoint">B_Endpoint</a> q c&#93;</li><li class="src short"><a href="#v:qcdata_unsequentialize">qcdata_unsequentialize</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; &#91;<a href="Quipper-Transformer.html#t:B_Endpoint">B_Endpoint</a> q c&#93; -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc</li><li class="src short"><a href="#v:qcdata_makeshape">qcdata_makeshape</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; a -&gt; b -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> a b qc -&gt; qc</li><li class="src short"><a href="#v:qcdata_mapM_op">qcdata_mapM_op</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; qc -&gt; (q -&gt; m q') -&gt; (c -&gt; m c') -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; m (<a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc)</li><li class="src short"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QType">QType</a> qc)) =&gt; <a href="#t:QCDataPlus">QCDataPlus</a> qc </li><li class="src short"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> qc) =&gt; <a href="#t:QCData_Simple">QCData_Simple</a> qc </li><li class="src short"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a> qc, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> qc) =&gt; <a href="#t:QCDataPlus_Simple">QCDataPlus_Simple</a> qc </li><li class="src short"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QCData">QCData</a> q, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> q, <a href="Quipper-Control.html#t:ControlSource">ControlSource</a> q, <a href="Quipper-Control.html#t:ControlSource">ControlSource</a> (<a href="Quipper-Circuit.html#t:Signed">Signed</a> q), <a href="Quipper-Labels.html#t:Labelable">Labelable</a> q <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> q ~ q, <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> q ~ <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a>) =&gt; <a href="#t:QCLeaf">QCLeaf</a> q </li><li class="src short"><span class="keyword">data</span>  <a href="#t:Qubit_Leaf">Qubit_Leaf</a>  = <a href="#v:Qubit_Leaf">Qubit_Leaf</a></li><li class="src short"><span class="keyword">data</span>  <a href="#t:Bit_Leaf">Bit_Leaf</a>  = <a href="#v:Bit_Leaf">Bit_Leaf</a></li><li class="src short"><a href="#v:canonical_shape">canonical_shape</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a></li><li class="src short"><span class="keyword">type</span> <a href="#t:LType">LType</a> a = <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-QData.html#t:Qubit_Leaf">Qubit_Leaf</a> <a href="Quipper-QData.html#t:Bit_Leaf">Bit_Leaf</a> a</li></ul></div><div id="interface"><h1 id="g:1">Introduction
+</h1><div class="doc"><p>The data types we consider here come in two varieties:
+ <em>homogeneous</em> and <em>heterogeneous</em> types.
+</p><p>A <em>homogeneous</em> data type describes a data structure that is built
+ up from only one kind of basic data (for example, only qubits, only
+ classical bits, or only boolean parameters). The following are
+ typical examples of homogeneous types:
+</p><pre> qa = (Qubit, Qubit, &#91;Qubit&#93;)
+ ca = (Bit, Bit, &#91;Bit&#93;)
+ ba = (Bool, Bool, &#91;Bool&#93;).
+</pre><p>An important feature of homogeneous types is that they can be
+ related to each other by shape. For example, <em>ca</em> above is the
+ &quot;classical version&quot; of <em>qa</em>. We say that the above types <em>qa</em>,
+ <em>ca</em>, and <em>ba</em> all share the same <em>shape type</em>. On the other hand,
+ they differ in their <em>leaf types</em>, which are <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>, <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>, and
+ <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>, respectively.
+</p><p>When naming types, variables, and operations related to homogeneous
+ data structures, we often use letters such as <em>q</em>, <em>c</em>, and <em>b</em> to
+ denote, respectively, the quantum, classical, and boolean versions
+ of some concept.
+</p><p>Homogeneous types are made available to Quipper programs via the
+ <code><a href="Quipper-QData.html#t:QData">QData</a></code> and <code><a href="Quipper-QData.html#t:QShape">QShape</a></code> type classes.
+</p><p>A <em>heterogeneous</em> data type describes a data structure that may
+ contain both classical and quantum bits. A typical example of a
+ heterogeneous type is:
+</p><pre> qc = (Qubit, Bit, &#91;Qubit&#93;).
+</pre><p>Heterogeneous types are often used to represent sets of
+ endpoints of a circuit, or the inputs or outputs to some circuit
+ building function. We often use the letters <em>qc</em> in connection with
+ heterogeneous types.
+</p><p>Heterogeneous types are made available to Quipper programs via the
+ <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> and <code><a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a></code> type classes.
+</p></div><h1 id="g:2">Primitive definitions
+</h1><div class="doc"><p>The type classes of this module are all derived from four
+ primitive items, which must be defined by induction on types:
+</p><ul><li> A type class <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> <em>qc</em>, representing structured data types
+ made up from classical and quantum leaves.
+</li><li> A type family <code><a href="Quipper-QData.html#t:QCType">QCType</a></code> <em>x</em> <em>y</em> <em>qc</em>, representing the type-level
+ substitution operation <nobr><em>qc</em> &#91;<em>x</em> / <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>, <em>y</em> / <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>&#93;</nobr>.
+</li><li> A type family <code><a href="Quipper-QData.html#t:QTypeB">QTypeB</a></code> <em>ba</em>, representing the type-level substitution
+ <nobr><em>ba</em> &#91;<code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> / <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>&#93;</nobr>.
+</li><li> A type class <code><a href="Quipper-QData.html#t:SimpleType">SimpleType</a></code> <em>qc</em>, representing &quot;simple&quot; data
+ types. We say that a data type <em>t</em> is &quot;simple&quot; if any two
+ elements of <em>t</em> have the same number of leaves. For example, tuples
+ are simple, but lists are not.
+</li></ul><p>An instance of <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>, <code><a href="Quipper-QData.html#t:QCType">QCType</a></code> and <code><a href="Quipper-QData.html#t:QTypeB">QTypeB</a></code> must be defined for
+ each new kind of quantum data. If the quantum data is simple, an
+ instance of <code><a href="Quipper-QData.html#t:SimpleType">SimpleType</a></code> must also be defined.
+</p><p>All other notions in this module are defined in terms of the above
+ four, and therefore need not be defined on a per-type basis.
+</p></div><h2 id="g:3">The QCType operation
+</h2><div class="top"><p class="src"><span class="keyword">type family</span> <a name="t:QCType" class="def">QCType</a> x y a <a href="src/Quipper/QData.html#line-135" class="link">Source</a></p><div class="doc"><p>The type <code><a href="Quipper-QData.html#t:QCType">QCType</a></code> <em>x</em> <em>y</em> <em>a</em> represents the substitution
+ <nobr><em>a</em> &#91;<em>x</em> / <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>, <em>y</em> / <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>&#93;</nobr>. For example:
+</p><pre> QCType x y (Qubit, Bit, &#91;Qubit&#93;) = (x, y, &#91;x&#93;).
+</pre><p>An instance of this must be defined for each new kind of quantum
+ data.
+</p></div></div><h2 id="g:4">The QTypeB operation
+</h2><div class="top"><p class="src"><span class="keyword">type family</span> <a name="t:QTypeB" class="def">QTypeB</a> a <a href="src/Quipper/QData.html#line-162" class="link">Source</a></p><div class="doc"><p>The type <code><a href="Quipper-QData.html#t:QTypeB">QTypeB</a></code> <em>ba</em> represents the substitution
+ <nobr><em>ba</em> &#91;<code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> / <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>&#93;</nobr>. For example: 
+</p><pre> QTypeB (Bool, Bool, &#91;Bool&#93;) = (Qubit, Qubit, &#91;Qubit&#93;).
+</pre><p>An instance of this must be defined for each new kind of quantum data.
+</p></div></div><h2 id="g:5">The QCData class
+</h2><div class="doc"><p>The <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> class provides only three primitive combinators:
+ <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code>, <code><a href="Quipper-QData.html#v:qcdata_zip">qcdata_zip</a></code>, and <code><a href="Quipper-QData.html#v:qcdata_promote">qcdata_promote</a></code>. These are
+ sufficient to define all other shape-generic operations.
+</p><p>An instance of this must be defined for each new kind of quantum data.
+</p><p>The functions <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code> and <code><a href="Quipper-QData.html#v:qcdata_zip">qcdata_zip</a></code> require &quot;shape type
+ parameters&quot;. These are dummy arguments whose <em>value</em> is ignored,
+ but whose <em>type</em> is used to determine the shape of the data to map
+ over. The dummy terms <code><code><a href="Quipper-QData.html#v:qubit">qubit</a></code> :: <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code></code> and <code><code><a href="Quipper-QData.html#v:bit">bit</a></code> :: <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code></code> may
+ be used to represent leaves in shape type arguments.
+</p><p>Note to programmers defining new <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> instances: Instances
+ <em>must</em> ensure that the functions <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code> and <code><a href="Quipper-QData.html#v:qcdata_zip">qcdata_zip</a></code>
+ do not evaluate their dummy arguments. These arguments will often
+ be <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#v:undefined">undefined</a></code>. In particular, if using a pattern match on this
+ argument, only a variable or a <em>lazy</em> pattern can be used.
+</p></div><div class="top"><p class="src"><span class="keyword">class</span> (<a href="Quipper-Labels.html#t:Labelable">Labelable</a> qc <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Typeable-Internal.html#t:Typeable">Typeable</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> (<a href="Quipper-QData.html#t:LType">LType</a> qc), qc ~ <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> qc, <a href="Quipper-QData.html#t:CType">CType</a> (<a href="Quipper-QData.html#t:QType">QType</a> qc) ~ <a href="Quipper-QData.html#t:CType">CType</a> qc, <a href="Quipper-QData.html#t:BType">BType</a> (<a href="Quipper-QData.html#t:CType">CType</a> qc) ~ <a href="Quipper-QData.html#t:BType">BType</a> qc, <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> (<a href="Quipper-QData.html#t:CType">CType</a> qc) ~ <a href="Quipper-QData.html#t:BType">BType</a> qc) =&gt; <a name="t:QCData" class="def">QCData</a> qc  <span class="keyword">where</span><a href="src/Quipper/QData.html#line-222" class="link">Source</a></p><div class="doc"><p>The <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> type class contains heterogeneous data types built
+ up from leaves of type <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> and <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>. It is the basis for
+ several generic operations that apply to classical and quantum
+ data, such as copying, transformers, simulation, and heterogeneous
+ versions of qterm and qdiscard.
+</p><p><code><a href="Quipper-QData.html#t:QCData">QCData</a></code> and <code><a href="Quipper-QData.html#t:QData">QData</a></code> are interrelated, in the sense that the
+ following implications hold:
+</p><pre> QData qa   implies   QCData qa
+ CData ca   implies   QCData ca
+</pre><p>Implications in the converse direction also hold whenever <em>qc</em> is a
+ fixed known type:
+</p><pre> QCData qc   implies   QData (QType qc)
+ QCData qc   implies   CData (CType qc)
+ QCData qc   implies   BData (BType qc)
+</pre><p>However, the type checker cannot prove the above implication in the
+ case where <em>qc</em> is a type variable; for this, the more flexible
+ (but more computationally expensive) <code><a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a></code> class can be used.
+</p></div><div class="subs methods"><p class="caption">Methods</p><p class="src"><a name="v:qcdata_mapM" class="def">qcdata_mapM</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m =&gt; qc -&gt; (q -&gt; m q') -&gt; (c -&gt; m c') -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; m (<a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc)<a href="src/Quipper/QData.html#line-222" class="link">Source</a></p><div class="doc"><p>Map two functions <em>f</em> and <em>g</em> over all the leaves of a
+ heterogeneous data structure. Apply <em>f</em> to all the leaves at
+ <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> positions, and <code>g</code> to all the leaves at <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> positions.
+ The first argument is a shape type parameter.
+</p><p>Example (ignoring the monad for the sake of simplicity):
+</p><pre> qcdata_mapM (qubit, bit, &#91;qubit&#93;) f g (x,y,&#91;z,w&#93;) = (f x, g y, &#91;f z, f w&#93;).
+</pre><p>For data types that have a sense of direction, the mapping should
+ preferably be performed from left to right, but this property is
+ not guaranteed and may change without notice. 
+</p></div><p class="src"><a name="v:qcdata_zip" class="def">qcdata_zip</a> ::  qc -&gt; q -&gt; c -&gt; q' -&gt; c' -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> (q, q') (c, c') qc<a href="src/Quipper/QData.html#line-222" class="link">Source</a></p><div class="doc"><p>Zip two heterogeneous data structures together, to obtain a new
+ data structure of the same shape, whose elements are pairs of the
+ corresponding elements of the input data structures. The zipping
+ is <em>strict</em>, meaning that both input data structure must have
+ exactly the same shape (same length of lists, etc). The first
+ five arguments are shape type parameters, representing the shape
+ of the data structure, the two leaf types of the first data
+ structure, and the two leaf types of the second data structure,
+ respectively.
+</p><p>Example:
+</p><pre> qcdata_zip (bit, &#91;qubit&#93;) int bool char string (True, &#91;2,3&#93;) (&quot;b&quot;, &#91;'c', 'd'&#93;) = ((True, &quot;b&quot;), &#91;(2,'c'), (3,'d')&#93;)
+ where the shape parameters are:
+   int = dummy :: Int
+   bool = dummy :: Bool
+   char = dummy :: Char
+   string = dummy :: String  
+</pre><p>The <code><a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a></code> argument is a stub error message to be used in
+ case of failure.
+</p></div><p class="src"><a name="v:qcdata_promote" class="def">qcdata_promote</a> :: <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; qc -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc<a href="src/Quipper/QData.html#line-222" class="link">Source</a></p><div class="doc"><p>It is sometimes convenient to have a boolean parameter with
+ some aspect of its shape indeterminate. The function
+ <code><a href="Quipper-QData.html#v:qcdata_promote">qcdata_promote</a></code> takes such a boolean parameter, as well as a
+ piece of <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>, and attempts to set the shape of the former to
+ that of the latter.
+</p><p>The kinds of promotions that are allowed depend on the data type.
+ For example, for simple types, <code><a href="Quipper-QData.html#v:qcdata_promote">qcdata_promote</a></code> has no work to
+ do and should just return the first argument. For types that are
+ not simple, but where no promotion is desired (e.g. <code>Qureg</code>),
+ <code><a href="Quipper-QData.html#v:qcdata_promote">qcdata_promote</a></code> should check that the shapes of the first and
+ second argument agree, and throw an error otherwise. For lists,
+ we allow a longer list to be promoted to a shorter one, but not
+ the other way around. For quantum integers, we allow an integer
+ of indeterminate length to be promoted to a determinate length,
+ but we do not allow a determinate length to be changed to another
+ determinate length.
+</p><p>The <code><a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a></code> argument is a stub error message to be used in
+ case of failure.
+</p></div></div><div class="subs instances"><p id="control.i:QCData" class="caption collapser" onclick="toggleSection('i:QCData')">Instances</p><div id="section.i:QCData" class="show"><table><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Char.html#t:Char">Char</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Float">Float</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integer">Integer</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> ()</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> <a href="Quipper-Monad.html#t:Bit">Bit</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> a =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> &#91;a&#93;</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCData">QCData</a> a =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (<a href="Quipper-Circuit.html#t:Signed">Signed</a> a)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (<a href="Quipper-Transformer.html#t:B_Endpoint">B_Endpoint</a> a b)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b, <a href="Quipper-QData.html#t:QCData">QCData</a> c) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b, c)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b, <a href="Quipper-QData.html#t:QCData">QCData</a> c, <a href="Quipper-QData.html#t:QCData">QCData</a> d) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b, c, d)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b, <a href="Quipper-QData.html#t:QCData">QCData</a> c, <a href="Quipper-QData.html#t:QCData">QCData</a> d, <a href="Quipper-QData.html#t:QCData">QCData</a> e) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b, c, d, e)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b, <a href="Quipper-QData.html#t:QCData">QCData</a> c, <a href="Quipper-QData.html#t:QCData">QCData</a> d, <a href="Quipper-QData.html#t:QCData">QCData</a> e, <a href="Quipper-QData.html#t:QCData">QCData</a> f) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b, c, d, e, f)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b, <a href="Quipper-QData.html#t:QCData">QCData</a> c, <a href="Quipper-QData.html#t:QCData">QCData</a> d, <a href="Quipper-QData.html#t:QCData">QCData</a> e, <a href="Quipper-QData.html#t:QCData">QCData</a> f, <a href="Quipper-QData.html#t:QCData">QCData</a> g) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b, c, d, e, f, g)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b, <a href="Quipper-QData.html#t:QCData">QCData</a> c, <a href="Quipper-QData.html#t:QCData">QCData</a> d, <a href="Quipper-QData.html#t:QCData">QCData</a> e, <a href="Quipper-QData.html#t:QCData">QCData</a> f, <a href="Quipper-QData.html#t:QCData">QCData</a> g, <a href="Quipper-QData.html#t:QCData">QCData</a> h) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b, c, d, e, f, g, h)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b, <a href="Quipper-QData.html#t:QCData">QCData</a> c, <a href="Quipper-QData.html#t:QCData">QCData</a> d, <a href="Quipper-QData.html#t:QCData">QCData</a> e, <a href="Quipper-QData.html#t:QCData">QCData</a> f, <a href="Quipper-QData.html#t:QCData">QCData</a> g, <a href="Quipper-QData.html#t:QCData">QCData</a> h, <a href="Quipper-QData.html#t:QCData">QCData</a> i) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b, c, d, e, f, g, h, i)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> a, <a href="Quipper-QData.html#t:QCData">QCData</a> b, <a href="Quipper-QData.html#t:QCData">QCData</a> c, <a href="Quipper-QData.html#t:QCData">QCData</a> d, <a href="Quipper-QData.html#t:QCData">QCData</a> e, <a href="Quipper-QData.html#t:QCData">QCData</a> f, <a href="Quipper-QData.html#t:QCData">QCData</a> g, <a href="Quipper-QData.html#t:QCData">QCData</a> h, <a href="Quipper-QData.html#t:QCData">QCData</a> i, <a href="Quipper-QData.html#t:QCData">QCData</a> j) =&gt; <a href="Quipper-QData.html#t:QCData">QCData</a> (a, b, c, d, e, f, g, h, i, j)</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h2 id="g:6">The SimpleType class
+</h2><div class="top"><p class="src"><span class="keyword">class</span> <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a name="t:SimpleType" class="def">SimpleType</a> qc  <span class="keyword">where</span><a href="src/Quipper/QData.html#line-505" class="link">Source</a></p><div class="doc"><p><code><a href="Quipper-QData.html#t:SimpleType">SimpleType</a></code> is a subclass of <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> consisting of simple
+ types. We say that a data type <em>t</em> is &quot;simple&quot; if any two
+ elements of <em>t</em> have the same number of leaves. For example, tuples
+ are simple, but lists are not.
+</p></div><div class="subs methods"><p class="caption">Methods</p><p class="src"><a name="v:fs_shape" class="def">fs_shape</a> :: qc<a href="src/Quipper/QData.html#line-505" class="link">Source</a></p><div class="doc"><p>Produce a term of the given shape. This term will contain
+ well-defined data constructors, but may be <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#v:undefined">undefined</a></code> at the
+ leaves.
+</p></div></div><div class="subs instances"><p id="control.i:SimpleType" class="caption collapser" onclick="toggleSection('i:SimpleType')">Instances</p><div id="section.i:SimpleType" class="show"><table><tr><td class="src"><a href="Quipper-QData.html#t:SimpleType">SimpleType</a> ()</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:SimpleType">SimpleType</a> <a href="Quipper-Monad.html#t:Bit">Bit</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:SimpleType">SimpleType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> c) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b, c)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> c, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> d) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b, c, d)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> c, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> d, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> e) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b, c, d, e)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> c, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> d, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> e, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> f) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b, c, d, e, f)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> c, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> d, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> e, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> f, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> g) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b, c, d, e, f, g)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> c, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> d, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> e, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> f, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> g, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> h) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b, c, d, e, f, g, h)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> c, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> d, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> e, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> f, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> g, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> h, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> i) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b, c, d, e, f, g, h, i)</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src">(<a href="Quipper-QData.html#t:SimpleType">SimpleType</a> a, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> b, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> c, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> d, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> e, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> f, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> g, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> h, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> i, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> j) =&gt; <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> (a, b, c, d, e, f, g, h, i, j)</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h1 id="g:7">Type conversions
+</h1><div class="doc"><p>We define convenient abbreviations for conversions to, or
+ between, homogeneous types.
+</p></div><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:QType" class="def">QType</a> a = <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> a<a href="src/Quipper/QData.html#line-561" class="link">Source</a></p><div class="doc"><p>The type operator <code><a href="Quipper-QData.html#t:QType">QType</a></code> converts a classical or heterogeneous
+ type to a homogeneous quantum type. More precisely, the type
+ <code><a href="Quipper-QData.html#t:QType">QType</a></code> <em>a</em> represents the substitution <nobr><em>a</em> &#91;<code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> / <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>&#93;</nobr>. 
+ It can be applied to both homogeneous and heterogeneous types, and
+ always yields a homogeneous type. For example:
+</p><pre> QType (Bit, &#91;Bit&#93;) = (Qubit, &#91;Qubit&#93;)
+ QType (Qubit, Bit) = (Qubit, Qubit)
+</pre></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:CType" class="def">CType</a> a = <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> a<a href="src/Quipper/QData.html#line-571" class="link">Source</a></p><div class="doc"><p>The type operator <code><a href="Quipper-QData.html#t:CType">CType</a></code> converts a classical or heterogeneous
+ type to a homogeneous quantum type. More precisely, the type
+ <code><a href="Quipper-QData.html#t:CType">CType</a></code> <em>a</em> represents the substitution <nobr><em>a</em> &#91;<code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> / <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>&#93;</nobr>. It
+ can be applied to both homogeneous and heterogeneous types, and
+ always yields a homogeneous type. For example:
+</p><pre> CType (Qubit, &#91;Qubit&#93;) = (Bit, &#91;Bit&#93;)
+ CType (Qubit, Bit) = (Bit, Bit)
+</pre></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:BType" class="def">BType</a> a = <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> a<a href="src/Quipper/QData.html#line-582" class="link">Source</a></p><div class="doc"><p>The type operator <code><a href="Quipper-QData.html#t:BType">BType</a></code> converts a classical, quantum, or
+ heterogeneous type to a homogeneous boolean type. More precisely,
+ the type <code><a href="Quipper-QData.html#t:BType">BType</a></code> <em>a</em> represents the substitution
+ <nobr><em>a</em> &#91;<code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code> / <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>, <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code> / <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>&#93;</nobr>. It can be applied to
+ both homogeneous and heterogeneous types, and always yields a
+ homogeneous type. For example:
+</p><pre> BType (Qubit, &#91;Qubit&#93;) = (Bool, &#91;Bool&#93;)
+ BType (Qubit, Bit) = (Bool, Bool)
+</pre></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:HType" class="def">HType</a> leaf qa = <a href="Quipper-QData.html#t:QCType">QCType</a> leaf leaf (<a href="Quipper-QData.html#t:QType">QType</a> qa)<a href="src/Quipper/QData.html#line-601" class="link">Source</a></p><div class="doc"><p>The type operator <code><a href="Quipper-QData.html#t:HType">HType</a></code> <em>x</em> converts a classical, quantum, or
+ boolean type to a homogeneous type with leaves <em>x</em>. More precisely,
+ the type <code><a href="Quipper-QData.html#t:HType">HType</a></code> <em>x</em> <em>a</em> represents the substitution
+ <nobr><em>a</em> &#91;<em>x</em> / <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>, <em>x</em> / <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>&#93;</nobr>.
+ For example:
+</p><pre> HType x (Qubit, &#91;Qubit&#93;) = (x, &#91;x&#93;)
+ HType x (Qubit, Bit) = (x, x)
+</pre><p>There is a very subtle difference between <code><a href="Quipper-QData.html#t:HType">HType</a></code> <em>x</em> <em>a</em> and
+ <code><a href="Quipper-QData.html#t:QCType">QCType</a></code> <em>x</em> <em>x</em> <em>a</em>. Although these two types are equal for all
+ <em>x</em> and <em>a</em>, the type checker cannot actually prove that <code><a href="Quipper-QData.html#t:QCType">QCType</a></code>
+ <em>x</em> <em>x</em> <em>a</em> is homogeneous from the assumption <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> <em>a</em>. It
+ can, however, prove that <code><a href="Quipper-QData.html#t:HType">HType</a></code> <em>x</em> <em>a</em> is homogeneous. Therefore
+ <code><a href="Quipper-QData.html#t:HType">HType</a></code> (or the slightly more efficient special cases <code><a href="Quipper-QData.html#t:QType">QType</a></code>,
+ <code><a href="Quipper-QData.html#t:CType">CType</a></code>, <code><a href="Quipper-QData.html#t:BType">BType</a></code>) should always be used to create a homogeneous
+ type from a heterogeneous one.
+</p></div></div><h1 id="g:8">Shape parameters
+</h1><div class="doc"><p>Several operations, such as <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code> and <code><a href="Quipper-QData.html#v:qcdata_zip">qcdata_zip</a></code>,
+ require a &quot;shape type parameter&quot;. The purpose of such a parameter
+ is only to fix a type; its value is completely unused. 
+</p><dl><dt>Introduction to shape type parameters</dt><dd>
+</dd></dl><p>$ The need for shape type parameters arises when dealing with a
+ data structure whose leaves are of some arbitrary type, rather than
+ <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>, <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>, or <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>. For example, consider the data structure
+</p><pre> &#91;(1, 2), (3, 4)&#93;
+</pre><p>This could be parsed in several different ways:
+</p><ul><li> as a data structure &#91;(<em>leaf</em>, <em>leaf</em>), (<em>leaf</em>, <em>leaf</em>)&#93;, where each leaf
+ is an integer;
+</li><li> as a data structure &#91;<em>leaf</em>, <em>leaf</em>&#93;, where each leaf is a pair of
+ integers;
+</li><li> as a data structure <em>leaf</em>, where each leaf is a list of pairs of
+ integers.
+</li></ul><p>The purpose of a shape type is to disambiguate this situation. In
+ shape types, the type <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> (and sometimes <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>, in the case of
+ heterogeneous types) takes the place of a leaf. In the three
+ situations of the above example, the shape type would be [(<code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>,
+ <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>)] in the first case; &#91;<code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>&#93; in the second case, the
+ <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> in the third case.
+</p><dl><dt>Difference between shape type parameters and shape term parameters</dt><dd>
+</dd></dl><p>A shape type parameter exists only to describe a type; its value is
+ irrelevant and often undefined. A shape type parameter describes
+ the location of leaves in a type. On the other hand, the purpose of
+ a shape term parameter is used to fix the number and locations of
+ leaves in a data structure (for example, to fix the length of a
+ list). Shape term parameters are also often just called &quot;shape
+ parameters&quot; in Quipper.
+</p><p>The distinction is perhaps best illustrated in an example.
+ A typical shape type parameter is
+</p><pre> undefined :: (Qubit, &#91;Qubit&#93;, &#91;&#91;Bit&#93;&#93;)
+</pre><p>A typical shape term parameter is
+</p><pre> (qubit, &#91;qubit, qubit, qubit&#93;, &#91;&#91;bit, bit&#93;, &#91;&#93;&#93;) :: (Qubit, &#91;Qubit&#93;, &#91;&#91;Bit&#93;&#93;)
+</pre><p>Both of them have the same type. The shape type parameter specifies
+ that the data structure is a triple consisting of a qubit, a list
+ of qubits, and a list of lists of bits.  The shape term parameter
+ moreover specifies that the first list consists of exactly three
+ qubits, and the second lists consists of a list of two bits and a
+ list of zero bits.
+</p><p>Note that the value of the shape type parameter is undefined (we
+ often use the term <code><a href="Quipper-QData.html#v:dummy">dummy</a></code> instead of <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#v:undefined">undefined</a></code>, to get more
+ meaningful error messages). On the other hand, the value of the
+ shape term parameter is partially defined; only the <em>leaves</em> are
+ of undefined value.
+</p><dl><dt>Functions for specifying shape type parameters</dt><dd>
+</dd></dl><p>Since it is not possible, in Haskell, to pass a type as an argument
+ to a function, we provide some terms whose only purpose is to
+ represent types. All of them have value <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#v:undefined">undefined</a></code>.  Effectively,
+ a shape type parameter is a type &quot;written as a term&quot;.
+</p><p>The following terms can also be combined in data structures to
+ represent composite types. For example:
+</p><pre> (qubit, &#91;bit&#93;) :: (Qubit, &#91;Bit&#93;)
+</pre></div><div class="top"><p class="src"><a name="v:dummy" class="def">dummy</a> ::  a<a href="src/Quipper/QData.html#line-685" class="link">Source</a></p><div class="doc"><p>A dummy term of any type. This term is <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#v:undefined">undefined</a></code> and must never
+ be evaluated. Its only purpose is to hold a type.
+</p></div></div><div class="top"><p class="src"><a name="v:qubit" class="def">qubit</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a><a href="src/Quipper/QData.html#line-691" class="link">Source</a></p><div class="doc"><p>A dummy term of type <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>. It can be used in shape parameters
+ (e.g., <code>qc_init</code>), as well as shape type parameters (e.g.,
+ <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code>).
+</p></div></div><div class="top"><p class="src"><a name="v:bit" class="def">bit</a> :: <a href="Quipper-Monad.html#t:Bit">Bit</a><a href="src/Quipper/QData.html#line-697" class="link">Source</a></p><div class="doc"><p>A dummy term of type <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>. It can be used in shape parameters
+ (e.g., <code>qc_init</code>), as well as shape type parameters (e.g.,
+ <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code>).
+</p></div></div><div class="top"><p class="src"><a name="v:bool" class="def">bool</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a><a href="src/Quipper/QData.html#line-701" class="link">Source</a></p><div class="doc"><p>A dummy term of type <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:shapetype_q" class="def">shapetype_q</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:QType">QType</a> qa -&gt; qa<a href="src/Quipper/QData.html#line-707" class="link">Source</a></p><div class="doc"><p>Convert a piece of homogeneous quantum data to a shape type
+ parameter. This is guaranteed to never evaluate <em>x</em>, and returns an
+ undefined value.
+</p></div></div><div class="top"><p class="src"><a name="v:shapetype_c" class="def">shapetype_c</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:CType">CType</a> qa -&gt; qa<a href="src/Quipper/QData.html#line-713" class="link">Source</a></p><div class="doc"><p>Convert a piece of homogeneous classical data to a shape type
+ parameter. This is guaranteed to never evaluate <em>x</em>, and returns an
+ undefined value.
+</p></div></div><div class="top"><p class="src"><a name="v:shapetype_b" class="def">shapetype_b</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qa -&gt; qa<a href="src/Quipper/QData.html#line-720" class="link">Source</a></p><div class="doc"><p>Convert a piece of homogeneous boolean data to a shape type
+ parameter. This is guaranteed to never evaluate <em>x</em>, and returns an
+ undefined value. Do not confuse this with the function <code>qshape</code>,
+ which creates a shape value.
+</p></div></div><div class="top"><p class="src"><a name="v:shape" class="def">shape</a> ::  a -&gt; a<a href="src/Quipper/QData.html#line-726" class="link">Source</a></p><div class="doc"><p>A dummy term of the same type as the given term. If <em>x</em> :: <em>a</em>,
+ then <code><a href="Quipper-QData.html#v:dummy">dummy</a></code> <em>x</em> :: <em>a</em>. This is guaranteed not to evaluate <em>x</em>,
+ and returns an undefined value.
+</p></div></div><h1 id="g:9">Homogeneous types
+</h1><h2 id="g:10">The QData class
+</h2><div class="doc"><p>The <code><a href="Quipper-QData.html#t:QData">QData</a></code> type class contains homogeneous data types built up
+ from leaves of type <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>. It contains no methods; all of its
+ functionality is derived from <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>. It does, however, contain
+ a number of equations that help the type checker figure out how to
+ convert heterogeneous type to homogeneous ones and vice versa.
+</p></div><div class="top"><p class="src"><span class="keyword">class</span> (qa ~ <a href="Quipper-QData.html#t:QType">QType</a> (<a href="Quipper-QData.html#t:CType">CType</a> qa), qa ~ <a href="Quipper-QData.html#t:QTypeB">QTypeB</a> (<a href="Quipper-QData.html#t:BType">BType</a> qa), qa ~ <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> qa, qa ~ <a href="Quipper-QData.html#t:QType">QType</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> (<a href="Quipper-QData.html#t:CType">CType</a> qa)) =&gt; <a name="t:QData" class="def">QData</a> qa <a href="src/Quipper/QData.html#line-743" class="link">Source</a></p><div class="doc"><p>The <code><a href="Quipper-QData.html#t:QData">QData</a></code> type class contains homogeneous data types built up
+ from leaves of type <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>.
+</p></div><div class="subs instances"><p id="control.i:QData" class="caption collapser" onclick="toggleSection('i:QData')">Instances</p><div id="section.i:QData" class="show"><table><tr><td class="src">(~ * qa (<a href="Quipper-QData.html#t:QType">QType</a> (<a href="Quipper-QData.html#t:CType">CType</a> qa)), ~ * qa (<a href="Quipper-QData.html#t:QTypeB">QTypeB</a> (<a href="Quipper-QData.html#t:BType">BType</a> qa)), ~ * qa (<a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> qa), ~ * qa (<a href="Quipper-QData.html#t:QType">QType</a> qa), <a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> (<a href="Quipper-QData.html#t:CType">CType</a> qa)) =&gt; <a href="Quipper-QData.html#t:QData">QData</a> qa</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h2 id="g:11">Derived combinators on QData
+</h2><div class="doc"><p>This section provides several convenient combinators for the
+ <code><a href="Quipper-QData.html#t:QData">QData</a></code> class. All of them are definable from those of
+ <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>.
+</p></div><div class="top"><p class="src"><a name="v:qdata_mapM" class="def">qdata_mapM</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> qa, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; qa -&gt; (x -&gt; m y) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x qa -&gt; m (<a href="Quipper-QData.html#t:HType">HType</a> y qa)<a href="src/Quipper/QData.html#line-777" class="link">Source</a></p><div class="doc"><p>Map a function <em>f</em> over all the leaves of a data structure.  The
+ first argument is a dummy shape parameter: its value is ignored, but
+ its <em>type</em> is used to determine the shape of the data to map over.
+</p><p>Example (ignoring the monad for the sake of simplicity):
+</p><pre> qdata_mapM (leaf, &#91;leaf&#93;) f (x,&#91;y,z,w&#93;) = (f x, &#91;f y, f z, f w&#93;).
+</pre><p>For data types that have a sense of direction, the mapping should
+ preferably be performed from left to right, but this property is
+ not guaranteed and may change without notice.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_zip" class="def">qdata_zip</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; x -&gt; y -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x qa -&gt; <a href="Quipper-QData.html#t:HType">HType</a> y qa -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:HType">HType</a> (x, y) qa<a href="src/Quipper/QData.html#line-787" class="link">Source</a></p><div class="doc"><p>Zip two data structures with leaf types <em>x</em> and <em>y</em> together, to
+ obtain a new data structure of the same shape with leaf type (<em>x</em>,
+ <em>y</em>).  The first three arguments are dummy shape type parameters, representing
+ the shape type and the two leaf types, respectively.
+</p><p>The <code><a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a></code> argument is a stub error message to be used in case
+ of failure.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_promote" class="def">qdata_promote</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qa -&gt; qa -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qa<a href="src/Quipper/QData.html#line-818" class="link">Source</a></p><div class="doc"><p>Sometimes, it is possible to have a boolean parameter with some
+ aspect of its shape indeterminate. The function <code><a href="Quipper-QData.html#v:qdata_promote">qdata_promote</a></code>
+ takes such a boolean parameter, as well as a piece of quantum data,
+ and sets the shape of the former to that of the latter.
+</p><p>Indeterminate shapes can be used with certain operations, such as
+ controlling and terminating, where some aspect of the shape of the
+ parameter can be determined from the context in which it is
+ used. This is useful, e.g., for quantum integers, where one may
+ want to specify a control condition by an integer literal such as
+ 17, without having to specify the number of bits. Thus, we can
+ write, e.g.,
+</p><pre> gate `controlled` qi .==. 17
+</pre><p>instead of the more cumbersome
+</p><pre> gate `controlled` qi .==. (intm (qdint_length qi) 17).
+</pre><p>Another useful application of this arises in the use of infinite
+ lists of booleans (such as <code>&#91;<code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:False">False</a></code>..&#93;</code>), to specify a control
+ condition for a finite list of qubits.
+</p><p>Because this function is used as a building block, we also pass
+ an error message to be used in case of failure. This will
+ hopefully make it clearer to the user which operation caused the
+ error.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_unzip" class="def">qdata_unzip</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; x -&gt; y -&gt; <a href="Quipper-QData.html#t:HType">HType</a> (x, y) s -&gt; (<a href="Quipper-QData.html#t:HType">HType</a> x s, <a href="Quipper-QData.html#t:HType">HType</a> y s)<a href="src/Quipper/QData.html#line-825" class="link">Source</a></p><div class="doc"><p>The inverse of <code><a href="Quipper-QData.html#v:qdata_zip">qdata_zip</a></code>: Take a data structure with leaf type
+ (<em>x</em>, <em>y</em>), and return two data structures of the same shape with
+ leaf types <em>x</em> and <em>y</em>, respectively. The first three arguments are
+ dummy shape type parameters, analogous to those of <code><a href="Quipper-QData.html#v:qdata_zip">qdata_zip</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_map" class="def">qdata_map</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; (x -&gt; y) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; <a href="Quipper-QData.html#t:HType">HType</a> y s<a href="src/Quipper/QData.html#line-832" class="link">Source</a></p><div class="doc"><p>Map a function over every leaf in a data structure. Non-monadic
+ version of <code><a href="Quipper-QData.html#v:qdata_mapM">qdata_mapM</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_fold" class="def">qdata_fold</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; (x -&gt; w -&gt; w) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; w -&gt; w<a href="src/Quipper/QData.html#line-837" class="link">Source</a></p><div class="doc"><p>Visit every leaf in a data structure, updating an accumulator.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_fold_map" class="def">qdata_fold_map</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; (x -&gt; w -&gt; (y, w)) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; w -&gt; (<a href="Quipper-QData.html#t:HType">HType</a> y s, w)<a href="src/Quipper/QData.html#line-844" class="link">Source</a></p><div class="doc"><p>Map a function over every leaf in a data structure, while also
+ updating an accumulator. This combines the functionality of
+ <code><a href="Quipper-QData.html#v:qdata_fold">qdata_fold</a></code> and <code><a href="Quipper-QData.html#v:qdata_map">qdata_map</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_foldM" class="def">qdata_foldM</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> s, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; s -&gt; (x -&gt; w -&gt; m w) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; w -&gt; m w<a href="src/Quipper/QData.html#line-850" class="link">Source</a></p><div class="doc"><p>Monadic version of <code><a href="Quipper-QData.html#v:qdata_fold">qdata_fold</a></code>: Visit every leaf in a data
+ structure, updating an accumulator.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_fold_mapM" class="def">qdata_fold_mapM</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> s, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; s -&gt; (x -&gt; w -&gt; m (y, w)) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; w -&gt; m (<a href="Quipper-QData.html#t:HType">HType</a> y s, w)<a href="src/Quipper/QData.html#line-862" class="link">Source</a></p><div class="doc"><p>Monadic version of <code><a href="Quipper-QData.html#v:qdata_fold_map">qdata_fold_map</a></code>: Map a function over every
+ leaf in a data structure, while also updating an accumulator. This
+ combines the functionality of <code><a href="Quipper-QData.html#v:qdata_foldM">qdata_foldM</a></code> and <code><a href="Quipper-QData.html#v:qdata_mapM">qdata_mapM</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_sequentialize" class="def">qdata_sequentialize</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; &#91;x&#93;<a href="src/Quipper/QData.html#line-884" class="link">Source</a></p><div class="doc"><p>Return a list of leaves of the given homogeneous data structure.
+ The first argument is a dummy shape type parameter, and is only used
+ for its type.
+</p><p>The leaves are ordered in some deterministic, but arbitrary way. It
+ is guaranteed that when two data structures of the same shape type
+ and shape (same length of lists etc) are sequentialized, the leaves
+ will be ordered the same way. No other property of the order is
+ guaranteed, In particular, it might change without notice. 
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_unsequentialize" class="def">qdata_unsequentialize</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; s -&gt; &#91;x&#93; -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s<a href="src/Quipper/QData.html#line-905" class="link">Source</a></p><div class="doc"><p>Take a specimen homogeneous data structure to specify the &quot;shape&quot;
+ desired (length of lists, etc); then reads the given list of leaves
+ in as a piece of homogeneous data of the same shape. The ordering
+ of the leaves is assumed to be the same as that which
+ <code><a href="Quipper-QData.html#v:qdata_sequentialize">qdata_sequentialize</a></code> produces for the given shape.
+</p><p>A &quot;length mismatch&quot; error occurs if the list does not have
+ exactly the required length.
+</p><p>Please note that, by contrast with the function
+ <code><a href="Quipper-QData.html#v:qdata_sequentialize">qdata_sequentialize</a></code>, the first argument is a shape term
+ parameter, not a shape type parameter. It is used to decide where
+ the qubits should go in the data structure.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_makeshape" class="def">qdata_makeshape</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; a -&gt; <a href="Quipper-QData.html#t:HType">HType</a> a qa -&gt; qa<a href="src/Quipper/QData.html#line-941" class="link">Source</a></p><div class="doc"><p>Combine a shape type argument <em>q</em>, a leaf type argument <em>a</em>, and
+ a shape size argument <em>x</em> into a single shape argument <em>qx</em>. Note:
+</p><ul><li> <em>q</em> captures only the type, but not the size of the data. Only
+ the type of <em>q</em> is used; its value can be undefined. This is
+ sufficient to determine the depth of leaves in a data structure,
+ but not their number.
+</li><li> <em>x</em> captures only the size of the data, but not its type. In
+ particular, <em>x</em> may have leaves of non-atomic types. <em>x</em> must
+ consist of well-defined constructors up to the depth of leaves of
+ <em>q</em>, but the values at the actual leaves of <em>x</em> may be undefined. 
+</li><li> The output <em>qx</em> combines the type of <em>q</em> with the size of <em>x</em>,
+ and can therefore be used both as a shape type and a shape value.
+ Note that the actual leaves of <em>qx</em> will be <code><a href="Quipper-QData.html#v:qubit">qubit</a></code> and <code><a href="Quipper-QData.html#v:bit">bit</a></code>,
+ which are synonyms for <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#v:undefined">undefined</a></code>. 
+</li></ul><p>Example:
+</p><pre> q = undefined :: (&#91;Qubit&#93;, &#91;&#91;Qubit&#93;&#93;)
+ x = (&#91;undefined, 0&#93;, &#91;&#91;undefined&#93;, &#91;0, 1&#93;&#93;)
+ qdata_makeshape qc a x = (&#91;qubit, qubit&#93;, &#91;&#91;qubit&#93;, &#91;qubit, qubit&#93;&#93;)
+</pre><p>where <em>a</em> :: <code>Int</code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_mapM_op" class="def">qdata_mapM_op</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> s, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; s -&gt; (x -&gt; m y) -&gt; <a href="Quipper-QData.html#t:HType">HType</a> x s -&gt; m (<a href="Quipper-QData.html#t:HType">HType</a> y s)<a href="src/Quipper/QData.html#line-950" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-QData.html#v:qdata_mapM">qdata_mapM</a></code>, except the leaves are visited in exactly the
+ opposite order. This is used primarily for cosmetic reasons: For
+ example, when initializing a bunch of ancillas, and then
+ terminating them, the circuit will look more symmetric if they are
+ terminated in the opposite order.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_promote_c" class="def">qdata_promote_c</a> :: <a href="Quipper-QData.html#t:QData">QData</a> s =&gt; <a href="Quipper-QData.html#t:BType">BType</a> s -&gt; <a href="Quipper-QData.html#t:CType">CType</a> s -&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-QData.html#t:BType">BType</a> s<a href="src/Quipper/QData.html#line-959" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-QData.html#v:qdata_promote">qdata_promote</a></code>, except take a piece of classical data.
+</p></div></div><h2 id="g:12">The CData and BData classes
+</h2><div class="top"><p class="src"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QType">QType</a> ca), <a href="Quipper-QData.html#t:CType">CType</a> (<a href="Quipper-QData.html#t:QType">QType</a> ca) ~ ca) =&gt; <a name="t:CData" class="def">CData</a> ca <a href="src/Quipper/QData.html#line-971" class="link">Source</a></p><div class="doc"><p>The <code><a href="Quipper-QData.html#t:CData">CData</a></code> type class contains homogeneous data types built up
+ from leaves of type <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>.
+</p></div><div class="subs instances"><p id="control.i:CData" class="caption collapser" onclick="toggleSection('i:CData')">Instances</p><div id="section.i:CData" class="show"><table><tr><td class="src">(<a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QType">QType</a> ca), ~ * (<a href="Quipper-QData.html#t:CType">CType</a> (<a href="Quipper-QData.html#t:QType">QType</a> ca)) ca) =&gt; <a href="Quipper-QData.html#t:CData">CData</a> ca</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QTypeB">QTypeB</a> ba), <a href="Quipper-QData.html#t:BType">BType</a> (<a href="Quipper-QData.html#t:QTypeB">QTypeB</a> ba) ~ ba) =&gt; <a name="t:BData" class="def">BData</a> ba <a href="src/Quipper/QData.html#line-976" class="link">Source</a></p><div class="doc"><p>The <code><a href="Quipper-QData.html#t:BData">BData</a></code> type class contains homogeneous data types built up
+ from leaves of type <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>.
+</p></div><div class="subs instances"><p id="control.i:BData" class="caption collapser" onclick="toggleSection('i:BData')">Instances</p><div id="section.i:BData" class="show"><table><tr><td class="src">(<a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QTypeB">QTypeB</a> ba), ~ * (<a href="Quipper-QData.html#t:BType">BType</a> (<a href="Quipper-QData.html#t:QTypeB">QTypeB</a> ba)) ba) =&gt; <a href="Quipper-QData.html#t:BData">BData</a> ba</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h2 id="g:13">The QShape class
+</h2><div class="doc"><p>By definition, <code><a href="Quipper-QData.html#t:QShape">QShape</a></code> <em>ba</em> <em>qa</em> <em>ca</em> means that <em>ba</em>, <em>qa</em>, and
+ <em>ca</em> are, respectively, boolean, quantum, and classical homogeneous
+ data types of the same common shape. The <code><a href="Quipper-QData.html#t:QShape">QShape</a></code> class directly
+ defined in terms of the <code><a href="Quipper-QData.html#t:QData">QData</a></code> class. In fact, the two classes are
+ interchangeable in the following sense:
+</p><pre> QShape ba qa ca   implies   QData qa, 
+</pre><p>and conversely,
+</p><pre> QData qa        implies   QShape (BType qa) qa (CType qa).
+</pre><p>Moreover, the functional dependencies <code><em>ba</em> -&gt; <em>qa</em>, <em>qa</em> -&gt; <em>ca</em>,
+ <em>ca</em> -&gt; <em>ba</em></code> ensure that each of the three types determines the
+ other two. Therefore, in many ways, <code><a href="Quipper-QData.html#t:QShape">QShape</a></code> is just a convenient
+ notation for functionality already present in <code><a href="Quipper-QData.html#t:QData">QData</a></code>.
+</p></div><div class="top"><p class="src"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QData">QData</a> qa, <a href="Quipper-QData.html#t:CType">CType</a> qa ~ ca, <a href="Quipper-QData.html#t:BType">BType</a> qa ~ ba) =&gt; <a name="t:QShape" class="def">QShape</a> ba qa ca | ba -&gt; qa, qa -&gt; ca, ca -&gt; ba<a href="src/Quipper/QData.html#line-1030" class="link">Source</a></p><div class="doc"><p>The <code><a href="Quipper-QData.html#t:QShape">QShape</a></code> class allows the definition of generic functions that
+ can operate on quantum data of any &quot;shape&quot;, for example, nested
+ tuples or lists of qubits.
+</p><p>In general, there are three kinds of data: quantum inputs (such as
+ <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>), classical inputs (such as <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>), and classical
+ parameters (such as <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>). For example, a <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> can be
+ initialized from a <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>; a <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> can be measured, resulting in
+ a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>, etc. For this reason, the type class <code><a href="Quipper-QData.html#t:QShape">QShape</a></code> establishes a
+ relation between three types:
+</p><dl><dt><code>qa</code></dt><dd> A data structure having <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> at the leaves.
+</dd><dt><code>ca</code></dt><dd> A data structure of the same shape as <code>qa</code>, having <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> at
+ the leaves.
+</dd><dt><code>ba</code></dt><dd> A data structure of the same shape as <code>qa</code>, having <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code> at
+ the leaves.
+</dd></dl><p>Some functions input a classical parameter for the sole purpose of
+ establishing the &quot;shape&quot; of a piece of data. The shape refers to
+ qualities of a data structure, such as the length of a list, which
+ are not uniquely determined by the type. For example, two different
+ lists of length 5 have the same shape. When performing a generic
+ operation, such as reversing a circuit, it is often necessary to
+ specify the shape of the inputs, but not the actual inputs.
+</p><p>In the common case where one only needs to declare one of the types
+ <em>qa</em>, <em>ca</em>, or <em>ba</em>, one of the simpler type classes <code><a href="Quipper-QData.html#t:QData">QData</a></code>,
+ <code><a href="Quipper-QData.html#t:CData">CData</a></code>, or <code><a href="Quipper-QData.html#t:BData">BData</a></code> can be used.
+</p></div><div class="subs instances"><p id="control.i:QShape" class="caption collapser" onclick="toggleSection('i:QShape')">Instances</p><div id="section.i:QShape" class="show"><table><tr><td class="src">(<a href="Quipper-QData.html#t:QData">QData</a> qa, ~ * (<a href="Quipper-QData.html#t:BType">BType</a> qa) ba, ~ * (<a href="Quipper-QData.html#t:CType">CType</a> qa) ca) =&gt; <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h1 id="g:14">Heterogeneous types
+</h1><div class="doc"><p>A heterogeneous type describes a data structure built up from
+ leaves of type <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> and <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>. Such types are used, for example,
+ to represent sets of endpoints in circuits, parameters to
+ subroutines and circuit building functions. A typical example is:
+</p><pre> (Bit, Qubit, &#91;Qubit&#93;).
+</pre></div><h2 id="g:15">Derived combinators on QCData
+</h2><div class="doc"><p>The <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> type class only contains the three primitive
+ combinators <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code>, <code><a href="Quipper-QData.html#v:qcdata_zip">qcdata_zip</a></code>, and <code><a href="Quipper-QData.html#v:qcdata_promote">qcdata_promote</a></code>.
+ Many other useful combinators are definable in terms of these, and
+ we provide several of them here.
+</p></div><div class="top"><p class="src"><a name="v:qcdata_unzip" class="def">qcdata_unzip</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; q -&gt; c -&gt; q' -&gt; c' -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> (q, q') (c, c') qc -&gt; (<a href="Quipper-QData.html#t:QCType">QCType</a> q c qc, <a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc)<a href="src/Quipper/QData.html#line-1060" class="link">Source</a></p><div class="doc"><p>The inverse of <code><a href="Quipper-QData.html#v:qcdata_zip">qcdata_zip</a></code>: Take a data structure whose leaves
+ are pairs, and return two data structures of the same shape,
+ collecting all the left components and all the right components,
+ respectively. The first five arguments are shape type parameters,
+ analogous to those of <code><a href="Quipper-QData.html#v:qcdata_zip">qcdata_zip</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_map" class="def">qcdata_map</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; (q -&gt; q') -&gt; (c -&gt; c') -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc<a href="src/Quipper/QData.html#line-1069" class="link">Source</a></p><div class="doc"><p>Map two functions <em>f</em> and <em>g</em> over the leaves of a heterogeneous
+ data structure. Apply <em>f</em> to all the leaves at <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> positions,
+ and <code>g</code> to all the leaves at <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> positions. Non-monadic version
+ of <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_fold" class="def">qcdata_fold</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; (q -&gt; w -&gt; w) -&gt; (c -&gt; w -&gt; w) -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; w -&gt; w<a href="src/Quipper/QData.html#line-1077" class="link">Source</a></p><div class="doc"><p>Visit every leaf in a data structure, updating an
+ accumulator. This function requires two accumulator functions <em>f</em>
+ and <em>g</em>, to be used at <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> positions and <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> positions,
+ respectively.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_fold_map" class="def">qcdata_fold_map</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; (q -&gt; w -&gt; (q', w)) -&gt; (c -&gt; w -&gt; (c', w)) -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; w -&gt; (<a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc, w)<a href="src/Quipper/QData.html#line-1084" class="link">Source</a></p><div class="doc"><p>Map a function over every leaf in a data structure, while also
+ updating an accumulator. This combines the functionality of
+ <code><a href="Quipper-QData.html#v:qcdata_fold">qcdata_fold</a></code> and <code><a href="Quipper-QData.html#v:qcdata_map">qcdata_map</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_foldM" class="def">qcdata_foldM</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; qc -&gt; (q -&gt; w -&gt; m w) -&gt; (c -&gt; w -&gt; m w) -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; w -&gt; m w<a href="src/Quipper/QData.html#line-1092" class="link">Source</a></p><div class="doc"><p>Monadic version of <code><a href="Quipper-QData.html#v:qcdata_fold">qcdata_fold</a></code>: Visit every leaf in a data
+ structure, updating an accumulator. This function requires two
+ accumulator functions <em>f</em> and <em>g</em>, to be used at <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> positions
+ and <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> positions, respectively.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_fold_mapM" class="def">qcdata_fold_mapM</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; qc -&gt; (q -&gt; w -&gt; m (q', w)) -&gt; (c -&gt; w -&gt; m (c', w)) -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; w -&gt; m (<a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc, w)<a href="src/Quipper/QData.html#line-1105" class="link">Source</a></p><div class="doc"><p>Monadic version of <code><a href="Quipper-QData.html#v:qcdata_fold_map">qcdata_fold_map</a></code>: Map a function over every
+ leaf in a data structure, while also updating an accumulator. This
+ combines the functionality of <code><a href="Quipper-QData.html#v:qcdata_foldM">qcdata_foldM</a></code> and <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_sequentialize" class="def">qcdata_sequentialize</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; &#91;<a href="Quipper-Transformer.html#t:B_Endpoint">B_Endpoint</a> q c&#93;<a href="src/Quipper/QData.html#line-1127" class="link">Source</a></p><div class="doc"><p>Return a list of leaves of the given heterogeneous data
+ structure. The first argument is a dummy shape type parameter, and
+ is only used for its type. Leaves in qubit positions and bit
+ positions are returned, respectively, as the left or right
+ components of a disjoint union.
+</p><p>The leaves are ordered in some deterministic, but arbitrary way. It
+ is guaranteed that when two data structures of the same shape type
+ and shape (same length of lists etc) are sequentialized, the leaves
+ will be ordered the same way. No other property of the order is
+ guaranteed, In particular, it might change without notice.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_unsequentialize" class="def">qcdata_unsequentialize</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; &#91;<a href="Quipper-Transformer.html#t:B_Endpoint">B_Endpoint</a> q c&#93; -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc<a href="src/Quipper/QData.html#line-1155" class="link">Source</a></p><div class="doc"><p>Take a specimen heterogeneous data structure to specify the
+ &quot;shape&quot; desired (length of lists, etc); then reads the given list
+ of leaves in as a piece of heterogeneous data of the same
+ shape. The ordering of the leaves, and the division of the leaves
+ into qubit and bit positions, is assumed to be the same as that
+ which <code><a href="Quipper-QData.html#v:qcdata_sequentialize">qcdata_sequentialize</a></code> produces for the given shape.
+</p><p>A &quot;length mismatch&quot; error occurs if the list does not have
+ exactly the required length. A &quot;shape mismatch&quot; error occurs if
+ the list contains an <code><a href="Quipper-Transformer.html#v:Endpoint_Bit">Endpoint_Bit</a></code> entry corresponding to a
+ <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> position in the shape, or an <code><a href="Quipper-Transformer.html#v:Endpoint_Qubit">Endpoint_Qubit</a></code> entry
+ corresponding to a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> position.
+</p><p>Please note that, by contrast with the function
+ <code><a href="Quipper-QData.html#v:qcdata_sequentialize">qcdata_sequentialize</a></code>, the first argument is a shape term
+ parameter, not a shape type parameter. It is used to decide where
+ the qubits and bits should go in the data structure.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_makeshape" class="def">qcdata_makeshape</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; a -&gt; b -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> a b qc -&gt; qc<a href="src/Quipper/QData.html#line-1198" class="link">Source</a></p><div class="doc"><p>Combine a shape type argument <em>q</em>, two leaf type arguments <em>a</em>
+ and <em>b</em>, and a shape size argument <em>x</em> into a single shape argument
+ <em>qx</em>. Note:
+</p><ul><li> <em>q</em> captures only the type, but not the size of the data. Only
+ the type of <em>q</em> is used; its value can be undefined. This is
+ sufficient to determine the depth of leaves in a data structure,
+ but not their number.
+</li><li> <em>x</em> captures only the size of the data, but not its type. In
+ particular, <em>x</em> may have leaves of non-atomic types. <em>x</em> must
+ consist of well-defined constructors up to the depth of leaves of
+ <em>q</em>, but the values at the actual leaves of <em>x</em> may be undefined. 
+</li><li> The output <em>qx</em> combines the type of <em>q</em> with the size of <em>x</em>,
+ and can therefore be used both as a shape type and a shape value.
+ Note that the actual leaves of <em>qx</em> will be <code><a href="Quipper-QData.html#v:qubit">qubit</a></code> and <code><a href="Quipper-QData.html#v:bit">bit</a></code>,
+ which are synonyms for <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#v:undefined">undefined</a></code>. 
+</li></ul><p>Example:
+</p><pre> qc = undefined :: (&#91;Qubit&#93;, &#91;&#91;Bit&#93;&#93;)
+ x = (&#91;undefined, (0,False)&#93;, &#91;&#91;undefined&#93;, &#91;Just 2, Nothing&#93;&#93;)
+ qcdata_makeshape qc a b x = (&#91;qubit, qubit&#93;, &#91;&#91;bit&#93;, &#91;bit, bit&#93;&#93;)
+</pre><p>where <em>a</em> :: <code>(Int,Bool)</code>, <em>b</em> :: <code>(Maybe Int)</code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_mapM_op" class="def">qcdata_mapM_op</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; qc -&gt; (q -&gt; m q') -&gt; (c -&gt; m c') -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> q c qc -&gt; m (<a href="Quipper-QData.html#t:QCType">QCType</a> q' c' qc)<a href="src/Quipper/QData.html#line-1208" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-QData.html#v:qcdata_mapM">qcdata_mapM</a></code>, except the leaves are visited in exactly the
+ opposite order. This is used primarily for cosmetic reasons: For
+ example, when initializing a bunch of ancillas, and then
+ terminating them, the circuit will look more symmetric if they are
+ terminated in the opposite order.
+</p></div></div><h2 id="g:16">The QCDataPlus class
+</h2><div class="top"><p class="src"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QType">QType</a> qc)) =&gt; <a name="t:QCDataPlus" class="def">QCDataPlus</a> qc <a href="src/Quipper/QData.html#line-1249" class="link">Source</a></p><div class="doc"><p>The <code><a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a></code> type class is almost identical to <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>,
+ except that it contains one additional piece of information that
+ allows the type checker to prove the implications
+</p><pre> QCDataPlus qc     implies   QShape (BType qc) (QType qc) (CType qc)
+ QCDataPlus qc     implies   QData (QType qc)
+ QCDataPlus qc     implies   CData (CType qc)
+ QCDataPlus qc     implies   BData (BType qc)
+</pre><p>This is sometimes useful, for example, in the context of a function
+ that inputs a <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>, measures all the qubits, and returns a
+ <code><a href="Quipper-QData.html#t:CData">CData</a></code>. However, the additional information for the type checker
+ comes at a price, which is drastically increased compilation time.
+ Therefore <code><a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a></code> should only be used when <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> is
+ insufficient.
+</p></div><div class="subs instances"><p id="control.i:QCDataPlus" class="caption collapser" onclick="toggleSection('i:QCDataPlus')">Instances</p><div id="section.i:QCDataPlus" class="show"><table><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="Quipper-QData.html#t:QData">QData</a> (<a href="Quipper-QData.html#t:QType">QType</a> qc)) =&gt; <a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a> qc</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h2 id="g:17">Fixed size QCDataPlus
+</h2><div class="top"><p class="src"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> qc) =&gt; <a name="t:QCData_Simple" class="def">QCData_Simple</a> qc <a href="src/Quipper/QData.html#line-1257" class="link">Source</a></p><div class="doc"><p><code><a href="Quipper-QData.html#t:QCDataPlus_Simple">QCDataPlus_Simple</a></code> is a convenience type class that combines
+ <code><a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a></code> and <code><a href="Quipper-QData.html#t:SimpleType">SimpleType</a></code>.
+</p></div><div class="subs instances"><p id="control.i:QCData_Simple" class="caption collapser" onclick="toggleSection('i:QCData_Simple')">Instances</p><div id="section.i:QCData_Simple" class="show"><table><tr><td class="src">(<a href="Quipper-QData.html#t:QCData">QCData</a> qc, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> qc) =&gt; <a href="Quipper-QData.html#t:QCData_Simple">QCData_Simple</a> qc</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a> qc, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> qc) =&gt; <a name="t:QCDataPlus_Simple" class="def">QCDataPlus_Simple</a> qc <a href="src/Quipper/QData.html#line-1262" class="link">Source</a></p><div class="doc"><p><code><a href="Quipper-QData.html#t:QCDataPlus_Simple">QCDataPlus_Simple</a></code> is a convenience type class that combines
+ <code><a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a></code> and <code><a href="Quipper-QData.html#t:SimpleType">SimpleType</a></code>.
+</p></div><div class="subs instances"><p id="control.i:QCDataPlus_Simple" class="caption collapser" onclick="toggleSection('i:QCDataPlus_Simple')">Instances</p><div id="section.i:QCDataPlus_Simple" class="show"><table><tr><td class="src">(<a href="Quipper-QData.html#t:QCDataPlus">QCDataPlus</a> qc, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> qc) =&gt; <a href="Quipper-QData.html#t:QCDataPlus_Simple">QCDataPlus_Simple</a> qc</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h2 id="g:18">The QCLeaf class
+</h2><div class="top"><p class="src"><span class="keyword">class</span> (<a href="Quipper-QData.html#t:QCData">QCData</a> q, <a href="Quipper-QData.html#t:SimpleType">SimpleType</a> q, <a href="Quipper-Control.html#t:ControlSource">ControlSource</a> q, <a href="Quipper-Control.html#t:ControlSource">ControlSource</a> (<a href="Quipper-Circuit.html#t:Signed">Signed</a> q), <a href="Quipper-Labels.html#t:Labelable">Labelable</a> q <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> q ~ q, <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> q ~ <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a>) =&gt; <a name="t:QCLeaf" class="def">QCLeaf</a> q <a href="src/Quipper/QData.html#line-1279" class="link">Source</a></p><div class="doc"><p>The class <code><a href="Quipper-QData.html#t:QCLeaf">QCLeaf</a></code> consists of the two types <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> and <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>.
+ It is primarily used for convenience, in those cases (such as the
+ arithmetic library) where some class instance should be defined for
+ the cases <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> and <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>, but not for general <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>. It is
+ also used, e.g., in the definition of the <code>./=.</code> operator.
+</p></div><div class="subs instances"><p id="control.i:QCLeaf" class="caption collapser" onclick="toggleSection('i:QCLeaf')">Instances</p><div id="section.i:QCLeaf" class="show"><table><tr><td class="src"><a href="Quipper-QData.html#t:QCLeaf">QCLeaf</a> <a href="Quipper-Monad.html#t:Bit">Bit</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-QData.html#t:QCLeaf">QCLeaf</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h2 id="g:19">Canonical string representation
+</h2><div class="doc"><p>For the purpose of storing boxed subroutines, it is useful to
+ have a unique representation of <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> shapes as strings.  The
+ currently implementation relies on <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#v:show">show</a></code> to give unique
+ representations. Therefore, when defining <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a></code> instances for
+ <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>, one should make sure that the generated strings contain
+ enough information to recover both the type and the shape uniquely.
+</p></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Qubit_Leaf" class="def">Qubit_Leaf</a>  <a href="src/Quipper/QData.html#line-1302" class="link">Source</a></p><div class="doc"><p>A type to represent a <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> leaf, for the sole purpose that
+ <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#v:show">show</a></code> will show it as &quot;Q&quot;.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Qubit_Leaf" class="def">Qubit_Leaf</a></td><td class="doc empty">&nbsp;</td></tr></table></div><div class="subs instances"><p id="control.i:Qubit_Leaf" class="caption collapser" onclick="toggleSection('i:Qubit_Leaf')">Instances</p><div id="section.i:Qubit_Leaf" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Quipper-QData.html#t:Qubit_Leaf">Qubit_Leaf</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Bit_Leaf" class="def">Bit_Leaf</a>  <a href="src/Quipper/QData.html#line-1308" class="link">Source</a></p><div class="doc"><p>A type to represent a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> leaf, for the sole purpose that
+ <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#v:show">show</a></code> will show it as &quot;C&quot;.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Bit_Leaf" class="def">Bit_Leaf</a></td><td class="doc empty">&nbsp;</td></tr></table></div><div class="subs instances"><p id="control.i:Bit_Leaf" class="caption collapser" onclick="toggleSection('i:Bit_Leaf')">Instances</p><div id="section.i:Bit_Leaf" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Quipper-QData.html#t:Bit_Leaf">Bit_Leaf</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><a name="v:canonical_shape" class="def">canonical_shape</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a><a href="src/Quipper/QData.html#line-1315" class="link">Source</a></p><div class="doc"><p>Turn any <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> into a string uniquely identifying its type and
+ shape. The current implementation assumes that appropriately unique
+ <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a></code> instances are defined for all <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>.
+</p></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:LType" class="def">LType</a> a = <a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-QData.html#t:Qubit_Leaf">Qubit_Leaf</a> <a href="Quipper-QData.html#t:Bit_Leaf">Bit_Leaf</a> a<a href="src/Quipper/QData.html#line-1326" class="link">Source</a></p><div class="doc"><p>The type operator <code><a href="Quipper-QData.html#t:LType">LType</a></code> converts <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> to <code><a href="Quipper-QData.html#t:Qubit_Leaf">Qubit_Leaf</a></code> and
+ <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> to <code><a href="Quipper-QData.html#t:Bit_Leaf">Bit_Leaf</a></code>.
+</p></div></div><h1 id="g:20">Defining new QCData instances
+</h1><div class="doc"><p>To define a new kind of quantum data, the following must be
+ defined:
+</p><ul><li> A class instance of <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>,
+</li><li> a type instance of <code><a href="Quipper-QData.html#t:QCType">QCType</a></code>, and
+</li><li> a type instance of <code><a href="Quipper-QData.html#t:QTypeB">QTypeB</a></code>.
+</li></ul><p>If the new type is simple, an class instance of <code><a href="Quipper-QData.html#t:SimpleType">SimpleType</a></code> should
+ also be defined.
+</p><p>If the new type may be integrated with Template Haskell, a class
+ instance of <code>CircLiftingUnpack</code> should also be defined.
+</p><p>To ensure that circuit labeling will work for the new type, a class
+ instance of <code><a href="Quipper-Labels.html#t:Labelable">Labelable</a></code> must also be defined for every member of
+ <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>. See <a href="Quipper-Labels.html">Quipper.Labels</a> for detailed instructions on how to
+ do so.
+</p><p>Modules that define new kinds of quantum data should import
+ <a href="Quipper-Internal.html">Quipper.Internal</a>.
+</p></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>

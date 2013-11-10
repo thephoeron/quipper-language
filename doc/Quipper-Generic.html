@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Quipper.Generic</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_Quipper-Generic.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/Quipper/Generic.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">Quipper.Generic</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Generic gates
+</a><ul><li><a href="#g:2">Initialization and termination
+</a></li><li><a href="#g:3">Measurement and preparation
+</a></li><li><a href="#g:4">Global phase gate
+</a></li><li><a href="#g:5">Mapped gates
+</a></li><li><a href="#g:6">Copying and uncopying
+</a></li><li><a href="#g:7">Classical gates
+</a></li><li><a href="#g:8">Named gates
+</a></li><li><a href="#g:9">Dynamic lifting
+</a></li></ul></li><li><a href="#g:10">Mapping
+</a></li><li><a href="#g:11">Conversion to lists
+</a></li><li><a href="#g:12">Shape related operations
+</a></li><li><a href="#g:13">Bindings
+</a></li><li><a href="#g:14">Generic controls
+</a></li><li><a href="#g:15">Generic encapsulation
+</a></li><li><a href="#g:16">Generic reversing
+</a></li><li><a href="#g:17">The QCurry type class
+</a></li><li><a href="#g:18">Generic circuit transformations
+</a></li><li><a href="#g:19">Generic block structure
+</a></li><li><a href="#g:20">Boxed subcircuits
+</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>This module provides functions and operators that are &quot;generic&quot;
+ on quantum data. We say that a function is generic if it works at
+ any quantum data type, rather than just a specific type such as
+ <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>. For example, the generic function <code><a href="Quipper-Generic.html#v:qinit">qinit</a></code> can be used to
+ initialize a qubit from a boolean, or a pair of qubits from a pair
+ of booleans, or a list of qubits from a list of booleans, and so
+ forth.
+</p><p>Some functions are also generic in the <em>number</em> of arguments they
+ take, in addition to the type of the arguments. 
+</p></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><a href="#v:qinit">qinit</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ba -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:qterm">qterm</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ba -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:qdiscard">qdiscard</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:cinit">cinit</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ba -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca</li><li class="src short"><a href="#v:cterm">cterm</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ba -&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:cdiscard">cdiscard</a> :: <a href="Quipper-QData.html#t:CData">CData</a> ca =&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:qc_init">qc_init</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc</li><li class="src short"><a href="#v:qc_init_with_shape">qc_init_with_shape</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc</li><li class="src short"><a href="#v:qc_term">qc_term</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:qc_discard">qc_discard</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:measure">measure</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca</li><li class="src short"><a href="#v:prepare">prepare</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:qc_measure">qc_measure</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> qc)</li><li class="src short"><a href="#v:qc_prepare">qc_prepare</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> qc)</li><li class="src short"><a href="#v:global_phase_anchored">global_phase_anchored</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:map_hadamard">map_hadamard</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:map_hadamard_at">map_hadamard_at</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:swap">swap</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qc, qc)</li><li class="src short"><a href="#v:swap_at">swap_at</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:controlled_not">controlled_not</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qc, qc)</li><li class="src short"><a href="#v:controlled_not_at">controlled_not_at</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:bool_controlled_not">bool_controlled_not</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc</li><li class="src short"><a href="#v:bool_controlled_not_at">bool_controlled_not_at</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:qmultinot">qmultinot</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:qmultinot_at">qmultinot_at</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:qc_copy_fun">qc_copy_fun</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qc, qc)</li><li class="src short"><a href="#v:qc_uncopy_fun">qc_uncopy_fun</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc</li><li class="src short"><a href="#v:qc_copy">qc_copy</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc</li><li class="src short"><a href="#v:qc_uncopy">qc_uncopy</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:cgate_if">cgate_if</a> :: <a href="Quipper-QData.html#t:CData">CData</a> ca =&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; ca -&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca</li><li class="src short"><a href="#v:circ_if">circ_if</a> :: <a href="Quipper-QData.html#t:CData">CData</a> ca =&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca</li><li class="src short"><a href="#v:named_gate">named_gate</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:named_gate_at">named_gate_at</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:named_rotation">named_rotation</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="Quipper-Circuit.html#t:Timestep">Timestep</a> -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:named_rotation_at">named_rotation_at</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="Quipper-Circuit.html#t:Timestep">Timestep</a> -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:extended_named_gate">extended_named_gate</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> qa, <a href="Quipper-QData.html#t:QData">QData</a> qb) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; qb -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:extended_named_gate_at">extended_named_gate_at</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> qa, <a href="Quipper-QData.html#t:QData">QData</a> qb) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; qb -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:dynamic_lift">dynamic_lift</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ba</li><li class="src short"><a href="#v:mapUnary">mapUnary</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>) -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:mapBinary">mapBinary</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-Monad.html#t:Qubit">Qubit</a>, <a href="Quipper-Monad.html#t:Qubit">Qubit</a>)) -&gt; qa -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qa, qa)</li><li class="src short"><a href="#v:mapBinary_c">mapBinary_c</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-Monad.html#t:Qubit">Qubit</a>, <a href="Quipper-Monad.html#t:Bit">Bit</a>)) -&gt; qa -&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qa, ca)</li><li class="src short"><a href="#v:map2Q">map2Q</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; ((<a href="Quipper-Monad.html#t:Qubit">Qubit</a>, <a href="Quipper-Monad.html#t:Qubit">Qubit</a>) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>) -&gt; (qa, qa) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:qc_mapBinary">qc_mapBinary</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-Monad.html#t:Qubit">Qubit</a>, <a href="Quipper-Monad.html#t:Qubit">Qubit</a>)) -&gt; (<a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-Monad.html#t:Bit">Bit</a>, <a href="Quipper-Monad.html#t:Bit">Bit</a>)) -&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qc, qc)</li><li class="src short"><a href="#v:qubits_of_qdata">qubits_of_qdata</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93;</li><li class="src short"><a href="#v:qdata_of_qubits">qdata_of_qubits</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; qa</li><li class="src short"><a href="#v:endpoints_of_qcdata">endpoints_of_qcdata</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; &#91;<a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93;</li><li class="src short"><a href="#v:qcdata_of_endpoints">qcdata_of_endpoints</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; &#91;<a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93; -&gt; qc</li><li class="src short"><a href="#v:qc_false">qc_false</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc</li><li class="src short"><a href="#v:qshape">qshape</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qa -&gt; qa</li><li class="src short"><a href="#v:qc_bind">qc_bind</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> a b qc -&gt; <a href="Quipper-Transformer.html#t:Bindings">Bindings</a> a b</li><li class="src short"><a href="#v:qc_unbind">qc_unbind</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="Quipper-Transformer.html#t:Bindings">Bindings</a> a b -&gt; qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> a b qc</li><li class="src short"><a href="#v:.-38--38-.">(.&amp;&amp;.)</a> :: (<a href="Quipper-Control.html#t:ControlSource">ControlSource</a> a, <a href="Quipper-Control.html#t:ControlSource">ControlSource</a> b) =&gt; a -&gt; b -&gt; <a href="Quipper-Control.html#t:ControlList">ControlList</a></li><li class="src short"><a href="#v:.-61--61-.">(.==.)</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Control.html#t:ControlList">ControlList</a></li><li class="src short"><a href="#v:.-47--61-.">(./=.)</a> :: <a href="Quipper-QData.html#t:QCLeaf">QCLeaf</a> q =&gt; q -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; <a href="Quipper-Control.html#t:ControlList">ControlList</a></li><li class="src short"><a href="#v:encapsulate_generic">encapsulate_generic</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> x =&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; (x, <a href="Quipper-Circuit.html#t:BCircuit">BCircuit</a>, y)</li><li class="src short"><a href="#v:encapsulate_generic_in_namespace">encapsulate_generic_in_namespace</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> x =&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (x, <a href="Quipper-Circuit.html#t:BCircuit">BCircuit</a>, y)</li><li class="src short"><a href="#v:unencapsulate_generic">unencapsulate_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; (x, <a href="Quipper-Circuit.html#t:BCircuit">BCircuit</a>, y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y</li><li class="src short"><a href="#v:encapsulate_dynamic">encapsulate_dynamic</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> x =&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; (x, <a href="Quipper-Circuit.html#t:DBCircuit">DBCircuit</a> y)</li><li class="src short"><a href="#v:unencapsulate_dynamic">unencapsulate_dynamic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; (x, <a href="Quipper-Circuit.html#t:DBCircuit">DBCircuit</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y</li><li class="src short"><a href="#v:reverse_generic">reverse_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_y x y, <a href="Libraries-Auxiliary.html#t:Curry">Curry</a> x_y_xt x (y -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> xt)) =&gt; x_y -&gt; x_y_xt</li><li class="src short"><a href="#v:reverse_generic_curried">reverse_generic_curried</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Libraries-Tuple.html#t:Tuple">Tuple</a> yt y, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_yt x yt, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> y_xt y xt, <a href="Libraries-Auxiliary.html#t:Curry">Curry</a> x_y_xt x y_xt) =&gt; x_yt -&gt; x_y_xt</li><li class="src short"><a href="#v:reverse_simple">reverse_simple</a> :: (<a href="Quipper-QData.html#t:QCData_Simple">QCData_Simple</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_y x y) =&gt; x_y -&gt; y -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> xt</li><li class="src short"><a href="#v:reverse_simple_curried">reverse_simple_curried</a> :: (<a href="Quipper-QData.html#t:QCData_Simple">QCData_Simple</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Libraries-Tuple.html#t:Tuple">Tuple</a> yt y, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_yt x yt, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> y_xt y xt) =&gt; x_yt -&gt; y_xt</li><li class="src short"><a href="#v:reverse_generic_endo">reverse_generic_endo</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_xt x xt) =&gt; x_xt -&gt; x_xt</li><li class="src short"><a href="#v:reverse_generic_imp">reverse_generic_imp</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x__ x ()) =&gt; x__ -&gt; x__</li><li class="src short"><a href="#v:reverse_endo_if">reverse_endo_if</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_xt x xt) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; x_xt -&gt; x_xt</li><li class="src short"><a href="#v:reverse_imp_if">reverse_imp_if</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> fun qa ()) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; fun -&gt; fun</li><li class="src short"><span class="keyword">class</span>  <a href="#t:QCurry">QCurry</a> fun args res | fun -&gt; args res, args res -&gt; fun <span class="keyword">where</span><ul class="subs"><li><a href="#v:qcurry">qcurry</a> :: (args -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> res) -&gt; fun</li><li><a href="#v:quncurry">quncurry</a> :: fun -&gt; args -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> res</li></ul></li><li class="src short"><a href="#v:transform_unary_dynamic_shape">transform_unary_dynamic_shape</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, x' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b x, y' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b y, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; <a href="Quipper-Transformer.html#t:DynamicTransformer">DynamicTransformer</a> m a b -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; x' -&gt; m y'</li><li class="src short"><a href="#v:transform_unary_dynamic">transform_unary_dynamic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; <a href="Quipper-Transformer.html#t:DynamicTransformer">DynamicTransformer</a> <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y</li><li class="src short"><a href="#v:transform_unary">transform_unary</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; <a href="Quipper-Transformer.html#t:Transformer">Transformer</a> <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y</li><li class="src short"><a href="#v:transform_generic">transform_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> qfun x y) =&gt; <a href="Quipper-Transformer.html#t:Transformer">Transformer</a> <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; qfun -&gt; qfun</li><li class="src short"><a href="#v:transform_unary_shape">transform_unary_shape</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, x' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b x, y' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b y, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; <a href="Quipper-Transformer.html#t:Transformer">Transformer</a> m a b -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; x' -&gt; m y'</li><li class="src short"><a href="#v:transform_generic_shape">transform_generic_shape</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> qfun x y, <a href="Libraries-Auxiliary.html#t:Curry">Curry</a> qfun' x' (m y'), <a href="Libraries-Auxiliary.html#t:Curry">Curry</a> qfun'' x qfun', x' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b x, y' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b y, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; <a href="Quipper-Transformer.html#t:Transformer">Transformer</a> m a b -&gt; qfun -&gt; qfun''</li><li class="src short"><a href="#v:with_ancilla_init">with_ancilla_init</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> a qa ca =&gt; a -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b</li><li class="src short"><a href="#v:with_ancilla_list">with_ancilla_list</a> ::  <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; (<a href="Quipper-Monad.html#t:Qulist">Qulist</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> a) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> a</li><li class="src short"><a href="#v:with_computed_fun">with_computed_fun</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; x -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; (y -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (y, b)) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (x, b)</li><li class="src short"><a href="#v:with_computed">with_computed</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> x =&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> x -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b</li><li class="src short"><a href="#v:with_basis_change">with_basis_change</a> ::  <a href="Quipper-Monad.html#t:Circ">Circ</a> () -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b</li><li class="src short"><a href="#v:with_classical_control">with_classical_control</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qa =&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:provide_subroutine_generic">provide_subroutine_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-Circuit.html#t:BoxId">BoxId</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:box">box</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> qb, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> qa_qb qa qb) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa_qb -&gt; qa_qb</li><li class="src short"><a href="#v:nbox">nbox</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integer">Integer</a> -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa) -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:box_loopM">box_loopM</a> :: (<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integral">Integral</a> int, <a href="Quipper-QData.html#t:QCData">QCData</a> qa) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; int -&gt; qa -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:loopM_boxed_if">loopM_boxed_if</a> :: (<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integral">Integral</a> int, <a href="Quipper-QData.html#t:QCData">QCData</a> qa) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; int -&gt; qa -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa</li><li class="src short"><a href="#v:inline_subroutine">inline_subroutine</a> :: <a href="Quipper-Circuit.html#t:BoxId">BoxId</a> -&gt; <a href="Quipper-Circuit.html#t:Namespace">Namespace</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> &#91;<a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93;</li></ul></div><div id="interface"><h1 id="g:1">Generic gates
+</h1><h2 id="g:2">Initialization and termination
+</h2><div class="top"><p class="src"><a name="v:qinit" class="def">qinit</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ba -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-172" class="link">Source</a></p><div class="doc"><p>Initialize a qubit from a boolean parameter. More generally,
+ initialize a data structure of qubits from a corresponding data
+ structure of boolean parameters. Examples:
+</p><pre> q &lt;- qinit False
+ (q0, q1) &lt;- qinit (True, False)
+ &#91;q0, q1, q2&#93; &lt;- qinit &#91;True, False, True&#93;
+</pre></div></div><div class="top"><p class="src"><a name="v:qterm" class="def">qterm</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ba -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-194" class="link">Source</a></p><div class="doc"><p>Terminate a qubit, asserting its state to equal the boolean
+ parameter. More generally, terminate a data structure of qubits,
+ asserting that their state is as given by a data structure of
+ booleans parameters. Examples:
+</p><pre> qterm False q
+ qterm (False, False) (q0, q1)
+ qterm &#91;False, False, False&#93; &#91;q0, q1, q2&#93;
+</pre><p>In some cases, it is permissible for some aspect of the parameter's
+ shape to be underspecified, e.g., a longer than necessary list, or
+ an integer of indeterminate length. It is therefore possible, for
+ example, to write:
+</p><pre> qterm 17 qa          -- when qa :: QDInt,
+ qterm &#91;False..&#93; qa   -- when qa :: &#91;Qubit&#93;.
+</pre><p>The rules for when a boolean argument can be &quot;promoted&quot; in this
+ way are specific to each individual data type.
+</p></div></div><div class="top"><p class="src"><a name="v:qdiscard" class="def">qdiscard</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-212" class="link">Source</a></p><div class="doc"><p>Discard a qubit, ignoring its state. This can leave the quantum
+ system in a mixed state, so is not a reversible operation. More
+ generally, discard all the qubits in a quantum data
+ structure. Examples:
+</p><pre> qdiscard q
+ qdiscard (q0, q1)
+ qdiscard &#91;q0, q1, q2&#93;
+</pre></div></div><div class="top"><p class="src"><a name="v:cinit" class="def">cinit</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ba -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca<a href="src/Quipper/Generic.html#line-224" class="link">Source</a></p><div class="doc"><p>Initialize a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> (boolean input) from a <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code> (boolean
+ parameter). More generally, initialize the a data structure of Bits
+ from a corresponding data structure of Bools. Examples:
+</p><pre> b &lt;- cinit False
+ (b0, b1) &lt;- cinit (True, False)
+ &#91;b0, b1, b2&#93; &lt;- cinit &#91;True, False, True&#93;
+</pre></div></div><div class="top"><p class="src"><a name="v:cterm" class="def">cterm</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ba -&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-246" class="link">Source</a></p><div class="doc"><p>Terminate a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>, asserting its state to equal the given
+ <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code>. More generally, terminate a data structure of Bits,
+ asserting that their state is as given by a data structure of
+ Bools. Examples:
+</p><pre> cterm False b
+ cterm (False, False) (b0, b1)
+ cterm &#91;False, False, False&#93; &#91;b0, b1, b2&#93;
+</pre><p>In some cases, it is permissible for some aspect of the parameter's
+ shape to be underspecified, e.g., a longer than necessary list, or
+ an integer of indeterminate length. It is therefore possible, for
+ example, to write:
+</p><pre> cterm 17 ca          -- when ca :: CInt,
+ cterm &#91;False..&#93; ca   -- when ca :: &#91;Bit&#93;.
+</pre><p>The rules for when a boolean argument can be &quot;promoted&quot; in this
+ way are specific to each individual data type.
+</p></div></div><div class="top"><p class="src"><a name="v:cdiscard" class="def">cdiscard</a> :: <a href="Quipper-QData.html#t:CData">CData</a> ca =&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-265" class="link">Source</a></p><div class="doc"><p>Discard a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>, ignoring its state. This can leave the system in
+ a mixed state, so is not a reversible operation. More generally,
+ discard all the Bits in a data structure. Examples:
+</p><pre> cdiscard b
+ cdiscard (b0, b1)
+ cdiscard &#91;b0, b1, b2&#93;
+</pre></div></div><div class="top"><p class="src"><a name="v:qc_init" class="def">qc_init</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc<a href="src/Quipper/Generic.html#line-284" class="link">Source</a></p><div class="doc"><p>Heterogeneous version of <code><a href="Quipper-Generic.html#v:qinit">qinit</a></code>. Please note that the type of
+ the result of this function cannot be inferred from the type of the
+ argument. For example, 
+</p><pre> x &lt;- qc_init False
+</pre><p>is ambiguous, unless it can be inferred from the context whether
+ <em>x</em> is a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> or a <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>. If the type cannot be inferred from
+ the context, it needs to be stated explicitly, like this:
+</p><pre> x &lt;- qc_init False :: Circ Qubit
+</pre><p>Alternatively, <code><a href="Quipper-Generic.html#v:qc_init_with_shape">qc_init_with_shape</a></code> can be used to fix a specific
+ type.
+</p></div></div><div class="top"><p class="src"><a name="v:qc_init_with_shape" class="def">qc_init_with_shape</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc<a href="src/Quipper/Generic.html#line-299" class="link">Source</a></p><div class="doc"><p>A version of <code><a href="Quipper-Generic.html#v:qc_init">qc_init</a></code> that uses a shape type parameter. The
+ first argument is the shape type parameter, and the second argument
+ is a data structure containing boolean initializers. The shape type
+ argument determines which booleans are used to initialize qubits,
+ and which ones are used to initialize classical bits.
+</p><p>Example:
+</p><pre> (x,y) &lt;- qc_init_with_shape (bit,&#91;qubit&#93;) (True, &#91;False,True&#93;)
+</pre><p>This will assign to <em>x</em> a classical bit initialized to 1, and to
+ <em>y</em> a list of two qubits initialized to |0&#9002; and |1&#9002;, respectively.
+</p></div></div><div class="top"><p class="src"><a name="v:qc_term" class="def">qc_term</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-303" class="link">Source</a></p><div class="doc"><p>Heterogeneous version of <code><a href="Quipper-Generic.html#v:qterm">qterm</a></code>. 
+</p></div></div><div class="top"><p class="src"><a name="v:qc_discard" class="def">qc_discard</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-320" class="link">Source</a></p><div class="doc"><p>Heterogeneous version of <code><a href="Quipper-Generic.html#v:qdiscard">qdiscard</a></code>.
+</p></div></div><h2 id="g:3">Measurement and preparation
+</h2><div class="top"><p class="src"><a name="v:measure" class="def">measure</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca<a href="src/Quipper/Generic.html#line-336" class="link">Source</a></p><div class="doc"><p>Measure a <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>, resulting in a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>. More generally, measure
+ all the Qubits in a quantum data structure, resulting in a
+ corresponding data structure of Bits. This is not a reversible
+ operation. Examples:
+</p><pre> b &lt;- measure q
+ (b0, b1) &lt;- measure (q0, q1)
+ &#91;b0, b1, b2&#93; &lt;- measure &#91;q0, q1, q2&#93;
+</pre></div></div><div class="top"><p class="src"><a name="v:prepare" class="def">prepare</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-346" class="link">Source</a></p><div class="doc"><p>Prepare a <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> initialized from a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>. More generally,
+ prepare a data structure of Qubits, initialized from a corresponding
+ data structure of Bits. Examples:
+</p><pre> q &lt;- prepare b
+ (q0, q1) &lt;- prepare (b0, b1)
+ &#91;q0, q1, q2&#93; &lt;- prepare &#91;b0, b1, b2&#93;
+</pre></div></div><div class="top"><p class="src"><a name="v:qc_measure" class="def">qc_measure</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> qc)<a href="src/Quipper/Generic.html#line-352" class="link">Source</a></p><div class="doc"><p>Heterogeneous version of <code><a href="Quipper-Generic.html#v:measure">measure</a></code>. Given a heterogeneous data
+ structure, measure all of its qubits, and leave any classical bits
+ unchanged.
+</p></div></div><div class="top"><p class="src"><a name="v:qc_prepare" class="def">qc_prepare</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-QData.html#t:QCType">QCType</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> qc)<a href="src/Quipper/Generic.html#line-361" class="link">Source</a></p><div class="doc"><p>Heterogeneous version of <code><a href="Quipper-Generic.html#v:measure">measure</a></code>. Given a heterogeneous data
+ structure, prepare qubits from all classical bits, and leave any
+ qubits unchanged.
+</p></div></div><h2 id="g:4">Global phase gate
+</h2><div class="top"><p class="src"><a name="v:global_phase_anchored" class="def">global_phase_anchored</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-374" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Monad.html#v:global_phase">global_phase</a></code>, except the gate is also &quot;anchored&quot; at a
+ qubit, a bit, or more generally at some quantum data. The anchor
+ is only used as a hint for graphical display. The gate, which is a
+ zero-qubit gate, will potentially be displayed near the anchor(s).
+</p></div></div><h2 id="g:5">Mapped gates
+</h2><div class="top"><p class="src"><a name="v:map_hadamard" class="def">map_hadamard</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-382" class="link">Source</a></p><div class="doc"><p>Apply a Hadamard gate to every qubit in a quantum data structure.
+</p></div></div><div class="top"><p class="src"><a name="v:map_hadamard_at" class="def">map_hadamard_at</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-386" class="link">Source</a></p><div class="doc"><p>Imperative version of <code><a href="Quipper-Generic.html#v:map_hadamard">map_hadamard</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:swap" class="def">swap</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qc, qc)<a href="src/Quipper/Generic.html#line-394" class="link">Source</a></p><div class="doc"><p>Apply a swap gate to two qubits. More generally, apply swap gates
+ to every corresponding pair of qubits in two pieces of quantum
+ data.
+</p></div></div><div class="top"><p class="src"><a name="v:swap_at" class="def">swap_at</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-400" class="link">Source</a></p><div class="doc"><p>Apply a swap gate to two qubits. More generally, apply swap gates
+ to every corresponding pair of qubits in two pieces of quantum
+ data.
+</p></div></div><div class="top"><p class="src"><a name="v:controlled_not" class="def">controlled_not</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qc, qc)<a href="src/Quipper/Generic.html#line-421" class="link">Source</a></p><div class="doc"><p>Apply a controlled-not gate to every corresponding pair of
+ quantum or classical bits in two pieces of QCData. The first
+ argument is the target and the second the (positive) control.  
+</p><p>For now, we require both pieces of QCData to have the same type,
+ i.e., classical bits can be controlled only by classical bits and
+ quantum bits can be controlled only by quantum bits.
+</p><p>Example:
+</p><pre> ((a',b'), (x,y)) &lt;- controlled_not (a,b) (x,y)
+</pre><p>is equivalent to
+</p><pre> a' &lt;- qnot a `controlled` x
+ b' &lt;- qnot b `controlled` y
+</pre></div></div><div class="top"><p class="src"><a name="v:controlled_not_at" class="def">controlled_not_at</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-445" class="link">Source</a></p><div class="doc"><p>Imperative version of <code><a href="Quipper-Generic.html#v:controlled_not">controlled_not</a></code>. Apply a controlled-not
+ gate to every corresponding pair of quantum or classical bits in
+ two pieces of QCData. The first argument is the target and the
+ second the (positive) control.
+</p></div></div><div class="top"><p class="src"><a name="v:bool_controlled_not" class="def">bool_controlled_not</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc<a href="src/Quipper/Generic.html#line-456" class="link">Source</a></p><div class="doc"><p>A version of <code><a href="Quipper-Generic.html#v:controlled_not">controlled_not</a></code> where the control consists of
+ boolean data. Example:
+</p><pre> bool_controlled_not (q, r, s) (True, True, False)
+</pre><p>negates <em>q</em> and <em>r</em>, but not <em>s</em>.
+</p></div></div><div class="top"><p class="src"><a name="v:bool_controlled_not_at" class="def">bool_controlled_not_at</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-467" class="link">Source</a></p><div class="doc"><p>A version of <code><a href="Quipper-Generic.html#v:controlled_not_at">controlled_not_at</a></code> where the control consists of
+ boolean data. Example:
+</p><pre> bool_controlled_not_at (q, r, s) (True, True, False)
+</pre><p>negates <em>q</em> and <em>r</em>, but not <em>s</em>.
+</p></div></div><div class="top"><p class="src"><a name="v:qmultinot" class="def">qmultinot</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-477" class="link">Source</a></p><div class="doc"><p>Negate all qubits in a quantum data structure.
+</p></div></div><div class="top"><p class="src"><a name="v:qmultinot_at" class="def">qmultinot_at</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-483" class="link">Source</a></p><div class="doc"><p>Negate all qubits in a quantum data structure.
+</p></div></div><h2 id="g:6">Copying and uncopying
+</h2><div class="top"><p class="src"><a name="v:qc_copy_fun" class="def">qc_copy_fun</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qc, qc)<a href="src/Quipper/Generic.html#line-492" class="link">Source</a></p><div class="doc"><p>Initialize a new piece of quantum data, as a copy of a given
+ piece.  Returns both the original and the copy.
+</p></div></div><div class="top"><p class="src"><a name="v:qc_uncopy_fun" class="def">qc_uncopy_fun</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc<a href="src/Quipper/Generic.html#line-506" class="link">Source</a></p><div class="doc"><p>Given two pieces of quantum data, assumed equal (w.r.t. the
+ computational basis), terminate the second piece (and return the
+ first, unmodified). This is the inverse of <code><a href="Quipper-Generic.html#v:qc_copy_fun">qc_copy_fun</a></code>, in the sense
+ that the following sequence of instructions behaves like the
+ identity function:
+</p><pre> (orig, copy) &lt;- qc_copy_fun orig
+ orig &lt;- qc_uncopy_fun orig copy
+</pre></div></div><div class="top"><p class="src"><a name="v:qc_copy" class="def">qc_copy</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qc<a href="src/Quipper/Generic.html#line-513" class="link">Source</a></p><div class="doc"><p>Create a fresh copy of a piece of quantum data. Note: copying is
+ performed via a controlled-not operation, and is not cloning. This
+ is similar to <code><a href="Quipper-Generic.html#v:qc_copy_fun">qc_copy_fun</a></code>, except it returns only the copy, and not
+ the original.
+</p></div></div><div class="top"><p class="src"><a name="v:qc_uncopy" class="def">qc_uncopy</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-525" class="link">Source</a></p><div class="doc"><p>&quot;Uncopy&quot; a piece of quantum data; i.e. terminate <em>copy</em>,
+ assuming it's a copy of <em>orig</em>. This is the inverse of
+ <code><a href="Quipper-Generic.html#v:qc_copy">qc_copy</a></code>, in the sense that the following sequence of
+ instructions behaves like the identity function:
+</p><pre> b &lt;- qc_copy a
+ qc_uncopy a b
+</pre></div></div><h2 id="g:7">Classical gates
+</h2><div class="top"><p class="src"><a name="v:cgate_if" class="def">cgate_if</a> :: <a href="Quipper-QData.html#t:CData">CData</a> ca =&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; ca -&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca<a href="src/Quipper/Generic.html#line-542" class="link">Source</a></p><div class="doc"><p>If <em>a</em> is <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:True">True</a></code>, return a copy of <em>b</em>, else return a copy of
+ <em>c</em>. Here <em>b</em> and <em>c</em> can be any data structures consisting of
+ Bits, but <em>b</em> and <em>c</em> must be of the same type and shape (for
+ example, if they are lists, they must be of equal
+ length). Examples:
+</p><pre> output &lt;- cgate_if a b c
+ (out0, out1) &lt;- cgate_if a (b0, b1) (c0, c1)
+ &#91;out0, out1, out2&#93; &lt;- cgate_if a &#91;b0, b1, b2&#93; &#91;c0, c1, c2&#93;
+</pre></div></div><div class="top"><p class="src"><a name="v:circ_if" class="def">circ_if</a> :: <a href="Quipper-QData.html#t:CData">CData</a> ca =&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ca<a href="src/Quipper/Generic.html#line-570" class="link">Source</a></p><div class="doc"><p><code><a href="Quipper-Generic.html#v:circ_if">circ_if</a></code> is an if-then-else function for classical circuits. 
+ It is a wrapper around <code><a href="Quipper-Generic.html#v:cgate_if">cgate_if</a></code>, intended to be used like this:
+</p><pre> result &lt;- circ_if &lt;&lt;&lt;condition&gt;&gt;&gt; (
+   &lt;&lt;then-part&gt;&gt;&gt;
+   )(
+   &lt;&lt;&lt;else-part&gt;&gt;&gt;
+   )
+</pre><p>Unlike <code><a href="Quipper-Generic.html#v:cgate_if">cgate_if</a></code>, this is a meta-operation, i.e., the bodies of
+ the &quot;then&quot; and &quot;else&quot; parts can be circuit building
+ operations. 
+</p><p>What makes this different from the usual boolean &quot;if-then-else&quot;
+ is that the condition is of type <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code>, i.e., it is only known at
+ circuit execution time. Therefore the generated circuit contains
+ <em>both</em> the &quot;then&quot; and &quot;else&quot; parts, suitably
+ controlled. Precondition: the &quot;then&quot; and &quot;else&quot; parts must be
+ of the same type and shape.
+</p></div></div><h2 id="g:8">Named gates
+</h2><div class="top"><p class="src"><a name="v:named_gate" class="def">named_gate</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-623" class="link">Source</a></p><div class="doc"><p>Define a new functional-style gate of the given name. Usage:
+</p><pre> my_unary_gate :: Qubit -&gt; Circ Qubit
+ my_unary_gate = named_gate &quot;Q&quot;
+</pre><pre> my_binary_gate :: (Qubit, Qubit) -&gt; Circ (Qubit, Qubit)
+ my_binary_gate = named_gate &quot;R&quot;
+</pre><p>This defines a new unary gate and a new binary gate, which will be
+ rendered as <a href="Q.html">Q</a> and <a href="R.html">R</a>, respectively, in circuit diagrams. 
+</p></div></div><div class="top"><p class="src"><a name="v:named_gate_at" class="def">named_gate_at</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-638" class="link">Source</a></p><div class="doc"><p>Define a new imperative-style gate of the given name. Usage:
+</p><pre> my_unary_gate_at :: Qubit -&gt; Circ ()
+ my_unary_gate_at = named_gate_at &quot;Q&quot;
+</pre><pre> my_binary_gate_at :: (Qubit, Qubit) -&gt; Circ ()
+ my_binary_gate_at = named_gate_at &quot;R&quot;
+</pre><p>This defines a new unary gate and a new binary gate, which will be
+ rendered as <a href="Q.html">Q</a> and <a href="R.html">R</a>, respectively, in circuit diagrams. 
+</p></div></div><div class="top"><p class="src"><a name="v:named_rotation" class="def">named_rotation</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="Quipper-Circuit.html#t:Timestep">Timestep</a> -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-654" class="link">Source</a></p><div class="doc"><p>Define a new functional-style gate of the given name, and
+ parameterized by a real-valued parameter. This is typically used
+ for rotations or phase gates that are parameterized by an angle.
+ The name can contain '%' as a place holder for the parameter.
+ Usage:
+</p><pre> my_unary_gate :: Qubit -&gt; Circ Qubit
+ my_unary_gate = named_rotation &quot;exp(-i%Z)&quot; 0.123
+</pre><pre> my_binary_gate :: TimeStep -&gt; (Qubit, Qubit) -&gt; Circ (Qubit, Qubit)
+ my_binary_gate t = named_rotation &quot;Q(%)&quot; t
+</pre></div></div><div class="top"><p class="src"><a name="v:named_rotation_at" class="def">named_rotation_at</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="Quipper-Circuit.html#t:Timestep">Timestep</a> -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-670" class="link">Source</a></p><div class="doc"><p>Define a new imperative-style gate of the given name, and
+ parameterized by a real-valued parameter. This is typically used
+ for rotations or phase gates that are parameterized by an angle.
+ The name can contain '%' as a place holder for the parameter.
+ Usage:
+</p><pre> my_unary_gate_at :: Qubit -&gt; Circ ()
+ my_unary_gate_at = named_rotation &quot;exp(-i%Z)&quot; 0.123
+</pre><pre> my_binary_gate_at :: TimeStep -&gt; (Qubit, Qubit) -&gt; Circ ()
+ my_binary_gate_at t = named_rotation &quot;Q(%)&quot; t
+</pre></div></div><div class="top"><p class="src"><a name="v:extended_named_gate" class="def">extended_named_gate</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> qa, <a href="Quipper-QData.html#t:QData">QData</a> qb) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; qb -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-591" class="link">Source</a></p><div class="doc"><p>Define a new functional-style gate of the given name. Like
+ <code><a href="Quipper-Generic.html#v:named_gate">named_gate</a></code>, except that the generated gate is extended with
+ &quot;generalized controls&quot;. The generalized controls are additional
+ inputs to the gate that are guaranteed not to be modified if they
+ are in a computational basis state. They are rendered in a special
+ way in circuit diagrams. Usage:
+</p><pre> my_new_gate :: (Qubit,Qubit) -&gt; Qubit -&gt; Circ (Qubit,Qubit)
+ my_new_gate = extended_named_gate &quot;Q&quot;
+</pre><p>This defines a new gate with name <a href="Q.html">Q</a>, two inputs, and one
+ generalized input.
+</p></div></div><div class="top"><p class="src"><a name="v:extended_named_gate_at" class="def">extended_named_gate_at</a> :: (<a href="Quipper-QData.html#t:QData">QData</a> qa, <a href="Quipper-QData.html#t:QData">QData</a> qb) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; qb -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-604" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:extended_named_gate">extended_named_gate</a></code>, except defines an imperative style gate.
+ Usage:
+</p><pre> my_new_gate_at :: (Qubit,Qubit) -&gt; Qubit -&gt; Circ ()
+ my_new_gate_at = extended_named_gate_at &quot;Q&quot;
+</pre><p>This defines a new gate with name <a href="Q.html">Q</a>, two inputs, and one
+ generalized input.
+</p></div></div><h2 id="g:9">Dynamic lifting
+</h2><div class="top"><p class="src"><a name="v:dynamic_lift" class="def">dynamic_lift</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ba<a href="src/Quipper/Generic.html#line-708" class="link">Source</a></p><div class="doc"><p>Convert a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> (boolean circuit output) to a <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></code> (boolean
+ parameter). More generally, convert a data structure of Bits to a
+ corresponding data structure of Bools.
+</p><p>For use in algorithms that require the output of a measurement to
+ be used as a circuit-generation parameter. This is the case, for
+ example, for sieving methods, and also for some iterative
+ algorithms.
+</p><p>Note that this is not a gate, but a meta-operation. The input
+ consists of classical circuit endpoints (whose values are known at
+ circuit execution time), and the output is a boolean parameter
+ (whose value is known at circuit generation time). 
+</p><p>The use of this operation implies an interleaving between circuit
+ execution and circuit generation. It is therefore a (physically)
+ expensive operation and should be used sparingly. Using the
+ <code><a href="Quipper-Generic.html#v:dynamic_lift">dynamic_lift</a></code> operation interrupts the batch mode operation of the
+ quantum device (where circuits are generated ahead of time), and
+ forces interactive operation (the quantum device must wait for the
+ next portion of the circuit to be generated). This operation is
+ especially expensive if the current circuit contains unmeasured
+ qubits; in this case, the qubits must be preserved while the
+ quantum device remains on standby.
+</p><p>Also note that this operation is not supported in all contexts. It
+ is an error, for example, to use this operation in a circuit that
+ is going to be reversed, or in the body of a boxed subroutine.
+ Also, not all output devices (such as circuit viewers) support this
+ operation.
+</p></div></div><h1 id="g:10">Mapping
+</h1><div class="top"><p class="src"><a name="v:mapUnary" class="def">mapUnary</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>) -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-715" class="link">Source</a></p><div class="doc"><p>Map a single qubit gate across every qubit in the data structure.
+</p></div></div><div class="top"><p class="src"><a name="v:mapBinary" class="def">mapBinary</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-Monad.html#t:Qubit">Qubit</a>, <a href="Quipper-Monad.html#t:Qubit">Qubit</a>)) -&gt; qa -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qa, qa)<a href="src/Quipper/Generic.html#line-720" class="link">Source</a></p><div class="doc"><p>Map a binary gate across every corresponding pair of qubits in
+ two quantum data structures of equal shape.
+</p></div></div><div class="top"><p class="src"><a name="v:mapBinary_c" class="def">mapBinary_c</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> ba qa ca =&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-Monad.html#t:Qubit">Qubit</a>, <a href="Quipper-Monad.html#t:Bit">Bit</a>)) -&gt; qa -&gt; ca -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qa, ca)<a href="src/Quipper/Generic.html#line-731" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:mapBinary">mapBinary</a></code>, except the second data structure is classical.
+</p></div></div><div class="top"><p class="src"><a name="v:map2Q" class="def">map2Q</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; ((<a href="Quipper-Monad.html#t:Qubit">Qubit</a>, <a href="Quipper-Monad.html#t:Qubit">Qubit</a>) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a>) -&gt; (qa, qa) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-744" class="link">Source</a></p><div class="doc"><p>Map a binary qubit circuit to every pair of qubits in the quantum
+ data-type. It is a run-time error if the two structures do not have
+ the same size.
+</p></div></div><div class="top"><p class="src"><a name="v:qc_mapBinary" class="def">qc_mapBinary</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-Monad.html#t:Qubit">Qubit</a>, <a href="Quipper-Monad.html#t:Qubit">Qubit</a>)) -&gt; (<a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (<a href="Quipper-Monad.html#t:Bit">Bit</a>, <a href="Quipper-Monad.html#t:Bit">Bit</a>)) -&gt; qc -&gt; qc -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (qc, qc)<a href="src/Quipper/Generic.html#line-757" class="link">Source</a></p><div class="doc"><p>Heterogeneous version of <code><a href="Quipper-Generic.html#v:mapBinary">mapBinary</a></code>. Map a binary gate <em>f</em>
+ across every corresponding pair of qubits, and a binary gate <em>g</em>
+ across every corresponding pair of bits, in two quantum data
+ structures of equal shape.
+</p></div></div><h1 id="g:11">Conversion to lists
+</h1><div class="doc"><p>The functions in this section can be used to convert
+ quantum data structures to and from lists. Do not use them! The
+ conversion is unsafe in the same way pointers to void are unsafe in
+ the C programming language. There is almost always a better and
+ more natural way to accomplish what you need to do.
+</p></div><div class="top"><p class="src"><a name="v:qubits_of_qdata" class="def">qubits_of_qdata</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93;<a href="src/Quipper/Generic.html#line-788" class="link">Source</a></p><div class="doc"><p>Return the list of qubits representing the given quantum data.
+ The qubits are ordered in some fixed, but arbitrary way. It is
+ guaranteed that two pieces of qdata of the same given shape will be
+ ordered in the same way. No other property of the order is
+ guaranteed, In particular, the order may change without notice from
+ one version of Quipper to the next.
+</p></div></div><div class="top"><p class="src"><a name="v:qdata_of_qubits" class="def">qdata_of_qubits</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; qa -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; qa<a href="src/Quipper/Generic.html#line-799" class="link">Source</a></p><div class="doc"><p>Take a specimen piece of quantum data to specify the &quot;shape&quot;
+ desired (length of lists, etc); then reads the given list of qubits
+ in as a piece of quantum data of the same shape. The ordering of
+ the input qubits is the same as <code><a href="Quipper-Generic.html#v:qubits_of_qdata">qubits_of_qdata</a></code> produces for the
+ given shape.
+</p><p>A &quot;length mismatch&quot; error occurs if the list does not have
+ exactly the required length.
+</p></div></div><div class="top"><p class="src"><a name="v:endpoints_of_qcdata" class="def">endpoints_of_qcdata</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; &#91;<a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93;<a href="src/Quipper/Generic.html#line-808" class="link">Source</a></p><div class="doc"><p>Return the list of endpoints that form the leaves of the given
+ <code><a href="Quipper-QData.html#t:QCData">QCData</a></code>. The leaves are ordered in some fixed, but arbitrary
+ way. It is guaranteed that two pieces of data of the same given
+ shape will be ordered in the same way. No other property of the
+ order is guaranteed. In particular, the order may change without notice from
+ one version of Quipper to the next.
+</p></div></div><div class="top"><p class="src"><a name="v:qcdata_of_endpoints" class="def">qcdata_of_endpoints</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; &#91;<a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93; -&gt; qc<a href="src/Quipper/Generic.html#line-820" class="link">Source</a></p><div class="doc"><p>Take a specimen piece of <code><a href="Quipper-QData.html#t:QCData">QCData</a></code> to specify the &quot;shape&quot;
+ desired (length of lists, etc); then reads the given list of
+ endpoints in as a piece of quantum data of the same shape. The
+ ordering of the input endpoints equals that produced by
+ <code><a href="Quipper-Generic.html#v:endpoints_of_qcdata">endpoints_of_qcdata</a></code> for the given shape.
+</p><p>A &quot;length mismatch&quot; error occurs if the list does not have
+ exactly the required length. A &quot;shape mismatch&quot; error occurs if
+ the list contains a <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code> when a <code><a href="Quipper-Monad.html#t:Bit">Bit</a></code> was expected, or vice versa. 
+</p></div></div><h1 id="g:12">Shape related operations
+</h1><div class="top"><p class="src"><a name="v:qc_false" class="def">qc_false</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc<a href="src/Quipper/Generic.html#line-840" class="link">Source</a></p><div class="doc"><p>Return a boolean data structure of the given shape, with every
+ leaf initialized to <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:False">False</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:qshape" class="def">qshape</a> :: <a href="Quipper-QData.html#t:QData">QData</a> qa =&gt; <a href="Quipper-QData.html#t:BType">BType</a> qa -&gt; qa<a href="src/Quipper/Generic.html#line-848" class="link">Source</a></p><div class="doc"><p>Return a quantum data structure of the given boolean shape, with
+ every leaf initialized to the undefined dummy value <code><a href="Quipper-QData.html#v:qubit">qubit</a></code>.
+</p></div></div><h1 id="g:13">Bindings
+</h1><div class="top"><p class="src"><a name="v:qc_bind" class="def">qc_bind</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> a b qc -&gt; <a href="Quipper-Transformer.html#t:Bindings">Bindings</a> a b<a href="src/Quipper/Generic.html#line-859" class="link">Source</a></p><div class="doc"><p>Take two pieces of quantum data of the same shape (the first of
+ which consists of wires of a low-level circuit) and create
+ bindings.
+</p></div></div><div class="top"><p class="src"><a name="v:qc_unbind" class="def">qc_unbind</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; <a href="Quipper-Transformer.html#t:Bindings">Bindings</a> a b -&gt; qc -&gt; <a href="Quipper-QData.html#t:QCType">QCType</a> a b qc<a href="src/Quipper/Generic.html#line-880" class="link">Source</a></p><div class="doc"><p>Apply bindings to a piece of quantum and/or classical data
+ holding low-level wires, to get data of the same shape.
+</p></div></div><h1 id="g:14">Generic controls
+</h1><div class="doc"><p>The following functions define a convenient syntax for
+ controls. With this, we can write controls in much the same way as
+ one would write (a restricted class of) boolean
+ expressions. Examples:
+</p><pre> q1 .==. 0 .&amp;&amp;. q2 .==. 1         for Qubits q1, q2
+</pre><pre> q .&amp;&amp;. p                         means  q .==. 1  .&amp;&amp;.  p .==. 1
+</pre><pre> qx .==. 5                        for a QDInt qx
+</pre><pre> q1 .==. 0 .&amp;&amp;. z &lt;= 7            we can combine quantum and classical controls
+</pre><pre> q ./=. b                         the negation of q .==. b;
+                                  here b is a boolean.
+</pre><pre> &#91;p,q,r,s&#93;                        a list of positive controls
+</pre><pre> &#91;(p, True), (q, False), (r, False), (s, True)&#93;
+                                  a list of positive and negative controls
+</pre><p>Among these infix operators, <code>(.&amp;&amp;.)</code> binds more weakly than
+ <code>(.==.)</code>, <code>(./=.)</code>.
+</p></div><div class="top"><p class="src"><a name="v:.-38--38-." class="def">(.&amp;&amp;.)</a> :: (<a href="Quipper-Control.html#t:ControlSource">ControlSource</a> a, <a href="Quipper-Control.html#t:ControlSource">ControlSource</a> b) =&gt; a -&gt; b -&gt; <a href="Quipper-Control.html#t:ControlList">ControlList</a><a href="src/Quipper/Generic.html#line-943" class="link">Source</a></p><div class="doc"><p>This is an infix operator to concatenate two controls, forming
+ their logical conjunction.
+</p></div></div><div class="top"><p class="src"><a name="v:.-61--61-." class="def">(.==.)</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qc =&gt; qc -&gt; <a href="Quipper-QData.html#t:BType">BType</a> qc -&gt; <a href="Quipper-Control.html#t:ControlList">ControlList</a><a href="src/Quipper/Generic.html#line-947" class="link">Source</a></p><div class="doc"><p><code>(qx .==. x)</code>: a control which is true just if quantum data <em>qx</em> is in the specified state <em>x</em>. 
+</p></div></div><div class="top"><p class="src"><a name="v:.-47--61-." class="def">(./=.)</a> :: <a href="Quipper-QData.html#t:QCLeaf">QCLeaf</a> q =&gt; q -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; <a href="Quipper-Control.html#t:ControlList">ControlList</a><a href="src/Quipper/Generic.html#line-955" class="link">Source</a></p><div class="doc"><p>The notation <code>(q ./=. x)</code> is shorthand for <code>(q .==. not x)</code>, when
+ <em>x</em> is a boolean parameter. 
+</p><p>Unlike <code><a href="Quipper-Generic.html#v:.-61--61-.">.==.</a></code>, which is defined for any shape of quantum data,
+ <code><a href="Quipper-Generic.html#v:.-47--61-.">./=.</a></code> is only defined for a single control bit or qubit.
+</p></div></div><h1 id="g:15">Generic encapsulation
+</h1><div class="doc"><p>An encapsulated circuit is a low-level circuit together with data
+ structures holding the input endpoints and output endpoints. A
+ circuit-generating function, with fully specified parameters, can
+ be turned into an encapsulated circuit; conversely, an encapsulated
+ circuit can be turned into a circuit-generating function. Thus,
+ encapsulation and unencapsulation are the main interface for
+ passing between high- and low-level data structures.
+</p></div><div class="top"><p class="src"><a name="v:encapsulate_generic" class="def">encapsulate_generic</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> x =&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; (x, <a href="Quipper-Circuit.html#t:BCircuit">BCircuit</a>, y)<a href="src/Quipper/Generic.html#line-1004" class="link">Source</a></p><div class="doc"><p>Extract an encapsulated circuit from a circuit-generating
+ function. This requires a shape parameter.
+</p></div></div><div class="top"><p class="src"><a name="v:encapsulate_generic_in_namespace" class="def">encapsulate_generic_in_namespace</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> x =&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (x, <a href="Quipper-Circuit.html#t:BCircuit">BCircuit</a>, y)<a href="src/Quipper/Generic.html#line-1012" class="link">Source</a></p><div class="doc"><p>As <code><a href="Quipper-Generic.html#v:encapsulate_generic">encapsulate_generic</a></code>, but passes the current namespace
+ into the circuit-generating function, to save recomputing
+ shared subroutines
+</p></div></div><div class="top"><p class="src"><a name="v:unencapsulate_generic" class="def">unencapsulate_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; (x, <a href="Quipper-Circuit.html#t:BCircuit">BCircuit</a>, y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y<a href="src/Quipper/Generic.html#line-1020" class="link">Source</a></p><div class="doc"><p>Turn an encapsulated circuit back into a circuit-generating
+ function.
+</p></div></div><div class="doc"><p>A dynamic encapsulated circuit is to an encapsulated circuit like a
+ <code><a href="Quipper-Circuit.html#t:DBCircuit">DBCircuit</a></code> to a <code><a href="Quipper-Circuit.html#t:BCircuit">BCircuit</a></code>. The output is not a static circuit,
+ but an interactive computation expressed through the <code><a href="Quipper-Circuit.html#t:ReadWrite">ReadWrite</a></code>
+ monad, which can be run on a quantum device to get a static circuit
+ out.
+</p></div><div class="top"><p class="src"><a name="v:encapsulate_dynamic" class="def">encapsulate_dynamic</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> x =&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; (x, <a href="Quipper-Circuit.html#t:DBCircuit">DBCircuit</a> y)<a href="src/Quipper/Generic.html#line-1037" class="link">Source</a></p><div class="doc"><p>Extract an encapsulated dynamic circuit from a circuit-generating
+ function. This requires a shape parameter.
+</p></div></div><div class="top"><p class="src"><a name="v:unencapsulate_dynamic" class="def">unencapsulate_dynamic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; (x, <a href="Quipper-Circuit.html#t:DBCircuit">DBCircuit</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y<a href="src/Quipper/Generic.html#line-1048" class="link">Source</a></p><div class="doc"><p>Turn an encapsulated dynamic circuit back into a
+ circuit-generating function.
+</p><p>This currently fails if the dynamic circuit contains output
+ liftings, because the transformer interface has not yet been
+ updated to work with dynamic circuits.
+</p></div></div><h1 id="g:16">Generic reversing
+</h1><div class="top"><p class="src"><a name="v:reverse_generic" class="def">reverse_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_y x y, <a href="Libraries-Auxiliary.html#t:Curry">Curry</a> x_y_xt x (y -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> xt)) =&gt; x_y -&gt; x_y_xt<a href="src/Quipper/Generic.html#line-1084" class="link">Source</a></p><div class="doc"><p>Reverse a circuit-generating function. The reversed function
+ requires a shape parameter, given as the input type of the original
+ function.
+</p><p>The type of this highly overloaded function is quite difficult to
+ read.  It can have for example the following types:
+</p><pre> reverse_generic :: (QCData x, QCData y) =&gt; (x -&gt; Circ y) -&gt; x -&gt; (y -&gt; Circ x) 
+ reverse_generic :: (QCData x, QCData y, QCData z) =&gt; (x -&gt; y -&gt; Circ z) -&gt; x -&gt; y -&gt; (z -&gt; Circ (x,y)) 
+</pre></div></div><div class="top"><p class="src"><a name="v:reverse_generic_curried" class="def">reverse_generic_curried</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Libraries-Tuple.html#t:Tuple">Tuple</a> yt y, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_yt x yt, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> y_xt y xt, <a href="Libraries-Auxiliary.html#t:Curry">Curry</a> x_y_xt x y_xt) =&gt; x_yt -&gt; x_y_xt<a href="src/Quipper/Generic.html#line-1107" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:reverse_generic">reverse_generic</a></code>, but takes functions whose output is a
+ tuple, and curries the reversed function.  Differs from
+ <code><a href="Quipper-Generic.html#v:reverse_generic">reverse_generic</a></code> in an example such as:
+</p><pre> f                         :: (x -&gt; y -&gt; Circ (z,w))
+ reverse_generic f         :: x -&gt; y -&gt; ((z,w) -&gt; Circ (x,y))
+ reverse_generic_curried f :: x -&gt; y -&gt; (z -&gt; w -&gt; Circ (x,y))
+</pre><p>Note: the output <em>must</em> be a <em>n</em>-tuple, where <em>n</em> = 0 or <em>n</em> &#8805;
+ 2. Applying this to a circuit whose output is a non-tuple type is a
+ type error; in this case, <code><a href="Quipper-Generic.html#v:reverse_generic">reverse_generic</a></code> should be used.
+</p></div></div><div class="top"><p class="src"><a name="v:reverse_simple" class="def">reverse_simple</a> :: (<a href="Quipper-QData.html#t:QCData_Simple">QCData_Simple</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_y x y) =&gt; x_y -&gt; y -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> xt<a href="src/Quipper/Generic.html#line-1124" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:reverse_generic">reverse_generic</a></code>, but only works at simple types, and
+ therefore requires no shape parameters.  Typical type instances:
+</p><pre> reverse_simple :: (QCData_Simple x, QCData y) =&gt; (x -&gt; Circ y) -&gt; (y -&gt; Circ x)
+ reverse_simple :: (QCData_Simple x, QCData_Simple y, QCData z) =&gt; (x -&gt; y -&gt; Circ z) -&gt; (z -&gt; Circ (x,y))
+</pre></div></div><div class="top"><p class="src"><a name="v:reverse_simple_curried" class="def">reverse_simple_curried</a> :: (<a href="Quipper-QData.html#t:QCData_Simple">QCData_Simple</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Libraries-Tuple.html#t:Tuple">Tuple</a> yt y, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_yt x yt, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> y_xt y xt) =&gt; x_yt -&gt; y_xt<a href="src/Quipper/Generic.html#line-1137" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:reverse_simple">reverse_simple</a></code>, but takes functions whose output is a
+ tuple, and curries the reversed function. Typical type instance:
+</p><pre> reverse_simple_curried :: (QCData_Simple x, QCData y, QCData z) =&gt; (x -&gt; Circ (y,z)) -&gt; (y -&gt; z -&gt; Circ x)
+</pre><p>Note: the output <em>must</em> be a <em>n</em>-tuple, where <em>n</em> = 0 or <em>n</em> &#8805;
+ 2. Applying this to a circuit whose output is a non-tuple type is a
+ type error; in this case, <code><a href="Quipper-Generic.html#v:reverse_generic">reverse_generic</a></code> should be used.
+</p></div></div><div class="top"><p class="src"><a name="v:reverse_generic_endo" class="def">reverse_generic_endo</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_xt x xt) =&gt; x_xt -&gt; x_xt<a href="src/Quipper/Generic.html#line-1152" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:reverse_generic">reverse_generic</a></code>, but specialized to endomorphic circuits,
+ i.e., circuits where the input and output have the same type (modulo
+ possibly currying) and shape. In this case, unlike <code><a href="Quipper-Generic.html#v:reverse_generic">reverse_generic</a></code>,
+ no additional shape parameter is required, and the reversed function
+ is curried if the original function was.  Typical type instances:
+</p><pre> reverse_generic_endo :: (QCData x) =&gt; (x -&gt; Circ x) -&gt; (x -&gt; Circ x)
+ reverse_generic_endo :: (QCData x, QCData y) =&gt; (x -&gt; y -&gt; Circ (x,y)) -&gt; (x -&gt; y -&gt; Circ (x,y))
+</pre></div></div><div class="top"><p class="src"><a name="v:reverse_generic_imp" class="def">reverse_generic_imp</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x__ x ()) =&gt; x__ -&gt; x__<a href="src/Quipper/Generic.html#line-1164" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:reverse_generic_endo">reverse_generic_endo</a></code>, but applies to endomorphic circuits
+ expressed in &quot;imperative&quot; style. Typical type instances:
+</p><pre> reverse_generic_endo :: (QCData x) =&gt; (x -&gt; Circ ()) -&gt; (x -&gt; Circ ())
+ reverse_generic_endo :: (QCData x, QCData y) =&gt; (x -&gt; y -&gt; Circ ()) -&gt; (x -&gt; y -&gt; Circ ())
+</pre></div></div><div class="top"><p class="src"><a name="v:reverse_endo_if" class="def">reverse_endo_if</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Libraries-Tuple.html#t:TupleOrUnary">TupleOrUnary</a> xt x, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> x_xt x xt) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; x_xt -&gt; x_xt<a href="src/Quipper/Generic.html#line-1176" class="link">Source</a></p><div class="doc"><p>Conditional version of <code><a href="Quipper-Generic.html#v:reverse_generic_endo">reverse_generic_endo</a></code>. Invert the
+ endomorphic quantum circuit if the boolean is true; otherwise,
+ insert the non-inverted circuit.
+</p></div></div><div class="top"><p class="src"><a name="v:reverse_imp_if" class="def">reverse_imp_if</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> fun qa ()) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; fun -&gt; fun<a href="src/Quipper/Generic.html#line-1183" class="link">Source</a></p><div class="doc"><p>Conditional version of <code><a href="Quipper-Generic.html#v:reverse_generic_imp">reverse_generic_imp</a></code>. Invert the
+ imperative style quantum circuit if the boolean is true; otherwise,
+ insert the non-inverted circuit.
+</p></div></div><h1 id="g:17">The QCurry type class
+</h1><div class="top"><p class="src"><span class="keyword">class</span>  <a name="t:QCurry" class="def">QCurry</a> fun args res | fun -&gt; args res, args res -&gt; fun <span class="keyword">where</span><a href="src/Quipper/Generic.html#line-1208" class="link">Source</a></p><div class="doc"><p>The <code><a href="Quipper-Generic.html#t:QCurry">QCurry</a></code> type class is similar to the <code><a href="Libraries-Auxiliary.html#t:Curry">Curry</a></code> type class,
+ except that the result type is guarded by the <code><a href="Quipper-Monad.html#t:Circ">Circ</a></code> monad. It
+ provides a family of type isomorphisms
+</p><pre>fun  &#8773;  args -&gt; Circ res,</pre><p>where
+</p><pre> fun = a1 -&gt; a2 -&gt; ... -&gt; an -&gt; Circ res,
+ args = (a1, (a2, (..., (an, ())))).
+</pre><p>The benefit of having <code>Circ</code> in the result type is that it ensures
+ that the result type is not itself a function type, and therefore
+ <em>fun</em> has a <em>unique</em> arity <em>n</em>. Then <em>args</em> and <em>res</em> are uniquely
+ determined by <em>fun</em>, which can be used to write higher-order
+ operators that consume <em>fun</em> of any arity and &quot;do the right
+ thing&quot;.
+</p></div><div class="subs methods"><p class="caption">Methods</p><p class="src"><a name="v:qcurry" class="def">qcurry</a> :: (args -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> res) -&gt; fun<a href="src/Quipper/Generic.html#line-1208" class="link">Source</a></p><p class="src"><a name="v:quncurry" class="def">quncurry</a> :: fun -&gt; args -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> res<a href="src/Quipper/Generic.html#line-1208" class="link">Source</a></p></div><div class="subs instances"><p id="control.i:QCurry" class="caption collapser" onclick="toggleSection('i:QCurry')">Instances</p><div id="section.i:QCurry" class="show"><table><tr><td class="src"><a href="Quipper-Generic.html#t:QCurry">QCurry</a> (<a href="Quipper-Monad.html#t:Circ">Circ</a> b) () b</td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="Quipper-Generic.html#t:QCurry">QCurry</a> fun args res =&gt; <a href="Quipper-Generic.html#t:QCurry">QCurry</a> (a -&gt; fun) (a, args) res</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h1 id="g:18">Generic circuit transformations
+</h1><div class="top"><p class="src"><a name="v:transform_unary_dynamic_shape" class="def">transform_unary_dynamic_shape</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, x' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b x, y' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b y, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; <a href="Quipper-Transformer.html#t:DynamicTransformer">DynamicTransformer</a> m a b -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; x' -&gt; m y'<a href="src/Quipper/Generic.html#line-1257" class="link">Source</a></p><div class="doc"><p>Like transform_unary_shape but for a dynamic transformer
+</p></div></div><div class="top"><p class="src"><a name="v:transform_unary_dynamic" class="def">transform_unary_dynamic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; <a href="Quipper-Transformer.html#t:DynamicTransformer">DynamicTransformer</a> <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y<a href="src/Quipper/Generic.html#line-1266" class="link">Source</a></p><div class="doc"><p>Like transform_unary but for a dynamic transformer
+</p></div></div><div class="top"><p class="src"><a name="v:transform_unary" class="def">transform_unary</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; <a href="Quipper-Transformer.html#t:Transformer">Transformer</a> <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y<a href="src/Quipper/Generic.html#line-1250" class="link">Source</a></p><div class="doc"><p>Apply the given transformer to a circuit.
+</p></div></div><div class="top"><p class="src"><a name="v:transform_generic" class="def">transform_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> qfun x y) =&gt; <a href="Quipper-Transformer.html#t:Transformer">Transformer</a> <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a> <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; qfun -&gt; qfun<a href="src/Quipper/Generic.html#line-1312" class="link">Source</a></p><div class="doc"><p>Apply the given transformer to a circuit.  Unlike
+ <code><a href="Quipper-Generic.html#v:transform_unary">transform_unary</a></code>, this function can be applied to a
+ circuit-generating function in curried form with <em>n</em> arguments, for
+ any <em>n</em> &#8805; 0.
+</p><p>The type of this heavily overloaded function is difficult to
+ read. In more readable form, it has all of the following types:
+</p><pre> transform_generic :: (QCData x) =&gt; Transformer Circ Qubit Bit -&gt; Circ x -&gt; Circ x
+ transform_generic :: (QCData x, QCData y) =&gt; Transformer Circ Qubit Bit -&gt; (x -&gt; Circ y) -&gt; (x -&gt; Circ y)
+ transform_generic :: (QCData x, QCData y, QCData z) =&gt; Transformer Circ Qubit Bit -&gt; (x -&gt; y -&gt; Circ z) -&gt; (x -&gt; y -&gt; Circ z)
+</pre><p>and so forth.
+</p></div></div><div class="top"><p class="src"><a name="v:transform_unary_shape" class="def">transform_unary_shape</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, x' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b x, y' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b y, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; <a href="Quipper-Transformer.html#t:Transformer">Transformer</a> m a b -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; x' -&gt; m y'<a href="src/Quipper/Generic.html#line-1244" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:transform_generic">transform_generic</a></code>, but applies to arbitrary transformers
+ of type
+</p><pre> Transformer m a b
+</pre><p>instead of the special case
+</p><pre> Transformer Circ Qubit Bit.
+</pre><p>This requires an additional shape argument. 
+</p></div></div><div class="top"><p class="src"><a name="v:transform_generic_shape" class="def">transform_generic_shape</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> qfun x y, <a href="Libraries-Auxiliary.html#t:Curry">Curry</a> qfun' x' (m y'), <a href="Libraries-Auxiliary.html#t:Curry">Curry</a> qfun'' x qfun', x' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b x, y' ~ <a href="Quipper-QData.html#t:QCType">QCType</a> a b y, <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> m) =&gt; <a href="Quipper-Transformer.html#t:Transformer">Transformer</a> m a b -&gt; qfun -&gt; qfun''<a href="src/Quipper/Generic.html#line-1290" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Generic.html#v:transform_generic">transform_generic</a></code>, but applies to arbitrary transformers
+ of type
+</p><pre> Transformer m a b
+</pre><p>instead of the special case
+</p><pre> Transformer Circ Qubit Bit.
+</pre><p>This requires an additional shape argument. 
+</p><p>The type of this heavily overloaded function is difficult to
+ read. In more readable form, it has all of the following types:
+</p><pre> transform_generic :: (QCData x) =&gt; Transformer m a b -&gt; Circ x -&gt; m (QCData a b x)
+ transform_generic :: (QCData x, QCData y) =&gt; Transformer m a b -&gt; (x -&gt; Circ y) -&gt; x -&gt; (QCData a b x -&gt; m (QCData a b y))
+ transform_generic :: (QCData x, QCData y, QCData z) =&gt; Transformer m a b -&gt; (x -&gt; y -&gt; Circ z) -&gt; x -&gt; y -&gt; (QCData a b x -&gt; QCData a b y -&gt; m (QCData a b z))
+</pre><p>and so forth.
+</p></div></div><h1 id="g:19">Generic block structure
+</h1><div class="top"><p class="src"><a name="v:with_ancilla_init" class="def">with_ancilla_init</a> :: <a href="Quipper-QData.html#t:QShape">QShape</a> a qa ca =&gt; a -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b<a href="src/Quipper/Generic.html#line-1332" class="link">Source</a></p><div class="doc"><p>Execute a block with local ancillas. Opens a block, initializing an ancilla with a specified classical value, and terminates it with the same value when the block closes. Note: it is the programmer's responsibility to return the ancilla to its original state at the end of the enclosed block. Usage:
+</p><pre> with_ancilla_init True $ \a -&gt; do {
+   &lt;&lt;&lt;code block using ancilla a initialized to True&gt;&gt;&gt;
+ }
+</pre><pre> with_ancilla_init &#91;True,False,True&#93; $ \a -&gt; do {
+   &lt;&lt;&lt;code block using list of ancillas a initialized to &#91;True,False,True&#93;&gt;&gt;&gt;
+ }
+</pre></div></div><div class="top"><p class="src"><a name="v:with_ancilla_list" class="def">with_ancilla_list</a> ::  <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; (<a href="Quipper-Monad.html#t:Qulist">Qulist</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> a) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> a<a href="src/Quipper/Generic.html#line-1345" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Monad.html#v:with_ancilla">with_ancilla</a></code>, but creates a list of <em>n</em> ancillas, all
+ initialized to |0&#9002;. Usage:
+</p><pre> with_ancilla_list n $ \a -&gt; do {
+   &lt;&lt;&lt;code block using list of ancillas a&gt;&gt;&gt;
+ }
+</pre></div></div><div class="top"><p class="src"><a name="v:with_computed_fun" class="def">with_computed_fun</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; x -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; (y -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (y, b)) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> (x, b)<a href="src/Quipper/Generic.html#line-1353" class="link">Source</a></p><div class="doc"><p><code><code><a href="Quipper-Generic.html#v:with_computed_fun">with_computed_fun</a></code> <em>x</em> <em>f</em> <em>g</em></code>: computes <em>x' := f(x)</em>; then computes <em>g(x')</em>, which should be organized as a pair <em>(x',y)</em>; then uncomputes <em>x'</em> back to <em>x</em>, and returns <em>(x,y)</em>.
+</p><p>Important subtlety in usage: all quantum data referenced in <em>f</em>, even as controls, must be explicitly bound and returned by <em>f</em>, or the reversing may rebind it incorrectly.  <em>g</em>, on the other hand, can safely refer to anything that is in scope outside the <code><a href="Quipper-Generic.html#v:with_computed_fun">with_computed_fun</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:with_computed" class="def">with_computed</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> x =&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> x -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b<a href="src/Quipper/Generic.html#line-1386" class="link">Source</a></p><div class="doc"><p><code><code><a href="Quipper-Generic.html#v:with_computed">with_computed</a></code> <em>computation</em> <em>code</em></code>: performs <em>computation</em>
+ (with result <em>x</em>), then performs <em>code</em> <em>x</em>, and finally performs
+ the reverse of <em>computation</em>, for example like this:
+</p><p><img src="images/with_computed.png">
+</p><p>Both <em>computation</em> and <em>code</em> may refer to any qubits that exist in
+ the current environment, and they may also create new
+ qubits. <em>computation</em> may produce arbitrary garbage in addition to
+ its output. 
+</p><p>This is a very general but relatively unsafe operation. It is the
+ user's responsibility to ensure that the computation can indeed be
+ undone. In particular, if <em>computation</em> contains any
+ initializations, then <em>code</em> must ensure that the corresponding
+ assertions will be satisfied in <em>computation</em><sup>&#8722;1</sup>.
+</p><p>Related more specialized, but potentially safer, operations are: 
+</p><ul><li> <code><a href="Quipper-Generic.html#v:with_basis_change">with_basis_change</a></code>, which is like <code><a href="Quipper-Generic.html#v:with_computed">with_computed</a></code>, but assumes
+ that <em>computation</em> is unitary, and
+</li><li> <code>classical_to_reversible</code>, which assumes that <em>computation</em> is
+ classical (or pseudo-classical), and <em>code</em> is a simple
+ copy-by-controlled-not operation.
+</li></ul></div></div><div class="top"><p class="src"><a name="v:with_basis_change" class="def">with_basis_change</a> ::  <a href="Quipper-Monad.html#t:Circ">Circ</a> () -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> b<a href="src/Quipper/Generic.html#line-1413" class="link">Source</a></p><div class="doc"><p><code><code><a href="Quipper-Generic.html#v:with_basis_change">with_basis_change</a></code> <em>basischange</em> <em>code</em></code>: performs a basis change,
+ then the <em>code</em>, then the inverse of the basis change. Both
+ <em>basischange</em> and <em>code</em> are in imperative style. It is the user's
+ responsibility to ensure that the image of <em>code</em> is contained in
+ the image of <em>basischange</em>, or else there will be unmet assertions
+ or runtime errors. Usage:
+</p><pre> with_basis_change basischange $ do
+   &lt;&lt;&lt;code&gt;&gt;&gt;
+
+ where
+   basischange = do
+     &lt;&lt;&lt;gates&gt;&gt;&gt;
+</pre></div></div><div class="top"><p class="src"><a name="v:with_classical_control" class="def">with_classical_control</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qa =&gt; <a href="Quipper-Monad.html#t:Bit">Bit</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-1587" class="link">Source</a></p><div class="doc"><p>Classical control on a function with same shape of input and
+ output: if the control bit is true the function is fired, otherwise
+ the identity map is used.
+ Note: the constraint on the types is dynamically checked.
+</p></div></div><h1 id="g:20">Boxed subcircuits
+</h1><div class="top"><p class="src"><a name="v:provide_subroutine_generic" class="def">provide_subroutine_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> x, <a href="Quipper-QData.html#t:QCData">QCData</a> y) =&gt; <a href="Libraries-Auxiliary.html#t:ErrMsg">ErrMsg</a> -&gt; <a href="Quipper-Circuit.html#t:BoxId">BoxId</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; (x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> y) -&gt; x -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Quipper/Generic.html#line-1432" class="link">Source</a></p><div class="doc"><p>Bind a name to a function as a subroutine in the current
+ namespace. This requires a shape argument, as well as complete
+ parameters, so that it is uniquely determined which actual circuit
+ will be the subroutine. It is an error to call that subroutine
+ later with a different shape argument. It is therefore the user's
+ responsibility to ensure that the name is unique to the subroutine,
+ parameters, and shape. 
+</p><p>This function does nothing if the name
+ already exists in the namespace; in particular, it does <em>not</em> check
+ whether the given function is equal to the stored subroutine. 
+</p></div></div><div class="top"><p class="src"><a name="v:box" class="def">box</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> qb, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> qa_qb qa qb) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; qa_qb -&gt; qa_qb<a href="src/Quipper/Generic.html#line-1540" class="link">Source</a></p><div class="doc"><p>A generic interface for wrapping a circuit-generating function
+ into a boxed and named subroutine. This takes a name and a
+ circuit-generating function, and returns a new circuit-generating
+ function of the same type, but which inserts a boxed subroutine
+ instead of the actual body of the subroutine.
+</p><p>It is intended to be used like this:
+</p><pre> somefunc :: Qubit -&gt; Circ Qubit
+ somefunc a = do ...
+ 
+ somefunc_boxed :: Qubit -&gt; Circ Qubit
+ somefunc_boxed = box &quot;somefunc&quot; somefunc
+</pre><p>Here, the type of <code>somefunc</code> is just an example; this could indeed
+ be a function with any number and type of arguments, as long as the
+ arguments and return type are quantum data.
+</p><p>It is also possible to inline the <code><a href="Quipper-Generic.html#v:box">box</a></code> operator directly, in which
+ case it should be done like this:
+</p><pre> somefunc :: Qubit -&gt; Circ Qubit
+ somefunc = box &quot;somefunc&quot; $ \a -&gt; do ...
+</pre><p>Note: The <code><a href="Quipper-Generic.html#v:box">box</a></code> operator wraps around a complete function,
+ including all of its arguments. It would be incorrect to apply the
+ <code><a href="Quipper-Generic.html#v:box">box</a></code> operator after some quantum variables have already been
+ defined. Thus, the following is incorrect:
+</p><pre> incorrect_somefunc :: Qubit -&gt; Circ Qubit
+ incorrect_somefunc a = box &quot;somefunc&quot; $ do ...
+</pre><p>It is the user's responsibility not to use the same name for
+ different subroutines. If <code><a href="Quipper-Generic.html#v:box">box</a></code> is called more than once with the
+ same name and shape of input, Quipper assumes, without checking,
+ that they are subsequent calls to the same subroutine. 
+</p><p>The type of the <code><a href="Quipper-Generic.html#v:box">box</a></code> operator is overloaded and quite difficult to
+ read.  It can have for example the following types:
+</p><pre> box :: String -&gt; (Qubit -&gt; Circ Qubit) -&gt; (Qubit -&gt; Circ Qubit)
+ box :: String -&gt; (QDInt -&gt; QDInt -&gt; Circ (QDInt,QDInt,QDInt)) -&gt; (QDInt -&gt; QDInt -&gt; Circ (QDInt,QDInt,QDInt))
+</pre></div></div><div class="top"><p class="src"><a name="v:nbox" class="def">nbox</a> :: <a href="Quipper-QData.html#t:QCData">QCData</a> qa =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integer">Integer</a> -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa) -&gt; qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-1551" class="link">Source</a></p><div class="doc"><p>A version of <code><a href="Quipper-Generic.html#v:box">box</a></code> with iteration. The second argument is an
+ iteration count.
+</p><p>This can only be applied to functions of a single argument, where
+ the input and output types are the same.
+</p></div></div><div class="top"><p class="src"><a name="v:box_loopM" class="def">box_loopM</a> :: (<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integral">Integral</a> int, <a href="Quipper-QData.html#t:QCData">QCData</a> qa) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; int -&gt; qa -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-1557" class="link">Source</a></p><div class="doc"><p>A version of <code><a href="Quipper-Generic.html#v:nbox">nbox</a></code> with same type as <code><a href="Libraries-Auxiliary.html#v:loopM">loopM</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:loopM_boxed_if" class="def">loopM_boxed_if</a> :: (<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integral">Integral</a> int, <a href="Quipper-QData.html#t:QCData">QCData</a> qa) =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; int -&gt; qa -&gt; (qa -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> qa<a href="src/Quipper/Generic.html#line-1567" class="link">Source</a></p><div class="doc"><p>A version of <code><a href="Libraries-Auxiliary.html#v:loopM">loopM</a></code> that will be boxed conditionally on a
+ boolean condition. Typical usage:
+</p><pre> loopM_boxed_if (s &gt; 1) &quot;name&quot; s x $ \x -&gt; do
+   &lt;&lt;&lt;body&gt;&gt;&gt;
+   return x
+</pre></div></div><div class="top"><p class="src"><a name="v:inline_subroutine" class="def">inline_subroutine</a> :: <a href="Quipper-Circuit.html#t:BoxId">BoxId</a> -&gt; <a href="Quipper-Circuit.html#t:Namespace">Namespace</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> &#91;<a href="Quipper-Monad.html#t:Endpoint">Endpoint</a>&#93;<a href="src/Quipper/Generic.html#line-1603" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Quipper-Monad.html#v:call_subroutine">call_subroutine</a></code>, except inline the subroutine body from
+ the given namespace, instead of inserting a subroutine call.
+</p><p>Implementation note: this currently copies <em>all</em> subroutine
+ definitions from the given namespace into the current namespace,
+ and not just the ones used by the current subroutine.
+</p><p>Implementation note: this currently only works on lists of endpoints.
+</p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>QuipperLib.Synthesis</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_QuipperLib-Synthesis.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/QuipperLib/Synthesis.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">QuipperLib.Synthesis</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Precision
+</a></li><li><a href="#g:2">Phase
+</a></li><li><a href="#g:3">Auxiliary functions
+</a></li><li><a href="#g:4">Single-qubit exact synthesis
+</a></li><li><a href="#g:5">Multi-qubit exact synthesis
+</a></li><li><a href="#g:6">Single-qubit approximate synthesis
+</a><ul><li><a href="#g:7"><em>z</em>-Rotations
+</a></li><li><a href="#g:8">Global phase gates
+</a></li><li><a href="#g:9"><em>U</em>(2) from Euler angles
+</a></li><li><a href="#g:10"><em>U</em>(2) from matrix
+</a></li><li><a href="#g:11">Controlled gates
+</a></li></ul></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>A Quipper library for synthesizing Clifford+<em>T</em> circuits directly
+ from a matrix description or Euler angle description of a unitary
+ operator. This library provides both exact and approximate
+ synthesis.
+</p></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">type</span> <a href="#t:Precision">Precision</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><a href="#v:bits">bits</a> :: <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a></li><li class="src short"><a href="#v:digits">digits</a> :: <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a></li><li class="src short"><span class="keyword">type</span> <a href="#t:KeepPhase">KeepPhase</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></li><li class="src short"><a href="#v:apply_gate_at">apply_gate_at</a> :: <a href="Libraries-Synthesis-CliffordT.html#t:Gate">Gate</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:apply_gates_at">apply_gates_at</a> :: &#91;<a href="Libraries-Synthesis-CliffordT.html#t:Gate">Gate</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:apply_gates2_at">apply_gates2_at</a> :: &#91;<a href="Libraries-Synthesis-CliffordT.html#t:Gate">Gate</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:twolevel">twolevel</a> :: <a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:Index">Index</a> -&gt; <a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:Index">Index</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:apply_twolevel_at">apply_twolevel_at</a> :: <a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:TwoLevel">TwoLevel</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:apply_twolevels_at">apply_twolevels_at</a> :: &#91;<a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:TwoLevel">TwoLevel</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:exact_synthesis1">exact_synthesis1</a> :: <a href="Libraries-Synthesis-CliffordT.html#t:ToGates">ToGates</a> a =&gt; a -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></li><li class="src short"><a href="#v:exact_synthesis">exact_synthesis</a> :: (<a href="Libraries-Synthesis-Ring.html#t:ToEComplex">ToEComplex</a> a, <a href="Libraries-Synthesis-Matrix.html#t:Nat">Nat</a> n) =&gt; <a href="Libraries-Synthesis-Matrix.html#t:Matrix">Matrix</a> n n a -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93;</li><li class="src short"><a href="#v:approximate_synthesis_zrot">approximate_synthesis_zrot</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a> -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></li><li class="src short"><a href="#v:approximate_synthesis_phase">approximate_synthesis_phase</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a> -&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a> -&gt; g -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:approximate_synthesis_euler">approximate_synthesis_euler</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a> -&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; (<a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>, <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>, <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>, <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>) -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></li><li class="src short"><a href="#v:approximate_synthesis_u2">approximate_synthesis_u2</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a> -&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-Matrix.html#t:U2">U2</a> (<a href="Libraries-Synthesis-Ring.html#t:Cplx">Cplx</a> <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>) -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></li><li class="src short"><a href="#v:approximate_synthesis_zrot_ctrl">approximate_synthesis_zrot_ctrl</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a> -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></li><li class="src short"><a href="#v:approximate_synthesis_phase_ctrl">approximate_synthesis_phase_ctrl</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a> -&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a> -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a></li></ul></div><div id="interface"><h1 id="g:1">Precision
+</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Precision" class="def">Precision</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a><a href="src/QuipperLib/Synthesis.html#line-32" class="link">Source</a></p><div class="doc"><p>A type to measure precision. Precision is expressed as a number
+ <em>b</em> of bits, i.e., binary digits, so that &#949; = 2<sup>&#8722;<em>b</em></sup>.
+</p></div></div><div class="top"><p class="src"><a name="v:bits" class="def">bits</a> :: <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a><a href="src/QuipperLib/Synthesis.html#line-38" class="link">Source</a></p><div class="doc"><p>Binary digits, as a unit of precision. For example, the following
+ specifies a precision of 20 binary digits:
+</p><pre> prec = 20 * bits
+</pre></div></div><div class="top"><p class="src"><a name="v:digits" class="def">digits</a> :: <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a><a href="src/QuipperLib/Synthesis.html#line-45" class="link">Source</a></p><div class="doc"><p>Decimal digits, as a unit of precision. For example, the
+ following specifies a precision of 30 decimal digits:
+</p><pre> prec = 30 * digits
+</pre></div></div><h1 id="g:2">Phase
+</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:KeepPhase" class="def">KeepPhase</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a><a href="src/QuipperLib/Synthesis.html#line-53" class="link">Source</a></p><div class="doc"><p>A boolean flag indicating whether to respect global phases
+ during circuit synthesis (<code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:True">True</a></code>) or disregard them (<code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:False">False</a></code>).
+</p></div></div><h1 id="g:3">Auxiliary functions
+</h1><div class="top"><p class="src"><a name="v:apply_gate_at" class="def">apply_gate_at</a> :: <a href="Libraries-Synthesis-CliffordT.html#t:Gate">Gate</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/Synthesis.html#line-60" class="link">Source</a></p><div class="doc"><p>Apply a gate (from the type <code><a href="Libraries-Synthesis-CliffordT.html#t:Gate">Gate</a></code> of Clifford+<em>T</em> operators) to
+ the given <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:apply_gates_at" class="def">apply_gates_at</a> :: &#91;<a href="Libraries-Synthesis-CliffordT.html#t:Gate">Gate</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/Synthesis.html#line-84" class="link">Source</a></p><div class="doc"><p>Apply a gate list (from the type <code><a href="Libraries-Synthesis-CliffordT.html#t:Gate">Gate</a></code> of Clifford+<em>T</em>
+ operators) to the given <code><a href="Quipper-Monad.html#t:Qubit">Qubit</a></code>. 
+</p><p>Note: the operators in the list are applied right-to-left, i.e.,
+ the gate list is assumed given in matrix multiplication order, but
+ are applied in circuit order.
+</p></div></div><div class="top"><p class="src"><a name="v:apply_gates2_at" class="def">apply_gates2_at</a> :: &#91;<a href="Libraries-Synthesis-CliffordT.html#t:Gate">Gate</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/Synthesis.html#line-90" class="link">Source</a></p><div class="doc"><p>Like <code><a href="QuipperLib-Synthesis.html#v:apply_gates_at">apply_gates_at</a></code>, but apply the same list of gates to two
+ qubits in parallel.
+</p></div></div><div class="top"><p class="src"><a name="v:twolevel" class="def">twolevel</a> :: <a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:Index">Index</a> -&gt; <a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:Index">Index</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; (<a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()) -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/Synthesis.html#line-107" class="link">Source</a></p><div class="doc"><p>Input two indices <em>i</em> and <em>j</em>, a list of qubits <em>qlist</em>, and an
+ imperative-style single-qubit gate <em>U</em>. Apply the two-level
+ operator <em>U</em><sub><em>i</em>,<em>j</em></sub> to <em>qlist</em>. Intended usage:
+</p><pre> twolevel i j qlist gate_U_at
+</pre><p>The qubits in <em>qlist</em> are ordered lexicographically left-to-right,
+ e.g., &#91;|00&#9002;, |01&#9002;, |10&#9002;, |11&#9002;&#93;.
+</p><p>This function implements an improved version of Gray codes.
+</p></div></div><div class="top"><p class="src"><a name="v:apply_twolevel_at" class="def">apply_twolevel_at</a> :: <a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:TwoLevel">TwoLevel</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/Synthesis.html#line-140" class="link">Source</a></p><div class="doc"><p>Apply a <code><a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:TwoLevel">TwoLevel</a></code> gate to the given list of qubits. 
+ The qubits in <em>qlist</em> are ordered lexicographically left-to-right,
+ e.g., &#91;|00&#9002;, |01&#9002;, |10&#9002;, |11&#9002;&#93;.
+</p></div></div><div class="top"><p class="src"><a name="v:apply_twolevels_at" class="def">apply_twolevels_at</a> :: &#91;<a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:TwoLevel">TwoLevel</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/Synthesis.html#line-176" class="link">Source</a></p><div class="doc"><p>Apply a list of <code><a href="Libraries-Synthesis-MultiQubitSynthesis.html#t:TwoLevel">TwoLevel</a></code> gates to the given list of
+ qubits. 
+</p><p>The qubits in <em>qlist</em> are ordered lexicographically left-to-right,
+ e.g., &#91;|00&#9002;, |01&#9002;, |10&#9002;, |11&#9002;&#93;.
+</p><p>Note: the operators in the list are applied right-to-left, i.e.,
+ the gate list is assumed given in matrix multiplication order, but
+ are applied in circuit order.
+</p></div></div><h1 id="g:4">Single-qubit exact synthesis
+</h1><div class="top"><p class="src"><a name="v:exact_synthesis1" class="def">exact_synthesis1</a> :: <a href="Libraries-Synthesis-CliffordT.html#t:ToGates">ToGates</a> a =&gt; a -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a><a href="src/QuipperLib/Synthesis.html#line-197" class="link">Source</a></p><div class="doc"><p>Decompose the given operator exactly into a single-qubit
+ Clifford+<em>T</em> circuit. The operator must be given in one of the
+ available exact formats, i.e., any instance of the <code><a href="Libraries-Synthesis-CliffordT.html#t:ToGates">ToGates</a></code> class.
+ Typical instances are:
+</p><ul><li> <code><a href="Libraries-Synthesis-Matrix.html#t:U2">U2</a></code> <code><a href="Libraries-Synthesis-Ring.html#t:DComplex">DComplex</a></code>: a 2&#215;2 unitary operator with entries from the
+ ring &#8484;&#91;1/&#8730;2, <em>i</em>&#93;;
+</li><li> <code><a href="Libraries-Synthesis-Matrix.html#t:U2">U2</a></code> <code><a href="Libraries-Synthesis-Ring.html#t:DOmega">DOmega</a></code>: a 2&#215;2 unitary operator with entries from the ring
+ <b>D</b>&#91;&#969;&#93;;
+</li><li> <code><a href="Libraries-Synthesis-Matrix.html#t:SO3">SO3</a></code> <code><a href="Libraries-Synthesis-Ring.html#t:DReal">DReal</a></code>: a 3&#215;3 Bloch sphere operator with entries from the
+ ring &#8484;&#91;1/&#8730;2&#93;. In this last case, the operator will be synthesized
+ up to an unspecified global phase.
+</li></ul></div></div><h1 id="g:5">Multi-qubit exact synthesis
+</h1><div class="top"><p class="src"><a name="v:exact_synthesis" class="def">exact_synthesis</a> :: (<a href="Libraries-Synthesis-Ring.html#t:ToEComplex">ToEComplex</a> a, <a href="Libraries-Synthesis-Matrix.html#t:Nat">Nat</a> n) =&gt; <a href="Libraries-Synthesis-Matrix.html#t:Matrix">Matrix</a> n n a -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93;<a href="src/QuipperLib/Synthesis.html#line-218" class="link">Source</a></p><div class="doc"><p>Decompose the given operator exactly into a Clifford+<em>T</em> circuit.
+ The operator must be given as an <em>n</em>&#215;<em>n</em>-matrix with coefficients
+ in a ring that is an instance of the <code><a href="Libraries-Synthesis-Ring.html#t:ToEComplex">ToEComplex</a></code> class. Typical
+ examples of such rings are <code><a href="Libraries-Synthesis-Ring.html#t:DComplex">DComplex</a></code>, <code><a href="Libraries-Synthesis-Ring.html#t:DOmega">DOmega</a></code>, and <code><a href="Libraries-Synthesis-Ring.html#t:EComplex">EComplex</a></code>.
+</p><p>If this function is applied to a list of <em>m</em> qubits, then we must
+ have <em>n</em> &#8804; 2<sup><em>m</em></sup>.
+</p><p>The generated circuit may contain ancillas.
+</p></div></div><h1 id="g:6">Single-qubit approximate synthesis
+</h1><h2 id="g:7"><em>z</em>-Rotations
+</h2><div class="top"><p class="src"><a name="v:approximate_synthesis_zrot" class="def">approximate_synthesis_zrot</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a> -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a><a href="src/QuipperLib/Synthesis.html#line-246" class="link">Source</a></p><div class="doc"><p>Decompose an <em>R</em><sub><em>z</em></sub>(&#952;) = <i>e</i><sup>&#8722;<em>i</em>&#952;<em>Z</em>/2</sup> gate into a
+ single-qubit Clifford+<em>T</em> circuit up to the given precision. 
+</p><p><img src="images/Rz.png">
+</p><p>The parameters are:
+</p><ul><li> a precision <em>b</em> &#8805; 0;
+</li><li> an angle &#952;, given as a <code><a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a></code> value;
+</li><li> a source of randomness <em>g</em>.
+</li></ul></div></div><h2 id="g:8">Global phase gates
+</h2><div class="top"><p class="src"><a name="v:approximate_synthesis_phase" class="def">approximate_synthesis_phase</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a> -&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a> -&gt; g -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/QuipperLib/Synthesis.html#line-276" class="link">Source</a></p><div class="doc"><p>Construct a Clifford+<em>T</em> circuit (with no inputs and outputs)
+ that approximates a scalar global phase gate <i>e</i><sup><em>i</em>&#952;</sup> up to the
+ given precision. The parameters are:
+</p><ul><li> a flag <em>keepphase</em> to indicate whether global phase should be
+ respected. (Note that if this is set to <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:False">False</a></code>, then this function
+ is just a no-op);
+</li><li> a precision <em>b</em> &#8805; 0;
+</li><li> an angle &#952;, given as a <code><a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a></code> value;
+</li><li> a source of randomness <em>g</em>.
+</li></ul><p>We use the following decomposition:
+</p><p><img src="images/phase.png">
+</p></div></div><h2 id="g:9"><em>U</em>(2) from Euler angles
+</h2><div class="top"><p class="src"><a name="v:approximate_synthesis_euler" class="def">approximate_synthesis_euler</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a> -&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; (<a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>, <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>, <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>, <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>) -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a><a href="src/QuipperLib/Synthesis.html#line-308" class="link">Source</a></p><div class="doc"><p>Decompose the operator
+</p><ul><li> <em>U</em> = <i>e</i><sup><em>i</em>&#945;</sup> R<sub><em>z</em></sub>(&#946;) R<sub><em>x</em></sub>(&#947;) R<sub><em>z</em></sub>(&#948;)
+</li></ul><p>into the Clifford+<em>T</em> gate base, up to the given precision.
+ The parameters are:
+</p><ul><li> a flag <em>keepphase</em> to indicate whether global phase should be
+   respected. If this is <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:False">False</a></code>, the angle &#945; is disregarded;
+</li><li> a precision <em>b</em> &#8805; 0;
+</li><li> a tuple of Euler angles (&#945;, &#946;, &#947;, &#948;), given as <code><a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a></code> values;
+</li><li> a source of randomness <em>g</em>.
+</li></ul></div></div><h2 id="g:10"><em>U</em>(2) from matrix
+</h2><div class="top"><p class="src"><a name="v:approximate_synthesis_u2" class="def">approximate_synthesis_u2</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a> -&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-Matrix.html#t:U2">U2</a> (<a href="Libraries-Synthesis-Ring.html#t:Cplx">Cplx</a> <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a>) -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a><a href="src/QuipperLib/Synthesis.html#line-340" class="link">Source</a></p><div class="doc"><p>Decompose a single-qubit unitary gate <em>U</em> into the Clifford+<em>T</em>
+ gate base, up to the given precision, provided that det <em>U</em> = 1.
+ The parameters are:
+</p><ul><li> a flag <em>keepphase</em> to indicate whether global phase should be
+ respected;
+</li><li> a precision <em>b</em> &#8805; 0;
+</li><li> a 2&#215;2 complex matrix, with entries expressed as <code><a href="Libraries-Synthesis-Ring.html#t:Cplx">Cplx</a></code> <code><a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a></code> values;
+</li><li> a source of randomness <em>g</em>.
+</li></ul></div></div><h2 id="g:11">Controlled gates
+</h2><div class="top"><p class="src"><a name="v:approximate_synthesis_zrot_ctrl" class="def">approximate_synthesis_zrot_ctrl</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a> -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a><a href="src/QuipperLib/Synthesis.html#line-365" class="link">Source</a></p><div class="doc"><p>Decompose a controlled <em>R</em><sub><em>z</em></sub>(&#952;) = <i>e</i><sup>&#8722;<em>i</em>&#952;<em>Z</em>/2</sup> gate
+ into a single-qubit Clifford+<em>T</em> circuit up to the given
+ precision. The parameters are as for <code><a href="QuipperLib-Synthesis.html#v:approximate_synthesis_phase">approximate_synthesis_phase</a></code>.
+ The first input is the target qubit, and the second input the
+ control.
+</p><p>We use the following decomposition. It has lower <em>T</em>-count than the
+ alternatives and makes good use of parallelism. Since it uses the
+ same rotation twice, only a single run of the synthesis algorithm
+ is required.
+</p><p><img src="images/controlled-zrot.png">
+</p></div></div><div class="top"><p class="src"><a name="v:approximate_synthesis_phase_ctrl" class="def">approximate_synthesis_phase_ctrl</a> :: <a href="http://hackage.haskell.org/packages/archive/random/1.0.1.1/doc/html/System-Random.html#t:RandomGen">RandomGen</a> g =&gt; <a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a> -&gt; <a href="QuipperLib-Synthesis.html#t:Precision">Precision</a> -&gt; <a href="Libraries-Synthesis-SymReal.html#t:SymReal">SymReal</a> -&gt; g -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> <a href="Quipper-Monad.html#t:Qubit">Qubit</a><a href="src/QuipperLib/Synthesis.html#line-393" class="link">Source</a></p><div class="doc"><p>Decompose a controlled phase gate
+</p><p><img src="images/controlled_phase.png">
+</p><p>into the Clifford+<em>T</em> gate base. The parameters are as for
+ <code><a href="QuipperLib-Synthesis.html#v:approximate_synthesis_phase">approximate_synthesis_phase</a></code>.
+</p><p>We use the following decomposition. It has lower <em>T</em>-count than the
+ alternatives and makes good use of parallelism. Since it uses the
+ same rotation twice, only a single run of the synthesis algorithm
+ is required.
+</p><p><img src="images/controlled-phase-decomp.png">
+</p><p>If the <code><a href="QuipperLib-Synthesis.html#t:KeepPhase">KeepPhase</a></code> flag is set, respect global phase; otherwise,
+ disregard it.
+</p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>

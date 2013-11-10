@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Libraries.Template</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_Libraries-Template.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/Libraries/Template.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">Libraries.Template</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Example
+</a></li><li><a href="#g:2">General lifting functions
+</a></li><li><a href="#g:3">Liftings of specific constants
+</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>This module provides the public interface to the template lifting
+ library. It provides functions that input a Haskell declaration or
+ expression (in the form of a Haskell abstract syntax tree), and
+ lift this to another declaration or expression, with all functions
+ lifted into a specified monad.
+</p><p>This can be combined with Template Haskell to convert source code
+ to Haskell abstract syntax trees and vice versa.
+</p></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><a href="#v:decToMonad">decToMonad</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Q">Q</a> &#91;<a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Dec">Dec</a>&#93; -&gt; <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Q">Q</a> &#91;<a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Dec">Dec</a>&#93;</li><li class="src short"><a href="#v:expToMonad">expToMonad</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Q">Q</a> <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Exp">Exp</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Q">Q</a> <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Exp">Exp</a></li><li class="src short">module <a href="Libraries-Template-Auxiliary.html">Libraries.Template.Auxiliary</a></li></ul></div><div id="interface"><h1 id="g:1">Example
+</h1><div class="doc"><p>We give an example to illustrate what is meant by &quot;lifting&quot; a
+ term to a monad. Consider the expression
+</p><pre> f = \g x -&gt; g x x,
+</pre><p>which has type
+</p><pre> f :: (a -&gt; a -&gt; b) -&gt; (a -&gt; b).
+</pre><p>We can lift this to the <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a></code> monad by 
+</p><ul><li> converting the expression to an abstract syntax tree, using the
+ special Template Haskell notation <nobr><code>&#91;| ... |&#93;</code></nobr>;
+</li><li> applying the <code><a href="Libraries-Template.html#v:expToMonad">expToMonad</a></code> function;
+</li><li> converting the resulting abstract syntax tree back to a term,
+ using the special Template Haskell notation <nobr><code>$( ... )</code></nobr>.
+</li></ul><p>This allows us to write the following:
+</p><pre> f' = $( expToMonad &quot;IO&quot; &#91;| \g x -&gt; g x x |&#93; ),
+</pre><p>which has type
+</p><pre> f' :: IO ((a -&gt; IO (a -&gt; IO b)) -&gt; IO (a -&gt; IO b)),
+</pre><p>and is in fact equivalent to
+</p><pre> f'' = return $ \g -&gt;
+         return $ \x -&gt; do
+           h &lt;- g x
+           y &lt;- h x
+           return y
+</pre></div><h1 id="g:2">General lifting functions
+</h1><div class="top"><p class="src"><a name="v:decToMonad" class="def">decToMonad</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Q">Q</a> &#91;<a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Dec">Dec</a>&#93; -&gt; <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Q">Q</a> &#91;<a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Dec">Dec</a>&#93;<a href="src/Libraries/Template/Lifting.html#line-610" class="link">Source</a></p><div class="doc"><p>Lift a list of declarations. The first argument is the name of
+ the monad to lift into.
+</p></div></div><div class="top"><p class="src"><a name="v:expToMonad" class="def">expToMonad</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Q">Q</a> <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Exp">Exp</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Q">Q</a> <a href="http://hackage.haskell.org/packages/archive/template-haskell/2.7.0.0/doc/html/Language-Haskell-TH-Syntax.html#t:Exp">Exp</a><a href="src/Libraries/Template/Lifting.html#line-621" class="link">Source</a></p><div class="doc"><p>Lift an expression. The first argument is the name of the monad
+ to lift into.
+</p></div></div><h1 id="g:3">Liftings of specific constants
+</h1><div class="top"><p class="src">module <a href="Libraries-Template-Auxiliary.html">Libraries.Template.Auxiliary</a></p></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>

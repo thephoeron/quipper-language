@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>QuipperLib.Decompose</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_QuipperLib-Decompose.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/QuipperLib/Decompose.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">QuipperLib.Decompose</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Precision
+</a></li><li><a href="#g:2">Phase
+</a></li><li><a href="#g:3">Gate bases
+</a></li><li><a href="#g:4">Generic decomposition
+</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>Functions to decompose circuits into various gate bases.
+</p></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">type</span> <a href="#t:Precision">Precision</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><a href="#v:bits">bits</a> :: <a href="QuipperLib-Decompose.html#t:Precision">Precision</a></li><li class="src short"><a href="#v:digits">digits</a> :: <a href="QuipperLib-Decompose.html#t:Precision">Precision</a></li><li class="src short"><span class="keyword">type</span> <a href="#t:KeepPhase">KeepPhase</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a></li><li class="src short"><span class="keyword">data</span>  <a href="#t:GateBase">GateBase</a> <ul class="subs"><li>= <a href="#v:Logical">Logical</a>  </li><li>| <a href="#v:Binary">Binary</a>  </li><li>| <a href="#v:Toffoli">Toffoli</a>  </li><li>| <a href="#v:CliffordT_old">CliffordT_old</a>  </li><li>| <a href="#v:CliffordT">CliffordT</a> <a href="QuipperLib-Decompose.html#t:KeepPhase">KeepPhase</a> <a href="QuipperLib-Decompose.html#t:Precision">Precision</a> <a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a>  </li><li>| <a href="#v:Standard">Standard</a> <a href="QuipperLib-Decompose.html#t:Precision">Precision</a> <a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a>  </li><li>| <a href="#v:Strict">Strict</a> <a href="QuipperLib-Decompose.html#t:Precision">Precision</a> <a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a>  </li><li>| <a href="#v:Approximate">Approximate</a> <a href="QuipperLib-Decompose.html#t:KeepPhase">KeepPhase</a> <a href="QuipperLib-Decompose.html#t:Precision">Precision</a> <a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a>  </li><li>| <a href="#v:Exact">Exact</a>  </li><li>| <a href="#v:TrimControls">TrimControls</a>  </li></ul></li><li class="src short"><a href="#v:gatebase_enum">gatebase_enum</a> :: &#91;(<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="QuipperLib-Decompose.html#t:GateBase">GateBase</a>)&#93;</li><li class="src short"><a href="#v:decompose_generic">decompose_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> qb, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> qfun qa qb) =&gt; <a href="QuipperLib-Decompose.html#t:GateBase">GateBase</a> -&gt; qfun -&gt; qfun</li></ul></div><div id="interface"><h1 id="g:1">Precision
+</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Precision" class="def">Precision</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a><a href="src/QuipperLib/Synthesis.html#line-32" class="link">Source</a></p><div class="doc"><p>A type to measure precision. Precision is expressed as a number
+ <em>b</em> of bits, i.e., binary digits, so that &#949; = 2<sup>&#8722;<em>b</em></sup>.
+</p></div></div><div class="top"><p class="src"><a name="v:bits" class="def">bits</a> :: <a href="QuipperLib-Decompose.html#t:Precision">Precision</a><a href="src/QuipperLib/Synthesis.html#line-38" class="link">Source</a></p><div class="doc"><p>Binary digits, as a unit of precision. For example, the following
+ specifies a precision of 20 binary digits:
+</p><pre> prec = 20 * bits
+</pre></div></div><div class="top"><p class="src"><a name="v:digits" class="def">digits</a> :: <a href="QuipperLib-Decompose.html#t:Precision">Precision</a><a href="src/QuipperLib/Synthesis.html#line-45" class="link">Source</a></p><div class="doc"><p>Decimal digits, as a unit of precision. For example, the
+ following specifies a precision of 30 decimal digits:
+</p><pre> prec = 30 * digits
+</pre></div></div><h1 id="g:2">Phase
+</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:KeepPhase" class="def">KeepPhase</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#t:Bool">Bool</a><a href="src/QuipperLib/Synthesis.html#line-53" class="link">Source</a></p><div class="doc"><p>A boolean flag indicating whether to respect global phases
+ during circuit synthesis (<code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:True">True</a></code>) or disregard them (<code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:False">False</a></code>).
+</p></div></div><h1 id="g:3">Gate bases
+</h1><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:GateBase" class="def">GateBase</a>  <a href="src/QuipperLib/Decompose/GateBase.html#line-36" class="link">Source</a></p><div class="doc"><p>An enumeration type for gate bases. More cases can be added in
+ the future, for example for using gates from a particular physical
+ machine description. 
+</p><p>Some gate bases carry additional parameters; for example, in the
+ case of decomposition into a discrete gate base, one may specify a
+ precision &#949;, a random seed, or other flags.
+</p><p>If a <code><a href="QuipperLib-Decompose.html#t:Precision">Precision</a></code> parameter is present, it specifies the desired
+ precision per gate. If a <code><a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a></code> parameter is present, it
+ specifies a source of randomness.
+</p><p>If a <code><a href="QuipperLib-Decompose.html#t:KeepPhase">KeepPhase</a></code> parameter is present, it determines whether global
+ phases are respected (<code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:True">True</a></code>) or disregarded (<code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Bool.html#v:False">False</a></code>).
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Logical" class="def">Logical</a></td><td class="doc"><p>Use all logical gates, i.e., leave the circuit unchanged.
+</p></td></tr><tr><td class="src"><a name="v:Binary" class="def">Binary</a></td><td class="doc"><p>Decompose into binary gates.
+</p></td></tr><tr><td class="src"><a name="v:Toffoli" class="def">Toffoli</a></td><td class="doc"><p>Decompose into Toffoli and binary gates.
+</p></td></tr><tr><td class="src"><a name="v:CliffordT_old" class="def">CliffordT_old</a></td><td class="doc"><p>Decompose into Clifford+<em>T</em>. This is a legacy transformer
+ that does not handle all gates correctly. For example, it does
+ not handle <em>W</em>-gates, rotations, or phase gates. Use
+ <code><a href="QuipperLib-Decompose.html#v:CliffordT">CliffordT</a></code> instead.
+</p></td></tr><tr><td class="src"><a name="v:CliffordT" class="def">CliffordT</a> <a href="QuipperLib-Decompose.html#t:KeepPhase">KeepPhase</a> <a href="QuipperLib-Decompose.html#t:Precision">Precision</a> <a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a></td><td class="doc"><p>Decompose into Clifford+<em>T</em>, specifically: single-qubit
+ Clifford gates, the controlled-not gate (with positive or
+ negative controls), and the gates <em>T</em> and <em>T</em><sup>&#8224;</sup>.
+</p></td></tr><tr><td class="src"><a name="v:Standard" class="def">Standard</a> <a href="QuipperLib-Decompose.html#t:Precision">Precision</a> <a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a></td><td class="doc"><p>Decompose into the standard gate set, which we define to be
+ <em>X</em>, <em>Y</em>, <em>Z</em>, <em>H</em>, <em>S</em>, <em>S</em><sup>&#8224;</sup>, <em>T</em>, <em>T</em><sup>&#8224;</sup>, and
+ <em>CNOT</em>. Suppresses global phases.
+</p></td></tr><tr><td class="src"><a name="v:Strict" class="def">Strict</a> <a href="QuipperLib-Decompose.html#t:Precision">Precision</a> <a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a></td><td class="doc"><p>Decompose into <em>H</em>, <em>S</em>, <em>T</em>, <em>CNOT</em> gates only. Suppresses
+ global phases.
+</p></td></tr><tr><td class="src"><a name="v:Approximate" class="def">Approximate</a> <a href="QuipperLib-Decompose.html#t:KeepPhase">KeepPhase</a> <a href="QuipperLib-Decompose.html#t:Precision">Precision</a> <a href="Libraries-RandomSource.html#t:RandomSource">RandomSource</a></td><td class="doc"><p>Decompose rotation and phase gates into Clifford+<em>T</em>, using
+ an approximate synthesis algorithm. Other gates are unchanged.
+</p></td></tr><tr><td class="src"><a name="v:Exact" class="def">Exact</a></td><td class="doc"><p>Decompose gates that can be exactly represented in the
+ Clifford+<em>T</em> base into that base, specifically: single-qubit
+ Clifford gates, the controlled-not gate (with positive or
+ negative controls), and the gates <em>T</em> and <em>T</em><sup>&#8224;</sup>. Leave
+ rotation and phase gates unchanged.
+</p></td></tr><tr><td class="src"><a name="v:TrimControls" class="def">TrimControls</a></td><td class="doc"><p>Eliminate excess controls from gates.
+</p></td></tr></table></div><div class="subs instances"><p id="control.i:GateBase" class="caption collapser" onclick="toggleSection('i:GateBase')">Instances</p><div id="section.i:GateBase" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="QuipperLib-Decompose.html#t:GateBase">GateBase</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><a name="v:gatebase_enum" class="def">gatebase_enum</a> :: &#91;(<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="QuipperLib-Decompose.html#t:GateBase">GateBase</a>)&#93;<a href="src/QuipperLib/Decompose/GateBase.html#line-81" class="link">Source</a></p><div class="doc"><p>An assignment of gate bases to names. Names are given as
+ lower-case strings.
+</p><p>This can be useful, e.g., in the definition of command line
+ options.
+</p><p>In the future, the syntax should be extended so that users can
+ specify parameters (e.g., the precision, random seed) on the
+ command line as well. For now, we just use the default precision.
+</p></div></div><h1 id="g:4">Generic decomposition
+</h1><div class="top"><p class="src"><a name="v:decompose_generic" class="def">decompose_generic</a> :: (<a href="Quipper-QData.html#t:QCData">QCData</a> qa, <a href="Quipper-QData.html#t:QCData">QCData</a> qb, <a href="Quipper-Generic.html#t:QCurry">QCurry</a> qfun qa qb) =&gt; <a href="QuipperLib-Decompose.html#t:GateBase">GateBase</a> -&gt; qfun -&gt; qfun<a href="src/QuipperLib/Decompose/GateBase.html#line-115" class="link">Source</a></p><div class="doc"><p>Decompose a circuit into gates from the given <code><a href="QuipperLib-Decompose.html#t:GateBase">GateBase</a></code>. This
+ can be applied to a circuit-generating function in curried form
+ with <em>n</em> arguments, for any <em>n</em> &#8805; 0.
+</p><p>The type of this heavily overloaded function is difficult to
+ read. In more readable form, it has all of the following types:
+</p><pre> decompose_generic :: (QCData qa) =&gt; GateBase -&gt; Circ qa -&gt; Circ qa
+ decompose_generic :: (QCData qa, QCData qb) =&gt; GateBase -&gt; (qa -&gt; Circ qb) -&gt; (qa -&gt; Circ qb)
+ decompose_generic :: (QCData qa, QCData qb, QCData qc) =&gt; GateBase -&gt; (qa -&gt; qb -&gt; Circ qc) -&gt; (qa -&gt; qb -&gt; Circ qc)
+</pre><p>and so forth.
+</p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>

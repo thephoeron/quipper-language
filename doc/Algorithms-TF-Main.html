@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Algorithms.TF.Main</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_Algorithms-TF-Main.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/Algorithms/TF/Main.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">Algorithms.TF.Main</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Documentation
+</a></li><li><a href="#g:2">Option processing
+</a></li><li><a href="#g:3">The Triangle Finding Algorithm main function
+</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>Authors: Peter LeFanu Lumsdaine, Neil Julien Ross
+</p><p>An implementation of the Triangle Finding Algorithm. The
+ Triangle Finding Problem is given by an undirected dense
+ simple graph <em>G</em> containing exactly one triangle &#8710;. The
+ graph is given by an oracle function <em>f</em> , such that, for 
+ any two nodes <em>v</em>, <em>w</em> of <em>G</em>, <em>f</em>(<em>v</em>,<em>w</em>)=1 if (<em>v</em>,<em>w</em>) 
+ is an edge of <em>G</em> and <em>f</em>(<em>v</em>,<em>w</em>)=0 otherwise. To solve 
+ such an instance of the problem is to find the set of 
+ vertices {<em>e</em><sub>1</sub> , <em>e</em><sub>2</sub> , <em>e</em><sub>3</sub>} forming 
+ &#8710; by querying <em>f</em>.
+</p><p>The algorithm works by performing a Grover-based quantum 
+ walk on a larger graph <em>H</em>, called the Hamming graph
+ associated to <em>G</em>. It is designed to find &#8710; with high
+ probability. The algorithm is parametric on an oracle
+ defining the graph <em>G</em>. In our implementation, the 
+ oracle is a changeable part, but we have also 
+ implemented a particular predefined oracle. 
+</p><p>The algorithm is described in:
+</p><ul><li> A. Childs and R. Kothari. &quot;Quantum query complexity of
+ minor-closed graph properties.&quot; In 
+ <em>Proceedings of the 28th Symposium on Theoretical Aspects of Computer Science</em>, 
+ pages 661&#8211;672, 2011.
+</li><li> F. Magniez, M. Santha, and M. Szegedy. &quot;Quantum 
+ algorithms for the triangle problem.&quot; In 
+ <em>Proceedings of the 16th Annual ACM-SIAM Symposium on Discrete Algorithms</em>, 
+ pages 1109&#8211;1117, 2005.
+</li></ul><p>The present implementation is based on detailed 
+ algorithm and oracle specifications that were provided to 
+ us by the IARPA QCS program and written by Richard 
+ Wisniewski.
+</p><p>Modules:
+</p><ul><li> <a href="Algorithms-TF-Main.html">Algorithms.TF.Main</a>: Command line interface.
+</li><li> <a href="Algorithms-TF-Definitions.html">Algorithms.TF.Definitions</a>: Some general purpose
+ definitions.
+</li><li> <a href="Algorithms-TF-QWTFP.html">Algorithms.TF.QWTFP</a>: The implementation of the main
+ Triangle Finding algorithm.
+</li><li> <a href="Algorithms-TF-Oracle.html">Algorithms.TF.Oracle</a>: The implementation of the 
+ oracle for the Triangle Finding algorithm.
+</li><li> <a href="Algorithms-TF-Alternatives.html">Algorithms.TF.Alternatives</a>: Some alternative 
+ implementations of some of the subroutines.
+</li><li> <a href="Algorithms-TF-Simulate.html">Algorithms.TF.Simulate</a>: Functions for simulating,
+ testing, and debugging oracles.
+</li></ul></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">data</span>  <a href="#t:WhatToShow">WhatToShow</a> <ul class="subs"><li>= <a href="#v:Circuit">Circuit</a>  </li><li>| <a href="#v:Oracle">Oracle</a>  </li><li>| <a href="#v:Sub">Sub</a>  </li><li>| <a href="#v:Arith">Arith</a>  </li><li>| <a href="#v:OTest">OTest</a>  </li></ul></li><li class="src short"><span class="keyword">data</span>  <a href="#t:OracleSelect">OracleSelect</a> <ul class="subs"><li>= <a href="#v:Orthodox">Orthodox</a>  </li><li>| <a href="#v:Blackbox">Blackbox</a>  </li></ul></li><li class="src short"><span class="keyword">data</span>  <a href="#t:QRamSelect">QRamSelect</a> <ul class="subs"><li>= <a href="#v:Standard_QRam">Standard_QRam</a>  </li><li>| <a href="#v:Alt_QRam">Alt_QRam</a>  </li></ul></li><li class="src short"><span class="keyword">data</span>  <a href="#t:Subroutine">Subroutine</a> <ul class="subs"><li>= <a href="#v:A2">A2</a>  </li><li>| <a href="#v:A3">A3</a>  </li><li>| <a href="#v:A4">A4</a>  </li><li>| <a href="#v:A5">A5</a>  </li><li>| <a href="#v:A6">A6</a>  </li><li>| <a href="#v:A7">A7</a>  </li><li>| <a href="#v:A8">A8</a>  </li><li>| <a href="#v:A9">A9</a>  </li><li>| <a href="#v:A10">A10</a>  </li><li>| <a href="#v:A11">A11</a>  </li><li>| <a href="#v:A12">A12</a>  </li><li>| <a href="#v:A13">A13</a>  </li><li>| <a href="#v:A14">A14</a>  </li><li>| <a href="#v:A15">A15</a>  </li><li>| <a href="#v:A16">A16</a>  </li><li>| <a href="#v:A17">A17</a>  </li><li>| <a href="#v:A18">A18</a>  </li><li>| <a href="#v:A19">A19</a>  </li><li>| <a href="#v:A20">A20</a>  </li><li>| <a href="#v:O2">O2</a>  </li><li>| <a href="#v:O3">O3</a>  </li><li>| <a href="#v:O4">O4</a>  </li><li>| <a href="#v:O5">O5</a>  </li><li>| <a href="#v:O6">O6</a>  </li><li>| <a href="#v:O7">O7</a>  </li><li>| <a href="#v:O8">O8</a>  </li></ul></li><li class="src short"><span class="keyword">data</span>  <a href="#t:Options">Options</a>  = <a href="#v:Options">Options</a> {<ul class="subs"><li><a href="#v:what">what</a> :: <a href="Algorithms-TF-Main.html#t:WhatToShow">WhatToShow</a></li><li><a href="#v:s">s</a> :: <a href="Algorithms-TF-Main.html#t:Subroutine">Subroutine</a></li><li><a href="#v:format">format</a> :: <a href="Quipper-Printing.html#t:Format">Format</a></li><li><a href="#v:gatebase">gatebase</a> :: <a href="QuipperLib-Decompose-GateBase.html#t:GateBase">GateBase</a></li><li><a href="#v:oracle">oracle</a> :: <a href="Algorithms-TF-Main.html#t:OracleSelect">OracleSelect</a></li><li><a href="#v:qram">qram</a> :: <a href="Algorithms-TF-Main.html#t:QRamSelect">QRamSelect</a></li><li><a href="#v:l">l</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a></li><li><a href="#v:n">n</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a></li><li><a href="#v:r">r</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a></li></ul>}</li><li class="src short"><a href="#v:defaultOptions">defaultOptions</a> :: <a href="Algorithms-TF-Main.html#t:Options">Options</a></li><li class="src short"><a href="#v:options">options</a> :: &#91;<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-Console-GetOpt.html#t:OptDescr">OptDescr</a> (<a href="Algorithms-TF-Main.html#t:Options">Options</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> <a href="Algorithms-TF-Main.html#t:Options">Options</a>)&#93;</li><li class="src short"><a href="#v:oracle_enum">oracle_enum</a> :: &#91;(<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="Algorithms-TF-Main.html#t:OracleSelect">OracleSelect</a>)&#93;</li><li class="src short"><a href="#v:subroutine_enum">subroutine_enum</a> :: &#91;(<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="Algorithms-TF-Main.html#t:Subroutine">Subroutine</a>)&#93;</li><li class="src short"><a href="#v:dopts">dopts</a> :: &#91;<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>&#93; -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> <a href="Algorithms-TF-Main.html#t:Options">Options</a></li><li class="src short"><a href="#v:usage">usage</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()</li><li class="src short"><a href="#v:main">main</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()</li><li class="src short"><a href="#v:spec_of_options">spec_of_options</a> :: <a href="Algorithms-TF-Main.html#t:Options">Options</a> -&gt; <a href="Algorithms-TF-Definitions.html#t:QWTFP_spec">QWTFP_spec</a></li><li class="src short"><a href="#v:qram_select">qram_select</a> :: <a href="Algorithms-TF-Main.html#t:QRamSelect">QRamSelect</a> -&gt; <a href="Algorithms-TF-Definitions.html#t:Qram">Qram</a></li></ul></div><div id="interface"><h1 id="g:1">Documentation
+</h1><div class="doc"><p>This module provides a command line interface for the
+ Triangle Finding Algorithm. This allows the user, for
+ example, to plug in different oracles, show different 
+ parts of the circuit, select a gate base, simulate, 
+ and select various parameters.
+</p><ul><li> Example invocations:
+</li></ul><pre>./tf</pre><p>Default options: the full <code><a href="Algorithms-TF-QWTFP.html#v:a1_QWTFP">a1_QWTFP</a></code> circuit, with 
+ (l,n,r) = (4,3,2), and a black-box oracle.
+</p><pre>./tf --oracle -o <a href="Orthodox.html">Orthodox</a> -l 3 -n 2 -r 2</pre><p>A manageable size to inspect the orthodox oracle.
+</p><pre>./tf -s mult -l 4</pre><p>The multiplier, for 4-bit integers mod 15.
+</p><pre>./tf --help</pre><p>Print detailed usage info (accepted options, etc.).
+</p><ul><li> Parameters:
+</li></ul><p><em>l</em>: the length of integers used in the oracle.  
+ (Default value: 4.)
+</p><p><em>n</em>: the size of nodes in the graph.  
+ (Default value: 3.)
+</p><p><em>r</em>: log<sub>2</sub> of the tuple size of the Hamming graph.  
+ (Default value: 2.)
+</p></div><h1 id="g:2">Option processing
+</h1><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:WhatToShow" class="def">WhatToShow</a>  <a href="src/Algorithms/TF/Main.html#line-128" class="link">Source</a></p><div class="doc"><p>An enumeration type for determining what the main function should do.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Circuit" class="def">Circuit</a></td><td class="doc"><p>Show the whole circuit.
+</p></td></tr><tr><td class="src"><a name="v:Oracle" class="def">Oracle</a></td><td class="doc"><p>Show only the oracle.
+</p></td></tr><tr><td class="src"><a name="v:Sub" class="def">Sub</a></td><td class="doc"><p>Show a specific subroutine.
+</p></td></tr><tr><td class="src"><a name="v:Arith" class="def">Arith</a></td><td class="doc"><p>Run simulation tests of the arithmetic subroutines. 
+</p></td></tr><tr><td class="src"><a name="v:OTest" class="def">OTest</a></td><td class="doc"><p>Run simulation tests of the oracle. 
+</p></td></tr></table></div><div class="subs instances"><p id="control.i:WhatToShow" class="caption collapser" onclick="toggleSection('i:WhatToShow')">Instances</p><div id="section.i:WhatToShow" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Algorithms-TF-Main.html#t:WhatToShow">WhatToShow</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:OracleSelect" class="def">OracleSelect</a>  <a href="src/Algorithms/TF/Main.html#line-137" class="link">Source</a></p><div class="doc"><p>An enumeration type for selecting an oracle.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Orthodox" class="def">Orthodox</a></td><td class="doc"><p>The default oracle.
+</p></td></tr><tr><td class="src"><a name="v:Blackbox" class="def">Blackbox</a></td><td class="doc"><p>A blackbox oracle.
+</p></td></tr></table></div><div class="subs instances"><p id="control.i:OracleSelect" class="caption collapser" onclick="toggleSection('i:OracleSelect')">Instances</p><div id="section.i:OracleSelect" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Algorithms-TF-Main.html#t:OracleSelect">OracleSelect</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:QRamSelect" class="def">QRamSelect</a>  <a href="src/Algorithms/TF/Main.html#line-143" class="link">Source</a></p><div class="doc"><p>A datatype for selecting a qRAM implementation.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Standard_QRam" class="def">Standard_QRam</a></td><td class="doc"><p>The default qRAM.
+</p></td></tr><tr><td class="src"><a name="v:Alt_QRam" class="def">Alt_QRam</a></td><td class="doc"><p>A slightly more efficient implementation.
+</p></td></tr></table></div><div class="subs instances"><p id="control.i:QRamSelect" class="caption collapser" onclick="toggleSection('i:QRamSelect')">Instances</p><div id="section.i:QRamSelect" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Algorithms-TF-Main.html#t:QRamSelect">QRamSelect</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Subroutine" class="def">Subroutine</a>  <a href="src/Algorithms/TF/Main.html#line-149" class="link">Source</a></p><div class="doc"><p>An enumeration type for selecting a subroutine.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:A2" class="def">A2</a></td><td class="doc"><p>Algorithm 2: Zero.
+</p></td></tr><tr><td class="src"><a name="v:A3" class="def">A3</a></td><td class="doc"><p>Algorithm 3: Initialize.
+</p></td></tr><tr><td class="src"><a name="v:A4" class="def">A4</a></td><td class="doc"><p>Algorithm 4: Hadamard.
+</p></td></tr><tr><td class="src"><a name="v:A5" class="def">A5</a></td><td class="doc"><p>Algorithm 5: Setup.
+</p></td></tr><tr><td class="src"><a name="v:A6" class="def">A6</a></td><td class="doc"><p>Algorithm 6: QWSH.
+</p></td></tr><tr><td class="src"><a name="v:A7" class="def">A7</a></td><td class="doc"><p>Algorithm 7: Diffuse.
+</p></td></tr><tr><td class="src"><a name="v:A8" class="def">A8</a></td><td class="doc"><p>Algorithm 8: FetchT.
+</p></td></tr><tr><td class="src"><a name="v:A9" class="def">A9</a></td><td class="doc"><p>Algorithm 9: StoreT.
+</p></td></tr><tr><td class="src"><a name="v:A10" class="def">A10</a></td><td class="doc"><p>Algorithm 10: FetchStoreT.
+</p></td></tr><tr><td class="src"><a name="v:A11" class="def">A11</a></td><td class="doc"><p>Algorithm 11: FetchE.
+</p></td></tr><tr><td class="src"><a name="v:A12" class="def">A12</a></td><td class="doc"><p>Algorithm 12: FetchStoreE.
+</p></td></tr><tr><td class="src"><a name="v:A13" class="def">A13</a></td><td class="doc"><p>Algorithm 13: Update.
+</p></td></tr><tr><td class="src"><a name="v:A14" class="def">A14</a></td><td class="doc"><p>Algorithm 14: SWAP.
+</p></td></tr><tr><td class="src"><a name="v:A15" class="def">A15</a></td><td class="doc"><p>Algorithm 15: TestTriangleEdges (inner quantum walk).
+</p></td></tr><tr><td class="src"><a name="v:A16" class="def">A16</a></td><td class="doc"><p>Algorithm 16: TriangleTestT.
+</p></td></tr><tr><td class="src"><a name="v:A17" class="def">A17</a></td><td class="doc"><p>Algorithm 17: TriangleTestTw.
+</p></td></tr><tr><td class="src"><a name="v:A18" class="def">A18</a></td><td class="doc"><p>Algorithm 18: TriangleEdgeSearch.
+</p></td></tr><tr><td class="src"><a name="v:A19" class="def">A19</a></td><td class="doc"><p>Algorithm 19: GCQWalk.
+</p></td></tr><tr><td class="src"><a name="v:A20" class="def">A20</a></td><td class="doc"><p>Algorithm 20: GCQWStep.
+</p></td></tr><tr><td class="src"><a name="v:O2" class="def">O2</a></td><td class="doc"><p>Algorithm O2: ConvertNODE.
+</p></td></tr><tr><td class="src"><a name="v:O3" class="def">O3</a></td><td class="doc"><p>Algorithm O3: TestEqual.
+</p></td></tr><tr><td class="src"><a name="v:O4" class="def">O4</a></td><td class="doc"><p>Algorithm O4: Pow17.
+</p></td></tr><tr><td class="src"><a name="v:O5" class="def">O5</a></td><td class="doc"><p>Algorithm O5: Mod3.
+</p></td></tr><tr><td class="src"><a name="v:O6" class="def">O6</a></td><td class="doc"><p>Algorithm O6: Sub.
+</p></td></tr><tr><td class="src"><a name="v:O7" class="def">O7</a></td><td class="doc"><p>Algorithm O7: Add.
+</p></td></tr><tr><td class="src"><a name="v:O8" class="def">O8</a></td><td class="doc"><p>Algorithm O8: Mul.
+</p></td></tr></table></div><div class="subs instances"><p id="control.i:Subroutine" class="caption collapser" onclick="toggleSection('i:Subroutine')">Instances</p><div id="section.i:Subroutine" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Algorithms-TF-Main.html#t:Subroutine">Subroutine</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Options" class="def">Options</a>  <a href="src/Algorithms/TF/Main.html#line-179" class="link">Source</a></p><div class="doc"><p>A data type to hold values set by command line options.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Options" class="def">Options</a></td><td class="doc empty">&nbsp;</td></tr><tr><td colspan="2"><div class="subs fields"><p class="caption">Fields</p><dl><dt class="src"><a name="v:what" class="def">what</a> :: <a href="Algorithms-TF-Main.html#t:WhatToShow">WhatToShow</a></dt><dd class="doc"><p>What kind of thing to output.
+</p></dd><dt class="src"><a name="v:s" class="def">s</a> :: <a href="Algorithms-TF-Main.html#t:Subroutine">Subroutine</a></dt><dd class="doc"><p>What specific subroutine to output. 
+</p></dd><dt class="src"><a name="v:format" class="def">format</a> :: <a href="Quipper-Printing.html#t:Format">Format</a></dt><dd class="doc"><p>The output format.
+</p></dd><dt class="src"><a name="v:gatebase" class="def">gatebase</a> :: <a href="QuipperLib-Decompose-GateBase.html#t:GateBase">GateBase</a></dt><dd class="doc"><p>What kind of gates to decompose into.
+</p></dd><dt class="src"><a name="v:oracle" class="def">oracle</a> :: <a href="Algorithms-TF-Main.html#t:OracleSelect">OracleSelect</a></dt><dd class="doc"><p>Which kind of oracle to use.
+</p></dd><dt class="src"><a name="v:qram" class="def">qram</a> :: <a href="Algorithms-TF-Main.html#t:QRamSelect">QRamSelect</a></dt><dd class="doc"><p>Which qram implementation to use.
+</p></dd><dt class="src"><a name="v:l" class="def">l</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a></dt><dd class="doc"><p>Parameter <code><a href="Algorithms-TF-Main.html#v:l">l</a></code>.
+</p></dd><dt class="src"><a name="v:n" class="def">n</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a></dt><dd class="doc"><p>Parameter <code><a href="Algorithms-TF-Main.html#v:n">n</a></code>.
+</p></dd><dt class="src"><a name="v:r" class="def">r</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a></dt><dd class="doc"><p>Parameter <code><a href="Algorithms-TF-Main.html#v:r">r</a></code>.
+</p></dd></dl><div class="clear"></div></div></td></tr></table></div><div class="subs instances"><p id="control.i:Options" class="caption collapser" onclick="toggleSection('i:Options')">Instances</p><div id="section.i:Options" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Algorithms-TF-Main.html#t:Options">Options</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><a name="v:defaultOptions" class="def">defaultOptions</a> :: <a href="Algorithms-TF-Main.html#t:Options">Options</a><a href="src/Algorithms/TF/Main.html#line-193" class="link">Source</a></p><div class="doc"><p>The default options.
+</p></div></div><div class="top"><p class="src"><a name="v:options" class="def">options</a> :: &#91;<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-Console-GetOpt.html#t:OptDescr">OptDescr</a> (<a href="Algorithms-TF-Main.html#t:Options">Options</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> <a href="Algorithms-TF-Main.html#t:Options">Options</a>)&#93;<a href="src/Algorithms/TF/Main.html#line-208" class="link">Source</a></p><div class="doc"><p>The list of command line options, in the format required by <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-Console-GetOpt.html#v:getOpt">getOpt</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:oracle_enum" class="def">oracle_enum</a> :: &#91;(<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="Algorithms-TF-Main.html#t:OracleSelect">OracleSelect</a>)&#93;<a href="src/Algorithms/TF/Main.html#line-291" class="link">Source</a></p><div class="doc"><p>An enumeration of available oracles and their names.
+</p></div></div><div class="top"><p class="src"><a name="v:subroutine_enum" class="def">subroutine_enum</a> :: &#91;(<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>, <a href="Algorithms-TF-Main.html#t:Subroutine">Subroutine</a>)&#93;<a href="src/Algorithms/TF/Main.html#line-298" class="link">Source</a></p><div class="doc"><p>An enumeration of available subroutines and their names.
+</p></div></div><div class="top"><p class="src"><a name="v:dopts" class="def">dopts</a> :: &#91;<a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a>&#93; -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> <a href="Algorithms-TF-Main.html#t:Options">Options</a><a href="src/Algorithms/TF/Main.html#line-329" class="link">Source</a></p><div class="doc"><p>Process <em>argv</em>-style command line options into an <code><a href="Algorithms-TF-Main.html#t:Options">Options</a></code> structure.
+</p></div></div><div class="top"><p class="src"><a name="v:usage" class="def">usage</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()<a href="src/Algorithms/TF/Main.html#line-337" class="link">Source</a></p><div class="doc"><p>Print usage message to <code><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/GHC-IO-Handle-FD.html#v:stdout">stdout</a></code>.
+</p></div></div><h1 id="g:3">The Triangle Finding Algorithm main function
+</h1><div class="top"><p class="src"><a name="v:main" class="def">main</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()<a href="src/Algorithms/TF/Main.html#line-350" class="link">Source</a></p><div class="doc"><p>Main function: read options, then execute the appropriate task.
+</p></div></div><div class="top"><p class="src"><a name="v:spec_of_options" class="def">spec_of_options</a> :: <a href="Algorithms-TF-Main.html#t:Options">Options</a> -&gt; <a href="Algorithms-TF-Definitions.html#t:QWTFP_spec">QWTFP_spec</a><a href="src/Algorithms/TF/Main.html#line-423" class="link">Source</a></p><div class="doc"><p>Compute the appropriate problem specification for the given options.
+</p></div></div><div class="top"><p class="src"><a name="v:qram_select" class="def">qram_select</a> :: <a href="Algorithms-TF-Main.html#t:QRamSelect">QRamSelect</a> -&gt; <a href="Algorithms-TF-Definitions.html#t:Qram">Qram</a><a href="src/Algorithms/TF/Main.html#line-432" class="link">Source</a></p><div class="doc"><p>Maps a <code><a href="Algorithms-TF-Main.html#t:QRamSelect">QRamSelect</a></code> element to the corresponding <code><a href="Algorithms-TF-Definitions.html#t:Qram">Qram</a></code> object.
+</p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>

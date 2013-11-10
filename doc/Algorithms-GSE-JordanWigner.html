@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Algorithms.GSE.JordanWigner</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_Algorithms-GSE-JordanWigner.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/Algorithms/GSE/JordanWigner.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">Algorithms.GSE.JordanWigner</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Overview
+</a></li><li><a href="#g:2">Correctness of the templates
+</a></li><li><a href="#g:3">Alternate Coulomb templates
+</a></li><li><a href="#g:4">General-purpose auxiliary functions
+</a></li><li><a href="#g:5">Scalars          
+</a></li><li><a href="#g:6">Basic Gates
+</a></li><li><a href="#g:7">Basic operators
+</a></li><li><a href="#g:8">Tensors of basic operators
+</a></li><li><a href="#g:9">Linear combinations of tensors
+</a></li><li><a href="#g:10">Jordan-Wigner representation
+</a></li><li><a href="#g:11">Second quantized interaction terms
+</a><ul><li><a href="#g:12">Simple interaction terms
+</a></li><li><a href="#g:13">Hermitian interaction terms
+</a></li></ul></li><li><a href="#g:14"><em>XYZD</em> decomposition
+</a></li><li><a href="#g:15">Exponentiation and circuit generation
+</a></li><li><a href="#g:16">Generate top-level templates
+</a></li><li><a href="#g:17">Testing
+</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>This module provides the Jordan-Wigner transformation and
+ symbolic derivation of circuit templates for second quantized
+ interaction terms. It is essentially a fully automated version of
+ the calculations from
+</p><ul><li> James D. Whitfield, Jacob Biamonte, and Al&#225;n
+ Aspuru-Guzik. &quot;Simulation of electronic structure Hamiltonians
+ using quantum computers.&quot; 
+ <em>Molecular Physics</em> 109(5):735&#8211;750, 2011.
+ See also <a href="http://arxiv.org/abs/1001.3855v3">http://arxiv.org/abs/1001.3855v3</a>.
+</li></ul></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><a href="#v:power">power</a> ::  <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; a -&gt; &#91;a&#93;</li><li class="src short"><a href="#v:consecutive_pairs">consecutive_pairs</a> ::  &#91;a&#93; -&gt; &#91;(a, a)&#93;</li><li class="src short"><span class="keyword">type</span> <a href="#t:Scalar">Scalar</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Complex.html#t:Complex">Complex</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><a href="#v:i">i</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Scalar">Scalar</a></li><li class="src short"><a href="#v:rotZ_at">rotZ_at</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:gse_G_at">gse_G_at</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:gse_T_at">gse_T_at</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:gse_Y_at">gse_Y_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><span class="keyword">data</span>  <a href="#t:Op">Op</a> <ul class="subs"><li>= <a href="#v:I">I</a>  </li><li>| <a href="#v:X">X</a>  </li><li>| <a href="#v:Y">Y</a>  </li><li>| <a href="#v:Z">Z</a>  </li><li>| <a href="#v:P">P</a>  </li><li>| <a href="#v:M">M</a>  </li><li>| <a href="#v:A">A</a>  </li><li>| <a href="#v:D">D</a>  </li></ul></li><li class="src short"><span class="keyword">data</span>  <a href="#t:Scaled">Scaled</a> a = <a href="#v:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Scalar">Scalar</a> a</li><li class="src short"><a href="#v:mult">mult</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a></li><li class="src short"><span class="keyword">type</span> <a href="#t:Tensor">Tensor</a> = &#91;<a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a>&#93;</li><li class="src short"><a href="#v:normalize_tensor">normalize_tensor</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a></li><li class="src short"><a href="#v:tensor_id">tensor_id</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a></li><li class="src short"><a href="#v:mult_tensor">mult_tensor</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a></li><li class="src short"><a href="#v:mult_scaled_tensor">mult_scaled_tensor</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a></li><li class="src short"><span class="keyword">type</span> <a href="#t:TensorLC">TensorLC</a> = Map <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> <a href="Algorithms-GSE-JordanWigner.html#t:Scalar">Scalar</a></li><li class="src short"><a href="#v:lc_zero">lc_zero</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></li><li class="src short"><a href="#v:lc_insert">lc_insert</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></li><li class="src short"><a href="#v:lc_from_list">lc_from_list</a> :: &#91;<a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a>&#93; -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></li><li class="src short"><a href="#v:lc_to_list">lc_to_list</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a> -&gt; &#91;<a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a>&#93;</li><li class="src short"><a href="#v:jw">jw</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a></li><li class="src short"><a href="#v:jw_dagger">jw_dagger</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a></li><li class="src short"><a href="#v:one_electron_operator_simple">one_electron_operator_simple</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a></li><li class="src short"><a href="#v:two_electron_operator_simple">two_electron_operator_simple</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a></li><li class="src short"><a href="#v:one_electron_operator">one_electron_operator</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></li><li class="src short"><a href="#v:two_electron_operator">two_electron_operator</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></li><li class="src short"><a href="#v:decompose_basis">decompose_basis</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a> -&gt; &#91;<a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a>&#93;</li><li class="src short"><a href="#v:decompose_tensor">decompose_tensor</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></li><li class="src short"><a href="#v:decompose_tensor_lc">decompose_tensor_lc</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></li><li class="src short"><a href="#v:exponentiate_simple">exponentiate_simple</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:exponentiate">exponentiate</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:one_electron_circuit">one_electron_circuit</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:two_electron_circuit">two_electron_circuit</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:two_electron_circuit_orthodox">two_electron_circuit_orthodox</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()</li><li class="src short"><a href="#v:show_one_electron">show_one_electron</a> :: <a href="Quipper-Printing.html#t:Format">Format</a> -&gt; <a href="QuipperLib-Decompose-GateBase.html#t:GateBase">GateBase</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()</li><li class="src short"><a href="#v:show_two_electron">show_two_electron</a> :: <a href="Quipper-Printing.html#t:Format">Format</a> -&gt; <a href="QuipperLib-Decompose-GateBase.html#t:GateBase">GateBase</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()</li><li class="src short"><a href="#v:show_two_electron_orthodox">show_two_electron_orthodox</a> :: <a href="Quipper-Printing.html#t:Format">Format</a> -&gt; <a href="QuipperLib-Decompose-GateBase.html#t:GateBase">GateBase</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()</li></ul></div><div id="interface"><h1 id="g:1">Overview
+</h1><div class="doc"><p>For a given tuple of orbital indices, (<em>p</em>,<em>q</em>) in case of
+ one-electron interactions, or (<em>p</em>,<em>q</em>,<em>r</em>,<em>s</em>) in case of two-electron
+ interactions, we first calculate the Jordan-Wigner transformation
+ of the second quantized hermitian interaction terms
+</p><p><em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>p</em></sub>, 
+</p><p><em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub> + <em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>p</em></sub>,
+</p><p><em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>,
+</p><p><em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><em>a</em><sub><em>s</em></sub> + 
+ <em>a</em><sub><em>s</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>.
+</p><p>Next, we decompose each operator into a linear combination <em>H</em> =
+ &#955;<sub>1</sub><em>M</em><sub>1</sub> + ... + &#955;<sub><em>n</em></sub><em>M</em><sub><em>n</em></sub> of mutually
+ commuting hermitian tensors. At this point, each summand <em>M</em><sub><em>j</em></sub>
+ in the linear combination will be a tensor product of the following
+ operators (not necessarily in this order):
+</p><ul><li> an even number (possibly zero) of Pauli <em>X</em> operators;
+</li><li> an even number (possibly zero) of Pauli <em>Y</em> operators;
+</li><li> zero or more Pauli <em>Z</em> operators, and
+</li><li> zero or more <em>D</em> operators, where <em>D</em> = &#963;<sup>&#8722;</sup>&#963;<sup>+</sup> = (<em>I</em>&#8722;<em>Z</em>)/2.
+</li></ul><p>Note that there may be zero terms in the summation; this happens,
+ for example, for 
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><em>a</em><sub><em>s</em></sub>,
+ because two electrons cannot occupy the same spin orbital due to
+ their fermionic nature. In this case, <em>H</em> = 0 and <i>e</i><sup>-<em>i</em>&#952;<em>H</em></sup> = <em>I</em>.
+</p><p>Next, we calculate <i>e</i><sup>-<em>i</em>&#952;<em>H</em></sup>. Because the summands <em>M</em><sub><em>j</em></sub>
+ commute, we can exponentiate each summand separately, using the formula
+ <i>e</i><sup>-<em>i</em>&#952;<em>H</em></sup> = <i>e</i><sup>-<em>i</em>&#952;&#955;<sub>1</sub><em>M</em><sub>1</sub></sup>&#8943;<i>e</i><sup>-<em>i</em>&#952;&#955;<sub><em>n</em></sub><em>M</em><sub><em>n</em></sub></sup>.
+</p><p>We then generate the circuit for <i>e</i><sup>-<em>i</em>&#952;&#955;<sub><em>j</em></sub><em>M</em><sub><em>j</em></sub></sup>
+ by applying a sequence of basis changes until the problem is
+ reduced to a controlled rotation. The basis changes are, in this
+ order:
+</p><ol><li> Change each Pauli <em>X</em> operator in <em>M</em><sub><em>j</em></sub> to a Pauli <em>Z</em>
+ operator, and apply a Hadamard basis change to the corresponding
+ qubit. This uses the relation <em>HXH</em> = <em>Z</em>.
+</li><li> Change each Pauli <em>Y</em> operator in <em>M</em><sub><em>j</em></sub> to a Pauli <em>Z</em>
+ operator, and apply a <b>Y</b> basis change to the corresponding
+ qubit. Note: the <b>Y</b> basis change operator is defined in
+ &#91;Whitfield et al.&#93; as <em>R</em><sub><em>x</em></sub>(-&#960;/2) = (<em>I</em>+<em>iX</em>)/&#8730;2, or
+ equivalently <b>Y</b> = <em>SHS</em>, and satisfies <b>Y</b><sup>&#8224;</sup><em>Y</em><b>Y</b> =
+ <em>Z</em>. It should not be confused with the Pauli <em>Y</em> operator.
+</li><li> If the operator <em>M</em><sub><em>j</em></sub> contains one or more Pauli <em>Z</em> operators
+ (including those obtained in steps 1 and 2), then do a basis change
+ by a cascade of controlled-not gates to reduce this to a single <em>Z</em>
+ operator. This uses the relation <em>CNot</em> (<em>Z</em>&#8855;<em>Z</em>) <em>CNot</em> = <em>I</em>&#8855;<em>Z</em>.
+</li></ol><p>After these basis changes, the operator <em>M</em><sub><em>j</em></sub> consists of
+ exactly zero or one Pauli <em>Z</em> operator, together with zero or more
+ <em>D</em> operators.  To see how to translate this into a controlled
+ rotation, note that for any operator <em>A</em>, we have
+</p><p><img src="images/expDA.png">
+</p><p>Therefore, each <em>D</em> operator in <em>M</em><sub><em>j</em></sub> turns into a control
+ after exponentiation. The final rotation is then computed by
+ distinguishing two cases:
+</p><ul><li> If <em>M</em><sub><em>j</em></sub> contains a Pauli <em>Z</em> operator, then use the
+ relation <i>e</i><sup>-<em>i</em>&#952;<em>Z</em></sup> = <em>R</em><sub><em>z</em></sub>(2&#952;). In this case, the circuit
+ for <i>e</i><sup>-<em>i</em>&#952;<em>M</em><sub><em>j</em></sub></sup> is a controlled <em>R</em><sub><em>z</em></sub>(2&#952;) gate in
+ the position of the <em>Z</em> operator, with zero or more controls in the
+ positions of any <em>D</em> operators.
+</li><li> If <em>M</em><sub><em>j</em></sub> does not contain a Pauli <em>Z</em> operator, then the
+ operation to be performed is a phase change <i>e</i><sup>-<em>i</em>&#952;</sup>, controlled
+ by the qubits in the positions of the <em>D</em> operators. Note that
+ there must be at least one <em>D</em> operator in this case. Also note
+ that a controlled <i>e</i><sup>-<em>i</em>&#952;</sup> gate is identical to a <em>T</em>(&#952;) gate.
+</li></ul></div><h1 id="g:2">Correctness of the templates
+</h1><div class="doc"><p>As outlined above, the functions in this module generate each
+ circuit from first principles, based on the Jordan-Wigner
+ representation of operators and on algebraic transformations. They
+ do not rely on pre-fabricated circuit templates.
+</p><p>Based on the automated calculations provided by this module, we
+ have found small typos in the 5 templates provided by [Whitfield
+ et al.] (Table 3, or Table A1 in the arXiv version). 
+</p><ul><li> The template for the number-excitation operator is missing a
+ control on its rotation gate. 
+</li><li> In the template for the Coulomb operator, the angles are wrong. 
+ Moreover, this program finds a simpler template.
+</li><li> In the template for the double excitation operator, the angles
+ are wrong; they should be &#177;&#952;/4 instead of &#952;.
+</li></ul><p>The corrected templates generated by our code are as follows:
+</p><ul><li> Number operator <em>h</em><sub><em>pp</em></sub> <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>p</em></sub>.
+</li></ul><pre> <img src="images/b0-template.png">
+</pre><ul><li> Excitation operator <em>h</em><sub><em>pq</em></sub> <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub>.
+</li></ul><pre> <img src="images/b1-template.png">
+</pre><ul><li> Coulomb and exchange operators <em>h</em><sub><em>pqqp</em></sub>
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>.
+</li></ul><pre> <img src="images/b2-template.png">
+</pre><ul><li> Number-excitation operator <em>h</em><sub><em>pqqr</em></sub>
+ (<em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>r</em></sub> +
+ <em>a</em><sub><em>r</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>).
+ The sign of &#177;&#952; depends on the relative ordering of the indices <em>p,q,r</em>.
+</li></ul><pre> <img src="images/b3-template.png">
+</pre><ul><li> Double excitation operator 
+ <em>h</em><sub><em>pqrs</em></sub>
+ (<em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><em>a</em><sub><em>s</em></sub> +
+ <em>a</em><sub><em>s</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>).
+ The sign of &#177;&#952;/4 in each of the eight terms depends on the relative ordering of the indices <em>p,q,r,s</em>.
+</li></ul><pre> <img src="images/b4-template.png"> 
+</pre></div><h1 id="g:3">Alternate Coulomb templates
+</h1><div class="doc"><p>As noted above, our algorithm found the following template for the
+ Coulomb operator 
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>:
+</p><pre> <img src="images/b2-template.png">
+</pre><p>This is simpler than the template given in &#91;Whitfield et al.&#93;, even
+ after one accounts for the cost of decomposing the additional
+ controlled <em>T</em>(&#952;) gate into elementary gates. However, an
+ equivalent circuit can also be given that is more similar to the
+ one in &#91;Whitfield et al.&#93; (but with corrected rotation angles):
+</p><pre> <img src="images/b2-orthodox.png">
+</pre><p>We call this the &quot;orthodox&quot; template, because it is closer to the
+ one specified by Whitfield et al. The program will use the orthodox
+ template if the command line option <code>--orthodox</code> is given, and it
+ will use the simplified template otherwise.
+</p></div><h1 id="g:4">General-purpose auxiliary functions
+</h1><div class="top"><p class="src"><a name="v:power" class="def">power</a> ::  <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; a -&gt; &#91;a&#93;<a href="src/Algorithms/GSE/JordanWigner.html#line-189" class="link">Source</a></p><div class="doc"><p>Construct a list consisting of <em>n</em> repetitions of some element.
+</p></div></div><div class="top"><p class="src"><a name="v:consecutive_pairs" class="def">consecutive_pairs</a> ::  &#91;a&#93; -&gt; &#91;(a, a)&#93;<a href="src/Algorithms/GSE/JordanWigner.html#line-199" class="link">Source</a></p><div class="doc"><p>Extract a list of <em>n</em>-1 consecutive pairs from an <em>n</em>-element list:
+</p><pre> consecutive_pairs &#91;&#93; = &#91;&#93;
+ consecutive_pairs &#91;1&#93; = &#91;&#93;
+ consecutive_pairs &#91;1,2&#93; = &#91;(1,2)&#93;
+ consecutive_pairs &#91;1,2,3&#93; = &#91;(1,2),(2,3)&#93;
+ consecutive_pairs &#91;1,2,3,4&#93; = &#91;(1,2),(2,3),(3,4)&#93;
+</pre></div></div><h1 id="g:5">Scalars          
+</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Scalar" class="def">Scalar</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Complex.html#t:Complex">Complex</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a><a href="src/Algorithms/GSE/JordanWigner.html#line-211" class="link">Source</a></p><div class="doc"><p>The type of complex numbers. Here, we use a floating point
+ representation, although a symbolic representation would also be
+ possible. Since for the purpose of this algorithm, all denominators
+ are powers of 2, the floating point representation is in fact exact.
+</p></div></div><div class="top"><p class="src"><a name="v:i" class="def">i</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Scalar">Scalar</a><a href="src/Algorithms/GSE/JordanWigner.html#line-214" class="link">Source</a></p><div class="doc"><p>The complex number <em>i</em>.
+</p></div></div><h1 id="g:6">Basic Gates
+</h1><div class="top"><p class="src"><a name="v:rotZ_at" class="def">rotZ_at</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-224" class="link">Source</a></p><div class="doc"><p>Apply a <em>R</em><sub>z</sub>(&#952;)=<i>e</i><sup>-<em>i</em>&#952;<em>Z</em>/2</sup> gate. The parameter &#952; is a
+ Bloch sphere angle.
+</p><p><img src="images/Rz.png">
+</p></div></div><div class="top"><p class="src"><a name="v:gse_G_at" class="def">gse_G_at</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-233" class="link">Source</a></p><div class="doc"><p>Apply a <em>G</em>(&#952;) gate. This is a global phase change of <i>e</i><sup>-<em>i</em>&#952;</sup>,
+ so this gate only &quot;does&quot; something when it is controlled.
+ Although it is logically a 0-ary gate, we give it a qubit argument
+ to specify where the gate can be drawn in circuit diagrams.
+</p><p><img src="images/G.png">
+</p></div></div><div class="top"><p class="src"><a name="v:gse_T_at" class="def">gse_T_at</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-240" class="link">Source</a></p><div class="doc"><p>Apply a <em>T</em>(&#952;) gate. This is a <em>Z</em>-rotation, but differs
+ from <em>R</em><sub>z</sub>(-&#952;) by a global phase.
+</p><p><img src="images/T.png">
+</p></div></div><div class="top"><p class="src"><a name="v:gse_Y_at" class="def">gse_Y_at</a> :: <a href="Quipper-Monad.html#t:Qubit">Qubit</a> -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-249" class="link">Source</a></p><div class="doc"><p>Apply a <b>Y</b> basis change gate. This is defined as <b>Y</b> = <em>SHS</em>, 
+ or equivalently,
+</p><p><img src="images/Y.png">
+</p><p>This should not be confused with the Pauli <em>Y</em> gate.
+</p></div></div><h1 id="g:7">Basic operators
+</h1><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Op" class="def">Op</a>  <a href="src/Algorithms/GSE/JordanWigner.html#line-260" class="link">Source</a></p><div class="doc"><p>This type provides a symbolic representation of certain
+ operators, generated by the Pauli operators, <em>P</em> = &#963;<sup>+</sup>, and
+ <em>M</em> = &#963;<sup>&#8722;</sup>. For lack of a better term, we call these the
+ &quot;basic&quot; operators. Note that apart from <em>P</em> and <em>M</em>, all of these
+ are hermitian.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:I" class="def">I</a></td><td class="doc"><p>Identity operator.
+</p></td></tr><tr><td class="src"><a name="v:X" class="def">X</a></td><td class="doc"><p>Pauli <em>X</em> operator.  
+</p></td></tr><tr><td class="src"><a name="v:Y" class="def">Y</a></td><td class="doc"><p>Pauli <em>Y</em> operator.
+</p></td></tr><tr><td class="src"><a name="v:Z" class="def">Z</a></td><td class="doc"><p>Pauli <em>Z</em> operator.
+</p></td></tr><tr><td class="src"><a name="v:P" class="def">P</a></td><td class="doc"><p>&#963;<sup>+</sup> operator = (0,1;0,0).
+</p></td></tr><tr><td class="src"><a name="v:M" class="def">M</a></td><td class="doc"><p>&#963;<sup>&#8722;</sup> operator = (0,0;1,0).
+</p></td></tr><tr><td class="src"><a name="v:A" class="def">A</a></td><td class="doc"><p>&#963;<sup>+</sup>&#963;<sup>&#8722;</sup> operator = (1,0;0,0).
+</p></td></tr><tr><td class="src"><a name="v:D" class="def">D</a></td><td class="doc"><p>&#963;<sup>&#8722;</sup>&#963;<sup>+</sup> operator = (0,0;0,1).
+</p></td></tr></table></div><div class="subs instances"><p id="control.i:Op" class="caption collapser" onclick="toggleSection('i:Op')">Instances</p><div id="section.i:Op" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Eq.html#t:Eq">Eq</a> <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Ord.html#t:Ord">Ord</a> <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Scaled" class="def">Scaled</a> a <a href="src/Algorithms/GSE/JordanWigner.html#line-274" class="link">Source</a></p><div class="doc"><p>A type to represent scalar multiples. An element of (<code><a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a></code>
+ <em>a</em>) is a pair (&#955;, <em>x</em>) of a complex scalar &#955; and an element <em>x</em> &#8712;
+ <em>a</em>. 
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Scaled" class="def">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Scalar">Scalar</a> a</td><td class="doc empty">&nbsp;</td></tr></table></div></div><div class="top"><p class="src"><a name="v:mult" class="def">mult</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a><a href="src/Algorithms/GSE/JordanWigner.html#line-284" class="link">Source</a></p><div class="doc"><p>Multiplication of basic operators. Note that the product of two
+ basic operators is not usually itself a basic operator, but a
+ scalar multiple thereof. This multiplication encodes the algebraic
+ laws of basic operators in symbolic form.
+</p></div></div><h1 id="g:8">Tensors of basic operators
+</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Tensor" class="def">Tensor</a> = &#91;<a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a>&#93;<a href="src/Algorithms/GSE/JordanWigner.html#line-359" class="link">Source</a></p><div class="doc"><p>We use a list of basic operators to represent a tensor
+ product. The convention is that infinitely many identity operators
+ are implicitly appended at the end of the list.
+</p></div></div><div class="top"><p class="src"><a name="v:normalize_tensor" class="def">normalize_tensor</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a><a href="src/Algorithms/GSE/JordanWigner.html#line-362" class="link">Source</a></p><div class="doc"><p>Normalize a tensor, by stripping away trailing identities.
+</p></div></div><div class="top"><p class="src"><a name="v:tensor_id" class="def">tensor_id</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a><a href="src/Algorithms/GSE/JordanWigner.html#line-371" class="link">Source</a></p><div class="doc"><p>The identity tensor.
+</p></div></div><div class="top"><p class="src"><a name="v:mult_tensor" class="def">mult_tensor</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a><a href="src/Algorithms/GSE/JordanWigner.html#line-375" class="link">Source</a></p><div class="doc"><p>Multiply two tensors. This returns a scaled tensor.
+</p></div></div><div class="top"><p class="src"><a name="v:mult_scaled_tensor" class="def">mult_scaled_tensor</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a><a href="src/Algorithms/GSE/JordanWigner.html#line-383" class="link">Source</a></p><div class="doc"><p>Multiply two scaled tensors.
+</p></div></div><h1 id="g:9">Linear combinations of tensors
+</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:TensorLC" class="def">TensorLC</a> = Map <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> <a href="Algorithms-GSE-JordanWigner.html#t:Scalar">Scalar</a><a href="src/Algorithms/GSE/JordanWigner.html#line-391" class="link">Source</a></p><div class="doc"><p>A type to represent complex linear combinations of tensors. 
+</p></div></div><div class="top"><p class="src"><a name="v:lc_zero" class="def">lc_zero</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a><a href="src/Algorithms/GSE/JordanWigner.html#line-394" class="link">Source</a></p><div class="doc"><p>The origin.
+</p></div></div><div class="top"><p class="src"><a name="v:lc_insert" class="def">lc_insert</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a><a href="src/Algorithms/GSE/JordanWigner.html#line-398" class="link">Source</a></p><div class="doc"><p>Add a tensor to a linear combination.
+</p></div></div><div class="top"><p class="src"><a name="v:lc_from_list" class="def">lc_from_list</a> :: &#91;<a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a>&#93; -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a><a href="src/Algorithms/GSE/JordanWigner.html#line-412" class="link">Source</a></p><div class="doc"><p>Turn a list of scaled tensors into a <code><a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></code>.
+</p></div></div><div class="top"><p class="src"><a name="v:lc_to_list" class="def">lc_to_list</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a> -&gt; &#91;<a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a>&#93;<a href="src/Algorithms/GSE/JordanWigner.html#line-416" class="link">Source</a></p><div class="doc"><p>Turn a <code><a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a></code> into a list of scaled tensors.
+</p></div></div><h1 id="g:10">Jordan-Wigner representation
+</h1><div class="doc"><p>The next two functions provide the Jordan-Wigner representation of
+ (Fock-space) annihilation and creation operators.
+</p></div><div class="top"><p class="src"><a name="v:jw" class="def">jw</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a><a href="src/Algorithms/GSE/JordanWigner.html#line-429" class="link">Source</a></p><div class="doc"><p>Construct the Jordan-Wigner annihilation operator <em>a</em><sub><em>p</em></sub> =
+ <em>IIIIPZZZZZ...</em> for spin-orbital index <em>p</em>. The first parameter is
+ <em>p</em>, and the second one is <em>M</em> (the number of spin-orbitals).
+ Precondition: 0 &#8804; <em>p</em> &lt; <em>M</em>.
+</p></div></div><div class="top"><p class="src"><a name="v:jw_dagger" class="def">jw_dagger</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a><a href="src/Algorithms/GSE/JordanWigner.html#line-436" class="link">Source</a></p><div class="doc"><p>Construct the Jordan-Wigner creation operator <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup>
+ = <em>IIIIMZZZZ...</em> for spin-orbital index <em>p</em>.  The first parameter
+ is <em>p</em>, and the second one is <em>M</em> (the number of spin-orbitals).
+ Precondition: 0 &#8804; <em>p</em> &lt; <em>M</em>.
+</p></div></div><h1 id="g:11">Second quantized interaction terms
+</h1><h2 id="g:12">Simple interaction terms
+</h2><div class="top"><p class="src"><a name="v:one_electron_operator_simple" class="def">one_electron_operator_simple</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a><a href="src/Algorithms/GSE/JordanWigner.html#line-447" class="link">Source</a></p><div class="doc"><p>Construct the one-electron second quantized non-hermitianized
+ interaction term <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub>.  The parameters
+ are <em>p,q</em>.
+</p></div></div><div class="top"><p class="src"><a name="v:two_electron_operator_simple" class="def">two_electron_operator_simple</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a><a href="src/Algorithms/GSE/JordanWigner.html#line-459" class="link">Source</a></p><div class="doc"><p>Construct the two-electron second quantized non-hermitianized
+ interaction term
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><em>a</em><sub><em>s</em></sub>.
+ The parameters are <em>p,q,r,s</em>.
+</p></div></div><h2 id="g:13">Hermitian interaction terms
+</h2><div class="top"><p class="src"><a name="v:one_electron_operator" class="def">one_electron_operator</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a><a href="src/Algorithms/GSE/JordanWigner.html#line-476" class="link">Source</a></p><div class="doc"><p>Construct
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub> 
+ if <em>p</em> = <em>q</em>, and 
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub> + <em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>p</em></sub> 
+ otherwise.
+</p></div></div><div class="top"><p class="src"><a name="v:two_electron_operator" class="def">two_electron_operator</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a><a href="src/Algorithms/GSE/JordanWigner.html#line-491" class="link">Source</a></p><div class="doc"><p>Construct
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><em>a</em><sub><em>s</em></sub>
+ if (<em>p</em>,<em>q</em>) = (<em>s</em>,<em>r</em>), and 
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><em>a</em><sub><em>s</em></sub> +
+ <em>a</em><sub><em>s</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>
+ otherwise.
+</p></div></div><h1 id="g:14"><em>XYZD</em> decomposition
+</h1><div class="top"><p class="src"><a name="v:decompose_basis" class="def">decompose_basis</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a> -&gt; &#91;<a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Op">Op</a>&#93;<a href="src/Algorithms/GSE/JordanWigner.html#line-506" class="link">Source</a></p><div class="doc"><p>Decompose a basic operator into linear combinations of hermitian basic operators.
+ This uses the relations <em>P</em> = 1/2 <em>X</em> + <em>i</em>/2 <em>Y</em> and 
+ <em>M</em> = 1/2 <em>X</em> - <em>i</em>/2 <em>Y</em>.
+</p></div></div><div class="top"><p class="src"><a name="v:decompose_tensor" class="def">decompose_tensor</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a><a href="src/Algorithms/GSE/JordanWigner.html#line-514" class="link">Source</a></p><div class="doc"><p>Decompose a tensor into a linear combination of hermitian
+ tensors. Due to sign alternation, the individual tensors all come
+ out to commute with each other.
+</p></div></div><div class="top"><p class="src"><a name="v:decompose_tensor_lc" class="def">decompose_tensor_lc</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a> -&gt; <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a><a href="src/Algorithms/GSE/JordanWigner.html#line-523" class="link">Source</a></p><div class="doc"><p>Decompose a linear combination of tensors into a linear
+ combination of hermitian tensors.
+</p></div></div><h1 id="g:15">Exponentiation and circuit generation
+</h1><div class="top"><p class="src"><a name="v:exponentiate_simple" class="def">exponentiate_simple</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:Scaled">Scaled</a> <a href="Algorithms-GSE-JordanWigner.html#t:Tensor">Tensor</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-539" class="link">Source</a></p><div class="doc"><p>Given a simple hermitian tensor <em>H</em> and an angle &#952;, generate a
+ circuit for <i>e</i><sup>-<em>i</em>&#952;<em>H</em></sup>.  The given list of input qubits is in
+ the same order as the operators in <em>H</em>. Precondition: <em>H</em> is made
+ up of zero or more identity operators and one or more of the
+ operators <em>X</em>, <em>Y</em>, <em>Z</em>, and <em>D</em>. The last parameter is a list of
+ additional controls.
+</p></div></div><div class="top"><p class="src"><a name="v:exponentiate" class="def">exponentiate</a> :: <a href="Algorithms-GSE-JordanWigner.html#t:TensorLC">TensorLC</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-581" class="link">Source</a></p><div class="doc"><p>Given a tensor <em>H</em> (already decomposed into commuting simple
+ tensors) and an angle &#952;, generate a circuit for <i>e</i><sup>-<em>i</em>&#952;<em>H</em></sup>.
+ The given list of input qubits is in the same order as the
+ operators in <em>H</em>.
+</p></div></div><h1 id="g:16">Generate top-level templates
+</h1><div class="top"><p class="src"><a name="v:one_electron_circuit" class="def">one_electron_circuit</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-598" class="link">Source</a></p><div class="doc"><p><code><code><a href="Algorithms-GSE-JordanWigner.html#v:one_electron_circuit">one_electron_circuit</a></code> theta p q</code>: Generate the circuit for the
+ hermitianized one-electron interaction with spin-orbital indices
+ <em>p</em>, <em>q</em>. More precisely, generate <i>e</i><sup>-<em>i</em>&#952;<em>H</em></sup>, where
+ <em>H</em> = <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub> if <em>p</em> = <em>q</em> and 
+ <em>H</em> = <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub> 
+ + <em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>p</em></sub> otherwise.
+</p><p>This function recognizes an important special case: if &#952;=0.0, don't
+ generate any gates at all. The case &#952;=0.0 frequently arises because
+ of the conversion from spatial orbitals to spin orbitals.
+</p></div></div><div class="top"><p class="src"><a name="v:two_electron_circuit" class="def">two_electron_circuit</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-620" class="link">Source</a></p><div class="doc"><p><code><code><a href="Algorithms-GSE-JordanWigner.html#v:two_electron_circuit">two_electron_circuit</a></code> theta p q r s</code>:
+ Generate the circuit for the hermitianized two-electron interaction
+ with spin-orbital indices <em>p</em>, <em>q</em>, <em>r</em>, <em>s</em>. More precisely, generate 
+ <i>e</i><sup>-<em>i</em>&#952;<em>H</em></sup>, where 
+ <em>H</em> = <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><em>a</em><sub><em>s</em></sub> if 
+ (<em>p</em>,<em>q</em>) = (<em>s</em>,<em>r</em>) and <em>H</em> =
+ <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><em>a</em><sub><em>s</em></sub> +
+ <em>a</em><sub><em>s</em></sub><sup>&#8224;</sup><em>a</em><sub><em>r</em></sub><sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>
+ otherwise.
+</p><p>This function recognizes an important special case: if &#952;=0.0, don't
+ generate any gates at all. The case &#952;=0.0 frequently arises because
+ of the conversion from spatial orbitals to spin orbitals.
+</p></div></div><div class="top"><p class="src"><a name="v:two_electron_circuit_orthodox" class="def">two_electron_circuit_orthodox</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; &#91;<a href="Quipper-Monad.html#t:Qubit">Qubit</a>&#93; -&gt; <a href="Quipper-Monad.html#t:Circ">Circ</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-642" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Algorithms-GSE-JordanWigner.html#v:two_electron_circuit">two_electron_circuit</a></code>, but use the &quot;orthodox&quot; circuit
+ template for the Coulomb operator <em>a</em><sub><em>p</em></sub><sup>&#8224;</sup><em>a</em>[sub
+ <em>q</em>]<sup>&#8224;</sup><em>a</em><sub><em>q</em></sub><em>a</em><sub><em>p</em></sub>. This generates a circuit using
+ three rotations, similar to &#91;Whitfield et al.&#93;, but with corrected
+ angles,
+</p><pre> <img src="images/b2-orthodox.png">
+</pre><p>instead of the simpler circuit that <code><a href="Algorithms-GSE-JordanWigner.html#v:two_electron_circuit">two_electron_circuit</a></code> would
+ normally generate:
+</p><pre> <img src="images/b2-template.png">
+</pre></div></div><h1 id="g:17">Testing
+</h1><div class="doc"><p>We provide two functions, accessible via command line options,
+ that allow the user to display individual templates. 
+</p></div><div class="top"><p class="src"><a name="v:show_one_electron" class="def">show_one_electron</a> :: <a href="Quipper-Printing.html#t:Format">Format</a> -&gt; <a href="QuipperLib-Decompose-GateBase.html#t:GateBase">GateBase</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-669" class="link">Source</a></p><div class="doc"><p>Display the circuit for the hermitianized one-electron interaction,
+ with &#952;=1.
+</p></div></div><div class="top"><p class="src"><a name="v:show_two_electron" class="def">show_two_electron</a> :: <a href="Quipper-Printing.html#t:Format">Format</a> -&gt; <a href="QuipperLib-Decompose-GateBase.html#t:GateBase">GateBase</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-678" class="link">Source</a></p><div class="doc"><p>Display the circuit for the hermitianized two-electron interaction, 
+ with &#952;=1. 
+</p></div></div><div class="top"><p class="src"><a name="v:show_two_electron_orthodox" class="def">show_two_electron_orthodox</a> :: <a href="Quipper-Printing.html#t:Format">Format</a> -&gt; <a href="QuipperLib-Decompose-GateBase.html#t:GateBase">GateBase</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-Int.html#t:Int">Int</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> ()<a href="src/Algorithms/GSE/JordanWigner.html#line-687" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Algorithms-GSE-JordanWigner.html#v:show_two_electron">show_two_electron</a></code>, but use the &quot;orthodox&quot; template for
+ the Coulomb operator.
+</p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Libraries.Render</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
+window.onload = function () {pageLoad();setSynopsis("mini_Libraries-Render.html");};
+//]]>
+</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="src/Libraries/Render.html">Source</a></li><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The Quipper System</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">Libraries.Render</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Types
+</a><ul><li><a href="#g:2">Coordinates
+</a></li><li><a href="#g:3">Color
+</a></li><li><a href="#g:4">Fonts
+</a></li><li><a href="#g:5">Alignment
+</a></li></ul></li><li><a href="#g:6">The Document monad
+</a></li><li><a href="#g:7">The Draw monad  
+</a><ul><li><a href="#g:8">Path construction commands
+</a></li><li><a href="#g:9">Painting commands
+</a></li><li><a href="#g:10">Text commands
+</a></li><li><a href="#g:11">Graphics parameters
+</a></li><li><a href="#g:12">Coordinate system
+</a></li><li><a href="#g:13">Comments
+</a></li><li><a href="#g:14">Block structure
+</a></li></ul></li><li><a href="#g:15">Backends
+</a></li><li><a href="#g:16">Customization
+</a><ul><li><a href="#g:17">Custom drawing commands
+</a></li><li><a href="#g:18">Customization interface
+</a></li><li><a href="#g:19">Customized rendering functions
+</a></li></ul></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>This module provides efficient functions for rendering vector
+ graphics to a number of formats, including EPS, PostScript, and
+ PDF. It provides an abstraction for multi-page documents, as well
+ as a set of graphics primitives for page descriptions. 
+</p><p>The graphics model is similar to that of the PostScript and PDF
+ languages, but we only implement a subset of their functionality.
+ Care has been taken that graphics rendering is done efficiently and
+ as lazily as possible; documents are rendered &quot;on the fly&quot;,
+ without the need to store the whole document in memory.
+</p><p>The provided document description model consists of two separate
+ layers of abstraction:
+</p><ul><li> <em>drawing</em> is concerned with placing marks on a fixed surface, and
+ takes place in the <code><a href="Libraries-Render.html#t:Draw">Draw</a></code> monad;
+</li><li> <em>document structure</em> is concerned with a sequence of pages, their
+ bounding boxes, and other meta-data. It takes place in the
+ <code><a href="Libraries-Render.html#t:Document">Document</a></code> monad.
+</li></ul></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">type</span> <a href="#t:X">X</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><span class="keyword">type</span> <a href="#t:Y">Y</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><span class="keyword">data</span>  <a href="#t:Color">Color</a> <ul class="subs"><li>= <a href="#v:Color_RGB">Color_RGB</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a>  </li><li>| <a href="#v:Color_Gray">Color_Gray</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a>  </li></ul></li><li class="src short"><span class="keyword">data</span>  <a href="#t:Basefont">Basefont</a> <ul class="subs"><li>= <a href="#v:TimesRoman">TimesRoman</a>  </li><li>| <a href="#v:Helvetica">Helvetica</a>  </li></ul></li><li class="src short"><span class="keyword">data</span>  <a href="#t:Font">Font</a>  = <a href="#v:Font">Font</a> <a href="Libraries-Render.html#t:Basefont">Basefont</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><a href="#v:nominalsize">nominalsize</a> :: <a href="Libraries-Render.html#t:Font">Font</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><a href="#v:text_width">text_width</a> :: <a href="Libraries-Render.html#t:Font">Font</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><span class="keyword">type</span> <a href="#t:Alignment">Alignment</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></li><li class="src short"><a href="#v:align_left">align_left</a> :: <a href="Libraries-Render.html#t:Alignment">Alignment</a></li><li class="src short"><a href="#v:align_center">align_center</a> :: <a href="Libraries-Render.html#t:Alignment">Alignment</a></li><li class="src short"><a href="#v:align_right">align_right</a> :: <a href="Libraries-Render.html#t:Alignment">Alignment</a></li><li class="src short"><span class="keyword">data</span>  <a href="#t:Document">Document</a> a</li><li class="src short"><a href="#v:newpage">newpage</a> ::  <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> a -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a</li><li class="src short"><a href="#v:newpage_defer">newpage_defer</a> ::  <a href="Libraries-Render.html#t:Draw">Draw</a> (<a href="Libraries-Render.html#t:X">X</a>, <a href="Libraries-Render.html#t:Y">Y</a>, a) -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a</li><li class="src short"><a href="#v:endpage">endpage</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> (<a href="Libraries-Render.html#t:X">X</a>, <a href="Libraries-Render.html#t:Y">Y</a>, ())</li><li class="src short"><span class="keyword">data</span>  <a href="#t:Draw">Draw</a> a</li><li class="src short"><a href="#v:newpath">newpath</a> :: <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:moveto">moveto</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:lineto">lineto</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:curveto">curveto</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:closepath">closepath</a> :: <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:arc">arc</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:arc_append">arc_append</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:oval">oval</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:rectangle">rectangle</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:stroke">stroke</a> :: <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:fill">fill</a> :: <a href="Libraries-Render.html#t:Color">Color</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:fillstroke">fillstroke</a> :: <a href="Libraries-Render.html#t:Color">Color</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:textbox">textbox</a> :: <a href="Libraries-Render.html#t:Alignment">Alignment</a> -&gt; <a href="Libraries-Render.html#t:Font">Font</a> -&gt; <a href="Libraries-Render.html#t:Color">Color</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:setlinewidth">setlinewidth</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:setcolor">setcolor</a> :: <a href="Libraries-Render.html#t:Color">Color</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:translate">translate</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:scale">scale</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:comment">comment</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:block">block</a> ::  <a href="Libraries-Render.html#t:Draw">Draw</a> a -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> a</li><li class="src short"><span class="keyword">data</span>  <a href="#t:RenderFormat">RenderFormat</a> <ul class="subs"><li>= <a href="#v:Format_PS">Format_PS</a>  </li><li>| <a href="#v:Format_PDF">Format_PDF</a>  </li><li>| <a href="#v:Format_EPS">Format_EPS</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integer">Integer</a>  </li><li>| <a href="#v:Format_Debug">Format_Debug</a>  </li></ul></li><li class="src short"><a href="#v:render_stdout">render_stdout</a> ::  <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> a</li><li class="src short"><a href="#v:render_file">render_file</a> ::  <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/GHC-IO-Handle.html#t:Handle">Handle</a> -&gt; <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> a</li><li class="src short"><a href="#v:render_string">render_string</a> ::  <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a></li><li class="src short"><a href="#v:draw_subroutine">draw_subroutine</a> :: &#91;CustomDef&#93; -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> () -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()</li><li class="src short"><a href="#v:custom_ps">custom_ps</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; CustomDef</li><li class="src short"><a href="#v:custom_pdf">custom_pdf</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; CustomDef</li><li class="src short"><a href="#v:custom_ascii">custom_ascii</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; CustomDef</li><li class="src short"><span class="keyword">data</span>  <a href="#t:Custom">Custom</a>  = <a href="#v:Custom">Custom</a> {<ul class="subs"><li><a href="#v:creator">creator</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a></li><li><a href="#v:ps_defs">ps_defs</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a></li></ul>}</li><li class="src short"><a href="#v:custom">custom</a> :: <a href="Libraries-Render.html#t:Custom">Custom</a></li><li class="src short"><a href="#v:render_custom_stdout">render_custom_stdout</a> ::  <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Custom">Custom</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> a</li><li class="src short"><a href="#v:render_custom_file">render_custom_file</a> ::  <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/GHC-IO-Handle.html#t:Handle">Handle</a> -&gt; <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Custom">Custom</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> a</li><li class="src short"><a href="#v:render_custom_string">render_custom_string</a> ::  <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Custom">Custom</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a></li></ul></div><div id="interface"><h1 id="g:1">Types
+</h1><h2 id="g:2">Coordinates
+</h2><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:X" class="def">X</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a><a href="src/Libraries/Render.html#line-144" class="link">Source</a></p><div class="doc"><p>The type of <em>x</em>-coordinates.
+</p></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Y" class="def">Y</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a><a href="src/Libraries/Render.html#line-147" class="link">Source</a></p><div class="doc"><p>The type of <em>y</em>-coordinates.
+</p></div></div><h2 id="g:3">Color
+</h2><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Color" class="def">Color</a>  <a href="src/Libraries/Render.html#line-153" class="link">Source</a></p><div class="doc"><p>The type of colors.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Color_RGB" class="def">Color_RGB</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></td><td class="doc"><p>Red, green and blue components,
+ in the range from 0.0 (dark) to
+ 1.0 (bright).
+</p></td></tr><tr><td class="src"><a name="v:Color_Gray" class="def">Color_Gray</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></td><td class="doc"><p>Gray value, in the range from
+ 0.0 (black) to 1.0 (white).
+</p></td></tr></table></div><div class="subs instances"><p id="control.i:Color" class="caption collapser" onclick="toggleSection('i:Color')">Instances</p><div id="section.i:Color" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Libraries-Render.html#t:Color">Color</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h2 id="g:4">Fonts
+</h2><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Basefont" class="def">Basefont</a>  <a href="src/Libraries/Render.html#line-166" class="link">Source</a></p><div class="doc"><p>A enumeration type for base fonts. For the time being, we only
+ offer TimesRoman and Helvetica.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:TimesRoman" class="def">TimesRoman</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a name="v:Helvetica" class="def">Helvetica</a></td><td class="doc empty">&nbsp;</td></tr></table></div><div class="subs instances"><p id="control.i:Basefont" class="caption collapser" onclick="toggleSection('i:Basefont')">Instances</p><div id="section.i:Basefont" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Libraries-Render.html#t:Basefont">Basefont</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Font" class="def">Font</a>  <a href="src/Libraries/Render.html#line-254" class="link">Source</a></p><div class="doc"><p>A data type describing a scaled font. This consists of a base
+ font and a point size.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Font" class="def">Font</a> <a href="Libraries-Render.html#t:Basefont">Basefont</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a></td><td class="doc empty">&nbsp;</td></tr></table></div><div class="subs instances"><p id="control.i:Font" class="caption collapser" onclick="toggleSection('i:Font')">Instances</p><div id="section.i:Font" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Libraries-Render.html#t:Font">Font</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><a name="v:nominalsize" class="def">nominalsize</a> :: <a href="Libraries-Render.html#t:Font">Font</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a><a href="src/Libraries/Render.html#line-258" class="link">Source</a></p><div class="doc"><p>Return the nominal point size of a font.
+</p></div></div><div class="top"><p class="src"><a name="v:text_width" class="def">text_width</a> :: <a href="Libraries-Render.html#t:Font">Font</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a><a href="src/Libraries/Render.html#line-262" class="link">Source</a></p><div class="doc"><p>Return the width of the given string in the given font.
+</p></div></div><h2 id="g:5">Alignment
+</h2><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Alignment" class="def">Alignment</a> = <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a><a href="src/Libraries/Render.html#line-274" class="link">Source</a></p><div class="doc"><p>A real number representing text alignment.  0 = left aligned, 0.5
+ = centered, 1 = right aligned. Intermediate values are also
+ possible. For example, an alignment value of 0.25 means one quarter
+ of the way between left aligned and right aligned.
+</p></div></div><div class="top"><p class="src"><a name="v:align_left" class="def">align_left</a> :: <a href="Libraries-Render.html#t:Alignment">Alignment</a><a href="src/Libraries/Render.html#line-277" class="link">Source</a></p><div class="doc"><p>Left alignment.
+</p></div></div><div class="top"><p class="src"><a name="v:align_center" class="def">align_center</a> :: <a href="Libraries-Render.html#t:Alignment">Alignment</a><a href="src/Libraries/Render.html#line-281" class="link">Source</a></p><div class="doc"><p>Centered alignment.
+</p></div></div><div class="top"><p class="src"><a name="v:align_right" class="def">align_right</a> :: <a href="Libraries-Render.html#t:Alignment">Alignment</a><a href="src/Libraries/Render.html#line-285" class="link">Source</a></p><div class="doc"><p>Right alignment.
+</p></div></div><h1 id="g:6">The Document monad
+</h1><div class="doc"><p>Document description takes place in the <code><a href="Libraries-Render.html#t:Document">Document</a></code> monad. A basic
+ multi-page document has the following structure:
+</p><pre> document :: Document ()
+ document = do
+   newpage x y $ do
+     &lt;&lt;&lt;drawing commands&gt;&gt;&gt;
+   newpage x y $ do
+     &lt;&lt;&lt;drawing commands&gt;&gt;&gt;
+   ...
+</pre><p>Here, each <code><a href="Libraries-Render.html#v:newpage">newpage</a></code> command describes one page of the
+ document. The parameters <em>x</em> and <em>y</em> specify the dimensions of the
+ page bounding box. They are expressed in units of PostScript
+ points, i.e., multiples of 1/72 inch.
+</p><p>Sometimes the bounding box for a page is not known until after the
+ page content has been generated. For this purpose, we also provide
+ the following alternative to the <code><a href="Libraries-Render.html#v:newpage">newpage</a></code> command:
+</p><pre>   newpage_defer $ do
+     &lt;&lt;&lt;drawing commands&gt;&gt;&gt;
+     endpage x y
+</pre><p>It works just like the <code><a href="Libraries-Render.html#v:newpage">newpage</a></code> command, except that the bounding
+ box is given at the end.
+</p></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Document" class="def">Document</a> a <a href="src/Libraries/Render.html#line-321" class="link">Source</a></p><div class="doc"><p>The Document monad.
+</p></div><div class="subs instances"><p id="control.i:Document" class="caption collapser" onclick="toggleSection('i:Document')">Instances</p><div id="section.i:Document" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> <a href="Libraries-Render.html#t:Document">Document</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><a name="v:newpage" class="def">newpage</a> ::  <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> a -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a<a href="src/Libraries/Render.html#line-358" class="link">Source</a></p><div class="doc"><p>Create a page of the given bounding box, containing the given
+ drawing.
+</p></div></div><div class="top"><p class="src"><a name="v:newpage_defer" class="def">newpage_defer</a> ::  <a href="Libraries-Render.html#t:Draw">Draw</a> (<a href="Libraries-Render.html#t:X">X</a>, <a href="Libraries-Render.html#t:Y">Y</a>, a) -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a<a href="src/Libraries/Render.html#line-367" class="link">Source</a></p><div class="doc"><p>Create a page containing the given drawing, with the bounding box
+ computed at the end of the drawing routines.
+</p></div></div><div class="top"><p class="src"><a name="v:endpage" class="def">endpage</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> (<a href="Libraries-Render.html#t:X">X</a>, <a href="Libraries-Render.html#t:Y">Y</a>, ())<a href="src/Libraries/Render.html#line-375" class="link">Source</a></p><div class="doc"><p>End the page with the given bounding box.
+</p></div></div><h1 id="g:7">The Draw monad  
+</h1><div class="doc"><p>The description of the visible content of a page take place in the
+ <code><a href="Libraries-Render.html#t:Draw">Draw</a></code> monad. It takes the form of a sequence of drawing commands,
+ for example:
+</p><pre>     moveto 10 10
+     lineto 10 100
+     lineto 100 100
+     lineto 100 10
+     closepath
+     stroke
+</pre><p>The graphics model is similar to that of the PostScript and PDF
+ languages. The basic concept is that of a <em>path</em>, which is a
+ sequence of straight and curved line segments. Paths are first
+ constructed using <em>path construction commands</em>, and then painted
+ using <em>painting commands</em>, depending on a set of current 
+ <em>graphics parameters</em> and a current <em>coordinate system</em>.
+</p><p>We also provide block structure. Changes to the graphics state
+ (color, coordinate system, etc.) that are done within a block are
+ local to the block.
+</p><pre>     block $ do
+       &lt;&lt;drawing commands&gt;&gt;
+</pre></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Draw" class="def">Draw</a> a <a href="src/Libraries/Render.html#line-445" class="link">Source</a></p><div class="doc"><p>The Draw monad.
+</p></div><div class="subs instances"><p id="control.i:Draw" class="caption collapser" onclick="toggleSection('i:Draw')">Instances</p><div id="section.i:Draw" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Control-Monad.html#t:Monad">Monad</a> <a href="Libraries-Render.html#t:Draw">Draw</a></td><td class="doc empty">&nbsp;</td></tr><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> a =&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> (<a href="Libraries-Render.html#t:Draw">Draw</a> a)</td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><h2 id="g:8">Path construction commands
+</h2><div class="doc"><p>During path construction, there is a notion of <em>current path</em> and
+ <em>current point</em>. A path may consist of zero or more connected
+ subpaths, and each subpath is either open or closed. 
+</p></div><div class="top"><p class="src"><a name="v:newpath" class="def">newpath</a> :: <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-509" class="link">Source</a></p><div class="doc"><p>Set the current path to empty.
+</p></div></div><div class="top"><p class="src"><a name="v:moveto" class="def">moveto</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-514" class="link">Source</a></p><div class="doc"><p>Start a new subpath at (<em>x</em>,<em>y</em>). The point (<em>x</em>,<em>y</em>) becomes the
+ current point.
+</p></div></div><div class="top"><p class="src"><a name="v:lineto" class="def">lineto</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-520" class="link">Source</a></p><div class="doc"><p>Extend the current subpath by a straight line segment from the
+ current point to (<em>x</em>,<em>y</em>). The point (<em>x</em>,<em>y</em>) becomes the current
+ point.
+</p></div></div><div class="top"><p class="src"><a name="v:curveto" class="def">curveto</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-527" class="link">Source</a></p><div class="doc"><p><code><code><a href="Libraries-Render.html#v:curveto">curveto</a></code> <em>x1</em> <em>y1</em> <em>x2</em> <em>y2</em> <em>x</em> <em>y</em></code>: Extend the current
+ subpath by a Bezier curve segment from the current point to
+ (<em>x</em>,<em>y</em>), with control points (<em>x1</em>,<em>y1</em>) and (<em>x2</em>,<em>y2</em>). The
+ point (<em>x</em>,<em>y</em>) becomes the current point.
+</p></div></div><div class="top"><p class="src"><a name="v:closepath" class="def">closepath</a> :: <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-535" class="link">Source</a></p><div class="doc"><p>Close the current subpath. If necessary, connect the subpath's
+ final and initial points by a straight line segment. Note that a
+ closed path is rendered differently than a non-closed path whose
+ initial and final points coincide, because in the latter case, the
+ endpoints are capped rather than mitered.
+</p></div></div><div class="top"><p class="src"><a name="v:arc" class="def">arc</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-661" class="link">Source</a></p><div class="doc"><p>Start a new subpath consisting of a circular arc segment. The
+ arc segment is centered at (<em>x</em>,<em>y</em>), has radius <em>r</em>, and extends
+ from angle <em>a1</em> to angle <em>a2</em>, measured in degrees,
+ counterclockwise from the <em>x</em>-axis. The arc is drawn clockwise if
+ <em>a2</em> &#8805; <em>a1</em>, and counterclockwise otherwise. The final point
+ becomes the new current point.
+</p></div></div><div class="top"><p class="src"><a name="v:arc_append" class="def">arc_append</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-673" class="link">Source</a></p><div class="doc"><p>Like <code><a href="Libraries-Render.html#v:arc">arc</a></code>, except append to the current subpath. If necessary,
+ add a straight line segment from the current point to the starting
+ point of the arc.
+</p></div></div><div class="top"><p class="src"><a name="v:oval" class="def">oval</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-683" class="link">Source</a></p><div class="doc"><p>Append a new closed subpath consisting of an oval centered at
+ (<em>x</em>,<em>y</em>), with horizontal and vertical radii <em>rx</em> and <em>ry</em>,
+ respectively.
+</p></div></div><div class="top"><p class="src"><a name="v:rectangle" class="def">rectangle</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-718" class="link">Source</a></p><div class="doc"><p><code><code><a href="Libraries-Render.html#v:rectangle">rectangle</a></code> <em>x</em> <em>y</em> <em>w</em> <em>h</em></code>: Draw a rectangle of width <em>w</em> and
+ height <em>h</em>, starting from (<em>x</em>,<em>y</em>). If <em>w</em> and <em>h</em> are positive,
+ then (<em>x</em>,<em>y</em>) is the lower left corner.
+</p></div></div><h2 id="g:9">Painting commands
+</h2><div class="top"><p class="src"><a name="v:stroke" class="def">stroke</a> :: <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-544" class="link">Source</a></p><div class="doc"><p>Stroke the current path, using the current line color, line
+ width, and other graphics parameters. This operation implicitly
+ resets the current path to empty.
+</p></div></div><div class="top"><p class="src"><a name="v:fill" class="def">fill</a> :: <a href="Libraries-Render.html#t:Color">Color</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-549" class="link">Source</a></p><div class="doc"><p>Fill the current path, using the given color. This operation
+ implicitly resets the current path to empty. 
+</p></div></div><div class="top"><p class="src"><a name="v:fillstroke" class="def">fillstroke</a> :: <a href="Libraries-Render.html#t:Color">Color</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-555" class="link">Source</a></p><div class="doc"><p>Fill the current path, using the given color; also stroke the
+ path using the current line color. This operation implicitly resets
+ the current path to empty.
+</p></div></div><h2 id="g:10">Text commands
+</h2><div class="top"><p class="src"><a name="v:textbox" class="def">textbox</a> :: <a href="Libraries-Render.html#t:Alignment">Alignment</a> -&gt; <a href="Libraries-Render.html#t:Font">Font</a> -&gt; <a href="Libraries-Render.html#t:Color">Color</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-573" class="link">Source</a></p><div class="doc"><p><code><code><a href="Libraries-Render.html#v:textbox">textbox</a></code> <em>a</em> <em>f</em> <em>c</em> <em>x0</em> <em>y0</em> <em>x1</em> <em>y1</em> <em>b</em> <em>s</em></code>: Write the
+ given string on an imaginary line from point (<em>x0</em>,<em>y0</em>) to
+ (<em>x1</em>,<em>y1</em>), using font <em>f</em> and color <em>c</em>. If the text is too wide
+ to fit on the line, it is scaled down. Otherwise, it is aligned
+ according to the alignment parameter <em>a</em>. The parameter <em>b</em>
+ specifies an additional offset by which to lower the text, with
+ respect to the text's nominal size. For example, if <em>b</em>=0, then the
+ above-mentioned imaginary line from (<em>x0</em>,<em>y0</em>) to (<em>x1</em>,<em>y1</em>)
+ coincides with the text's usual baseline. If <em>b</em>=0.5, then this
+ line approximately goes through the center of each character.
+</p><p><img src="images/textbox.png">
+</p></div></div><h2 id="g:11">Graphics parameters
+</h2><div class="doc"><p>The painting commands rely on a set of graphics parameters. The
+ graphics parameters are initially set to default values, and can be
+ altered with the following commands.
+</p></div><div class="top"><p class="src"><a name="v:setlinewidth" class="def">setlinewidth</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Double">Double</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-586" class="link">Source</a></p><div class="doc"><p>Set the line width. The initial line width is 1.
+</p></div></div><div class="top"><p class="src"><a name="v:setcolor" class="def">setcolor</a> :: <a href="Libraries-Render.html#t:Color">Color</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-591" class="link">Source</a></p><div class="doc"><p>Set the current color for stroking. The initial stroke color is
+ black.
+</p></div></div><h2 id="g:12">Coordinate system
+</h2><div class="doc"><p>Coordinates, lengths, widths, etc, are all interpreted relative to
+ a <em>current coordinate system</em>. The initial coordinate system of
+ each page has the origin in the lower left corner, with each unit
+ equaling one PostScript point (1/72 inch). The following commands
+ can be used to change the current coordinate system.
+</p></div><div class="top"><p class="src"><a name="v:translate" class="def">translate</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-606" class="link">Source</a></p><div class="doc"><p>Translate the current coordinate system by (<em>x</em>,<em>y</em>).
+</p></div></div><div class="top"><p class="src"><a name="v:scale" class="def">scale</a> :: <a href="Libraries-Render.html#t:X">X</a> -&gt; <a href="Libraries-Render.html#t:Y">Y</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-612" class="link">Source</a></p><div class="doc"><p>Scale the current coordinate system by (<em>s</em>,<em>t</em>). Here, <em>s</em> is
+ the scaling factor in the <em>x</em>-direction, and <em>t</em> is the scaling
+ factor in the <em>y</em>-direction.
+</p></div></div><h2 id="g:13">Comments
+</h2><div class="top"><p class="src"><a name="v:comment" class="def">comment</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-625" class="link">Source</a></p><div class="doc"><p>Insert a human-readable comment in the content stream. This is
+ for information only, and is not rendered in the graphical output.
+</p></div></div><h2 id="g:14">Block structure
+</h2><div class="doc"><p>Drawing operations can be grouped into blocks with the <code><a href="Libraries-Render.html#v:block">block</a></code>
+ operator. Changes to the graphics parameters and coordinate system
+ are local to the block. It is undefined whether changes to the
+ current path made within a block persist after the end of the block
+ (they do in PDF, but not in PostScript). Therefore, path
+ construction should not be broken up across end-of-block boundaries.
+</p></div><div class="top"><p class="src"><a name="v:block" class="def">block</a> ::  <a href="Libraries-Render.html#t:Draw">Draw</a> a -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> a<a href="src/Libraries/Render.html#line-645" class="link">Source</a></p><div class="doc"><p>Perform a block of commands in a local copy of the graphics
+ state. This is intended to be used like this:
+</p><pre>     block $ do
+       &lt;&lt;drawing commands&gt;&gt;
+</pre></div></div><h1 id="g:15">Backends
+</h1><div class="doc"><p>The following commands can be used to render documents to various
+ available formats. The available formats are PostScript, PDF, EPS,
+ and an ASCII-based debugging format. Output can be written to
+ standard output, to a file, or to a string.
+</p></div><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:RenderFormat" class="def">RenderFormat</a>  <a href="src/Libraries/Render.html#line-1924" class="link">Source</a></p><div class="doc"><p>Available graphics formats for rendering.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Format_PS" class="def">Format_PS</a></td><td class="doc"><p>PostScript.
+</p></td></tr><tr><td class="src"><a name="v:Format_PDF" class="def">Format_PDF</a></td><td class="doc"><p>Portable Document Format.
+</p></td></tr><tr><td class="src"><a name="v:Format_EPS" class="def">Format_EPS</a> <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Prelude.html#t:Integer">Integer</a></td><td class="doc"><p>Encapsulated PostScript. The integer
+ argument specifies which single page to
+ extract from the document.
+</p></td></tr><tr><td class="src"><a name="v:Format_Debug" class="def">Format_Debug</a></td><td class="doc"><p>An ASCII-based debugging format.
+</p></td></tr></table></div><div class="subs instances"><p id="control.i:RenderFormat" class="caption collapser" onclick="toggleSection('i:RenderFormat')">Instances</p><div id="section.i:RenderFormat" class="show"><table><tr><td class="src"><a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Text-Show.html#t:Show">Show</a> <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a></td><td class="doc empty">&nbsp;</td></tr></table></div></div></div><div class="top"><p class="src"><a name="v:render_stdout" class="def">render_stdout</a> ::  <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> a<a href="src/Libraries/Render.html#line-1988" class="link">Source</a></p><div class="doc"><p>Render a document to standard output, using the given output format.
+</p></div></div><div class="top"><p class="src"><a name="v:render_file" class="def">render_file</a> ::  <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/GHC-IO-Handle.html#t:Handle">Handle</a> -&gt; <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> a<a href="src/Libraries/Render.html#line-1984" class="link">Source</a></p><div class="doc"><p>Render a document to a file, using the given output format.
+</p></div></div><div class="top"><p class="src"><a name="v:render_string" class="def">render_string</a> ::  <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a><a href="src/Libraries/Render.html#line-1992" class="link">Source</a></p><div class="doc"><p>Render a document to a string, using the given output format.
+</p></div></div><h1 id="g:16">Customization
+</h1><div class="doc"><p>The document and drawing abstractions provided by this module are
+ purposely kept general-purpose, and do not include
+ application-specific features. However, we provide a mechanism by
+ which applications can provide customized drawing commands and
+ other custom features.
+</p></div><h2 id="g:17">Custom drawing commands
+</h2><div class="doc"><p>It is sometimes useful to use customized drawing commands. For
+ example, an application that draws many rectangles might like to
+ define a custom <code><a href="Libraries-Render.html#v:rectangle">rectangle</a></code> function for appending a rectangle to
+ the current path. Of course this can be defined as an ordinary
+ Haskell function, using elementary drawing commands:
+</p><pre> my_rect :: X -&gt; Y -&gt; X -&gt; Y -&gt; Draw ()
+ my_rect x0 y0 x1 y1 = do
+   moveto x0 y0
+   lineto x0 y1
+   lineto x1 y1
+   lineto x1 y0
+   closepath
+</pre><p>However, sometimes it is nice to make use of specialized abilities
+ of individual backends. For example, PDF already has a built-in
+ rectangle drawing command, and PostScript has the ability to define
+ custom subroutines within the document text. Using these features
+ can decrease the size of the generated documents. 
+</p><p>We therefore provide a facility for defining new drawing commands
+ with backend-specific implementations. For example, a more general
+ version of the above <code>my_rect</code> function can be defined as
+ follows:
+</p><pre> my_rect :: X -&gt; Y -&gt; X -&gt; Y -&gt; Draw ()
+ my_rect x0 y0 x1 y1 = draw_subroutine alt $ do
+   moveto x0 y0
+   lineto x0 y1
+   lineto x1 y1
+   lineto x1 y0
+   closepath
+  where
+   alt = [
+     custom_ps $      printf &quot;%f %f %f %f rect\n&quot; x0 y0 x1 y1,
+     custom_pdf $     printf &quot;%f %f %f %f re\n&quot; x0 y0 (x1-x0) (y1-y0),
+     custom_ascii $   printf &quot;My_rect %f %f %f %f\n&quot; x0 y0 x1 y1
+     ]
+</pre><p>The idea is to provide a default definition in terms of primitive
+ drawing commands, as well as a list of various backend specific
+ definitions. In the case of PostScript subroutines, the PostScript
+ file must then also be supplied with a definition for the <em>rect</em>
+ subroutine, which can be done with the command <code>render_ps_custom</code>:
+</p><pre> my_ps_defs = &quot;/rect { ... } bind def\n&quot;
+
+ my_render_ps = render_ps_custom custom { ps_defs = my_ps_defs }
+</pre><p>Note that the <code><a href="Libraries-Render.html#v:draw_subroutine">draw_subroutine</a></code> customization mechanism is entirely
+ optional. Its purpose is to generate shorter output for some
+ backends; if it is omitted, the file may be be longer but should
+ look the same.
+</p></div><div class="top"><p class="src"><a name="v:draw_subroutine" class="def">draw_subroutine</a> :: &#91;CustomDef&#93; -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> () -&gt; <a href="Libraries-Render.html#t:Draw">Draw</a> ()<a href="src/Libraries/Render.html#line-475" class="link">Source</a></p><div class="doc"><p>Create a new subroutine.
+</p></div></div><div class="top"><p class="src"><a name="v:custom_ps" class="def">custom_ps</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; CustomDef<a href="src/Libraries/Render.html#line-816" class="link">Source</a></p><div class="doc"><p>Define a custom PostScript definition.
+</p></div></div><div class="top"><p class="src"><a name="v:custom_pdf" class="def">custom_pdf</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; CustomDef<a href="src/Libraries/Render.html#line-820" class="link">Source</a></p><div class="doc"><p>Define a custom PDF definition.
+</p></div></div><div class="top"><p class="src"><a name="v:custom_ascii" class="def">custom_ascii</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a> -&gt; CustomDef<a href="src/Libraries/Render.html#line-824" class="link">Source</a></p><div class="doc"><p>Define a custom ASCII definition.
+</p></div></div><h2 id="g:18">Customization interface
+</h2><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Custom" class="def">Custom</a>  <a href="src/Libraries/Render.html#line-839" class="link">Source</a></p><div class="doc"><p>A data structure that holds application-specific meta-data and
+ customization information.
+</p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a name="v:Custom" class="def">Custom</a></td><td class="doc empty">&nbsp;</td></tr><tr><td colspan="2"><div class="subs fields"><p class="caption">Fields</p><dl><dt class="src"><a name="v:creator" class="def">creator</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a></dt><dd class="doc"><p>Name of the software that created the file.
+ Example: &quot;MyApp 1.0&quot;. Note: this is intended
+ to hold the name of the software, not the
+ human user, that created the document.
+</p></dd><dt class="src"><a name="v:ps_defs" class="def">ps_defs</a> :: <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a></dt><dd class="doc"><p>Definitions to go in the PostScript
+ preamble.
+</p></dd></dl><div class="clear"></div></div></td></tr></table></div></div><div class="top"><p class="src"><a name="v:custom" class="def">custom</a> :: <a href="Libraries-Render.html#t:Custom">Custom</a><a href="src/Libraries/Render.html#line-852" class="link">Source</a></p><div class="doc"><p>An empty customization structure. Customizations should be
+ specified by modifying <code><a href="Libraries-Render.html#v:custom">custom</a></code>, for example:
+</p><pre> custom { creator = &quot;MyApp 1.0&quot; }
+</pre></div></div><h2 id="g:19">Customized rendering functions
+</h2><div class="doc"><p>The following are versions of the generic rendering functions that
+ also take a customization data structure as an additional
+ parameter.
+</p></div><div class="top"><p class="src"><a name="v:render_custom_stdout" class="def">render_custom_stdout</a> ::  <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Custom">Custom</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> a<a href="src/Libraries/Render.html#line-1967" class="link">Source</a></p><div class="doc"><p>Render a document to standard output, using the given output
+ format and customization data structure.
+</p></div></div><div class="top"><p class="src"><a name="v:render_custom_file" class="def">render_custom_file</a> ::  <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/GHC-IO-Handle.html#t:Handle">Handle</a> -&gt; <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Custom">Custom</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/System-IO.html#t:IO">IO</a> a<a href="src/Libraries/Render.html#line-1959" class="link">Source</a></p><div class="doc"><p>Render a document to a file, using the given output format and
+ customization data structure.
+</p></div></div><div class="top"><p class="src"><a name="v:render_custom_string" class="def">render_custom_string</a> ::  <a href="Libraries-Render.html#t:RenderFormat">RenderFormat</a> -&gt; <a href="Libraries-Render.html#t:Custom">Custom</a> -&gt; <a href="Libraries-Render.html#t:Document">Document</a> a -&gt; <a href="http://hackage.haskell.org/packages/archive/base/4.5.1.0/doc/html/Data-String.html#t:String">String</a><a href="src/Libraries/Render.html#line-1972" class="link">Source</a></p><div class="doc"><p>Render a document to a string, using the given output format and
+ customization data structure.
+</p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.11.0</p></div></body></html>
