@@ -1,0 +1,39 @@
+# This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+# file COPYRIGHT for a list of authors, copyright holders, licensing,
+# and other details. All rights reserved.
+# 
+# ======================================================================
+
+Auxiliary.hi: Auxiliary.hs
+CommandLine.hi: CommandLine.hs Auxiliary.hi
+PortableSignals.hi: PortableSignals.hs
+RandomSource.hi: RandomSource.hs
+Render.hi: Render.hs Auxiliary.hi
+Sampling.hi: Sampling.hs Tuple.hi
+Tuple.hi: Tuple.hs
+ShowAll.hi: ShowAll.hs
+Stabilizers/Pauli.hi: Stabilizers/Pauli.hs Synthesis/Ring.hi
+Synthesis/Ring.hi: Synthesis/Ring.hs
+Stabilizers/Clifford.hi: Stabilizers/Clifford.hs Stabilizers/Pauli.hi Synthesis/Ring.hi
+Template.hi: Template.hs Template/Lifting.hi Template/Auxiliary.hi
+Template/Lifting.hi: Template/Lifting.hs Template/LiftQ.hi
+Template/LiftQ.hi: Template/LiftQ.hs Template/ErrorMsgQ.hi Template/ErrorMsgQ.hi
+Template/ErrorMsgQ.hi: Template/ErrorMsgQ.hs
+Template/Auxiliary.hi: Template/Auxiliary.hs Auxiliary.hi
+Typeable.hi: Typeable.hs
+Auxiliary.hi: Auxiliary.hs
+CommandLine.hi: CommandLine.hs ../Libraries/Auxiliary.hs
+PortableSignals.hi: PortableSignals.hs
+RandomSource.hi: RandomSource.hs
+Render.hi: Render.hs ../Libraries/Auxiliary.hs
+Sampling.hi: Sampling.hs ../Libraries/Tuple.hs
+ShowAll.hi: ShowAll.hs
+Stabilizers/Pauli.hi: Stabilizers/Pauli.hs ../Libraries/Synthesis/Ring.hs
+Stabilizers/Clifford.hi: Stabilizers/Clifford.hs ../Libraries/Stabilizers/Pauli.hs ../Libraries/Synthesis/Ring.hs
+Template.hi: Template.hs ../Libraries/Template/Lifting.hs ../Libraries/Template/Auxiliary.hs ../Libraries/Template/LiftQ.hs ../Libraries/Template/ErrorMsgQ.hs ../Libraries/Auxiliary.hs
+Template/Auxiliary.hi: Template/Auxiliary.hs ../Libraries/Auxiliary.hs
+Template/ErrorMsgQ.hi: Template/ErrorMsgQ.hs
+Template/Lifting.hi: Template/Lifting.hs ../Libraries/Template/LiftQ.hs ../Libraries/Template/ErrorMsgQ.hs
+Template/LiftQ.hi: Template/LiftQ.hs ../Libraries/Template/ErrorMsgQ.hs
+Tuple.hi: Tuple.hs
+Typeable.hi: Typeable.hs

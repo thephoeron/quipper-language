@@ -1,0 +1,34 @@
+# This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+# file COPYRIGHT for a list of authors, copyright holders, licensing,
+# and other details. All rights reserved.
+# 
+# ======================================================================
+
+ArcTan2.hi: ArcTan2.hs
+Clifford.hi: Clifford.hs
+CliffordT.hi: CliffordT.hs Ring.hi Matrix.hi Clifford.hi MultiQubitSynthesis.hi
+Ring.hi: Ring.hs
+Matrix.hi: Matrix.hs Ring.hi
+MultiQubitSynthesis.hi: MultiQubitSynthesis.hs Matrix.hi Ring.hi
+EuclideanDomain.hi: EuclideanDomain.hs Ring.hi
+EulerAngles.hi: EulerAngles.hs Ring.hi Matrix.hi ArcTan2.hi
+LaTeX.hi: LaTeX.hs CliffordT.hi MultiQubitSynthesis.hi Ring.hi Matrix.hi SymReal.hi
+SymReal.hi: SymReal.hs ArcTan2.hi
+Newsynth.hi: Newsynth.hs Ring.hi Ring/FixedPrec.hi Matrix.hi CliffordT.hi EuclideanDomain.hi SymReal.hi
+Ring/FixedPrec.hi: Ring/FixedPrec.hs Ring.hi
+Random/FixedPrec.hi: Random/FixedPrec.hs
+RotationDecomposition.hi: RotationDecomposition.hs Matrix.hi MultiQubitSynthesis.hi Ring.hi EulerAngles.hi ArcTan2.hi
+ArcTan2.hi: ArcTan2.hs
+Clifford.hi: Clifford.hs
+CliffordT.hi: CliffordT.hs ../../Libraries/Synthesis/Ring.hs ../../Libraries/Synthesis/Matrix.hs ../../Libraries/Synthesis/Clifford.hs ../../Libraries/Synthesis/MultiQubitSynthesis.hs
+EuclideanDomain.hi: EuclideanDomain.hs ../../Libraries/Synthesis/Ring.hs
+EulerAngles.hi: EulerAngles.hs ../../Libraries/Synthesis/Ring.hs ../../Libraries/Synthesis/Matrix.hs ../../Libraries/Synthesis/ArcTan2.hs
+LaTeX.hi: LaTeX.hs ../../Libraries/Synthesis/CliffordT.hs ../../Libraries/Synthesis/MultiQubitSynthesis.hs ../../Libraries/Synthesis/Ring.hs ../../Libraries/Synthesis/Matrix.hs ../../Libraries/Synthesis/SymReal.hs ../../Libraries/Synthesis/Clifford.hs ../../Libraries/Synthesis/ArcTan2.hs
+Matrix.hi: Matrix.hs ../../Libraries/Synthesis/Ring.hs
+MultiQubitSynthesis.hi: MultiQubitSynthesis.hs ../../Libraries/Synthesis/Matrix.hs ../../Libraries/Synthesis/Ring.hs
+Newsynth.hi: Newsynth.hs ../../Libraries/Synthesis/Ring.hs ../../Libraries/Synthesis/Ring/FixedPrec.hs ../../Libraries/Synthesis/Matrix.hs ../../Libraries/Synthesis/CliffordT.hs ../../Libraries/Synthesis/EuclideanDomain.hs ../../Libraries/Synthesis/SymReal.hs ../../Libraries/Synthesis/Clifford.hs ../../Libraries/Synthesis/MultiQubitSynthesis.hs ../../Libraries/Synthesis/ArcTan2.hs
+Ring.hi: Ring.hs
+Ring/FixedPrec.hi: Ring/FixedPrec.hs ../../Libraries/Synthesis/Ring.hs
+Random/FixedPrec.hi: Random/FixedPrec.hs
+RotationDecomposition.hi: RotationDecomposition.hs ../../Libraries/Synthesis/Matrix.hs ../../Libraries/Synthesis/MultiQubitSynthesis.hs ../../Libraries/Synthesis/Ring.hs ../../Libraries/Synthesis/EulerAngles.hs ../../Libraries/Synthesis/ArcTan2.hs
+SymReal.hi: SymReal.hs ../../Libraries/Synthesis/ArcTan2.hs
