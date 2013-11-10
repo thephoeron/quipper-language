@@ -1,8 +1,5 @@
 *.hi
 *.o
-quipper/scripts/quipper
-quipper/scripts/quipperdoc
-quipper/scripts/quipperi
 Programs/Synthesis/newsynth
 Programs/Tools/ASCII
 Programs/Tools/CliffordT
