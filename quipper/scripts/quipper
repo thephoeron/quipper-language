@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+# file COPYRIGHT for a list of authors, copyright holders, licensing,
+# and other details. All rights reserved.
+# 
+# ======================================================================
+
+
+# Check if we are on Windows
+
+if test "$OS" = "Windows_NT"
+then
+ SCRIPT_EXT=".bat"
+else
+ SCRIPT_EXT=".sh"
+fi
+
+# Get working directory and name of the script
+
+SCRIPT_DIR="$(dirname "$0")"
+MYNAME="$(basename "$0")"
+QUIPPER_BASE="${SCRIPT_DIR}/../.."
+INCLUDES="-i${QUIPPER_BASE} -i${QUIPPER_BASE}/quipper"
+
+# Usage message
+
+usage() {
+    echo "$MYNAME: the Quipper compiler"
+    echo ""
+    echo "Usage: $MYNAME [--help|-h]"
+    echo "       $MYNAME [anything-other-than-the-above]"
+    echo ""
+    echo "Options: "
+    echo "   (no parameters)          : bitterly complain"
+    echo "   --help, -h               : print this message"
+    echo "   any-other-than-the-above : passed on to ghc"
+    echo ""
+    echo "This compiler is a wrapper around ghc."
+    echo "Its usage is therefore exactly the same as that of ghc."
+    echo "Try \`ghc --help' for more information."
+}
+
+# Test whether we need to print usage
+
+if test "$#" -eq 0
+then
+    echo "$MYNAME: No input files."
+    echo "For usage information, try the \`--help' option."
+    exit 1
+elif test "$*" = "--help" -o "$*" = "-h"
+then
+    usage
+    exit 0
+fi
+
+# If not, run GHC with Quipper preprocessor
+
+ghc ${INCLUDES} -F -pgmF "${SCRIPT_DIR}/convert_template${SCRIPT_EXT}" "$@"
