@@ -1,7 +1,6 @@
-QUIPPER-LANGUAGE
-================
+# QUIPPER-LANGUAGE
 
-Quipper: embedded, scalable functional programming language for quantum computing.
+Quipper: embedded, scalable functional programming language for quantum computing, based on the Quantum Lambda Calculus; v0.7 (10/14/2014).
 
 Unofficial fork from: http://www.mathstat.dal.ca/~selinger/quipper/
 
@@ -10,14 +9,14 @@ Tested with the Haskell Platform 2012 & 2013 on Linux x86_64/OS X 10.7
 To-do
 -----
 
-* Make Quipper `cabal-install`able
+* Make Quipper Cabal installable and sandboxed
 
 Installation & Use
 ------------------
 
 Clone this repo to somewhere obvious, like `~/quipper-language/`.
 
-Install or update to the latest version of [The Haskell Platform](http://www.haskell.org/platform/).
+Install or update to the latest version of `cabal-install` and `ghc` from your package manager.
 
 Double-check the dependencies list below, and ensure you have them all installed under your `~/.cabal` directory.  `cabal install ...` manually as needed.
 
@@ -44,12 +43,14 @@ Dependencies
 
 Ensure these packages are installed from Hackage before compilation:
 
- * random v1.0.1.1
- * mtl v2.1.2
- * primes v0.2.1.0
- * Lattices v0.0.1
- * zlib v0.5.4.1
- * fixedprec v0.1
- * containers v0.5.2.1
- * set-monad v0.1.0.0
- * quickcheck v2.6
+ * random v.1.0.1.1
+ * mtl v.2.1.2
+ * primes v.0.2.1.0
+ * Lattices v.0.0.1
+ * zlib v.0.5.4.1
+ * easyrender v.0.1.0.0
+ * fixedprec v.0.2.1.0
+ * newsynth v.0.1.0.0
+ * containers v.0.5.2.1
+ * set-monad v.0.1.0.0
+ * QuickCheck v.2.6
