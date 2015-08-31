@@ -11,7 +11,7 @@
 <a name="line-4"></a><font color=Blue><i>-- Triangle Finding Algorithm. </i></font>
 <a name="line-5"></a><font color=Blue><i>--</i></font>
 <a name="line-6"></a><font color=Blue><i>-- This oracle injects the graph /G/ into the space </i></font>
-<a name="line-7"></a><font color=Blue><i>-- {0, 1, . . . , 2/l/ &#8722; 1} of /l/-bit integers, and each oracle </i></font>
+<a name="line-7"></a><font color=Blue><i>-- {0, 1, . . . , 2/l/ &#x2212; 1} of /l/-bit integers, and each oracle </i></font>
 <a name="line-8"></a><font color=Blue><i>-- call requires the extensive use of modular arithmetic.</i></font>
 <a name="line-9"></a><font color=Blue><i>--</i></font>
 <a name="line-10"></a><font color=Blue><i>-- The circuits produced by running this \"orthodox\" oracle are </i></font>
@@ -61,8 +61,8 @@
 <a name="line-54"></a>      <font color=Cyan>(</font>u<font color=Cyan>,</font>uint<font color=Cyan>)</font> <font color=Red>&lt;-</font> o2_ConvertNode l u hn
 <a name="line-55"></a>      <font color=Cyan>(</font>v<font color=Cyan>,</font>vint<font color=Cyan>)</font> <font color=Red>&lt;-</font> o2_ConvertNode l v hn
 <a name="line-56"></a>      <font color=Cyan>(</font>uint<font color=Cyan>,</font>vint<font color=Cyan>,</font>t_uv<font color=Cyan>)</font> <font color=Red>&lt;-</font> o3_TestEqual uint vint
-<a name="line-57"></a>      <font color=Blue><i>{- Since we don&#8217;t have &#8220;quantum control&#8221;, we can&#8217;t say &#8220;if t == True&#8230; return&#8221; here;
-<a name="line-58"></a>         instead we just add a &#8220;control on t_uv == False&#8221; to the later flips of &#8216;edge&#8217;. -}</i></font>
+<a name="line-57"></a>      <font color=Blue><i>{- Since we don&#x2019;t have &#x201c;quantum control&#x201d;, we can&#x2019;t say &#x201c;if t == True&#x2026; return&#x201d; here;
+<a name="line-58"></a>         instead we just add a &#x201c;control on t_uv == False&#x201d; to the later flips of &#x2018;edge&#x2019;. -}</i></font>
 <a name="line-59"></a>
 <a name="line-60"></a>      <font color=Cyan>(</font>uint<font color=Cyan>,</font>u17<font color=Cyan>)</font> <font color=Red>&lt;-</font> o4_POW17 uint
 <a name="line-61"></a>      <font color=Cyan>(</font>uint<font color=Cyan>,</font>u17<font color=Cyan>,</font>uF<font color=Cyan>)</font> <font color=Red>&lt;-</font> o3_TestEqual uint u17
@@ -75,7 +75,7 @@
 <a name="line-68"></a>      uH <font color=Red>&lt;-</font> qnot uH <font color=Cyan>`controlled`</font> <font color=Cyan>(</font>uint_bits <font color=Cyan>!!</font> <font color=Cyan>(</font>l<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-69"></a>      vH <font color=Red>&lt;-</font> qinit False
 <a name="line-70"></a>      vH <font color=Red>&lt;-</font> qnot vH <font color=Cyan>`controlled`</font> <font color=Cyan>(</font>vint_bits <font color=Cyan>!!</font> <font color=Cyan>(</font>l<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Cyan>)</font><font color=Cyan>)</font>
-<a name="line-71"></a><font color=Blue><i>--    Would like to say &#8221;t_uHvH &lt;- qd_testequal uH vH t_uHvH&#8221;, if testequal were generic.</i></font>
+<a name="line-71"></a><font color=Blue><i>--    Would like to say &#x201d;t_uHvH &lt;- qd_testequal uH vH t_uHvH&#x201d;, if testequal were generic.</i></font>
 <a name="line-72"></a>      t_uHvH <font color=Red>&lt;-</font> qinit True
 <a name="line-73"></a>      t_uHvH <font color=Red>&lt;-</font> qnot t_uHvH <font color=Cyan>`controlled`</font> uH
 <a name="line-74"></a>      t_uHvH <font color=Red>&lt;-</font> qnot t_uHvH <font color=Cyan>`controlled`</font> vH
@@ -105,11 +105,11 @@
 <a name="line-98"></a>  comment_with_label <font color=Magenta>"EXIT: o2_ConvertNode"</font> <font color=Cyan>(</font>u<font color=Cyan>,</font> uint<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"u"</font><font color=Cyan>,</font> <font color=Magenta>"uint"</font><font color=Cyan>)</font>
 <a name="line-99"></a>  return <font color=Cyan>(</font>u<font color=Cyan>,</font> uint<font color=Cyan>)</font>
 <a name="line-100"></a>
-<a name="line-101"></a><a name="o3_TestEqual"></a><font color=Blue><i>-- | Algorithm O-3. Compare if two QIntTF&#8217;s are equal;</i></font>
+<a name="line-101"></a><a name="o3_TestEqual"></a><font color=Blue><i>-- | Algorithm O-3. Compare if two QIntTF&#x2019;s are equal;</i></font>
 <a name="line-102"></a><font color=Blue><i>-- return the result in a fresh Qubit. </i></font>
 <a name="line-103"></a><font color=Blue><i>-- </i></font>
-<a name="line-104"></a><font color=Blue><i>-- This function is in general iffy: 00&#8230;00 and 11&#8230;11 do /not/ test as equal, as they should.</i></font>
-<a name="line-105"></a><font color=Blue><i>-- However, that case does not arise in the oracle: on the one hand, both 00&#8230;00 and 11&#8230;11</i></font>
+<a name="line-104"></a><font color=Blue><i>-- This function is in general iffy: 00&#x2026;00 and 11&#x2026;11 do /not/ test as equal, as they should.</i></font>
+<a name="line-105"></a><font color=Blue><i>-- However, that case does not arise in the oracle: on the one hand, both 00&#x2026;00 and 11&#x2026;11</i></font>
 <a name="line-106"></a><font color=Blue><i>-- are literal fixed points of 'o4_POW17', and on the other, 'o5_MOD3' never outputs 00. </i></font>
 <a name="line-107"></a><font color=Blue>o3_TestEqual</font> <font color=Red>::</font> QIntTF <font color=Red>-&gt;</font> QIntTF<font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QIntTF<font color=Cyan>,</font>QIntTF<font color=Cyan>,</font>Qubit<font color=Cyan>)</font>
 <a name="line-108"></a><font color=Blue>o3_TestEqual</font> <font color=Red>=</font> box <font color=Magenta>"o3"</font> <font color=Cyan>$</font> <font color=Red>\</font>x y <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
@@ -174,10 +174,10 @@
 <a name="line-167"></a><a name="o5_MOD3"></a><font color=Blue><i>-- | Algorithm O-5. Compute residue modulo 3 of the lower-order bits of a</i></font>
 <a name="line-168"></a><font color=Blue><i>-- 'QIntTF', into a fresh 2-bit 'QIntTF'.</i></font>
 <a name="line-169"></a><font color=Blue><i>-- </i></font>
-<a name="line-170"></a><font color=Blue><i>-- This algorithm is size-limited &#8212; works for up to 31-bit integers, but not beyond.</i></font>
+<a name="line-170"></a><font color=Blue><i>-- This algorithm is size-limited &#x2014; works for up to 31-bit integers, but not beyond.</i></font>
 <a name="line-171"></a><font color=Blue><i>-- </i></font>
 <a name="line-172"></a><font color=Blue><i>-- This also currently is mismatched with our specification of QIntTF, since it </i></font>
-<a name="line-173"></a><font color=Blue><i>-- produces output in the range 1&#8211;3, rather than 0&#8211;2.  However, output of this </i></font>
+<a name="line-173"></a><font color=Blue><i>-- produces output in the range 1&#x2013;3, rather than 0&#x2013;2.  However, output of this </i></font>
 <a name="line-174"></a><font color=Blue><i>-- algorithm is only used via '03_TestEqual', so this is not a problem in practice. </i></font>
 <a name="line-175"></a><font color=Blue>o5_MOD3</font> <font color=Red>::</font> QIntTF <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QIntTF<font color=Cyan>,</font>QIntTF<font color=Cyan>)</font>
 <a name="line-176"></a><font color=Blue>o5_MOD3</font> <font color=Red>=</font> box <font color=Magenta>"o5"</font> <font color=Cyan>$</font> <font color=Red>\</font>x <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
@@ -232,7 +232,7 @@
 <a name="line-225"></a>  
 <a name="line-226"></a>    d <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate l False<font color=Cyan>)</font> <font color=Blue><i>-- will be [the list of bits of] the eventual answer</i></font>
 <a name="line-227"></a>    d1 <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate l False<font color=Cyan>)</font> <font color=Blue><i>-- will hold an intermediate version of the</i></font>
-<a name="line-228"></a>            <font color=Blue><i>-- subtraction, not &#8220;corrected&#8221; modulo (2^l &#8211; 1).</i></font>
+<a name="line-228"></a>            <font color=Blue><i>-- subtraction, not &#x201c;corrected&#x201d; modulo (2^l &#x2013; 1).</i></font>
 <a name="line-229"></a>    c1 <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate <font color=Cyan>(</font>l<font color=Cyan>+</font><font color=Magenta>1</font><font color=Cyan>)</font> False<font color=Cyan>)</font>
 <a name="line-230"></a>
 <a name="line-231"></a>    <font color=Cyan>(</font>c1<font color=Cyan>,</font>d1<font color=Cyan>,</font>x<font color=Cyan>)</font> <font color=Red>&lt;-</font> loop_with_indexM l <font color=Cyan>(</font>c1<font color=Cyan>,</font>d1<font color=Cyan>,</font>x<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Red>\</font>j <font color=Cyan>(</font>c1<font color=Cyan>,</font>d1<font color=Cyan>,</font>x<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
@@ -335,8 +335,8 @@
 <a name="line-328"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font> y<font color=Cyan>,</font> s<font color=Cyan>)</font>
 <a name="line-329"></a>
 <a name="line-330"></a><a name="o7_ADD_controlled"></a><font color=Blue><i>-- | Controlled version of 'o7_ADD'. Returns either a copy of the first </i></font>
-<a name="line-331"></a><font color=Blue><i>-- input (if controls are &#8220;off&#8221;) or the sum of the inputs </i></font>
-<a name="line-332"></a><font color=Blue><i>-- (if controls are &#8220;on&#8221;).</i></font>
+<a name="line-331"></a><font color=Blue><i>-- input (if controls are &#x201c;off&#x201d;) or the sum of the inputs </i></font>
+<a name="line-332"></a><font color=Blue><i>-- (if controls are &#x201c;on&#x201d;).</i></font>
 <a name="line-333"></a><font color=Blue><i>--</i></font>
 <a name="line-334"></a><font color=Blue><i>-- We make this version explicitly, rather than just using 'controlled',</i></font>
 <a name="line-335"></a><font color=Blue><i>-- because the controls only need to be applied to a very few selected </i></font>
@@ -390,7 +390,7 @@
 <a name="line-383"></a>    <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>x_bits<font color=Cyan>,</font>y_bits<font color=Cyan>,</font>s<font color=Cyan>,</font>s1<font color=Cyan>,</font>c1<font color=Cyan>,</font>c2<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-384"></a>      <font color=Blue><i>-- Prepare a qubit holding the value of the controls,</i></font>
 <a name="line-385"></a>      <font color=Blue><i>-- since we want to control also on their negation.</i></font>
-<a name="line-386"></a>      <font color=Blue><i>-- /Can&#8217;t/ include this in &#8220;with_computed_fun&#8221;: controls can&#8217;t be bound</i></font>
+<a name="line-386"></a>      <font color=Blue><i>-- /Can&#x2019;t/ include this in &#x201c;with_computed_fun&#x201d;: controls can&#x2019;t be bound</i></font>
 <a name="line-387"></a>      <font color=Blue><i>-- as QData, and including it unbound yields rather interesting bug.</i></font>
 <a name="line-388"></a>      temp_control <font color=Red>&lt;-</font> qinit False
 <a name="line-389"></a>      temp_control <font color=Red>&lt;-</font> qnot temp_control <font color=Cyan>`controlled`</font> controls

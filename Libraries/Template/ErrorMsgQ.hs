@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -10,6 +10,9 @@
 module Libraries.Template.ErrorMsgQ where
 
 import Language.Haskell.TH
+
+import Control.Applicative (Applicative(..))
+import Control.Monad (liftM, ap)
 
 -- | Shortcut for 'Either String a'.
 type ErrMsg a = Either String a
@@ -25,6 +28,12 @@ instance Monad ErrMsgQ where
                  Left s -> return (Left s)
                  Right r -> let (ErrMsgQ y) = f r in y
 
+instance Applicative ErrMsgQ where
+  pure = return
+  (<*>) = ap
+
+instance Functor ErrMsgQ where
+  fmap = liftM
 
 -- | Set an error message, to be thrown.
 -- Usage:                 

@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -374,17 +374,17 @@ setWeld (a, b, childctrl, direction, f, g, n) = do
 -- /b/ are quantum registers of length at least /n/+2, and /f/ is a
 -- boolean register of length /n/.
 doWeld1 :: (Qureg, Qureg, Qubit, Boolreg, Int) -> Circ ()
-doWeld1 (a, b, weldctrl, f, n) = do
+doWeld1 (a, b, weldctrl, g, n) = do
   comment_with_label "ENTER: doWeld1" (a, b, weldctrl) ("a", "b", "weldctrl")
   with_ancilla $ \addsub -> do
     with_controls (weldctrl .==. 1 .&&. a.!(n+1) .==. 0) $ do {
       qnot_at addsub
     }
-    cAddNum (addsub, b, a, f, n)
+    cAddNum (addsub, b, a, g, n)
     with_controls (weldctrl .==. 1) $ do {
       qnot_at addsub
     }
-    cSubNum (addsub, b, a, f, n)
+    cSubNum (addsub, b, a, g, n)
     with_controls (weldctrl .==. 1 .&&. a.!(n+1) .==. 1) $ do {
       qnot_at addsub
     }
@@ -397,11 +397,11 @@ doWeld1 (a, b, weldctrl, f, n) = do
 -- /b/ are quantum registers of length at least /n/+2, and /g/ is a
 -- boolean register of length /n/.
 doWeld0 :: (Qureg, Qureg, Qubit, Boolreg, Int) -> Circ ()
-doWeld0 (a, b, weldctrl, g, n) = do
+doWeld0 (a, b, weldctrl, f, n) = do
   comment_with_label "ENTER: doWeld0" (a, b, weldctrl) ("a", "b", "weldctrl")
   for 0 (n-1) 1 $ \index -> do
     with_controls (weldctrl .==. 1) $ do {
-      qnot_at (b.!(index)) `controlled` a.!(index) ./=. g.!(index)
+      qnot_at (b.!(index)) `controlled` a.!(index) ./=. f.!(index)
     }
   endfor
   comment_with_label "EXIT: doWeld0" (a, b, weldctrl) ("a", "b", "weldctrl")

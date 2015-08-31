@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -17,6 +17,7 @@ import Data.List
 import Quipper
 import QuipperLib.Arith
 import Libraries.Auxiliary
+import Prelude hiding (subtract)
 
 -- ----------------------------------------------------------------------
 -- * Binary representation of integers
@@ -51,10 +52,6 @@ template_tail = return $ \t -> return $ tail t
 -- | Template Haskell version of @[]@.
 template_symb_obracket_symb_cbracket_ :: Circ [a]
 template_symb_obracket_symb_cbracket_ = return []
-
--- | Template Haskell version of '$'.
-template_symb_dollar_ :: Circ ((a -> Circ b) -> Circ (a -> Circ b))
-template_symb_dollar_ = return $ \f -> return $ \x -> f x
 
 -- | Monadic version of 'mapAccumL'.
 mapAccumLM :: (acc -> x -> Circ (acc,y)) -> acc -> [x] -> Circ (acc,[y])

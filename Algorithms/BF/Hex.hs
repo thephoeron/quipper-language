@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -17,7 +17,7 @@ module Algorithms.BF.Hex where
 import Quipper
 import Quipper.CircLifting
 import QuipperLib.Qram
-import QuipperLib.Arith
+import QuipperLib.Arith hiding (template_symb_plus_)
 
 import Prelude hiding (lookup)
 

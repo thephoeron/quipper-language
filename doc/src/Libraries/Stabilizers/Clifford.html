@@ -24,7 +24,7 @@
 <a name="line-17"></a><font color=Green><u>import</u></font> <font color=Green><u>qualified</u></font> Data<font color=Cyan>.</font>Map <font color=Green><u>as</u></font> Map
 <a name="line-18"></a><font color=Green><u>import</u></font> Control<font color=Cyan>.</font>Monad<font color=Cyan>.</font>State
 <a name="line-19"></a><font color=Green><u>import</u></font> System<font color=Cyan>.</font>Random
-<a name="line-20"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Synthesis<font color=Cyan>.</font>Ring <font color=Cyan>(</font>Cplx <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font> i<font color=Cyan>)</font>
+<a name="line-20"></a><font color=Green><u>import</u></font> Quantum<font color=Cyan>.</font>Synthesis<font color=Cyan>.</font>Ring <font color=Cyan>(</font>Cplx <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font> i<font color=Cyan>)</font>
 <a name="line-21"></a>
 <a name="line-22"></a><a name="Qubit"></a><font color=Blue><i>-- | A qubit is defined as an integer reference.</i></font>
 <a name="line-23"></a><a name="Qubit"></a><font color=Green><u>type</u></font> Qubit <font color=Red>=</font> Int
@@ -83,7 +83,7 @@
 <a name="line-76"></a><font color=Blue>empty_tableau</font> <font color=Red>::</font> Tableau
 <a name="line-77"></a><font color=Blue>empty_tableau</font> <font color=Red>=</font> ST <font color=Magenta>0</font> Map<font color=Cyan>.</font>empty Map<font color=Cyan>.</font>empty Map<font color=Cyan>.</font>empty Map<font color=Cyan>.</font>empty
 <a name="line-78"></a>
-<a name="line-79"></a><a name="add_qubit"></a><font color=Blue><i>-- | A new qubit in the state |0&#9002; or |1&#9002; can be added to a tableau.</i></font>
+<a name="line-79"></a><a name="add_qubit"></a><font color=Blue><i>-- | A new qubit in the state |0&#x232a; or |1&#x232a; can be added to a tableau.</i></font>
 <a name="line-80"></a><font color=Blue>add_qubit</font> <font color=Red>::</font> Bool <font color=Red>-&gt;</font> Tableau <font color=Red>-&gt;</font> Tableau
 <a name="line-81"></a><font color=Blue>add_qubit</font> b tab <font color=Red>=</font> ST <font color=Cyan>(</font>nq <font color=Cyan>+</font> <font color=Magenta>1</font><font color=Cyan>)</font> sign' tableau' de_sign' de_tableau'
 <a name="line-82"></a> <font color=Green><u>where</u></font>
@@ -129,7 +129,7 @@
 <a name="line-122"></a>  <font color=Cyan>(</font>spc<font color=Cyan>,</font>pauli<font color=Cyan>)</font> <font color=Red>=</font> commute px pz
 <a name="line-123"></a>  sign <font color=Red>=</font> signPlus_to_sign <font color=Cyan>$</font> multiply_signPlus <font color=Cyan>(</font>multiply_signPlus <font color=Cyan>(</font>One sx<font color=Cyan>)</font> <font color=Cyan>(</font>One sz<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>(</font>multiply_signPlus <font color=Cyan>(</font>PlusI<font color=Cyan>)</font> <font color=Cyan>(</font>spc<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-124"></a>
-<a name="line-125"></a><a name="from_matrix"></a><font color=Blue><i>-- | It is possible to construct a 'Unitary' from a 2&#215;2-matrix.</i></font>
+<a name="line-125"></a><a name="from_matrix"></a><font color=Blue><i>-- | It is possible to construct a 'Unitary' from a 2&#x00d7;2-matrix.</i></font>
 <a name="line-126"></a><font color=Blue>from_matrix</font> <font color=Red>::</font> <font color=Cyan>(</font>Floating r<font color=Cyan>,</font> Eq r<font color=Cyan>,</font> Show r<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix1 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font> <font color=Red>-&gt;</font> Unitary
 <a name="line-127"></a><font color=Blue>from_matrix</font> m <font color=Red>=</font> from_minimal minimal
 <a name="line-128"></a> <font color=Green><u>where</u></font>
@@ -211,7 +211,7 @@
 <a name="line-204"></a>   <font color=Cyan>(</font>spc2<font color=Cyan>,</font>p2<font color=Cyan>)</font> <font color=Red>=</font> commute pix2 piz2
 <a name="line-205"></a>   sign <font color=Red>=</font> signPlus_to_sign <font color=Cyan>$</font> multiply_signPlus <font color=Cyan>(</font>multiply_signPlus <font color=Cyan>(</font>One six<font color=Cyan>)</font> <font color=Cyan>(</font>One siz<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>(</font>multiply_signPlus <font color=Cyan>(</font>spc1<font color=Cyan>)</font> <font color=Cyan>(</font>spc2<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-206"></a>
-<a name="line-207"></a><a name="from_matrix2"></a><font color=Blue><i>-- | It is possible to construct a 'Unitary2' from a 4&#215;4-matrix.</i></font>
+<a name="line-207"></a><a name="from_matrix2"></a><font color=Blue><i>-- | It is possible to construct a 'Unitary2' from a 4&#x00d7;4-matrix.</i></font>
 <a name="line-208"></a><font color=Blue>from_matrix2</font> <font color=Red>::</font> <font color=Cyan>(</font>Floating r<font color=Cyan>,</font> Eq r<font color=Cyan>,</font> Show r<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix2 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font> <font color=Red>-&gt;</font> Unitary2
 <a name="line-209"></a><font color=Blue>from_matrix2</font> m <font color=Red>=</font> from_minimal2 minimal
 <a name="line-210"></a> <font color=Green><u>where</u></font>
@@ -225,7 +225,7 @@
 <a name="line-218"></a>    m_dagger <font color=Red>=</font> transpose2 m
 <a name="line-219"></a>    sp <font color=Red>=</font> fromMatrix2 <font color=Cyan>$</font> multiplyMatrix2 m <font color=Cyan>(</font>multiplyMatrix2 <font color=Cyan>(</font>toMatrix2 xy'<font color=Cyan>)</font> m_dagger<font color=Cyan>)</font>
 <a name="line-220"></a>
-<a name="line-221"></a><a name="from_matrix_controlled"></a><font color=Blue><i>-- | It is possible to construct a 'Unitary2' from controlling a 2&#215;2-matrix.</i></font>
+<a name="line-221"></a><a name="from_matrix_controlled"></a><font color=Blue><i>-- | It is possible to construct a 'Unitary2' from controlling a 2&#x00d7;2-matrix.</i></font>
 <a name="line-222"></a><font color=Blue>from_matrix_controlled</font> <font color=Red>::</font> <font color=Cyan>(</font>Floating r<font color=Cyan>,</font> Show r<font color=Cyan>,</font> Eq r<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix1 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font> <font color=Red>-&gt;</font> Unitary2
 <a name="line-223"></a><font color=Blue>from_matrix_controlled</font> m1 <font color=Red>=</font> from_matrix2 <font color=Cyan>(</font>control1 m1<font color=Cyan>)</font>
 <a name="line-224"></a>

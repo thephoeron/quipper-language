@@ -40,7 +40,7 @@
 <a name="line-33"></a><font color=Blue><i>-- | This is a version of 'BWT.Oracle' that uses 'Qulist' instead of</i></font>
 <a name="line-34"></a><font color=Blue><i>--   'Qureg'.  An oracle provides the following information: the tree</i></font>
 <a name="line-35"></a><font color=Blue><i>--   depth /n/, the label length /m/, the number of edge colors /k/,</i></font>
-<a name="line-36"></a><font color=Blue><i>--   the entrance label /ENTRANCE/, and for each color 0 &#8804; /c/ &lt; /k/,</i></font>
+<a name="line-36"></a><font color=Blue><i>--   the entrance label /ENTRANCE/, and for each color 0 &#x2264; /c/ &lt; /k/,</i></font>
 <a name="line-37"></a><font color=Blue><i>--   a reversible circuit /ORACLE[sub c](a,b,r)/.</i></font>
 <a name="line-38"></a>
 <a name="line-39"></a><a name="Oracle"></a><font color=Green><u>data</u></font> Oracle <font color=Red>=</font> Oracle <font color=Cyan>{</font>
@@ -73,7 +73,7 @@
 <a name="line-66"></a><font color=Blue><i>-- </i></font>
 <a name="line-67"></a><font color=Blue><i>-- rather than the more general property </i></font>
 <a name="line-68"></a><font color=Blue><i>-- </i></font>
-<a name="line-69"></a><font color=Blue><i>-- &gt; ORACLE[sub c](a, b, r) = (a, b &#8853; v[sub c](a), r &#8853; f[sub c](a)).  </i></font>
+<a name="line-69"></a><font color=Blue><i>-- &gt; ORACLE[sub c](a, b, r) = (a, b &#x2295; v[sub c](a), r &#x2295; f[sub c](a)).  </i></font>
 <a name="line-70"></a><font color=Blue><i>-- </i></font>
 <a name="line-71"></a><font color=Blue><i>-- This gives us the freedom to build more efficient oracles, where</i></font>
 <a name="line-72"></a><font color=Blue><i>-- appropriate.</i></font>
@@ -133,17 +133,17 @@
 <a name="line-126"></a>    <font color=Green><u>where</u></font>
 <a name="line-127"></a>      dc_not h x y <font color=Red>=</font> qnot_at h <font color=Cyan>`controlled`</font> <font color=Cyan>(</font>x <font color=Cyan>.==.</font> <font color=Magenta>1</font> <font color=Cyan>.&amp;&amp;.</font> y <font color=Cyan>.==.</font> <font color=Magenta>0</font><font color=Cyan>)</font>
 <a name="line-128"></a>  
-<a name="line-129"></a><a name="compute_steps"></a><font color=Blue><i>-- | Compute the required number of iterations as a function of &#949; and</i></font>
+<a name="line-129"></a><a name="compute_steps"></a><font color=Blue><i>-- | Compute the required number of iterations as a function of &#x03b5; and</i></font>
 <a name="line-130"></a><font color=Blue><i>-- /dt/.</i></font>
 <a name="line-131"></a><font color=Blue><i>-- </i></font>
-<a name="line-132"></a><font color=Blue><i>-- Inputs: /n/ is the tree depth, &#949; is the desired precision, /dt/ is</i></font>
+<a name="line-132"></a><font color=Blue><i>-- Inputs: /n/ is the tree depth, &#x03b5; is the desired precision, /dt/ is</i></font>
 <a name="line-133"></a><font color=Blue><i>-- the simulation time step. Intermediate values: /t/ is the</i></font>
 <a name="line-134"></a><font color=Blue><i>-- simulation time. Output: /s/, the upper bound on the number of</i></font>
 <a name="line-135"></a><font color=Blue><i>-- simulation time steps.</i></font>
 <a name="line-136"></a><font color=Blue><i>-- </i></font>
 <a name="line-137"></a><font color=Blue><i>-- Note: \[Childs et al\] specifies that /t/ should be chosen</i></font>
-<a name="line-138"></a><font color=Blue><i>-- uniformly at random within the interval 0 &lt; /t/ &#8804; /n/[sup 4]\/2&#949;.</i></font>
-<a name="line-139"></a><font color=Blue><i>-- Here, for simplicity, we just use /t/ = &#8970;/n/[sup 4]\/2&#949;&#8971;. Also note</i></font>
+<a name="line-138"></a><font color=Blue><i>-- uniformly at random within the interval 0 &lt; /t/ &#x2264; /n/[sup 4]\/2&#x03b5;.</i></font>
+<a name="line-139"></a><font color=Blue><i>-- Here, for simplicity, we just use /t/ = &#x230a;/n/[sup 4]\/2&#x03b5;&#x230b;. Also note</i></font>
 <a name="line-140"></a><font color=Blue><i>-- that this function is for information only, as it is not actually</i></font>
 <a name="line-141"></a><font color=Blue><i>-- used. Users should specify /s/ directly.</i></font>
 <a name="line-142"></a><font color=Blue>compute_steps</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> Int
@@ -326,7 +326,7 @@
 <a name="line-319"></a><font color=Blue>doweld1</font> f s [] <font color=Red>=</font> error <font color=Magenta>"doweld1: invalid node"</font>
 <a name="line-320"></a>
 <a name="line-321"></a><a name="doweld0"></a><font color=Blue><i>-- | Input an /n/+1-bit leaf node /a/:/aa/ (without the tree bit), and</i></font>
-<a name="line-322"></a><font color=Blue><i>-- return /a/:(/aa/ &#8853; /g/). The first input is the /n/-bit welding</i></font>
+<a name="line-322"></a><font color=Blue><i>-- return /a/:(/aa/ &#x2295; /g/). The first input is the /n/-bit welding</i></font>
 <a name="line-323"></a><font color=Blue><i>-- vector /g/ (a parameter to the oracle).</i></font>
 <a name="line-324"></a><font color=Blue>doweld0</font> <font color=Red>::</font> Boollist <font color=Red>-&gt;</font> <font color=Red>[</font>Bool<font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font>Bool<font color=Red>]</font>
 <a name="line-325"></a><font color=Blue>doweld0</font> g <font color=Cyan>(</font>a<font color=Red><b>:</b></font>aa<font color=Cyan>)</font> <font color=Red>=</font> a <font color=Red><b>:</b></font> aa' <font color=Green><u>where</u></font>
@@ -483,7 +483,7 @@
 <a name="line-476"></a><font color=Blue>cdoweld1</font> f s [] <font color=Red>=</font> error <font color=Magenta>"cdoweld1: invalid node"</font>
 <a name="line-477"></a>
 <a name="line-478"></a><a name="cdoweld0"></a><font color=Blue><i>-- | Input an /n/+1-bit leaf node /a/:/aa/ (without the tree bit), and</i></font>
-<a name="line-479"></a><font color=Blue><i>-- return /a/:(/aa/ &#8853; /g/). The first input is the /n/-bit welding</i></font>
+<a name="line-479"></a><font color=Blue><i>-- return /a/:(/aa/ &#x2295; /g/). The first input is the /n/-bit welding</i></font>
 <a name="line-480"></a><font color=Blue><i>-- vector /g/ (a parameter to the oracle).</i></font>
 <a name="line-481"></a><font color=Blue>cdoweld0</font> <font color=Red>::</font> Boollist <font color=Red>-&gt;</font> Bitlist <font color=Red>-&gt;</font> Circ Bitlist
 <a name="line-482"></a><font color=Blue>cdoweld0</font> g node_in<font color=Red>@</font><font color=Cyan>(</font>a<font color=Red><b>:</b></font>aa<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>

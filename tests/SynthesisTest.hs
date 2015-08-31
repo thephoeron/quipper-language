@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -9,9 +9,9 @@
 import Quipper
 import QuipperLib.Synthesis
 
-import Libraries.Synthesis.Ring
-import Libraries.Synthesis.Matrix
-import Libraries.Synthesis.MultiQubitSynthesis
+import Quantum.Synthesis.Ring
+import Quantum.Synthesis.Matrix
+import Quantum.Synthesis.MultiQubitSynthesis
 
 import System.Random
 
@@ -37,13 +37,30 @@ main2 = do
 -- exact matrix representation.
 main3 :: IO ()
 main3 = do
-  print_generic Preview (exact_synthesis op) [qubit, qubit]
+  print_generic Preview (exact_synthesis_alt op) [qubit, qubit]
   where
     op :: Matrix Four Four DOmega
-    op = matrix4x4 ( 1, 0,  0, 0 )
-                   ( 0, s, -s, 0 )
-                   ( 0, 0,  0, 1 )
-                   ( 0, s,  s, 0 ) 
+    op = matrix4x4 ( 1,  0,  0, 0 )
+                   ( 0, -s,  s, 0 )
+                   ( 0,  0,  0, 1 )
+                   ( 0,  s,  s, 0 ) 
+    s = roothalf
+    
+-- | Exact synthesis of a multi-qubit Clifford+/T/ circuit from an
+-- exact matrix representation.
+main3a :: IO ()
+main3a = do
+  print_generic Preview (exact_synthesis_alt op) [qubit, qubit, qubit]
+  where
+    op :: Matrix Eight Eight DOmega
+    op = matrix [[ 1, 0,  0, 0, 0, 0, 0, 0 ],
+                 [ 0, s, -s, 0, 0, 0, 0, 0 ],
+                 [ 0, 0,  0, 1, 0, 0, 0, 0 ],
+                 [ 0, s,  s, 0, 0, 0, 0, 0 ],
+                 [ 0, 0,  0, 0, 1, 0, 0, 0 ],
+                 [ 0, 0,  0, 0, 0, 1, 0, 0 ],
+                 [ 0, 0,  0, 0, 0, 0, 0, 1 ],
+                 [ 0, 0,  0, 0, 0, 0, 1, 0 ]] 
     s = roothalf
     
 -- | Approximate synthesis of a /z/-rotation as a Clifford+/T/ circuit.
@@ -92,4 +109,4 @@ main7 = do
                    (-0.8, 0.6*i )
 
 -- | Run any of the above main functions:
-main = main3
+main = main3a

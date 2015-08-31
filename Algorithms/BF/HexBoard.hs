@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -15,11 +15,11 @@ module Algorithms.BF.HexBoard
 where
 
 import Quipper
-import Libraries.Render
 
 import Algorithms.BF.BooleanFormula
 import Algorithms.BF.Hex
 
+import Graphics.EasyRender
 import Text.Printf
 
 -- ----------------------------------------------------------------------

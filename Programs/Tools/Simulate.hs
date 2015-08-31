@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -23,9 +23,8 @@ import QuipperLib.QuipperASCIIParser
 import Libraries.Auxiliary (string_of_list)
 import Libraries.CommandLine
 import Libraries.Sampling
-import Libraries.Synthesis.Random.FixedPrec
-import Libraries.Synthesis.Ring
-import Libraries.Synthesis.SymReal
+import Quantum.Synthesis.Ring
+import Quantum.Synthesis.SymReal
 
 import Data.Map (Map)
 import qualified Data.Map as Map

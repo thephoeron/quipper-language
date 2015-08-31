@@ -42,7 +42,7 @@
 <a name="line-35"></a>
 <a name="line-36"></a><a name="with_combined_controls_gb"></a><font color=Blue><i>-- | Decompose quantum controls recursively until at most /n/ remain,</i></font>
 <a name="line-37"></a><font color=Blue><i>-- and then pass these reduced controls to the given circuit.</i></font>
-<a name="line-38"></a><font color=Blue><i>-- Precondition: /n/ &#8805; 1.  The decomposition is done using Toffoli</i></font>
+<a name="line-38"></a><font color=Blue><i>-- Precondition: /n/ &#x2265; 1.  The decomposition is done using Toffoli</i></font>
 <a name="line-39"></a><font color=Blue><i>-- gates, decomposed into the gate base. Classical controls are left</i></font>
 <a name="line-40"></a><font color=Blue><i>-- untouched.</i></font>
 <a name="line-41"></a><font color=Blue><i>-- </i></font>
@@ -228,7 +228,7 @@
 <a name="line-221"></a>  
 <a name="line-222"></a><font color=Blue><i>-- | Decompose a circuit into gates from the given 'LegacyGateBase'. Unlike</i></font>
 <a name="line-223"></a><font color=Blue><i>-- 'decompose_legacy_unary', this can be applied to a circuit-generating</i></font>
-<a name="line-224"></a><font color=Blue><i>-- function in curried form with /n/ arguments, for any /n/ &#8805; 0.</i></font>
+<a name="line-224"></a><font color=Blue><i>-- function in curried form with /n/ arguments, for any /n/ &#x2265; 0.</i></font>
 <a name="line-225"></a><font color=Blue><i>-- </i></font>
 <a name="line-226"></a><font color=Blue><i>-- The type of this heavily overloaded function is difficult to</i></font>
 <a name="line-227"></a><font color=Blue><i>-- read. In more readable form, it has all of the following types:</i></font>

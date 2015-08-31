@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -149,6 +149,9 @@ import Data.IntMap (IntMap)
 import qualified Data.IntMap as IntMap
 
 import qualified Data.Traversable as Traversable
+
+import Control.Applicative (Applicative(..))
+import Control.Monad (liftM, ap)
 
 -- ----------------------------------------------------------------------
 -- * List operations
@@ -766,6 +769,13 @@ newtype Id a = Id { getId :: a }
 instance Monad Id where
   return a = Id a
   (Id a) >>= b = b a
+
+instance Applicative Id where
+  pure = return
+  (<*>) = ap
+
+instance Functor Id where
+  fmap = liftM
 
 -- ----------------------------------------------------------------------
 -- * Identity types

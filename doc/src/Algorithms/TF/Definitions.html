@@ -84,7 +84,7 @@
 <a name="line-77"></a><font color=Blue><i>-- except that the integers are considered to be mod 2[sup /m/]-1 instead</i></font>
 <a name="line-78"></a><font color=Blue><i>-- of 2[sup /m/].</i></font>
 <a name="line-79"></a><font color=Blue><i>-- </i></font>
-<a name="line-80"></a><font color=Blue><i>-- In general, functions on these types should be able to handle both 00&#8230;00 and 11&#8230;11, </i></font>
+<a name="line-80"></a><font color=Blue><i>-- In general, functions on these types should be able to handle both 00&#x2026;00 and 11&#x2026;11, </i></font>
 <a name="line-81"></a><font color=Blue><i>-- and should treat them equally, essentially regarding 'IntTF', 'CIntTF', and the </i></font>
 <a name="line-82"></a><font color=Blue><i>-- computational basis of 'QIntTF' as formal quotients.</i></font>
 <a name="line-83"></a><font color=Blue><i>-- Some operations are not perfect. One should keep in mind, for example, that specifying </i></font>
@@ -115,7 +115,7 @@
 <a name="line-108"></a><font color=Blue><i>-- ** Operations for IntTF</i></font>
 <a name="line-109"></a>
 <a name="line-110"></a><a name="integer_of_inttf"></a><font color=Blue><i>-- | Convert an 'IntTF' of length /m/ to an 'Integer' in the range {0,</i></font>
-<a name="line-111"></a><font color=Blue><i>-- &#8230;, 2[sup /m/]-2}. If the 'IntTF' has indeterminate length, return</i></font>
+<a name="line-111"></a><font color=Blue><i>-- &#x2026;, 2[sup /m/]-2}. If the 'IntTF' has indeterminate length, return</i></font>
 <a name="line-112"></a><font color=Blue><i>-- the original 'Integer'.</i></font>
 <a name="line-113"></a><font color=Blue>integer_of_inttf</font> <font color=Red>::</font> IntTF <font color=Red>-&gt;</font> Integer
 <a name="line-114"></a><font color=Blue>integer_of_inttf</font> <font color=Cyan>(</font>XIntTF x<font color=Cyan>)</font> <font color=Red>=</font> 
@@ -147,7 +147,7 @@
 <a name="line-140"></a>        y' <font color=Red>=</font> inttf_promote y x errstr
 <a name="line-141"></a>        errstr <font color=Red>=</font> <font color=Magenta>"Equality test on IntTF: operands must be of equal length"</font>
 <a name="line-142"></a>
-<a name="line-143"></a><a name="inttf_set_length"></a><font color=Blue><i>-- | Set the length of an 'IntTF' to /m/ &#8805; 0. This operation is only</i></font>
+<a name="line-143"></a><a name="inttf_set_length"></a><font color=Blue><i>-- | Set the length of an 'IntTF' to /m/ &#x2265; 0. This operation is only</i></font>
 <a name="line-144"></a><font color=Blue><i>-- legal if the input (a) has indeterminate length or (b) has</i></font>
 <a name="line-145"></a><font color=Blue><i>-- determinate length already equal to /m/. In particular, it cannot</i></font>
 <a name="line-146"></a><font color=Blue><i>-- be used to change the length from anything other than from</i></font>
@@ -286,7 +286,7 @@
 <a name="line-279"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-280"></a><font color=Blue><i>-- * Arithmetic functions</i></font>
 <a name="line-281"></a>
-<a name="line-282"></a><a name="increment"></a><font color=Blue><i>-- | Increment a standard 'QDInt' (i.e. big-endian, mod 2[sup &#8467;]).</i></font>
+<a name="line-282"></a><a name="increment"></a><font color=Blue><i>-- | Increment a standard 'QDInt' (i.e. big-endian, mod 2[sup &#x2113;]).</i></font>
 <a name="line-283"></a><font color=Blue>increment</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> Circ QDInt
 <a name="line-284"></a><font color=Blue>increment</font> x <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-285"></a>  comment_with_label <font color=Magenta>"ENTER: increment"</font> x <font color=Magenta>"x"</font>
@@ -294,7 +294,7 @@
 <a name="line-287"></a>  comment_with_label <font color=Magenta>"EXIT: increment"</font> x <font color=Magenta>"x"</font>
 <a name="line-288"></a>  return x
 <a name="line-289"></a> 
-<a name="line-290"></a><a name="decrement"></a><font color=Blue><i>-- | Decrement a standard 'QDInt' (i.e. big-endian, mod 2[sup &#8467;]).</i></font>
+<a name="line-290"></a><a name="decrement"></a><font color=Blue><i>-- | Decrement a standard 'QDInt' (i.e. big-endian, mod 2[sup &#x2113;]).</i></font>
 <a name="line-291"></a><font color=Blue>decrement</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> Circ QDInt
 <a name="line-292"></a><font color=Blue>decrement</font> x <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-293"></a>  comment_with_label <font color=Magenta>"ENTER: decrement"</font> x <font color=Magenta>"x"</font>
@@ -302,7 +302,7 @@
 <a name="line-295"></a>  comment_with_label <font color=Magenta>"EXIT: decrement"</font> x <font color=Magenta>"x"</font>
 <a name="line-296"></a>  return x
 <a name="line-297"></a>
-<a name="line-298"></a><a name="increment_big"></a><font color=Blue><i>-- | Increment a bit-string, considered as a big-endian integer mod 2[sup &#8467;].</i></font>
+<a name="line-298"></a><a name="increment_big"></a><font color=Blue><i>-- | Increment a bit-string, considered as a big-endian integer mod 2[sup &#x2113;].</i></font>
 <a name="line-299"></a><font color=Blue>increment_big</font> <font color=Red>::</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ <font color=Red>[</font>Qubit<font color=Red>]</font>
 <a name="line-300"></a><font color=Blue>increment_big</font> [] <font color=Red>=</font> return []
 <a name="line-301"></a><font color=Blue>increment_big</font> <font color=Cyan>(</font>i_high<font color=Red><b>:</b></font>i_lower<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -310,7 +310,7 @@
 <a name="line-303"></a>      i_lower <font color=Red>&lt;-</font> increment_big i_lower
 <a name="line-304"></a>      return <font color=Cyan>(</font>i_high<font color=Red><b>:</b></font>i_lower<font color=Cyan>)</font>
 <a name="line-305"></a> 
-<a name="line-306"></a><a name="decrement_big"></a><font color=Blue><i>-- | Decrement a bit-string, considered as a big-endian integer mod 2[sup &#8467;].</i></font>
+<a name="line-306"></a><a name="decrement_big"></a><font color=Blue><i>-- | Decrement a bit-string, considered as a big-endian integer mod 2[sup &#x2113;].</i></font>
 <a name="line-307"></a><font color=Blue>decrement_big</font> <font color=Red>::</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ <font color=Red>[</font>Qubit<font color=Red>]</font>
 <a name="line-308"></a><font color=Blue>decrement_big</font> [] <font color=Red>=</font> return []
 <a name="line-309"></a><font color=Blue>decrement_big</font> <font color=Cyan>(</font>i_high<font color=Red><b>:</b></font>i_lower<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -318,7 +318,7 @@
 <a name="line-311"></a>      i_high <font color=Red>&lt;-</font> qnot i_high <font color=Cyan>`controlled`</font> i_lower
 <a name="line-312"></a>      return <font color=Cyan>(</font>i_high<font color=Red><b>:</b></font>i_lower<font color=Cyan>)</font>
 <a name="line-313"></a>
-<a name="line-314"></a><a name="increment_little"></a><font color=Blue><i>-- | Increment a bit-string, considered as a little-endian integer mod 2[sup &#8467;].</i></font>
+<a name="line-314"></a><a name="increment_little"></a><font color=Blue><i>-- | Increment a bit-string, considered as a little-endian integer mod 2[sup &#x2113;].</i></font>
 <a name="line-315"></a><font color=Blue>increment_little</font> <font color=Red>::</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ <font color=Red>[</font>Qubit<font color=Red>]</font>
 <a name="line-316"></a><font color=Blue>increment_little</font> [] <font color=Red>=</font> return []
 <a name="line-317"></a><font color=Blue>increment_little</font> <font color=Cyan>(</font>i_low<font color=Red><b>:</b></font>i_higher<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -326,7 +326,7 @@
 <a name="line-319"></a>  i_low <font color=Red>&lt;-</font> qnot i_low
 <a name="line-320"></a>  return <font color=Cyan>(</font>i_low<font color=Red><b>:</b></font>i_higher<font color=Cyan>)</font>
 <a name="line-321"></a>
-<a name="line-322"></a><a name="decrement_little"></a><font color=Blue><i>-- | Decrement a bit-string, considered as a little-endian integer mod 2[sup &#8467;].</i></font>
+<a name="line-322"></a><a name="decrement_little"></a><font color=Blue><i>-- | Decrement a bit-string, considered as a little-endian integer mod 2[sup &#x2113;].</i></font>
 <a name="line-323"></a><font color=Blue>decrement_little</font> <font color=Red>::</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ <font color=Red>[</font>Qubit<font color=Red>]</font>
 <a name="line-324"></a><font color=Blue>decrement_little</font> [] <font color=Red>=</font> return []
 <a name="line-325"></a><font color=Blue>decrement_little</font> <font color=Cyan>(</font>i_low<font color=Red><b>:</b></font>i_higher<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -334,7 +334,7 @@
 <a name="line-327"></a>  i_higher <font color=Red>&lt;-</font> decrement_little i_higher <font color=Cyan>`controlled`</font> i_low
 <a name="line-328"></a>  return <font color=Cyan>(</font>i_low<font color=Red><b>:</b></font>i_higher<font color=Cyan>)</font>
 <a name="line-329"></a>
-<a name="line-330"></a><a name="choose"></a><font color=Blue><i>-- | The standard &#8220;combinations&#8221; function &#8220;/n/ choose /k/&#8221;.</i></font>
+<a name="line-330"></a><a name="choose"></a><font color=Blue><i>-- | The standard &#x201c;combinations&#x201d; function &#x201c;/n/ choose /k/&#x201d;.</i></font>
 <a name="line-331"></a><font color=Blue>choose</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral a<font color=Cyan>)</font> <font color=Red>=&gt;</font> a <font color=Red>-&gt;</font> a <font color=Red>-&gt;</font> a
 <a name="line-332"></a><font color=Blue>choose</font> n <font color=Magenta>0</font> <font color=Red>=</font> <font color=Magenta>1</font>
 <a name="line-333"></a><font color=Blue>choose</font> <font color=Magenta>0</font> k <font color=Red>=</font> <font color=Magenta>0</font>

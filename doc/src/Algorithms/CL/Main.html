@@ -8,11 +8,11 @@
 <pre><a name="line-1"></a><font color=Blue><i>-- |</i></font>
 <a name="line-2"></a><font color=Blue><i>-- Authors: Keith Kim, Peter LeFanu Lumsdaine, Alexandr Virodov</i></font>
 <a name="line-3"></a><font color=Blue><i>--  </i></font>
-<a name="line-4"></a><font color=Blue><i>-- An implementation of Hallgren&#8217;s Class Number algorithm.  This algorithm computes various invariants of </i></font>
-<a name="line-5"></a><font color=Blue><i>-- a real quadratic number field /K/ = &#8474;(&#8730;&#916;), notably the class number and the structure of the class group /CL/(/K/).</i></font>
-<a name="line-6"></a><font color=Blue><i>-- The field /K/ is specified by its discriminant /&#916;/, the main input to the algorithm.</i></font>
+<a name="line-4"></a><font color=Blue><i>-- An implementation of Hallgren&#x2019;s Class Number algorithm.  This algorithm computes various invariants of </i></font>
+<a name="line-5"></a><font color=Blue><i>-- a real quadratic number field /K/ = &#x211a;(&#x221a;&#x0394;), notably the class number and the structure of the class group /CL/(/K/).</i></font>
+<a name="line-6"></a><font color=Blue><i>-- The field /K/ is specified by its discriminant /&#x0394;/, the main input to the algorithm.</i></font>
 <a name="line-7"></a><font color=Blue><i>--</i></font>
-<a name="line-8"></a><font color=Blue><i>-- The algorithm may also be adapted to other problems from algebraic number theory, including Pell's equation (finding integer solutions to /x/ [sup 2] &#8722; /dy/ [sup 2] = 1, for non-square /d/) and the principal ideal problem (determining whether an ideal of a number field is principal, and finding a generator if so).</i></font>
+<a name="line-8"></a><font color=Blue><i>-- The algorithm may also be adapted to other problems from algebraic number theory, including Pell's equation (finding integer solutions to /x/ [sup 2] &#x2212; /dy/ [sup 2] = 1, for non-square /d/) and the principal ideal problem (determining whether an ideal of a number field is principal, and finding a generator if so).</i></font>
 <a name="line-9"></a><font color=Blue><i>--</i></font>
 <a name="line-10"></a><font color=Blue><i>-- The present implementation falls into five stages, which we will refer to throughout the documentation:</i></font>
 <a name="line-11"></a><font color=Blue><i>-- </i></font>
@@ -30,17 +30,17 @@
 <a name="line-23"></a><font color=Blue><i>--</i></font>
 <a name="line-24"></a><font color=Blue><i>-- The algorithm and its mathematical background are described in:</i></font>
 <a name="line-25"></a><font color=Blue><i>-- </i></font>
-<a name="line-26"></a><font color=Blue><i>-- * Sean Hallgren, \"Polynomial-time quantum algorithms for Pell&#8217;s equation and the principal ideal problem\",</i></font>
-<a name="line-27"></a><font color=Blue><i>-- in /STOC &#8217;02: Proceedings of the thirty-fourth annual ACM symposium on Theory of computing/, pp. 653&#8211;658, 2002.</i></font>
+<a name="line-26"></a><font color=Blue><i>-- * Sean Hallgren, \"Polynomial-time quantum algorithms for Pell&#x2019;s equation and the principal ideal problem\",</i></font>
+<a name="line-27"></a><font color=Blue><i>-- in /STOC &#x2019;02: Proceedings of the thirty-fourth annual ACM symposium on Theory of computing/, pp. 653&#x2013;658, 2002.</i></font>
 <a name="line-28"></a><font color=Blue><i>-- (Also published in J. ACM, 54(1), 2007.)</i></font>
 <a name="line-29"></a><font color=Blue><i>-- </i></font>
-<a name="line-30"></a><font color=Blue><i>-- * Richard Jozsa, \"Quantum computation in algebraic number theory: Hallgren&#8217;s efficient quantum</i></font>
-<a name="line-31"></a><font color=Blue><i>-- algorithm for solving Pell&#8217;s equation.\" Annals of Physics, 306:241&#8211;279, February 2003; </i></font>
+<a name="line-30"></a><font color=Blue><i>-- * Richard Jozsa, \"Quantum computation in algebraic number theory: Hallgren&#x2019;s efficient quantum</i></font>
+<a name="line-31"></a><font color=Blue><i>-- algorithm for solving Pell&#x2019;s equation.\" Annals of Physics, 306:241&#x2013;279, February 2003; </i></font>
 <a name="line-32"></a><font color=Blue><i>-- also available as &lt;<a href="http://arxiv.org/abs/quant-ph/0302134">http://arxiv.org/abs/quant-ph/0302134</a>&gt;.  All references in documentation</i></font>
 <a name="line-33"></a><font color=Blue><i>-- refer to arXiv version.</i></font>
 <a name="line-34"></a><font color=Blue><i>-- </i></font>
 <a name="line-35"></a><font color=Blue><i>-- * Daniel Haase and Helmut Maier, \"Quantum algorithms for number fields.\" Fortschr. Phys.,</i></font>
-<a name="line-36"></a><font color=Blue><i>-- 54(8):866&#8211;881, 2006.</i></font>
+<a name="line-36"></a><font color=Blue><i>-- 54(8):866&#x2013;881, 2006.</i></font>
 <a name="line-37"></a><font color=Blue><i>--</i></font>
 <a name="line-38"></a><font color=Blue><i>-- The present implementation is based on a detailed algorithm specification that was provided to us by the IARPA QCS</i></font>
 <a name="line-39"></a><font color=Blue><i>-- program and written by Brian J. Matt, Durward McDonell, and David Zaret.</i></font>
@@ -49,13 +49,13 @@
 <a name="line-42"></a><font color=Blue><i>-- </i></font>
 <a name="line-43"></a><font color=Blue><i>-- * "Algorithms.CL.Main": Command line interface.</i></font>
 <a name="line-44"></a><font color=Blue><i>-- </i></font>
-<a name="line-45"></a><font color=Blue><i>-- * "Algorithms.CL.Auxiliary": General-purpose functions required in Hallgren&#8217;s algorithm.</i></font>
+<a name="line-45"></a><font color=Blue><i>-- * "Algorithms.CL.Auxiliary": General-purpose functions required in Hallgren&#x2019;s algorithm.</i></font>
 <a name="line-46"></a><font color=Blue><i>-- </i></font>
-<a name="line-47"></a><font color=Blue><i>-- * "Algorithms.CL.Types": Specialized classical and quantum datatypes used in Hallgren&#8217;s algorithm, and basic functions on these types.</i></font>
+<a name="line-47"></a><font color=Blue><i>-- * "Algorithms.CL.Types": Specialized classical and quantum datatypes used in Hallgren&#x2019;s algorithm, and basic functions on these types.</i></font>
 <a name="line-48"></a><font color=Blue><i>-- </i></font>
-<a name="line-49"></a><font color=Blue><i>-- * "Algorithms.CL.CL": The high-level structure of Hallgren&#8217;s algorithm.</i></font>
+<a name="line-49"></a><font color=Blue><i>-- * "Algorithms.CL.CL": The high-level structure of Hallgren&#x2019;s algorithm.</i></font>
 <a name="line-50"></a><font color=Blue><i>-- </i></font>
-<a name="line-51"></a><font color=Blue><i>-- * "Algorithms.CL.RegulatorClassical": A classical implementation of the functions and operations of stages 1&#8211;4.</i></font>
+<a name="line-51"></a><font color=Blue><i>-- * "Algorithms.CL.RegulatorClassical": A classical implementation of the functions and operations of stages 1&#x2013;4.</i></font>
 <a name="line-52"></a><font color=Blue><i>-- </i></font>
 <a name="line-53"></a><font color=Blue><i>-- * "Algorithms.CL.RegulatorQuantum": A quantum implementation of the functions required for stages 1 and 4</i></font>
 <a name="line-54"></a><font color=Blue><i>-- </i></font>
@@ -92,7 +92,7 @@
 <a name="line-85"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-86"></a><font color=Blue><i>-- * Command line interface</i></font>
 <a name="line-87"></a>
-<a name="line-88"></a><font color=Blue><i>-- $ This module provides a command line interface for Hallgren&#8217;s Class</i></font>
+<a name="line-88"></a><font color=Blue><i>-- $ This module provides a command line interface for Hallgren&#x2019;s Class</i></font>
 <a name="line-89"></a><font color=Blue><i>-- Number algorithm. This allows the user, for example, to print or simulate </i></font>
 <a name="line-90"></a><font color=Blue><i>-- the circuits used in quantum portions of the algorithm, or to run </i></font>
 <a name="line-91"></a><font color=Blue><i>-- small instances of the algorithm in a classical implementation.</i></font>
@@ -101,24 +101,24 @@
 <a name="line-94"></a><font color=Blue><i>--</i></font>
 <a name="line-95"></a><font color=Blue><i>-- &gt;&gt;&gt; ./cl -R</i></font>
 <a name="line-96"></a><font color=Blue><i>--</i></font>
-<a name="line-97"></a><font color=Blue><i>-- Compute, classically, the regulator of &#8474;[&#8730;&#916;], with &#916; = 28 (default value).</i></font>
+<a name="line-97"></a><font color=Blue><i>-- Compute, classically, the regulator of &#x211a;[&#x221a;&#x0394;], with &#x0394; = 28 (default value).</i></font>
 <a name="line-98"></a><font color=Blue><i>--</i></font>
 <a name="line-99"></a><font color=Blue><i>-- &gt;&gt;&gt; ./cl -P -d 17</i></font>
 <a name="line-100"></a><font color=Blue><i>-- </i></font>
-<a name="line-101"></a><font color=Blue><i>-- Compute, classically, the fundamental solution of Pell&#8217;s equation </i></font>
-<a name="line-102"></a><font color=Blue><i>-- /x/[super 2] &#8722; /d//y/[super 2] = 1 </i></font>
-<a name="line-103"></a><font color=Blue><i>-- with /d/ = /&#916;/ = 17.</i></font>
+<a name="line-101"></a><font color=Blue><i>-- Compute, classically, the fundamental solution of Pell&#x2019;s equation </i></font>
+<a name="line-102"></a><font color=Blue><i>-- /x/[super 2] &#x2212; /d//y/[super 2] = 1 </i></font>
+<a name="line-103"></a><font color=Blue><i>-- with /d/ = /&#x0394;/ = 17.</i></font>
 <a name="line-104"></a><font color=Blue><i>--</i></font>
 <a name="line-105"></a><font color=Blue><i>-- &gt;&gt;&gt; ./cl -S fn -d 5 -f eps &gt; cl_fn_d5.eps </i></font>
 <a name="line-106"></a><font color=Blue><i>--</i></font>
 <a name="line-107"></a><font color=Blue><i>-- Produce an .eps file of the quantum circuit implementing the </i></font>
 <a name="line-108"></a><font color=Blue><i>-- pseudo-periodic function /f/[sub /N/] used for regulator estimation,</i></font>
-<a name="line-109"></a><font color=Blue><i>-- for &#916; = 5</i></font>
+<a name="line-109"></a><font color=Blue><i>-- for &#x0394; = 5</i></font>
 <a name="line-110"></a><font color=Blue><i>--</i></font>
 <a name="line-111"></a><font color=Blue><i>-- &gt;&gt;&gt; ./cl -S starprod -d 60 -f gatecount</i></font>
 <a name="line-112"></a><font color=Blue><i>--</i></font>
 <a name="line-113"></a><font color=Blue><i>-- Give gate-count for the quantum circuit implementing the star-product</i></font>
-<a name="line-114"></a><font color=Blue><i>-- on ideals, for &#916; = 17</i></font>
+<a name="line-114"></a><font color=Blue><i>-- on ideals, for &#x0394; = 17</i></font>
 <a name="line-115"></a><font color=Blue><i>--</i></font>
 <a name="line-116"></a><font color=Blue><i>-- &gt;&gt;&gt; ./cl --help</i></font>
 <a name="line-117"></a><font color=Blue><i>--</i></font>
@@ -134,7 +134,7 @@
 <a name="line-127"></a>  <font color=Red>|</font> Sub             <font color=Blue><i>-- ^Show the circuit for a specific quantum subroutine</i></font>
 <a name="line-128"></a>  <font color=Red>|</font> Regulator       <font color=Blue><i>-- ^Classically, find the regulator</i></font>
 <a name="line-129"></a>  <font color=Red>|</font> FundamentalUnit <font color=Blue><i>-- ^Classically, find the fundamental unit</i></font>
-<a name="line-130"></a>  <font color=Red>|</font> PellSolution    <font color=Blue><i>-- ^Classically, find the fundamental solution of Pell&#8217;s equation</i></font>
+<a name="line-130"></a>  <font color=Red>|</font> PellSolution    <font color=Blue><i>-- ^Classically, find the fundamental solution of Pell&#x2019;s equation</i></font>
 <a name="line-131"></a>  <font color=Green><u>deriving</u></font> Show
 <a name="line-132"></a>
 <a name="line-133"></a><a name="Subroutine"></a><font color=Blue><i>-- | An enumeration type for selecting a subroutine.</i></font>
@@ -153,14 +153,14 @@
 <a name="line-146"></a>
 <a name="line-147"></a><a name="Options"></a><font color=Blue><i>-- | A data type to hold values set by command line options.</i></font>
 <a name="line-148"></a><a name="Options"></a><font color=Green><u>data</u></font> Options <font color=Red>=</font> Options <font color=Cyan>{</font>
-<a name="line-149"></a>  <font color=Blue><i>-- Main &#8220;what to do&#8221; type options:</i></font>
+<a name="line-149"></a>  <font color=Blue><i>-- Main &#x201c;what to do&#x201d; type options:</i></font>
 <a name="line-150"></a>  what     <font color=Red>::</font> WhatToShow<font color=Cyan>,</font>    <font color=Blue><i>-- ^What kind of thing to output.</i></font>
 <a name="line-151"></a>  format   <font color=Red>::</font> Format<font color=Cyan>,</font>        <font color=Blue><i>-- ^The output format.</i></font>
 <a name="line-152"></a>  gatebase <font color=Red>::</font> GateBase<font color=Cyan>,</font>      <font color=Blue><i>-- ^What kind of gates to decompose into.</i></font>
 <a name="line-153"></a>  sub      <font color=Red>::</font> Subroutine<font color=Cyan>,</font>    <font color=Blue><i>-- ^Which subroutine to output (if @'what' == 'Sub'@).</i></font>
 <a name="line-154"></a>
 <a name="line-155"></a>  <font color=Blue><i>-- Master problem parameter</i></font>
-<a name="line-156"></a>  cl_delta <font color=Red>::</font> CLIntP<font color=Cyan>,</font>        <font color=Blue><i>-- ^The discriminant &#916;, specifying the problem.</i></font>
+<a name="line-156"></a>  cl_delta <font color=Red>::</font> CLIntP<font color=Cyan>,</font>        <font color=Blue><i>-- ^The discriminant &#x0394;, specifying the problem.</i></font>
 <a name="line-157"></a>
 <a name="line-158"></a>  <font color=Blue><i>-- Inputs for stage 1 of the algorithm</i></font>
 <a name="line-159"></a>  cl_i     <font color=Red>::</font> Int<font color=Cyan>,</font>           <font color=Blue><i>-- ^i, log_2 of the estimated bound 2^i for the weak period S.</i></font>
@@ -217,12 +217,12 @@
 <a name="line-210"></a>  Option <font color=Red>[</font><font color=Magenta>'1'</font><font color=Red>]</font> []            <font color=Cyan>(</font>NoArg <font color=Cyan>(</font>what Stage1<font color=Cyan>)</font><font color=Cyan>)</font>                <font color=Cyan>$</font> <font color=Magenta>"output the circuit for stage 1 of the algorithm (default)"</font><font color=Cyan>,</font>
 <a name="line-211"></a>  Option <font color=Red>[</font><font color=Magenta>'4'</font><font color=Red>]</font> []            <font color=Cyan>(</font>NoArg <font color=Cyan>(</font>what Stage4<font color=Cyan>)</font><font color=Cyan>)</font>                <font color=Cyan>$</font> <font color=Magenta>"output the circuit for stage 4 of the algorithm"</font><font color=Cyan>,</font>
 <a name="line-212"></a>  Option <font color=Red>[</font><font color=Magenta>'S'</font><font color=Red>]</font> <font color=Red>[</font><font color=Magenta>"sub"</font><font color=Red>]</font>       <font color=Cyan>(</font>ReqArg read_subroutine <font color=Magenta>"&lt;subroutine&gt;"</font><font color=Cyan>)</font>   <font color=Cyan>$</font> <font color=Magenta>"output the circuit for a specific subroutine"</font><font color=Cyan>,</font>
-<a name="line-213"></a>  Option <font color=Red>[</font><font color=Magenta>'R'</font><font color=Red>]</font> <font color=Red>[</font><font color=Magenta>"regulator"</font><font color=Red>]</font> <font color=Cyan>(</font>NoArg <font color=Cyan>(</font>what Regulator<font color=Cyan>)</font><font color=Cyan>)</font>            <font color=Cyan>$</font> <font color=Magenta>"classically, find the regulator, given &#916;"</font><font color=Cyan>,</font>
-<a name="line-214"></a>  Option <font color=Red>[</font><font color=Magenta>'F'</font><font color=Red>]</font> []            <font color=Cyan>(</font>NoArg <font color=Cyan>(</font>what FundamentalUnit<font color=Cyan>)</font><font color=Cyan>)</font>      <font color=Cyan>$</font> <font color=Magenta>"classically, find the fundamental unit, given &#916;"</font><font color=Cyan>,</font>
-<a name="line-215"></a>  Option <font color=Red>[</font><font color=Magenta>'P'</font><font color=Red>]</font> []            <font color=Cyan>(</font>NoArg <font color=Cyan>(</font>what PellSolution<font color=Cyan>)</font><font color=Cyan>)</font>         <font color=Cyan>$</font> <font color=Magenta>"classically, find the fundamental solution of Pell&#8217;s equation, given &#916;"</font><font color=Cyan>,</font>
+<a name="line-213"></a>  Option <font color=Red>[</font><font color=Magenta>'R'</font><font color=Red>]</font> <font color=Red>[</font><font color=Magenta>"regulator"</font><font color=Red>]</font> <font color=Cyan>(</font>NoArg <font color=Cyan>(</font>what Regulator<font color=Cyan>)</font><font color=Cyan>)</font>            <font color=Cyan>$</font> <font color=Magenta>"classically, find the regulator, given &#x0394;"</font><font color=Cyan>,</font>
+<a name="line-214"></a>  Option <font color=Red>[</font><font color=Magenta>'F'</font><font color=Red>]</font> []            <font color=Cyan>(</font>NoArg <font color=Cyan>(</font>what FundamentalUnit<font color=Cyan>)</font><font color=Cyan>)</font>      <font color=Cyan>$</font> <font color=Magenta>"classically, find the fundamental unit, given &#x0394;"</font><font color=Cyan>,</font>
+<a name="line-215"></a>  Option <font color=Red>[</font><font color=Magenta>'P'</font><font color=Red>]</font> []            <font color=Cyan>(</font>NoArg <font color=Cyan>(</font>what PellSolution<font color=Cyan>)</font><font color=Cyan>)</font>         <font color=Cyan>$</font> <font color=Magenta>"classically, find the fundamental solution of Pell&#x2019;s equation, given &#x0394;"</font><font color=Cyan>,</font>
 <a name="line-216"></a>
 <a name="line-217"></a><font color=Blue><i>-- Input parameters</i></font>
-<a name="line-218"></a>  Option <font color=Red>[</font><font color=Magenta>'d'</font><font color=Red>]</font> <font color=Red>[</font><font color=Magenta>"delta"</font><font color=Red>]</font>     <font color=Cyan>(</font>ReqArg read_delta <font color=Magenta>"&lt;N&gt;"</font><font color=Cyan>)</font>           <font color=Cyan>$</font> <font color=Magenta>"discriminant &#916; (a.k.a. D)                 (default: "</font> <font color=Cyan>++</font> show_default cl_delta <font color=Cyan>++</font> <font color=Magenta>")"</font><font color=Cyan>,</font>
+<a name="line-218"></a>  Option <font color=Red>[</font><font color=Magenta>'d'</font><font color=Red>]</font> <font color=Red>[</font><font color=Magenta>"delta"</font><font color=Red>]</font>     <font color=Cyan>(</font>ReqArg read_delta <font color=Magenta>"&lt;N&gt;"</font><font color=Cyan>)</font>           <font color=Cyan>$</font> <font color=Magenta>"discriminant &#x0394; (a.k.a. D)                 (default: "</font> <font color=Cyan>++</font> show_default cl_delta <font color=Cyan>++</font> <font color=Magenta>")"</font><font color=Cyan>,</font>
 <a name="line-219"></a>
 <a name="line-220"></a>  Option <font color=Red>[</font><font color=Magenta>'s'</font><font color=Red>]</font> <font color=Red>[</font><font color=Magenta>"ss"</font><font color=Red>]</font>        <font color=Cyan>(</font>ReqArg read_s     <font color=Magenta>"&lt;N&gt;"</font><font color=Cyan>)</font>           <font color=Cyan>$</font> <font color=Magenta>"estimated bound on period S, for stage 1 (default: "</font> <font color=Cyan>++</font> show <font color=Cyan>(</font><font color=Magenta>2</font><font color=Cyan>^</font><font color=Cyan>(</font>cl_i default_options<font color=Cyan>)</font><font color=Cyan>)</font>     <font color=Cyan>++</font> <font color=Magenta>")"</font><font color=Cyan>,</font>
 <a name="line-221"></a>  Option <font color=Red>[</font><font color=Magenta>'i'</font><font color=Red>]</font> []            <font color=Cyan>(</font>ReqArg read_i     <font color=Magenta>"&lt;N&gt;"</font><font color=Cyan>)</font>           <font color=Cyan>$</font> <font color=Magenta>"estimated bound on log_2 S, for stage 1 (default: "</font> <font color=Cyan>++</font> show <font color=Cyan>(</font>cl_i default_options<font color=Cyan>)</font>     <font color=Cyan>++</font> <font color=Magenta>")"</font><font color=Cyan>,</font>
@@ -261,7 +261,7 @@
 <a name="line-254"></a>          [] <font color=Red>-&gt;</font> optfail <font color=Cyan>(</font><font color=Magenta>"Unknown subroutine -- "</font> <font color=Cyan>++</font> str <font color=Cyan>++</font> <font color=Magenta>"\n"</font><font color=Cyan>)</font>
 <a name="line-255"></a>          <font color=Green><u>_</u></font>  <font color=Red>-&gt;</font> optfail <font color=Cyan>(</font><font color=Magenta>"Ambiguous subroutine -- "</font> <font color=Cyan>++</font> str <font color=Cyan>++</font> <font color=Magenta>"\n"</font><font color=Cyan>)</font>
 <a name="line-256"></a>
-<a name="line-257"></a>      read_delta <font color=Red>=</font> read_arg parse_int    <font color=Cyan>(</font><font color=Cyan>&gt;</font><font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>(</font><font color=Red>\</font>n o <font color=Red>-&gt;</font> o <font color=Cyan>{</font> cl_delta <font color=Red>=</font> fromIntegral n <font color=Cyan>}</font><font color=Cyan>)</font> <font color=Magenta>"Invalid &#916;"</font>
+<a name="line-257"></a>      read_delta <font color=Red>=</font> read_arg parse_int    <font color=Cyan>(</font><font color=Cyan>&gt;</font><font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>(</font><font color=Red>\</font>n o <font color=Red>-&gt;</font> o <font color=Cyan>{</font> cl_delta <font color=Red>=</font> fromIntegral n <font color=Cyan>}</font><font color=Cyan>)</font> <font color=Magenta>"Invalid &#x0394;"</font>
 <a name="line-258"></a>      read_seed  <font color=Red>=</font> read_arg parse_int    <font color=Cyan>(</font><font color=Cyan>&gt;=</font><font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>(</font><font color=Red>\</font>n o <font color=Red>-&gt;</font> o <font color=Cyan>{</font> cl_seed  <font color=Red>=</font> fromIntegral n <font color=Cyan>}</font><font color=Cyan>)</font> <font color=Magenta>"Invalid seed"</font>
 <a name="line-259"></a>      read_i     <font color=Red>=</font> read_arg parse_int    <font color=Cyan>(</font><font color=Cyan>&gt;=</font><font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>(</font><font color=Red>\</font>n o <font color=Red>-&gt;</font> o <font color=Cyan>{</font> cl_i     <font color=Red>=</font> fromIntegral n <font color=Cyan>}</font><font color=Cyan>)</font> <font color=Magenta>"Invalid i"</font>
 <a name="line-260"></a>      read_s     <font color=Red>=</font> read_arg parse_int    <font color=Cyan>(</font><font color=Cyan>&gt;</font><font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>(</font><font color=Red>\</font>n o <font color=Red>-&gt;</font> o <font color=Cyan>{</font> cl_i     <font color=Red>=</font> ceiling <font color=Cyan>$</font> logBase <font color=Magenta>2</font> <font color=Cyan>$</font> fromIntegral n <font color=Cyan>}</font><font color=Cyan>)</font> <font color=Magenta>"Invalid s"</font>
@@ -311,7 +311,7 @@
 <a name="line-304"></a>
 <a name="line-305"></a>  <font color=Green><u>let</u></font> bigD <font color=Red>=</font> cl_delta options
 <a name="line-306"></a>  assertM <font color=Cyan>(</font>is_valid_bigD bigD<font color=Cyan>)</font> <font color=Cyan>$</font>
-<a name="line-307"></a>    <font color=Magenta>"&#916; = "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show <font color=Cyan>$</font> cl_delta options<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" not valid discriminant"</font>
+<a name="line-307"></a>    <font color=Magenta>"&#x0394; = "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show <font color=Cyan>$</font> cl_delta options<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" not valid discriminant"</font>
 <a name="line-308"></a>  <font color=Green><u>let</u></font> d <font color=Red>=</font> d_of_bigD bigD
 <a name="line-309"></a>
 <a name="line-310"></a>  <font color=Green><u>case</u></font> what options <font color=Green><u>of</u></font>
@@ -320,30 +320,30 @@
 <a name="line-313"></a>    Sub <font color=Red>-&gt;</font> main_sub options
 <a name="line-314"></a>    Regulator <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-315"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"Regulator (by classical period-finding):"</font>
-<a name="line-316"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#916; = "</font> <font color=Cyan>++</font> show bigD
+<a name="line-316"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#x0394; = "</font> <font color=Cyan>++</font> show bigD
 <a name="line-317"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"d = "</font> <font color=Cyan>++</font> show d
 <a name="line-318"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"R = "</font> <font color=Cyan>++</font> show <font color=Cyan>(</font>regulator bigD<font color=Cyan>)</font>
 <a name="line-319"></a>    FundamentalUnit <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-320"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"Fundamental unit (by classical period-finding):"</font>
-<a name="line-321"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#916; = "</font> <font color=Cyan>++</font> show bigD
+<a name="line-321"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#x0394; = "</font> <font color=Cyan>++</font> show bigD
 <a name="line-322"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"d = "</font> <font color=Cyan>++</font> show d
-<a name="line-323"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#949;_0 = "</font> <font color=Cyan>++</font> pretty_show_AlgNum <font color=Cyan>(</font>fundamental_unit bigD<font color=Cyan>)</font>
+<a name="line-323"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#x03b5;_0 = "</font> <font color=Cyan>++</font> pretty_show_AlgNum <font color=Cyan>(</font>fundamental_unit bigD<font color=Cyan>)</font>
 <a name="line-324"></a>    PellSolution <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
-<a name="line-325"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"Fundamental solution of Pell&#8217;s equation x^2 &#8722; d y^2 = 1 (by classical period-finding):"</font>
+<a name="line-325"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"Fundamental solution of Pell&#x2019;s equation x^2 &#x2212; d y^2 = 1 (by classical period-finding):"</font>
 <a name="line-326"></a>      <font color=Green><u>let</u></font> <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>)</font> <font color=Red>=</font> fundamental_solution d
-<a name="line-327"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#916; = "</font> <font color=Cyan>++</font> show bigD
+<a name="line-327"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#x0394; = "</font> <font color=Cyan>++</font> show bigD
 <a name="line-328"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"d = "</font> <font color=Cyan>++</font> show d
 <a name="line-329"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"x = "</font> <font color=Cyan>++</font> show x
 <a name="line-330"></a>      putStrLn <font color=Cyan>$</font> <font color=Magenta>"y = "</font> <font color=Cyan>++</font> show y
 <a name="line-331"></a>
-<a name="line-332"></a><a name="main_stage1"></a><font color=Blue><i>-- | Main function for outputting the circuit for stage 1 of Hallgren&#8217;s algorithm.</i></font>
+<a name="line-332"></a><a name="main_stage1"></a><font color=Blue><i>-- | Main function for outputting the circuit for stage 1 of Hallgren&#x2019;s algorithm.</i></font>
 <a name="line-333"></a><font color=Blue>main_stage1</font> <font color=Red>::</font> Options <font color=Red>-&gt;</font> IO()
 <a name="line-334"></a><font color=Blue>main_stage1</font> options <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-335"></a>
 <a name="line-336"></a>    <font color=Blue><i>-- Generate the main circuit.</i></font>
 <a name="line-337"></a>    <font color=Green><u>let</u></font> bigD    <font color=Red>=</font> cl_delta options
 <a name="line-338"></a>    assertM <font color=Cyan>(</font>is_valid_bigD bigD<font color=Cyan>)</font> <font color=Cyan>$</font>
-<a name="line-339"></a>      <font color=Magenta>"&#916; = "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show <font color=Cyan>$</font> cl_delta options<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" not valid discriminant"</font>
+<a name="line-339"></a>      <font color=Magenta>"&#x0394; = "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show <font color=Cyan>$</font> cl_delta options<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" not valid discriminant"</font>
 <a name="line-340"></a>    <font color=Green><u>let</u></font> i       <font color=Red>=</font> cl_i     options
 <a name="line-341"></a>        ss_bound <font color=Red>=</font> <font color=Magenta>2</font><font color=Cyan>^</font>i
 <a name="line-342"></a>        q       <font color=Red>=</font> <font color=Magenta>2</font> <font color=Cyan>+</font> <font color=Magenta>2</font> <font color=Cyan>*</font> i   <font color=Blue><i>-- So 2^q = 4 * S_bound^2 is the first power of 2 above S_bound  </i></font>
@@ -353,7 +353,7 @@
 <a name="line-346"></a>    putStrLn <font color=Cyan>$</font> show options
 <a name="line-347"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>""</font>
 <a name="line-348"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>"Computed values: "</font>
-<a name="line-349"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#916;: "</font> <font color=Cyan>++</font> show bigD
+<a name="line-349"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>"&#x0394;: "</font> <font color=Cyan>++</font> show bigD
 <a name="line-350"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>"i: "</font> <font color=Cyan>++</font> show i
 <a name="line-351"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>"S_bound: "</font> <font color=Cyan>++</font> show ss_bound
 <a name="line-352"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>"q: "</font> <font color=Cyan>++</font> show q
@@ -367,7 +367,7 @@
 <a name="line-360"></a>    print_simple <font color=Cyan>(</font>format options<font color=Cyan>)</font> <font color=Cyan>(</font>decompose_generic <font color=Cyan>(</font>gatebase options<font color=Cyan>)</font> circuit<font color=Cyan>)</font>
 <a name="line-361"></a>
 <a name="line-362"></a>
-<a name="line-363"></a><a name="main_stage4"></a><font color=Blue><i>-- | Main function for outputting the circuit for stage 4 of Hallgren&#8217;s algorithm.</i></font>
+<a name="line-363"></a><a name="main_stage4"></a><font color=Blue><i>-- | Main function for outputting the circuit for stage 4 of Hallgren&#x2019;s algorithm.</i></font>
 <a name="line-364"></a><font color=Blue>main_stage4</font> <font color=Red>::</font> Options <font color=Red>-&gt;</font> IO()
 <a name="line-365"></a><font color=Blue>main_stage4</font> options <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-366"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>"Generating circuit for stage 4 with args: "</font> <font color=Cyan>++</font> show options

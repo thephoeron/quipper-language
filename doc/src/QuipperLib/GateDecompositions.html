@@ -411,7 +411,7 @@
 <a name="line-404"></a>
 <a name="line-405"></a><a name="controlled_V_at"></a><font color=Blue><i>-- | Decomposition of a controlled /V/-gate into the Clifford+/T/</i></font>
 <a name="line-406"></a><font color=Blue><i>-- base. Adapted from Amy et al. (&lt;<a href="http://arxiv.org/abs/1206.0758v3">http://arxiv.org/abs/1206.0758v3</a>&gt;,</i></font>
-<a name="line-407"></a><font color=Blue><i>-- Figure 5(c)). Our /V/-gate is /H//S/[sup &#8224;]/H/ as in Nielsen and</i></font>
+<a name="line-407"></a><font color=Blue><i>-- Figure 5(c)). Our /V/-gate is /H//S/[sup &#x2020;]/H/ as in Nielsen and</i></font>
 <a name="line-408"></a><font color=Blue><i>-- Chuang. The first argument is the target, and the second one is the</i></font>
 <a name="line-409"></a><font color=Blue><i>-- control. The control can be positive or negative.</i></font>
 <a name="line-410"></a><font color=Blue><i>-- </i></font>
@@ -488,7 +488,7 @@
 <a name="line-481"></a><font color=Blue>cc_iX_plain_at</font> q c1 c2 <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-482"></a>  gate_iX_at q <font color=Cyan>`controlled`</font> <font color=Cyan>(</font>c1<font color=Cyan>,</font>c2<font color=Cyan>)</font>
 <a name="line-483"></a>
-<a name="line-484"></a><a name="multi_cnot_barenco_at"></a><font color=Blue><i>-- | Decomposition of an /m/-times controlled not-gate, using /m/&#8722;2</i></font>
+<a name="line-484"></a><a name="multi_cnot_barenco_at"></a><font color=Blue><i>-- | Decomposition of an /m/-times controlled not-gate, using /m/&#x2212;2</i></font>
 <a name="line-485"></a><font color=Blue><i>-- ancillas that do not need be initialized in a particular</i></font>
 <a name="line-486"></a><font color=Blue><i>-- state. Adapted from Barenco et al.</i></font>
 <a name="line-487"></a><font color=Blue><i>-- (&lt;<a href="http://arxiv.org/abs/quantph/9503016">http://arxiv.org/abs/quantph/9503016</a>&gt;, Lemma 7.2).</i></font>
@@ -507,7 +507,7 @@
 <a name="line-500"></a><font color=Blue><i>-- not be initialized, and are returned in their original state.</i></font>
 <a name="line-501"></a><font color=Blue><i>-- </i></font>
 <a name="line-502"></a><font color=Blue><i>-- The size of this circuit is linear in the number of controls; the</i></font>
-<a name="line-503"></a><font color=Blue><i>-- decomposition uses 4/m/&#8722;8 doubly-controlled gates for /m/ &#8805; 3.</i></font>
+<a name="line-503"></a><font color=Blue><i>-- decomposition uses 4/m/&#x2212;8 doubly-controlled gates for /m/ &#x2265; 3.</i></font>
 <a name="line-504"></a><font color=Blue><i>-- </i></font>
 <a name="line-505"></a><font color=Blue><i>-- \[image multi_cnot_barenco.png]</i></font>
 <a name="line-506"></a><font color=Blue>multi_cnot_barenco_at</font> <font color=Red>::</font> <font color=Cyan>(</font>Qubit <font color=Red>-&gt;</font> Signed Qubit <font color=Red>-&gt;</font> Signed Qubit <font color=Red>-&gt;</font> Circ ()<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Cyan>(</font>Qubit <font color=Red>-&gt;</font> Signed Qubit <font color=Red>-&gt;</font> Signed Qubit <font color=Red>-&gt;</font> Circ ()<font color=Cyan>)</font> <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font>Signed Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ ()
@@ -548,8 +548,8 @@
 <a name="line-541"></a><font color=Blue><i>-- argument is a list of signed controls.</i></font>
 <a name="line-542"></a><font color=Blue><i>-- </i></font>
 <a name="line-543"></a><font color=Blue><i>-- The size of this circuit is linear in the number of controls; the</i></font>
-<a name="line-544"></a><font color=Blue><i>-- decomposition uses 8/m/&#8722;32 doubly-controlled gates, 4 /T/-gates,</i></font>
-<a name="line-545"></a><font color=Blue><i>-- and 2 /H/-gates, for /m/ &#8805; 6.</i></font>
+<a name="line-544"></a><font color=Blue><i>-- decomposition uses 8/m/&#x2212;32 doubly-controlled gates, 4 /T/-gates,</i></font>
+<a name="line-545"></a><font color=Blue><i>-- and 2 /H/-gates, for /m/ &#x2265; 6.</i></font>
 <a name="line-546"></a><font color=Blue><i>-- </i></font>
 <a name="line-547"></a><font color=Blue><i>-- \[image multi_ciX_noancilla.png]</i></font>
 <a name="line-548"></a><font color=Blue>multi_ciX_noancilla_at</font> <font color=Red>::</font> <font color=Cyan>(</font>Qubit <font color=Red>-&gt;</font> Signed Qubit <font color=Red>-&gt;</font> Signed Qubit <font color=Red>-&gt;</font> Circ ()<font color=Cyan>)</font> <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> <font color=Red>[</font>Signed Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ ()
@@ -601,22 +601,22 @@
 <a name="line-594"></a>
 <a name="line-595"></a><a name="with_combined_controls"></a><font color=Blue><i>-- | Decompose quantum controls recursively until at most /n/ remain,</i></font>
 <a name="line-596"></a><font color=Blue><i>-- and then pass these reduced controls to the given circuit.</i></font>
-<a name="line-597"></a><font color=Blue><i>-- Precondition: /n/ &#8805; 1.  </i></font>
+<a name="line-597"></a><font color=Blue><i>-- Precondition: /n/ &#x2265; 1.  </i></font>
 <a name="line-598"></a><font color=Blue><i>-- </i></font>
 <a name="line-599"></a><font color=Blue><i>-- The decomposition is done using a Toffoli-like gate that is given</i></font>
 <a name="line-600"></a><font color=Blue><i>-- as the first argument. This should be either a Toffoli gate, a</i></font>
 <a name="line-601"></a><font color=Blue><i>-- doubly-controlled /iX/-gate, a decomposition thereof, or any other</i></font>
 <a name="line-602"></a><font color=Blue><i>-- reversible ternary gate with the behavior</i></font>
 <a name="line-603"></a><font color=Blue><i>-- </i></font>
-<a name="line-604"></a><font color=Blue><i>-- * |000&#9002; &#8614; |0&#9002;|&#966;[sub 0]&#9002;</i></font>
+<a name="line-604"></a><font color=Blue><i>-- * |000&#x232a; &#x21a6; |0&#x232a;|&#x03c6;[sub 0]&#x232a;</i></font>
 <a name="line-605"></a><font color=Blue><i>-- </i></font>
-<a name="line-606"></a><font color=Blue><i>-- * |001&#9002; &#8614; |0&#9002;|&#966;[sub 1]&#9002;</i></font>
+<a name="line-606"></a><font color=Blue><i>-- * |001&#x232a; &#x21a6; |0&#x232a;|&#x03c6;[sub 1]&#x232a;</i></font>
 <a name="line-607"></a><font color=Blue><i>-- </i></font>
-<a name="line-608"></a><font color=Blue><i>-- * |010&#9002; &#8614; |0&#9002;|&#966;[sub 2]&#9002;</i></font>
+<a name="line-608"></a><font color=Blue><i>-- * |010&#x232a; &#x21a6; |0&#x232a;|&#x03c6;[sub 2]&#x232a;</i></font>
 <a name="line-609"></a><font color=Blue><i>-- </i></font>
-<a name="line-610"></a><font color=Blue><i>-- * |011&#9002; &#8614; |1&#9002;|&#966;[sub 3]&#9002;,</i></font>
+<a name="line-610"></a><font color=Blue><i>-- * |011&#x232a; &#x21a6; |1&#x232a;|&#x03c6;[sub 3]&#x232a;,</i></font>
 <a name="line-611"></a><font color=Blue><i>-- </i></font>
-<a name="line-612"></a><font color=Blue><i>-- where the states |&#966;[sub 0]&#9002;, &#8230;, |&#966;[sub 3]&#9002; are arbitrary.</i></font>
+<a name="line-612"></a><font color=Blue><i>-- where the states |&#x03c6;[sub 0]&#x232a;, &#x2026;, |&#x03c6;[sub 3]&#x232a; are arbitrary.</i></font>
 <a name="line-613"></a><font color=Blue><i>-- </i></font>
 <a name="line-614"></a><font color=Blue><i>-- For example, when /n/=2, this typically yields a circuit such as</i></font>
 <a name="line-615"></a><font color=Blue><i>-- the following (here shown using the doubly-controlled /iX/-gate):</i></font>

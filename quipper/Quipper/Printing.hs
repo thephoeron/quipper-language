@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -43,8 +43,6 @@ import Quipper.Generic
 import Quipper.Monad
 import Quipper.QData
 
-import Libraries.Render
-
 -- import other stuff
 import Prelude
 import Text.Printf
@@ -52,8 +50,9 @@ import Data.Char(isSpace)
 import Data.List
 import Data.Maybe
 import Control.Monad(when)
+import Graphics.EasyRender
 import System.IO
-import System.Cmd
+import System.Process
 import System.Directory
 import System.Environment
 import System.Info

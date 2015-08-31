@@ -1,4 +1,4 @@
-# This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+# This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 # file COPYRIGHT for a list of authors, copyright holders, licensing,
 # and other details. All rights reserved.
 # 
@@ -23,10 +23,9 @@ Quipper/CircLifting.hi: Quipper/CircLifting.hs Quipper/Monad.hi Quipper/Monad.hi
 ../Libraries/Template/ErrorMsgQ.hi: ../Libraries/Template/ErrorMsgQ.hs
 ../Libraries/Template/Auxiliary.hi: ../Libraries/Template/Auxiliary.hs ../Libraries/Auxiliary.hi
 Quipper/Classical.hi: Quipper/Classical.hs Quipper/Generic.hi Quipper/QData.hi Quipper/Monad.hi Quipper/Control.hi Quipper/Transformer.hi
-Quipper/Printing.hi: Quipper/Printing.hs ../Libraries/Auxiliary.hi Quipper/Circuit.hi Quipper/Generic.hi Quipper/Monad.hi Quipper/QData.hi ../Libraries/Render.hi
-../Libraries/Render.hi: ../Libraries/Render.hs ../Libraries/Auxiliary.hi
+Quipper/Printing.hi: Quipper/Printing.hs ../Libraries/Auxiliary.hi Quipper/Circuit.hi Quipper/Generic.hi Quipper/Monad.hi Quipper/QData.hi
 Quipper/Internal.hi: Quipper/Internal.hs ../Libraries/Auxiliary.hi Quipper/QData.hi Quipper/Labels.hi Quipper/Generic.hi
-Quipper.hi: Quipper.hs ../quipper/Quipper/Monad.hs ../quipper/Quipper/Generic.hs ../quipper/Quipper/QData.hs ../quipper/Quipper/QClasses.hs ../quipper/Quipper/Control.hs ../quipper/Quipper/CircLifting.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Circuit.hs ../quipper/Quipper/Classical.hs ../quipper/Quipper/Printing.hs ../quipper/Quipper/Labels.hs ../Libraries/Template.hs ../Libraries/Auxiliary.hs ../Libraries/Tuple.hs ../Libraries/Typeable.hs ../Libraries/Render.hs ../Libraries/Template/Lifting.hs ../Libraries/Template/Auxiliary.hs ../Libraries/Template/LiftQ.hs ../Libraries/Template/ErrorMsgQ.hs
+Quipper.hi: Quipper.hs ../quipper/Quipper/Monad.hs ../quipper/Quipper/Generic.hs ../quipper/Quipper/QData.hs ../quipper/Quipper/QClasses.hs ../quipper/Quipper/Control.hs ../quipper/Quipper/CircLifting.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Circuit.hs ../quipper/Quipper/Classical.hs ../quipper/Quipper/Printing.hs ../quipper/Quipper/Labels.hs ../Libraries/Template.hs ../Libraries/Auxiliary.hs ../Libraries/Tuple.hs ../Libraries/Typeable.hs ../Libraries/Template/Lifting.hs ../Libraries/Template/Auxiliary.hs ../Libraries/Template/LiftQ.hs ../Libraries/Template/ErrorMsgQ.hs
 Quipper/CircLifting.hi: Quipper/CircLifting.hs ../quipper/Quipper/Monad.hs ../quipper/Quipper/Circuit.hs ../quipper/Quipper/Generic.hs ../quipper/Quipper/QData.hs ../Libraries/Auxiliary.hs ../quipper/Quipper/Control.hs ../quipper/Quipper/QClasses.hs ../Libraries/Template.hs ../quipper/Quipper/Transformer.hs ../Libraries/Tuple.hs ../quipper/Quipper/Labels.hs ../Libraries/Typeable.hs ../Libraries/Template/Lifting.hs ../Libraries/Template/Auxiliary.hs ../Libraries/Template/LiftQ.hs ../Libraries/Template/ErrorMsgQ.hs
 Quipper/Circuit.hi: Quipper/Circuit.hs ../Libraries/Auxiliary.hs
 Quipper/Classical.hi: Quipper/Classical.hs ../quipper/Quipper/Generic.hs ../quipper/Quipper/QData.hs ../quipper/Quipper/Monad.hs ../quipper/Quipper/Control.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Circuit.hs ../Libraries/Auxiliary.hs ../Libraries/Tuple.hs ../quipper/Quipper/Labels.hs ../Libraries/Typeable.hs
@@ -35,7 +34,7 @@ Quipper/Generic.hi: Quipper/Generic.hs ../quipper/Quipper/Circuit.hs ../quipper/
 Quipper/Internal.hi: Quipper/Internal.hs ../Libraries/Auxiliary.hs ../quipper/Quipper/QData.hs ../quipper/Quipper/Labels.hs ../quipper/Quipper/Generic.hs ../quipper/Quipper/Monad.hs ../Libraries/Tuple.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Control.hs ../Libraries/Typeable.hs ../quipper/Quipper/Circuit.hs
 Quipper/Labels.hi: Quipper/Labels.hs ../quipper/Quipper/Circuit.hs ../quipper/Quipper/Monad.hs ../Libraries/Auxiliary.hs ../Libraries/Tuple.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Control.hs
 Quipper/Monad.hi: Quipper/Monad.hs ../quipper/Quipper/Circuit.hs ../Libraries/Auxiliary.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Control.hs ../Libraries/Tuple.hs
-Quipper/Printing.hi: Quipper/Printing.hs ../Libraries/Auxiliary.hs ../quipper/Quipper/Circuit.hs ../quipper/Quipper/Generic.hs ../quipper/Quipper/Monad.hs ../quipper/Quipper/QData.hs ../Libraries/Render.hs ../Libraries/Tuple.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Control.hs ../quipper/Quipper/Labels.hs ../Libraries/Typeable.hs
+Quipper/Printing.hi: Quipper/Printing.hs ../Libraries/Auxiliary.hs ../quipper/Quipper/Circuit.hs ../quipper/Quipper/Generic.hs ../quipper/Quipper/Monad.hs ../quipper/Quipper/QData.hs ../Libraries/Tuple.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Control.hs ../quipper/Quipper/Labels.hs ../Libraries/Typeable.hs
 Quipper/QClasses.hi: Quipper/QClasses.hs ../quipper/Quipper/Generic.hs ../quipper/Quipper/QData.hs ../quipper/Quipper/Monad.hs ../quipper/Quipper/Circuit.hs ../Libraries/Auxiliary.hs ../Libraries/Tuple.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Control.hs ../quipper/Quipper/Labels.hs ../Libraries/Typeable.hs
 Quipper/QData.hi: Quipper/QData.hs ../quipper/Quipper/Monad.hs ../Libraries/Auxiliary.hs ../Libraries/Tuple.hs ../quipper/Quipper/Labels.hs ../quipper/Quipper/Transformer.hs ../quipper/Quipper/Control.hs ../Libraries/Typeable.hs ../quipper/Quipper/Circuit.hs
 Quipper/Transformer.hi: Quipper/Transformer.hs ../quipper/Quipper/Circuit.hs ../Libraries/Auxiliary.hs

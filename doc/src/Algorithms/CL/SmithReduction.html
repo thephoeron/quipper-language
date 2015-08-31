@@ -14,7 +14,7 @@
 <a name="line-7"></a><font color=Blue><i>--</i></font>
 <a name="line-8"></a><font color=Blue><i>-- For background on how this is used to compute the structure of Abelian groups,</i></font>
 <a name="line-9"></a><font color=Blue><i>-- see the MathOverflow question &lt;<a href="http://mathoverflow.net/questions/12009/">http://mathoverflow.net/questions/12009/</a>&gt;,</i></font>
-<a name="line-10"></a><font color=Blue><i>-- in particular Greg Kuperberg&#8217;s answer &lt;<a href="http://mathoverflow.net/questions/12009#12053">http://mathoverflow.net/questions/12009#12053</a>&gt;.</i></font>
+<a name="line-10"></a><font color=Blue><i>-- in particular Greg Kuperberg&#x2019;s answer &lt;<a href="http://mathoverflow.net/questions/12009#12053">http://mathoverflow.net/questions/12009#12053</a>&gt;.</i></font>
 <a name="line-11"></a><font color=Blue><i>-- </i></font>
 <a name="line-12"></a><font color=Blue><i>-- We do not implement full SNF reduction here, but rather just as much as is</i></font>
 <a name="line-13"></a><font color=Blue><i>-- needed to compute the structure of finitely presented Abelian groups from</i></font>
@@ -27,11 +27,11 @@
 <a name="line-20"></a>
 <a name="line-21"></a><font color=Blue><i>-- * Matrix type and basic access functions.</i></font>
 <a name="line-22"></a>
-<a name="line-23"></a><a name="CLMatrix"></a><font color=Blue><i>-- | A data type to hold an /m/&#215;/n/ matrix (/M/[sub /ij/]),</i></font>
+<a name="line-23"></a><a name="CLMatrix"></a><font color=Blue><i>-- | A data type to hold an /m/&#x00d7;/n/ matrix (/M/[sub /ij/]),</i></font>
 <a name="line-24"></a><a name="CLMatrix"></a><font color=Blue><i>-- with entries from an arbitrary type @a@.</i></font>
 <a name="line-25"></a><a name="CLMatrix"></a><font color=Blue><i>-- </i></font>
 <a name="line-26"></a><a name="CLMatrix"></a><font color=Blue><i>-- The fields are: integers /m/ and /n/; a flag /t/ to indicate that a matrix</i></font>
-<a name="line-27"></a><a name="CLMatrix"></a><font color=Blue><i>-- should be considered formally transposed; and an /m/&#215;/n/ array /M/</i></font>
+<a name="line-27"></a><a name="CLMatrix"></a><font color=Blue><i>-- should be considered formally transposed; and an /m/&#x00d7;/n/ array /M/</i></font>
 <a name="line-28"></a><a name="CLMatrix"></a><font color=Blue><i>-- containing the entries.  When /t/ is 'False', /m/ is the number of rows,</i></font>
 <a name="line-29"></a><a name="CLMatrix"></a><font color=Blue><i>-- and /n/ the number of columns; when /t/ is 'True', this is reversed.</i></font>
 <a name="line-30"></a><a name="CLMatrix"></a><font color=Blue><i>--</i></font>
@@ -84,7 +84,7 @@
 <a name="line-77"></a><a name="matrix_from_list"></a><font color=Blue><i>-- | Construct an 'CLMatrix' from a list such as @[[1,0],[4,-5]]@.</i></font>
 <a name="line-78"></a><font color=Blue><i>--</i></font>
 <a name="line-79"></a><font color=Blue><i>-- Assumes that all inner lists are the same length, </i></font>
-<a name="line-80"></a><font color=Blue><i>-- and that the overall list is of length &#8805;1.</i></font>
+<a name="line-80"></a><font color=Blue><i>-- and that the overall list is of length &#x2265;1.</i></font>
 <a name="line-81"></a><font color=Blue>matrix_from_list</font> <font color=Red>::</font> <font color=Red>[</font><font color=Red>[</font>a<font color=Red>]</font><font color=Red>]</font> <font color=Red>-&gt;</font> CLMatrix a
 <a name="line-82"></a><font color=Blue>matrix_from_list</font> [] <font color=Red>=</font> error <font color=Magenta>"matrixFromList: empty list"</font>
 <a name="line-83"></a><font color=Blue>matrix_from_list</font> rs<font color=Red>@</font><font color=Cyan>(</font>r0<font color=Red><b>:</b></font><font color=Green><u>_</u></font><font color=Cyan>)</font> <font color=Red>=</font> CLMatrix <font color=Cyan>(</font>length rs<font color=Cyan>)</font> <font color=Cyan>(</font>length r0<font color=Cyan>)</font> False <font color=Cyan>$</font>
@@ -120,7 +120,7 @@
 <a name="line-113"></a>  <font color=Green><u>let</u></font> <font color=Cyan>(</font>d<font color=Cyan>,</font>x<font color=Cyan>,</font>y<font color=Cyan>)</font> <font color=Red>=</font> extended_euclid a b
 <a name="line-114"></a>      a' <font color=Red>=</font> a <font color=Cyan>`div`</font> d
 <a name="line-115"></a>      b' <font color=Red>=</font> b <font color=Cyan>`div`</font> d
-<a name="line-116"></a>  <font color=Blue><i>-- know that [x a + y b == d] and [d /= 0], so the matrix [[x,y],[&#8722;b',a']]</i></font>
+<a name="line-116"></a>  <font color=Blue><i>-- know that [x a + y b == d] and [d /= 0], so the matrix [[x,y],[&#x2212;b',a']]</i></font>
 <a name="line-117"></a>  <font color=Blue><i>-- is invertible; so premultiplication by it does not change the group</i></font>
 <a name="line-118"></a>  <font color=Blue><i>-- presentation (and indeed could be obtained as a combination of elementary</i></font>
 <a name="line-119"></a>  <font color=Blue><i>-- column operations).</i></font>
@@ -128,7 +128,7 @@
 <a name="line-121"></a>       <font color=Cyan>///</font> <font color=Red>[</font> <font color=Cyan>(</font>i<font color=Cyan>,</font>j1<font color=Cyan>,</font> <font color=Cyan>(</font><font color=Blue><i>-</i></font>b' <font color=Cyan>*</font> m <font color=Cyan>!!!</font> <font color=Cyan>(</font>i<font color=Cyan>,</font>j0<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>a' <font color=Cyan>*</font> m <font color=Cyan>!!!</font> <font color=Cyan>(</font>i<font color=Cyan>,</font>j1<font color=Cyan>)</font><font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>|</font> i <font color=Red>&lt;-</font> row_list m<font color=Red>]</font> 
 <a name="line-122"></a>
 <a name="line-123"></a><a name="clean_first_row"></a><font color=Blue><i>-- | Given a matrix, repeatedly use 'elim_entry_with_pivot' to put the</i></font>
-<a name="line-124"></a><font color=Blue><i>-- top row into clean form (/d/,0,&#8230;,0).</i></font>
+<a name="line-124"></a><font color=Blue><i>-- top row into clean form (/d/,0,&#x2026;,0).</i></font>
 <a name="line-125"></a><font color=Blue>clean_first_row</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral int<font color=Cyan>)</font> <font color=Red>=&gt;</font> CLMatrix int <font color=Red>-&gt;</font> CLMatrix int
 <a name="line-126"></a><font color=Blue>clean_first_row</font> m0 <font color=Red>=</font>
 <a name="line-127"></a>  foldl <font color=Cyan>(</font><font color=Red>\</font>m j <font color=Red>-&gt;</font> elim_entry_with_pivot m <font color=Magenta>0</font> <font color=Magenta>0</font> j<font color=Cyan>)</font> m0 <font color=Cyan>(</font>tail <font color=Cyan>$</font> col_list m0<font color=Cyan>)</font>
@@ -153,9 +153,9 @@
 <a name="line-146"></a><font color=Blue><i>-- corresponding to columns of the matrix, and relations specified by the </i></font>
 <a name="line-147"></a><font color=Blue><i>-- rows), compute the structure constants of the group, not necessarily sorted.</i></font>
 <a name="line-148"></a><font color=Blue><i>--</i></font>
-<a name="line-149"></a><font color=Blue><i>-- That is, return a list of natural numbers [/n/[sub 0],&#8230;,/n/[sub /s/]] </i></font>
+<a name="line-149"></a><font color=Blue><i>-- That is, return a list of natural numbers [/n/[sub 0],&#x2026;,/n/[sub /s/]] </i></font>
 <a name="line-150"></a><font color=Blue><i>-- such that the group given by the input presentation is isomorphic to the</i></font>
-<a name="line-151"></a><font color=Blue><i>-- product of the cyclic groups &#8484;\/(/n/[sub /i/]).</i></font>
+<a name="line-151"></a><font color=Blue><i>-- product of the cyclic groups &#x2124;\/(/n/[sub /i/]).</i></font>
 <a name="line-152"></a><font color=Blue>structure_constants_from_matrix</font>  <font color=Red>::</font> <font color=Cyan>(</font>Show int<font color=Cyan>,</font> Integral int<font color=Cyan>)</font> <font color=Red>=&gt;</font> CLMatrix int <font color=Red>-&gt;</font> <font color=Red>[</font>int<font color=Red>]</font>
 <a name="line-153"></a><font color=Blue>structure_constants_from_matrix</font> m <font color=Red>=</font>
 <a name="line-154"></a>  <font color=Green><u>if</u></font> cols m <font color=Cyan>==</font> <font color=Magenta>0</font> <font color=Green><u>then</u></font> []

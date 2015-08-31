@@ -1,19 +1,23 @@
-This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 file COPYRIGHT for a list of authors, copyright holders, licensing,
 and other details. All rights reserved.
 
 ======================================================================
 
 
-                  INSTALLATION INSTRUCTIONS ON LINUX
+            INSTALLATION INSTRUCTIONS FOR LINUX, MAC OS X,
+                       AND OTHER POSIX SYSTEMS
 
 
 I. Operating system
    ================
 
-Quipper has been tested on Ubuntu 12.10 and OpenSUZE 12.2. It should
-run on many different flavors of Linux and other POSIX-like systems.
+Quipper has been tested on Ubuntu 12.10, OpenSUZE 12.2, and Mac OS X.
+It should run on many different flavors of Linux and other POSIX-like
+systems.
 
+For installation instructions for Windows, please see the file
+INSTALLING.windows.
 
 II. Prerequisites
     =============
@@ -45,7 +49,7 @@ later) versions as well.
      + GNU gawk v.4.0.0
    Vendor: Free Software Foundation
  
- * The Glasgow Haskell Compiler (ghc), v.7.4.2
+ * The Glasgow Haskell Compiler (ghc), v.7.6.2
    Vendor: The University Court of the University of Glasgow.
  
  * cabal v.0.14.0

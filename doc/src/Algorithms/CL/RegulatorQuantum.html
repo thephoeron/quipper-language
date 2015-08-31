@@ -7,7 +7,7 @@
 <body>
 <pre><a name="line-1"></a><font color=Blue><i>{-# LANGUAGE MultiParamTypeClasses #-}</i></font> 
 <a name="line-2"></a>
-<a name="line-3"></a><font color=Blue><i>-- | This module implements the specialized quantum operations required in stages 1 and 4 of Hallgren&#8217;s algorithm.</i></font>
+<a name="line-3"></a><font color=Blue><i>-- | This module implements the specialized quantum operations required in stages 1 and 4 of Hallgren&#x2019;s algorithm.</i></font>
 <a name="line-4"></a><font color=Blue><i>--</i></font>
 <a name="line-5"></a><font color=Blue><i>-- The key operation for stage 1 is 'q_fN', implementing /f/[sub /N/], the quasi-periodic</i></font>
 <a name="line-6"></a><font color=Blue><i>-- function used in approximating the regulator.  This is the function /h/ of</i></font>
@@ -42,7 +42,7 @@
 <a name="line-35"></a>
 <a name="line-36"></a><font color=Blue><i>-- | Send /I/ = \&lt;/k/,/l/,/a/,/b/&gt; to /l/\//ka/ /I/ = \&lt;1,/a/,/a/,/b/&gt;.</i></font>
 <a name="line-37"></a><font color=Blue><i>--</i></font>
-<a name="line-38"></a><font color=Blue><i>-- On distances, send &#948;[sub /I/] to &#948;[sub /I/] - log (/l/\//ka/).</i></font>
+<a name="line-38"></a><font color=Blue><i>-- On distances, send &#x03b4;[sub /I/] to &#x03b4;[sub /I/] - log (/l/\//ka/).</i></font>
 <a name="line-39"></a>
 <a name="line-40"></a><a name="q_normalize"></a><font color=Blue><i>-- Implementation note: is it more efficient to multply/divide and then</i></font>
 <a name="line-41"></a><font color=Blue><i>-- take log, or take logs separately and then add/subtract?</i></font>
@@ -72,7 +72,7 @@
 <a name="line-65"></a>      return <font color=Cyan>(</font><font color=Cyan>(</font>various<font color=Cyan>,</font>dist<font color=Cyan>)</font><font color=Cyan>,</font> dist'<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-66"></a>  return <font color=Cyan>(</font><font color=Cyan>(</font>Ideal bigD k l a b<font color=Cyan>,</font> dist<font color=Cyan>)</font><font color=Cyan>,</font> <font color=Cyan>(</font>Ideal bigD k' l' a' b'<font color=Cyan>,</font> dist'<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-67"></a>
-<a name="line-68"></a><font color=Blue><i>-- | Apply the function &#961; to an 'IdealQ' together with a distance.  </i></font>
+<a name="line-68"></a><font color=Blue><i>-- | Apply the function &#x03c1; to an 'IdealQ' together with a distance.  </i></font>
 <a name="line-69"></a><font color=Blue><i>-- See [Jozsa 2003], Sect 6.2, preceding Prop. 21; compare 'rho_d'.</i></font>
 <a name="line-70"></a>
 <a name="line-71"></a><a name="q_rho_d"></a><font color=Blue><i>-- Implementation note: not factored into q_rho plus action on distance,</i></font>
@@ -114,16 +114,16 @@
 <a name="line-107"></a>    qc_copy
 <a name="line-108"></a>  return <font color=Cyan>(</font>iid<font color=Cyan>,</font> rho_iid<font color=Cyan>)</font>
 <a name="line-109"></a>
-<a name="line-110"></a><a name="q_rho_inv_d"></a><font color=Blue><i>-- | Apply the function &#961;[sup &#8211;1] to an 'IdealQ' together with a distance.  </i></font>
+<a name="line-110"></a><a name="q_rho_inv_d"></a><font color=Blue><i>-- | Apply the function &#x03c1;[sup &#x2013;1] to an 'IdealQ' together with a distance.  </i></font>
 <a name="line-111"></a><font color=Blue><i>-- See [Jozsa 2003], Sec 6.2, preceding Prop. 21, and Sec 6.4; compare 'rho_inv_d'.</i></font>
 <a name="line-112"></a><font color=Blue>q_rho_inv_d</font> <font color=Red>::</font> IdDistQ <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>IdDistQ<font color=Cyan>,</font> IdDistQ<font color=Cyan>)</font>
 <a name="line-113"></a><font color=Blue>q_rho_inv_d</font> <font color=Red>=</font> box <font color=Magenta>"rho_inv"</font> <font color=Cyan>$</font> <font color=Red>\</font>iid<font color=Red>@</font><font color=Cyan>(</font>Ideal bigD m l a b<font color=Cyan>,</font> del<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-114"></a>  rho_inv_iid <font color=Red>&lt;-</font> with_computed
 <a name="line-115"></a>    <font color=Cyan>(</font><font color=Green><u>do</u></font>
-<a name="line-116"></a>    <font color=Blue><i>--  b' = &#964;(&#916;,-b,a):</i></font>
+<a name="line-116"></a>    <font color=Blue><i>--  b' = &#x03c4;(&#x0394;,-b,a):</i></font>
 <a name="line-117"></a>      <font color=Cyan>(</font><font color=Green><u>_</u></font><font color=Cyan>,</font> b_neg<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_negate b
 <a name="line-118"></a>      <font color=Cyan>(</font><font color=Green><u>_</u></font><font color=Cyan>,</font> <font color=Green><u>_</u></font><font color=Cyan>,</font> b'<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_tau bigD b_neg a
-<a name="line-119"></a>    <font color=Blue><i>--  a'' = (&#916; - b'^2) / (4*a):</i></font>
+<a name="line-119"></a>    <font color=Blue><i>--  a'' = (&#x0394; - b'^2) / (4*a):</i></font>
 <a name="line-120"></a>      <font color=Cyan>(</font><font color=Green><u>_</u></font><font color=Cyan>,</font> b'_sq<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_square b'
 <a name="line-121"></a>      <font color=Cyan>(</font><font color=Green><u>_</u></font><font color=Cyan>,</font> a''_num<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_negate b'_sq
 <a name="line-122"></a>      a''_num <font color=Red>&lt;-</font> q_add_param_in_place <font color=Cyan>(</font>fromIntegral bigD<font color=Cyan>)</font> a''_num
@@ -158,7 +158,7 @@
 <a name="line-151"></a><font color=Blue><i>-- | As 'q_rho_d', but for reduced ideals.</i></font>
 <a name="line-152"></a>
 <a name="line-153"></a><a name="q_rho_red_d"></a><font color=Blue><i>-- Implementation note: could be optimised a bit, since some of the algebra </i></font>
-<a name="line-154"></a><font color=Blue><i>-- needed for &#961; in the general case is redundant for reduced ideals.</i></font>
+<a name="line-154"></a><font color=Blue><i>-- needed for &#x03c1; in the general case is redundant for reduced ideals.</i></font>
 <a name="line-155"></a><font color=Blue>q_rho_red_d</font> <font color=Red>::</font> IdRedDistQ <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>IdRedDistQ<font color=Cyan>,</font>IdRedDistQ<font color=Cyan>)</font> 
 <a name="line-156"></a><font color=Blue>q_rho_red_d</font> <font color=Cyan>(</font>ii<font color=Cyan>,</font>del<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-157"></a>  ii <font color=Red>&lt;-</font> q_forget_reduced ii
@@ -184,11 +184,11 @@
 <a name="line-177"></a><a name="q_dot_prod"></a><font color=Blue><i>-- | Compute the ordinary (not necessarily reduced) product of two reduced</i></font>
 <a name="line-178"></a><font color=Blue><i>-- fractional ideals.</i></font>
 <a name="line-179"></a><font color=Blue><i>-- </i></font>
-<a name="line-180"></a><font color=Blue><i>-- This is /I/&#8901;/J/ of [Jozsa 2003], Sec 7.1, following the description</i></font>
+<a name="line-180"></a><font color=Blue><i>-- This is /I/&#x22c5;/J/ of [Jozsa 2003], Sec 7.1, following the description</i></font>
 <a name="line-181"></a><font color=Blue><i>-- given in Prop. 34.</i></font>
 <a name="line-182"></a><font color=Blue>q_dot_prod</font> <font color=Red>::</font> IdealRedQ <font color=Red>-&gt;</font> IdealRedQ <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>IdealRedQ<font color=Cyan>,</font>IdealRedQ<font color=Cyan>,</font>IdealQ<font color=Cyan>)</font>
 <a name="line-183"></a><font color=Blue>q_dot_prod</font> <font color=Red>=</font> box <font color=Magenta>"q_dot_prod"</font> <font color=Cyan>$</font> <font color=Red>\</font><font color=Cyan>(</font>IdealRed bigD1 a1 b1<font color=Cyan>)</font> <font color=Cyan>(</font>IdealRed bigD2 a2 b2<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
-<a name="line-184"></a>  assertM <font color=Cyan>(</font>all_eq <font color=Red>[</font>bigD1<font color=Cyan>,</font>bigD2<font color=Red>]</font><font color=Cyan>)</font> <font color=Magenta>"Error: mismatched &#916;&#8217;s in q_dot_prod."</font>
+<a name="line-184"></a>  assertM <font color=Cyan>(</font>all_eq <font color=Red>[</font>bigD1<font color=Cyan>,</font>bigD2<font color=Red>]</font><font color=Cyan>)</font> <font color=Magenta>"Error: mismatched &#x0394;&#x2019;s in q_dot_prod."</font>
 <a name="line-185"></a>  <font color=Green><u>let</u></font> bigD <font color=Red>=</font> bigD1
 <a name="line-186"></a>      n <font color=Red>=</font> qdint_length a1
 <a name="line-187"></a>
@@ -298,7 +298,7 @@
 <a name="line-291"></a><a name="q_star_prod"></a><font color=Blue><i>-- | Given two reduced ideals-with-distance, compute their star-product, with distance.</i></font>
 <a name="line-292"></a><font color=Blue><i>--</i></font>
 <a name="line-293"></a><font color=Blue><i>-- This is /I/*/J/ of [Jozsa 2003], Sec. 7.1, defined as the first reduced</i></font>
-<a name="line-294"></a><font color=Blue><i>-- ideal-with-distance following /I/&#8901;/J/.</i></font>
+<a name="line-294"></a><font color=Blue><i>-- ideal-with-distance following /I/&#x22c5;/J/.</i></font>
 <a name="line-295"></a><font color=Blue>q_star_prod</font> <font color=Red>::</font> IdRedDistQ <font color=Red>-&gt;</font> IdRedDistQ <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>IdRedDistQ<font color=Cyan>,</font> IdRedDistQ<font color=Cyan>,</font> IdRedDistQ<font color=Cyan>)</font>
 <a name="line-296"></a><font color=Blue>q_star_prod</font> <font color=Red>=</font> box <font color=Magenta>"q_star_prod"</font> <font color=Cyan>$</font> <font color=Red>\</font>iid jjd <font color=Red>-&gt;</font> <font color=Green><u>do</u></font> 
 <a name="line-297"></a>  <font color=Green><u>let</u></font> bigD <font color=Red>=</font> bigD_of_IdealRed <font color=Cyan>$</font> fst iid
@@ -307,7 +307,7 @@
 <a name="line-300"></a>    <font color=Cyan>(</font>iid<font color=Cyan>,</font>jjd<font color=Cyan>)</font> 
 <a name="line-301"></a>    <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>iid<font color=Cyan>,</font>jjd<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-302"></a>      comment <font color=Magenta>"q_star_prod, step 1: K &lt;- 1/ka (I . J)"</font>
-<a name="line-303"></a>      label <font color=Cyan>(</font>iid<font color=Cyan>,</font>jjd<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Cyan>(</font><font color=Magenta>"I"</font><font color=Cyan>,</font><font color=Magenta>"&#948;(I)"</font><font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font><font color=Magenta>"J"</font><font color=Cyan>,</font><font color=Magenta>"&#948;(J)"</font><font color=Cyan>)</font><font color=Cyan>)</font>
+<a name="line-303"></a>      label <font color=Cyan>(</font>iid<font color=Cyan>,</font>jjd<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Cyan>(</font><font color=Magenta>"I"</font><font color=Cyan>,</font><font color=Magenta>"&#x03b4;(I)"</font><font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font><font color=Magenta>"J"</font><font color=Cyan>,</font><font color=Magenta>"&#x03b4;(J)"</font><font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-304"></a>      <font color=Cyan>(</font>iid<font color=Cyan>,</font>jjd<font color=Cyan>,</font>ii_jjd<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_dot_prod_with_dist iid jjd
 <a name="line-305"></a>      label <font color=Cyan>(</font>ii_jjd<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"II.JJ"</font><font color=Cyan>)</font>
 <a name="line-306"></a>      <font color=Cyan>(</font>ii_jjd<font color=Cyan>,</font>kkd<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_normalize ii_jjd
@@ -321,14 +321,14 @@
 <a name="line-314"></a>          c <font color=Red>&lt;-</font> qnot c
 <a name="line-315"></a>          return <font color=Cyan>(</font><font color=Cyan>(</font>kk<font color=Cyan>,</font>dist<font color=Cyan>)</font><font color=Cyan>,</font>c<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-316"></a>        <font color=Cyan>(</font><font color=Cyan>(</font>ceiling <font color=Cyan>$</font> <font color=Cyan>(</font>logBase <font color=Magenta>2</font> <font color=Cyan>$</font> fromIntegral bigD<font color=Cyan>)</font> <font color=Cyan>/</font> <font color=Magenta>2</font><font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Magenta>1</font><font color=Cyan>)</font> 
-<a name="line-317"></a><font color=Blue><i>-- Generally, reduction may require log_2 (a/&#8730;D) steps, </i></font>
+<a name="line-317"></a><font color=Blue><i>-- Generally, reduction may require log_2 (a/&#x221a;D) steps, </i></font>
 <a name="line-318"></a><font color=Blue><i>-- but here a is a_3 from the dot-product I.J,</i></font>
-<a name="line-319"></a><font color=Blue><i>-- so a = a_3 = (a1 * a2) / k^2 &#8804; a1 * a2;</i></font>
-<a name="line-320"></a><font color=Blue><i>-- but now a1, a2 &#8804; &#8730;D since they come from reduced ideals,</i></font>
-<a name="line-321"></a><font color=Blue><i>-- so a &#8804; &#8730;D * &#8730;D = D, and the bound simplifies.</i></font>
+<a name="line-319"></a><font color=Blue><i>-- so a = a_3 = (a1 * a2) / k^2 &#x2264; a1 * a2;</i></font>
+<a name="line-320"></a><font color=Blue><i>-- but now a1, a2 &#x2264; &#x221a;D since they come from reduced ideals,</i></font>
+<a name="line-321"></a><font color=Blue><i>-- so a &#x2264; &#x221a;D * &#x221a;D = D, and the bound simplifies.</i></font>
 <a name="line-322"></a>        kkd 
 <a name="line-323"></a>        <font color=Cyan>(</font><font color=Red>\</font>kkd_old <font color=Red>-&gt;</font> <font color=Green><u>do</u></font> 
-<a name="line-324"></a>          comment <font color=Magenta>"q_star_prod, step 2, loop body: compute &#961;(&#922;)"</font>
+<a name="line-324"></a>          comment <font color=Magenta>"q_star_prod, step 2, loop body: compute &#x03c1;(&#x039a;)"</font>
 <a name="line-325"></a>          <font color=Cyan>(</font>kkd_old<font color=Cyan>,</font>kkd_new<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_rho_d kkd_old 
 <a name="line-326"></a>          return <font color=Cyan>(</font>kkd_new<font color=Cyan>,</font>kkd_old<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-327"></a>
@@ -342,36 +342,36 @@
 <a name="line-335"></a>      <font color=Blue><i>-- NB: implementation of the conditional + whiles could almost certainly be improved.</i></font>
 <a name="line-336"></a>
 <a name="line-337"></a>      <font color=Cyan>(</font>dist_k<font color=Cyan>,</font> dist_ij<font color=Cyan>,</font> k_lt_ij<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_lt dist_k dist_ij
-<a name="line-338"></a>      label k_lt_ij <font color=Magenta>"Initially, &#948;(K) &#8804; &#948;(I.J)?"</font>
+<a name="line-338"></a>      label k_lt_ij <font color=Magenta>"Initially, &#x03b4;(K) &#x2264; &#x03b4;(I.J)?"</font>
 <a name="line-339"></a>      <font color=Green><u>let</u></font> ii_jjd <font color=Red>=</font> <font color=Cyan>(</font>ii_jj<font color=Cyan>,</font>dist_ij<font color=Cyan>)</font>
 <a name="line-340"></a>          kkd <font color=Red>=</font> <font color=Cyan>(</font>kk<font color=Cyan>,</font>dist_k<font color=Cyan>)</font>
 <a name="line-341"></a>
 <a name="line-342"></a>      comment <font color=Magenta>"q_star_prod, step 3a: pull-forwards loop"</font>
 <a name="line-343"></a>      <font color=Cyan>(</font><font color=Cyan>(</font>dist_ij<font color=Cyan>,</font> kkd<font color=Cyan>)</font><font color=Cyan>,</font> <font color=Cyan>(</font>dij'<font color=Cyan>,</font> kkd_forwards<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>&lt;-</font> q_bounded_while_with_garbage
 <a name="line-344"></a>        <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>dist_ij<font color=Cyan>,</font><font color=Cyan>(</font>kk<font color=Cyan>,</font>dist_k<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
-<a name="line-345"></a>          comment <font color=Magenta>"q_star_prod, step 3a, loop condition: is &#948;(K) &#8804; &#948;(II.JJ) still?"</font>
+<a name="line-345"></a>          comment <font color=Magenta>"q_star_prod, step 3a, loop condition: is &#x03b4;(K) &#x2264; &#x03b4;(II.JJ) still?"</font>
 <a name="line-346"></a>          <font color=Cyan>(</font>dist_k<font color=Cyan>,</font> dist_ij<font color=Cyan>,</font> k_lt_ij<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_lt dist_k dist_ij
 <a name="line-347"></a>          return <font color=Cyan>(</font><font color=Cyan>(</font>dist_ij<font color=Cyan>,</font><font color=Cyan>(</font>kk<font color=Cyan>,</font>dist_k<font color=Cyan>)</font><font color=Cyan>)</font><font color=Cyan>,</font>k_lt_ij<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-348"></a>        <font color=Cyan>(</font>ceiling <font color=Cyan>$</font> <font color=Magenta>3</font> <font color=Cyan>*</font> <font color=Cyan>(</font>logBase <font color=Magenta>2</font> <font color=Cyan>$</font> fromIntegral bigD<font color=Cyan>)</font> <font color=Cyan>/</font> <font color=Magenta>2</font><font color=Cyan>)</font> 
 <a name="line-349"></a>        <font color=Cyan>(</font>dist_ij<font color=Cyan>,</font>kkd<font color=Cyan>)</font> 
 <a name="line-350"></a>        <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>dij<font color=Cyan>,</font>kkd_old<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font> 
-<a name="line-351"></a>          comment <font color=Magenta>"q_star_prod, step 3a, loop body: compute &#961;(&#922;)"</font>
+<a name="line-351"></a>          comment <font color=Magenta>"q_star_prod, step 3a, loop body: compute &#x03c1;(&#x039a;)"</font>
 <a name="line-352"></a>          <font color=Cyan>(</font>kkd_old<font color=Cyan>,</font>kkd_new<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_rho_red_d kkd_old 
 <a name="line-353"></a>          return <font color=Cyan>(</font><font color=Cyan>(</font>dij<font color=Cyan>,</font>kkd_new<font color=Cyan>)</font><font color=Cyan>,</font>kkd_old<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-354"></a>
 <a name="line-355"></a>      comment <font color=Magenta>"q_star_prod, step 3b: pull-backwards loop"</font>
 <a name="line-356"></a>      <font color=Cyan>(</font><font color=Cyan>(</font>dist_ij<font color=Cyan>,</font> kkd<font color=Cyan>)</font><font color=Cyan>,</font> <font color=Cyan>(</font>dij''<font color=Cyan>,</font> kkd_too_far_back<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>&lt;-</font> q_bounded_while_with_garbage
 <a name="line-357"></a>        <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>dist_ij<font color=Cyan>,</font><font color=Cyan>(</font>kk<font color=Cyan>,</font>dist_k<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
-<a name="line-358"></a>          comment <font color=Magenta>"q_star_prod, step 3b, loop condition: is &#948;(K) &#8805; &#948;(II.JJ) still?"</font>
+<a name="line-358"></a>          comment <font color=Magenta>"q_star_prod, step 3b, loop condition: is &#x03b4;(K) &#x2265; &#x03b4;(II.JJ) still?"</font>
 <a name="line-359"></a>          <font color=Cyan>(</font>dist_k<font color=Cyan>,</font> dist_ij<font color=Cyan>,</font> k_gt_ij<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_gt dist_k dist_ij
 <a name="line-360"></a>          return <font color=Cyan>(</font><font color=Cyan>(</font>dist_ij<font color=Cyan>,</font><font color=Cyan>(</font>kk<font color=Cyan>,</font>dist_k<font color=Cyan>)</font><font color=Cyan>)</font><font color=Cyan>,</font>k_gt_ij<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-361"></a>        <font color=Cyan>(</font>ceiling <font color=Cyan>$</font> <font color=Magenta>3</font> <font color=Cyan>*</font> <font color=Cyan>(</font>logBase <font color=Magenta>2</font> <font color=Cyan>$</font> fromIntegral bigD<font color=Cyan>)</font> <font color=Cyan>/</font> <font color=Magenta>2</font><font color=Cyan>)</font> 
 <a name="line-362"></a>        <font color=Cyan>(</font>dist_ij<font color=Cyan>,</font>kkd<font color=Cyan>)</font> 
 <a name="line-363"></a>        <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>dij<font color=Cyan>,</font>kkd_old<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font> 
-<a name="line-364"></a>          comment <font color=Magenta>"q_star_prod, step 3b, loop body: compute &#961;^-1(&#922;)"</font>
+<a name="line-364"></a>          comment <font color=Magenta>"q_star_prod, step 3b, loop body: compute &#x03c1;^-1(&#x039a;)"</font>
 <a name="line-365"></a>          <font color=Cyan>(</font>kkd_old<font color=Cyan>,</font>kkd_new<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_rho_inv_red_d kkd_old 
 <a name="line-366"></a>          return <font color=Cyan>(</font><font color=Cyan>(</font>dij<font color=Cyan>,</font>kkd_new<font color=Cyan>)</font><font color=Cyan>,</font>kkd_old<font color=Cyan>)</font><font color=Cyan>)</font>
-<a name="line-367"></a>      comment <font color=Magenta>"q_star_prod, step 3b, cleanup: apply &#961; once to the output of this loop"</font>
+<a name="line-367"></a>      comment <font color=Magenta>"q_star_prod, step 3b, cleanup: apply &#x03c1; once to the output of this loop"</font>
 <a name="line-368"></a>      <font color=Cyan>(</font>kkd_too_far_back<font color=Cyan>,</font> kkd_back<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_rho_red_d kkd_too_far_back
 <a name="line-369"></a>
 <a name="line-370"></a>      return <font color=Cyan>(</font><font color=Cyan>(</font>iid<font color=Cyan>,</font> jjd<font color=Cyan>,</font> ii_jjd<font color=Cyan>,</font> kkd_initial<font color=Cyan>,</font> kkd<font color=Cyan>,</font> dij'<font color=Cyan>,</font> dij''<font color=Cyan>,</font> kkd_too_far_back<font color=Cyan>)</font><font color=Cyan>,</font> k_lt_ij<font color=Cyan>,</font> kkd_forwards<font color=Cyan>,</font> kkd_back<font color=Cyan>)</font><font color=Cyan>)</font>
@@ -396,9 +396,9 @@
 <a name="line-389"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-390"></a><font color=Blue><i>-- * The function f[sub /N/]</i></font>
 <a name="line-391"></a>
-<a name="line-392"></a><a name="q_fN"></a><font color=Blue><i>-- |  @'q_fN' &#916; /s/ /n/ /l/ /qi/ /j/@: find the minimal ideal-with-distance (/J/,&#948;[sub /J/]) such that &#948;[sub /J/] &gt; /x/, where /x/ = /i/\//N/ + /j/\//L/, where /N/ = 2[sup /n/], /L/ = 2[sup /l/].  /qi/ is quantum; other inputs are classical parameters.  Return (/i/,/J/,&#948;[sub /J/]&#8211;/x/).  Work under the assumption that /R/ &lt; 2[sup /s/].</i></font>
+<a name="line-392"></a><a name="q_fN"></a><font color=Blue><i>-- |  @'q_fN' &#x0394; /s/ /n/ /l/ /qi/ /j/@: find the minimal ideal-with-distance (/J/,&#x03b4;[sub /J/]) such that &#x03b4;[sub /J/] &gt; /x/, where /x/ = /i/\//N/ + /j/\//L/, where /N/ = 2[sup /n/], /L/ = 2[sup /l/].  /qi/ is quantum; other inputs are classical parameters.  Return (/i/,/J/,&#x03b4;[sub /J/]&#x2013;/x/).  Work under the assumption that /R/ &lt; 2[sup /s/].</i></font>
 <a name="line-393"></a><font color=Blue><i>--</i></font>
-<a name="line-394"></a><font color=Blue><i>-- This is the function /h/ of [Jozsa 2003], Sec. 9, discretized with precision 1\//N/ = 2[sup &#8722;/n/],</i></font>
+<a name="line-394"></a><font color=Blue><i>-- This is the function /h/ of [Jozsa 2003], Sec. 9, discretized with precision 1\//N/ = 2[sup &#x2212;/n/],</i></font>
 <a name="line-395"></a><font color=Blue><i>-- and perturbed by the jitter parameter /j/\//L/.</i></font>
 <a name="line-396"></a><font color=Blue>q_fN</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> IntM <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font><font color=Cyan>(</font>IdealRedQ<font color=Cyan>,</font>FPRealQ<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-397"></a><font color=Blue>q_fN</font> bigD n l qi j <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -407,7 +407,7 @@
 <a name="line-400"></a>      ll <font color=Red>=</font> <font color=Magenta>2</font><font color=Cyan>^</font>l
 <a name="line-401"></a>      q <font color=Red>=</font> qdint_length qi
 <a name="line-402"></a><font color=Blue><i>-- Need to figure out a bound /p/ on the precision of the real arithmetic required.</i></font>
-<a name="line-403"></a><font color=Blue><i>-- It&#8217;s tempting to take /p/ = max(/n/,/l/); but I [pll] think we need larger, since if</i></font>
+<a name="line-403"></a><font color=Blue><i>-- It&#x2019;s tempting to take /p/ = max(/n/,/l/); but I [pll] think we need larger, since if</i></font>
 <a name="line-404"></a><font color=Blue><i>-- I understand correctly, we want the /final output/ with precision of 2^-n, which </i></font>
 <a name="line-405"></a><font color=Blue><i>-- requires higher precision in intermediate calculations.</i></font>
 <a name="line-406"></a>
@@ -420,18 +420,18 @@
 <a name="line-413"></a>      <font color=Cyan>(</font>qi<font color=Cyan>,</font>qj<font color=Cyan>,</font>qx<font color=Cyan>)</font> <font color=Red>&lt;-</font> fprealq_add_het <font color=Cyan>(</font><font color=Blue><i>-</i></font>p<font color=Cyan>)</font> <font color=Cyan>(</font>q <font color=Blue><i>-</i></font> n <font color=Cyan>+</font> p<font color=Cyan>)</font> qi qj
 <a name="line-414"></a>      label qx <font color=Magenta>"x := i/N + j/L"</font>
 <a name="line-415"></a>
-<a name="line-416"></a>      comment <font color=Magenta>"q_fN, step 2: J &lt;- &#961;^2(O)."</font>
+<a name="line-416"></a>      comment <font color=Magenta>"q_fN, step 2: J &lt;- &#x03c1;^2(O)."</font>
 <a name="line-417"></a>      oo <font color=Red>&lt;-</font> qinit <font color=Cyan>$</font> fix_sizes_IdealRed <font color=Cyan>$</font> unit_idealRed bigD
 <a name="line-418"></a>      dist_o <font color=Red>&lt;-</font> qinit <font color=Cyan>$</font> <font color=Cyan>(</font>fprealx <font color=Cyan>(</font><font color=Blue><i>-</i></font>p<font color=Cyan>)</font> <font color=Cyan>(</font>intm <font color=Cyan>(</font>q <font color=Blue><i>-</i></font> n <font color=Cyan>+</font> p<font color=Cyan>)</font> <font color=Magenta>0</font><font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-419"></a>      <font color=Green><u>let</u></font> ood <font color=Red>=</font> <font color=Cyan>(</font>oo<font color=Cyan>,</font>dist_o<font color=Cyan>)</font>
-<a name="line-420"></a>      label ood <font color=Cyan>(</font><font color=Magenta>"O"</font><font color=Cyan>,</font> <font color=Magenta>"&#948;_O = 0"</font><font color=Cyan>)</font>
+<a name="line-420"></a>      label ood <font color=Cyan>(</font><font color=Magenta>"O"</font><font color=Cyan>,</font> <font color=Magenta>"&#x03b4;_O = 0"</font><font color=Cyan>)</font>
 <a name="line-421"></a>
 <a name="line-422"></a>      <font color=Cyan>(</font>ood<font color=Cyan>,</font>jjd0<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_rho_red_d ood
-<a name="line-423"></a>      label jjd0 <font color=Cyan>(</font><font color=Magenta>"J0"</font><font color=Cyan>,</font> <font color=Magenta>"&#948;_J0)"</font><font color=Cyan>)</font>
+<a name="line-423"></a>      label jjd0 <font color=Cyan>(</font><font color=Magenta>"J0"</font><font color=Cyan>,</font> <font color=Magenta>"&#x03b4;_J0)"</font><font color=Cyan>)</font>
 <a name="line-424"></a>      <font color=Cyan>(</font>jjd0<font color=Cyan>,</font>jjd1<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_rho_red_d jjd0
-<a name="line-425"></a>      label jjd1 <font color=Cyan>(</font><font color=Magenta>"J1"</font><font color=Cyan>,</font> <font color=Magenta>"&#948;_J1)"</font><font color=Cyan>)</font>
+<a name="line-425"></a>      label jjd1 <font color=Cyan>(</font><font color=Magenta>"J1"</font><font color=Cyan>,</font> <font color=Magenta>"&#x03b4;_J1)"</font><font color=Cyan>)</font>
 <a name="line-426"></a>      
-<a name="line-427"></a>      comment <font color=Magenta>"q_fN, step 3: compute the iterated squares of (J1,&#948;_J1)."</font>
+<a name="line-427"></a>      comment <font color=Magenta>"q_fN, step 3: compute the iterated squares of (J1,&#x03b4;_J1)."</font>
 <a name="line-428"></a>      <font color=Blue><i>-- Note: quantumly, it is cheaper to compute them all unconditionally, rather than</i></font>
 <a name="line-429"></a>      <font color=Blue><i>-- using a conditional loop that stops early, as one might classically.</i></font>
 <a name="line-430"></a>      jjds <font color=Red>&lt;-</font> loop_with_indexM
@@ -440,14 +440,14 @@
 <a name="line-433"></a>        <font color=Red>[</font>jjd1<font color=Red>]</font>
 <a name="line-434"></a>        <font color=Cyan>(</font><font color=Red>\</font>i <font color=Cyan>(</font>jjd_prev<font color=Red><b>:</b></font>jjds_earlier<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-435"></a>          <font color=Cyan>(</font>jjd_prev<font color=Cyan>,</font>jjd_new<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_star_square jjd_prev
-<a name="line-436"></a>          label jjd_new <font color=Cyan>(</font><font color=Magenta>"J_"</font> <font color=Cyan>++</font> show <font color=Cyan>(</font>i<font color=Cyan>+</font><font color=Magenta>2</font><font color=Cyan>)</font><font color=Cyan>,</font> <font color=Magenta>"&#948;_"</font> <font color=Cyan>++</font> show <font color=Cyan>(</font>i<font color=Cyan>+</font><font color=Magenta>2</font><font color=Cyan>)</font><font color=Cyan>)</font>
+<a name="line-436"></a>          label jjd_new <font color=Cyan>(</font><font color=Magenta>"J_"</font> <font color=Cyan>++</font> show <font color=Cyan>(</font>i<font color=Cyan>+</font><font color=Magenta>2</font><font color=Cyan>)</font><font color=Cyan>,</font> <font color=Magenta>"&#x03b4;_"</font> <font color=Cyan>++</font> show <font color=Cyan>(</font>i<font color=Cyan>+</font><font color=Magenta>2</font><font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-437"></a>          return <font color=Cyan>(</font>jjd_new<font color=Red><b>:</b></font>jjd_prev<font color=Red><b>:</b></font>jjds_earlier<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-438"></a>
-<a name="line-439"></a>      comment <font color=Magenta>"q_fN, step 4: compute the greatest product of these &#8804; x"</font>
+<a name="line-439"></a>      comment <font color=Magenta>"q_fN, step 4: compute the greatest product of these &#x2264; x"</font>
 <a name="line-440"></a>      <font color=Blue><i>-- Again, it is quantumly cheaper to start at the maximum possible bound, instead of k = M.</i></font>
 <a name="line-441"></a>
 <a name="line-442"></a>      <font color=Green><u>let</u></font> jjd_star <font color=Red>=</font> ood
-<a name="line-443"></a>      label jjd_star <font color=Cyan>(</font><font color=Magenta>"J_*, &#948;_*"</font><font color=Cyan>)</font>
+<a name="line-443"></a>      label jjd_star <font color=Cyan>(</font><font color=Magenta>"J_*, &#x03b4;_*"</font><font color=Cyan>)</font>
 <a name="line-444"></a>
 <a name="line-445"></a>      <font color=Cyan>(</font>qx<font color=Cyan>,</font> jjd_star<font color=Cyan>,</font> garbage<font color=Cyan>)</font> <font color=Red>&lt;-</font> foldM 
 <a name="line-446"></a>        <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>qx<font color=Cyan>,</font> jjd_star_old<font color=Cyan>,</font> garbage<font color=Cyan>)</font> jjd_k <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
@@ -460,15 +460,15 @@
 <a name="line-453"></a>            controlled_not jjd_star_new jjd_star_candidate <font color=Cyan>`controlled`</font> test <font color=Cyan>.==.</font> True
 <a name="line-454"></a>          <font color=Cyan>(</font>jjd_star_new<font color=Cyan>,</font> jjd_star_old<font color=Cyan>)</font> <font color=Red>&lt;-</font>
 <a name="line-455"></a>            controlled_not jjd_star_new jjd_star_old <font color=Cyan>`controlled`</font> test <font color=Cyan>.==.</font> False
-<a name="line-456"></a>          label jjd_star_new <font color=Cyan>(</font><font color=Magenta>"J_*, &#948;(J_*)"</font><font color=Cyan>)</font>
+<a name="line-456"></a>          label jjd_star_new <font color=Cyan>(</font><font color=Magenta>"J_*, &#x03b4;(J_*)"</font><font color=Cyan>)</font>
 <a name="line-457"></a>          return <font color=Cyan>(</font>qx<font color=Cyan>,</font> jjd_star_new<font color=Cyan>,</font> <font color=Cyan>(</font>jjd_star_old<font color=Cyan>,</font>jjd_star_candidate<font color=Cyan>,</font>jjd_k<font color=Cyan>,</font>test<font color=Cyan>)</font><font color=Red><b>:</b></font>garbage<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-458"></a>        <font color=Cyan>(</font>qx<font color=Cyan>,</font> jjd_star<font color=Cyan>,</font> []<font color=Cyan>)</font>
 <a name="line-459"></a>        jjds
 <a name="line-460"></a>    
-<a name="line-461"></a>      label jjd_star <font color=Cyan>(</font><font color=Magenta>"J_*, &#948;_*)"</font><font color=Cyan>)</font>
-<a name="line-462"></a>      comment <font color=Magenta>"q_fN: (J_*,&#948;_*) is now the greatest ideal/distance pair &#8804; x constructible from the iterated star-squares (J_k,&#948;_k)."</font>
+<a name="line-461"></a>      label jjd_star <font color=Cyan>(</font><font color=Magenta>"J_*, &#x03b4;_*)"</font><font color=Cyan>)</font>
+<a name="line-462"></a>      comment <font color=Magenta>"q_fN: (J_*,&#x03b4;_*) is now the greatest ideal/distance pair &#x2264; x constructible from the iterated star-squares (J_k,&#x03b4;_k)."</font>
 <a name="line-463"></a>
-<a name="line-464"></a>      comment <font color=Magenta>"q_fN, step 5: apply &#961;^2 to (J_*,&#948;_*) as long as &#948;_* &#8804; x."</font>
+<a name="line-464"></a>      comment <font color=Magenta>"q_fN, step 5: apply &#x03c1;^2 to (J_*,&#x03b4;_*) as long as &#x03b4;_* &#x2264; x."</font>
 <a name="line-465"></a>      <font color=Cyan>(</font><font color=Cyan>(</font>jjd_star_initial<font color=Cyan>,</font> qx<font color=Cyan>)</font><font color=Cyan>,</font> <font color=Cyan>(</font>jjd_star<font color=Cyan>,</font> qx_copy<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>&lt;-</font> q_bounded_while_with_garbage
 <a name="line-466"></a>        <font color=Blue><i>-- conditional test:</i></font>
 <a name="line-467"></a>        <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font><font color=Cyan>(</font>jj_star<font color=Cyan>,</font> dist_star<font color=Cyan>)</font><font color=Cyan>,</font> qx<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
@@ -485,7 +485,7 @@
 <a name="line-478"></a>          return <font color=Cyan>(</font><font color=Cyan>(</font>jjd_star_new<font color=Cyan>,</font> qx<font color=Cyan>)</font><font color=Cyan>,</font> <font color=Cyan>(</font>jjd_star_old<font color=Cyan>,</font> rho_jjd_star_old<font color=Cyan>)</font><font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-479"></a>      qx <font color=Red>&lt;-</font> qc_uncopy_fun qx qx_copy
 <a name="line-480"></a>
-<a name="line-481"></a>      comment <font color=Magenta>"q_fN, step 6: apply &#961;^{-1} once more if necessary."</font>
+<a name="line-481"></a>      comment <font color=Magenta>"q_fN, step 6: apply &#x03c1;^{-1} once more if necessary."</font>
 <a name="line-482"></a>      <font color=Cyan>(</font>jjd_star_candidate1<font color=Cyan>,</font> jjd_star_candidate2<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_rho_inv_red_d jjd_star
 <a name="line-483"></a>      
 <a name="line-484"></a>      <font color=Green><u>let</u></font> <font color=Cyan>(</font>jj_star_candidate1<font color=Cyan>,</font> dist_star_candidate1<font color=Cyan>)</font> <font color=Red>=</font> jjd_star_candidate1
@@ -493,7 +493,7 @@
 <a name="line-486"></a>      <font color=Green><u>let</u></font> jjd_star_candidate1 <font color=Red>=</font> <font color=Cyan>(</font>jj_star_candidate1<font color=Cyan>,</font> dist_star_candidate1<font color=Cyan>)</font>
 <a name="line-487"></a>      
 <a name="line-488"></a>      <font color=Blue><i>-- End of the computation part of the 'with_computed_fun'.  </i></font>
-<a name="line-489"></a>      <font color=Blue><i>-- Pass on everything we&#8217;ve constructed, with the relevant stuff put first.  </i></font>
+<a name="line-489"></a>      <font color=Blue><i>-- Pass on everything we&#x2019;ve constructed, with the relevant stuff put first.  </i></font>
 <a name="line-490"></a>      return <font color=Cyan>(</font>qx<font color=Cyan>,</font> jjd_star_candidate1<font color=Cyan>,</font> jjd_star_candidate2<font color=Cyan>,</font> final_test<font color=Cyan>,</font>
 <a name="line-491"></a>              <font color=Cyan>(</font>qi<font color=Cyan>,</font> qj<font color=Cyan>,</font> garbage<font color=Cyan>,</font> jjd0<font color=Cyan>,</font> jjd1<font color=Cyan>,</font> jjd_star_initial<font color=Cyan>,</font> jjd_star_initial<font color=Cyan>)</font><font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-492"></a>

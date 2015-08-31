@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -44,6 +44,9 @@ import Data.IntMap (IntMap)
 import qualified Data.IntMap as IntMap
 
 import Data.Typeable
+
+import Control.Applicative (Applicative(..))
+import Control.Monad (liftM, ap)
 
 -- ----------------------------------------------------------------------
 -- * Quantum circuit data type
@@ -664,6 +667,13 @@ instance Monad ReadWrite where
     RW_Write gate f' -> RW_Write gate (f' >>= g)
     RW_Read bit cont -> RW_Read bit (\bool -> cont bool >>= g)
     RW_Subroutine name subroutine f' -> RW_Subroutine name subroutine (f' >>= g)
+
+instance Applicative ReadWrite where
+  pure = return
+  (<*>) = ap
+
+instance Functor ReadWrite where
+  fmap = liftM
 
 -- | Transforms a read-write computation into one that behaves identically,
 -- but also returns the list of gates generated.

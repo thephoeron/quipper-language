@@ -10,10 +10,10 @@
 <a name="line-3"></a><font color=Blue><i>-- interaction terms. It is essentially a fully automated version of</i></font>
 <a name="line-4"></a><font color=Blue><i>-- the calculations from</i></font>
 <a name="line-5"></a><font color=Blue><i>-- </i></font>
-<a name="line-6"></a><font color=Blue><i>-- * James D. Whitfield, Jacob Biamonte, and Al&#225;n</i></font>
+<a name="line-6"></a><font color=Blue><i>-- * James D. Whitfield, Jacob Biamonte, and Al&#x00e1;n</i></font>
 <a name="line-7"></a><font color=Blue><i>-- Aspuru-Guzik. \"Simulation of electronic structure Hamiltonians</i></font>
 <a name="line-8"></a><font color=Blue><i>-- using quantum computers.\" </i></font>
-<a name="line-9"></a><font color=Blue><i>-- /Molecular Physics/ 109(5):735&#8211;750, 2011.</i></font>
+<a name="line-9"></a><font color=Blue><i>-- /Molecular Physics/ 109(5):735&#x2013;750, 2011.</i></font>
 <a name="line-10"></a><font color=Blue><i>-- See also &lt;<a href="http://arxiv.org/abs/1001.3855v3">http://arxiv.org/abs/1001.3855v3</a>&gt;.</i></font>
 <a name="line-11"></a>
 <a name="line-12"></a>
@@ -39,17 +39,17 @@
 <a name="line-32"></a><font color=Blue><i>-- interactions, we first calculate the Jordan-Wigner transformation</i></font>
 <a name="line-33"></a><font color=Blue><i>-- of the second quantized hermitian interaction terms</i></font>
 <a name="line-34"></a><font color=Blue><i>-- </i></font>
-<a name="line-35"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /p/], </i></font>
+<a name="line-35"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /p/], </i></font>
 <a name="line-36"></a><font color=Blue><i>-- </i></font>
-<a name="line-37"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/] + /a/[sub /q/][sup &#8224;]/a/[sub /p/],</i></font>
+<a name="line-37"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/] + /a/[sub /q/][sup &#x2020;]/a/[sub /p/],</i></font>
 <a name="line-38"></a><font color=Blue><i>-- </i></font>
-<a name="line-39"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /q/]/a/[sub /p/],</i></font>
+<a name="line-39"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/],</i></font>
 <a name="line-40"></a><font color=Blue><i>-- </i></font>
-<a name="line-41"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/] + </i></font>
-<a name="line-42"></a><font color=Blue><i>-- /a/[sub /s/][sup &#8224;]/a/[sub /r/][sup &#8224;]/a/[sub /q/]/a/[sub /p/].</i></font>
+<a name="line-41"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/] + </i></font>
+<a name="line-42"></a><font color=Blue><i>-- /a/[sub /s/][sup &#x2020;]/a/[sub /r/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/].</i></font>
 <a name="line-43"></a><font color=Blue><i>-- </i></font>
 <a name="line-44"></a><font color=Blue><i>-- Next, we decompose each operator into a linear combination /H/ =</i></font>
-<a name="line-45"></a><font color=Blue><i>-- &#955;[sub 1]/M/[sub 1] + ... + &#955;[sub /n/]/M/[sub /n/] of mutually</i></font>
+<a name="line-45"></a><font color=Blue><i>-- &#x03bb;[sub 1]/M/[sub 1] + ... + &#x03bb;[sub /n/]/M/[sub /n/] of mutually</i></font>
 <a name="line-46"></a><font color=Blue><i>-- commuting hermitian tensors. At this point, each summand /M/[sub /j/]</i></font>
 <a name="line-47"></a><font color=Blue><i>-- in the linear combination will be a tensor product of the following</i></font>
 <a name="line-48"></a><font color=Blue><i>-- operators (not necessarily in this order):</i></font>
@@ -60,19 +60,19 @@
 <a name="line-53"></a><font color=Blue><i>-- </i></font>
 <a name="line-54"></a><font color=Blue><i>-- * zero or more Pauli /Z/ operators, and</i></font>
 <a name="line-55"></a><font color=Blue><i>-- </i></font>
-<a name="line-56"></a><font color=Blue><i>-- * zero or more /D/ operators, where /D/ = &#963;[sup &#8722;]&#963;[sup +] = (/I/&#8722;/Z/)\/2.</i></font>
+<a name="line-56"></a><font color=Blue><i>-- * zero or more /D/ operators, where /D/ = &#x03c3;[sup &#x2212;]&#x03c3;[sup +] = (/I/&#x2212;/Z/)\/2.</i></font>
 <a name="line-57"></a><font color=Blue><i>-- </i></font>
 <a name="line-58"></a><font color=Blue><i>-- Note that there may be zero terms in the summation; this happens,</i></font>
 <a name="line-59"></a><font color=Blue><i>-- for example, for </i></font>
-<a name="line-60"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /p/][sup &#8224;]/a/[sub /r/]/a/[sub /s/],</i></font>
+<a name="line-60"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /p/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/],</i></font>
 <a name="line-61"></a><font color=Blue><i>-- because two electrons cannot occupy the same spin orbital due to</i></font>
-<a name="line-62"></a><font color=Blue><i>-- their fermionic nature. In this case, /H/ = 0 and [exp -/i/&#952;/H/] = /I/.</i></font>
+<a name="line-62"></a><font color=Blue><i>-- their fermionic nature. In this case, /H/ = 0 and [exp -/i/&#x03b8;/H/] = /I/.</i></font>
 <a name="line-63"></a><font color=Blue><i>-- </i></font>
-<a name="line-64"></a><font color=Blue><i>-- Next, we calculate [exp -/i/&#952;/H/]. Because the summands /M/[sub /j/]</i></font>
+<a name="line-64"></a><font color=Blue><i>-- Next, we calculate [exp -/i/&#x03b8;/H/]. Because the summands /M/[sub /j/]</i></font>
 <a name="line-65"></a><font color=Blue><i>-- commute, we can exponentiate each summand separately, using the formula</i></font>
-<a name="line-66"></a><font color=Blue><i>-- [exp -/i/&#952;/H/] = [exp -/i/&#952;&#955;[sub 1]/M/[sub 1]]&#8943;[exp -/i/&#952;&#955;[sub /n/]/M/[sub /n/]].</i></font>
+<a name="line-66"></a><font color=Blue><i>-- [exp -/i/&#x03b8;/H/] = [exp -/i/&#x03b8;&#x03bb;[sub 1]/M/[sub 1]]&#x22ef;[exp -/i/&#x03b8;&#x03bb;[sub /n/]/M/[sub /n/]].</i></font>
 <a name="line-67"></a><font color=Blue><i>-- </i></font>
-<a name="line-68"></a><font color=Blue><i>-- We then generate the circuit for [exp -/i/&#952;&#955;[sub /j/]/M/[sub /j/]]</i></font>
+<a name="line-68"></a><font color=Blue><i>-- We then generate the circuit for [exp -/i/&#x03b8;&#x03bb;[sub /j/]/M/[sub /j/]]</i></font>
 <a name="line-69"></a><font color=Blue><i>-- by applying a sequence of basis changes until the problem is</i></font>
 <a name="line-70"></a><font color=Blue><i>-- reduced to a controlled rotation. The basis changes are, in this</i></font>
 <a name="line-71"></a><font color=Blue><i>-- order:</i></font>
@@ -84,14 +84,14 @@
 <a name="line-77"></a><font color=Blue><i>-- 2. Change each Pauli /Y/ operator in /M/[sub /j/] to a Pauli /Z/</i></font>
 <a name="line-78"></a><font color=Blue><i>-- operator, and apply a [bold Y] basis change to the corresponding</i></font>
 <a name="line-79"></a><font color=Blue><i>-- qubit. Note: the [bold Y] basis change operator is defined in</i></font>
-<a name="line-80"></a><font color=Blue><i>-- [Whitfield et al.] as /R/[sub /x/](-&#960;\/2) = (/I/+/iX/)\/&#8730;2, or</i></font>
-<a name="line-81"></a><font color=Blue><i>-- equivalently [bold Y] = /SHS/, and satisfies [bold Y][super &#8224;]/Y/[bold Y] =</i></font>
+<a name="line-80"></a><font color=Blue><i>-- [Whitfield et al.] as /R/[sub /x/](-&#x03c0;\/2) = (/I/+/iX/)\/&#x221a;2, or</i></font>
+<a name="line-81"></a><font color=Blue><i>-- equivalently [bold Y] = /SHS/, and satisfies [bold Y][super &#x2020;]/Y/[bold Y] =</i></font>
 <a name="line-82"></a><font color=Blue><i>-- /Z/. It should not be confused with the Pauli /Y/ operator.</i></font>
 <a name="line-83"></a><font color=Blue><i>-- </i></font>
 <a name="line-84"></a><font color=Blue><i>-- 3. If the operator /M/[sub /j/] contains one or more Pauli /Z/ operators</i></font>
 <a name="line-85"></a><font color=Blue><i>-- (including those obtained in steps 1 and 2), then do a basis change</i></font>
 <a name="line-86"></a><font color=Blue><i>-- by a cascade of controlled-not gates to reduce this to a single /Z/</i></font>
-<a name="line-87"></a><font color=Blue><i>-- operator. This uses the relation /CNot/ (/Z/&#8855;/Z/) /CNot/ = /I/&#8855;/Z/.</i></font>
+<a name="line-87"></a><font color=Blue><i>-- operator. This uses the relation /CNot/ (/Z/&#x2297;/Z/) /CNot/ = /I/&#x2297;/Z/.</i></font>
 <a name="line-88"></a><font color=Blue><i>-- </i></font>
 <a name="line-89"></a><font color=Blue><i>-- After these basis changes, the operator /M/[sub /j/] consists of</i></font>
 <a name="line-90"></a><font color=Blue><i>-- exactly zero or one Pauli /Z/ operator, together with zero or more</i></font>
@@ -105,16 +105,16 @@
 <a name="line-98"></a><font color=Blue><i>-- distinguishing two cases:</i></font>
 <a name="line-99"></a><font color=Blue><i>-- </i></font>
 <a name="line-100"></a><font color=Blue><i>-- * If /M/[sub /j/] contains a Pauli /Z/ operator, then use the</i></font>
-<a name="line-101"></a><font color=Blue><i>-- relation [exp -/i/&#952;/Z/] = /R/[sub /z/](2&#952;). In this case, the circuit</i></font>
-<a name="line-102"></a><font color=Blue><i>-- for [exp -/i/&#952;/M/[sub /j/]] is a controlled /R/[sub /z/](2&#952;) gate in</i></font>
+<a name="line-101"></a><font color=Blue><i>-- relation [exp -/i/&#x03b8;/Z/] = /R/[sub /z/](2&#x03b8;). In this case, the circuit</i></font>
+<a name="line-102"></a><font color=Blue><i>-- for [exp -/i/&#x03b8;/M/[sub /j/]] is a controlled /R/[sub /z/](2&#x03b8;) gate in</i></font>
 <a name="line-103"></a><font color=Blue><i>-- the position of the /Z/ operator, with zero or more controls in the</i></font>
 <a name="line-104"></a><font color=Blue><i>-- positions of any /D/ operators.</i></font>
 <a name="line-105"></a><font color=Blue><i>-- </i></font>
 <a name="line-106"></a><font color=Blue><i>-- * If /M/[sub /j/] does not contain a Pauli /Z/ operator, then the</i></font>
-<a name="line-107"></a><font color=Blue><i>-- operation to be performed is a phase change [exp -/i/&#952;], controlled</i></font>
+<a name="line-107"></a><font color=Blue><i>-- operation to be performed is a phase change [exp -/i/&#x03b8;], controlled</i></font>
 <a name="line-108"></a><font color=Blue><i>-- by the qubits in the positions of the /D/ operators. Note that</i></font>
 <a name="line-109"></a><font color=Blue><i>-- there must be at least one /D/ operator in this case. Also note</i></font>
-<a name="line-110"></a><font color=Blue><i>-- that a controlled [exp -/i/&#952;] gate is identical to a /T/(&#952;) gate.</i></font>
+<a name="line-110"></a><font color=Blue><i>-- that a controlled [exp -/i/&#x03b8;] gate is identical to a /T/(&#x03b8;) gate.</i></font>
 <a name="line-111"></a>
 <a name="line-112"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-113"></a><font color=Blue><i>-- * Correctness of the templates</i></font>
@@ -135,35 +135,35 @@
 <a name="line-128"></a><font color=Blue><i>-- Moreover, this program finds a simpler template.</i></font>
 <a name="line-129"></a><font color=Blue><i>-- </i></font>
 <a name="line-130"></a><font color=Blue><i>-- * In the template for the double excitation operator, the angles</i></font>
-<a name="line-131"></a><font color=Blue><i>-- are wrong; they should be &#177;&#952;\/4 instead of &#952;.</i></font>
+<a name="line-131"></a><font color=Blue><i>-- are wrong; they should be &#x00b1;&#x03b8;\/4 instead of &#x03b8;.</i></font>
 <a name="line-132"></a><font color=Blue><i>-- </i></font>
 <a name="line-133"></a><font color=Blue><i>-- The corrected templates generated by our code are as follows:</i></font>
 <a name="line-134"></a><font color=Blue><i>-- </i></font>
-<a name="line-135"></a><font color=Blue><i>-- * Number operator /h/[sub /pp/] /a/[sub /p/][sup &#8224;]/a/[sub /p/].</i></font>
+<a name="line-135"></a><font color=Blue><i>-- * Number operator /h/[sub /pp/] /a/[sub /p/][sup &#x2020;]/a/[sub /p/].</i></font>
 <a name="line-136"></a><font color=Blue><i>-- </i></font>
 <a name="line-137"></a><font color=Blue><i>-- &gt; [image b0-template.png]</i></font>
 <a name="line-138"></a><font color=Blue><i>-- </i></font>
-<a name="line-139"></a><font color=Blue><i>-- * Excitation operator /h/[sub /pq/] /a/[sub /p/][sup &#8224;]/a/[sub /q/].</i></font>
+<a name="line-139"></a><font color=Blue><i>-- * Excitation operator /h/[sub /pq/] /a/[sub /p/][sup &#x2020;]/a/[sub /q/].</i></font>
 <a name="line-140"></a><font color=Blue><i>-- </i></font>
 <a name="line-141"></a><font color=Blue><i>-- &gt; [image b1-template.png]</i></font>
 <a name="line-142"></a><font color=Blue><i>-- </i></font>
 <a name="line-143"></a><font color=Blue><i>-- * Coulomb and exchange operators /h/[sub /pqqp/]</i></font>
-<a name="line-144"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /q/]/a/[sub /p/].</i></font>
+<a name="line-144"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/].</i></font>
 <a name="line-145"></a><font color=Blue><i>-- </i></font>
 <a name="line-146"></a><font color=Blue><i>-- &gt; [image b2-template.png]</i></font>
 <a name="line-147"></a><font color=Blue><i>-- </i></font>
 <a name="line-148"></a><font color=Blue><i>-- * Number-excitation operator /h/[sub /pqqr/]</i></font>
-<a name="line-149"></a><font color=Blue><i>-- (/a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /q/]/a/[sub /r/] +</i></font>
-<a name="line-150"></a><font color=Blue><i>-- /a/[sub /r/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /q/]/a/[sub /p/]).</i></font>
-<a name="line-151"></a><font color=Blue><i>-- The sign of &#177;&#952; depends on the relative ordering of the indices /p,q,r/.</i></font>
+<a name="line-149"></a><font color=Blue><i>-- (/a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /q/]/a/[sub /r/] +</i></font>
+<a name="line-150"></a><font color=Blue><i>-- /a/[sub /r/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/]).</i></font>
+<a name="line-151"></a><font color=Blue><i>-- The sign of &#x00b1;&#x03b8; depends on the relative ordering of the indices /p,q,r/.</i></font>
 <a name="line-152"></a><font color=Blue><i>-- </i></font>
 <a name="line-153"></a><font color=Blue><i>-- &gt; [image b3-template.png]</i></font>
 <a name="line-154"></a><font color=Blue><i>-- </i></font>
 <a name="line-155"></a><font color=Blue><i>-- * Double excitation operator </i></font>
 <a name="line-156"></a><font color=Blue><i>-- /h/[sub /pqrs/]</i></font>
-<a name="line-157"></a><font color=Blue><i>-- (/a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/] +</i></font>
-<a name="line-158"></a><font color=Blue><i>-- /a/[sub /s/][sup &#8224;]/a/[sub /r/][sup &#8224;]/a/[sub /q/]/a/[sub /p/]).</i></font>
-<a name="line-159"></a><font color=Blue><i>-- The sign of &#177;&#952;\/4 in each of the eight terms depends on the relative ordering of the indices /p,q,r,s/.</i></font>
+<a name="line-157"></a><font color=Blue><i>-- (/a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/] +</i></font>
+<a name="line-158"></a><font color=Blue><i>-- /a/[sub /s/][sup &#x2020;]/a/[sub /r/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/]).</i></font>
+<a name="line-159"></a><font color=Blue><i>-- The sign of &#x00b1;&#x03b8;\/4 in each of the eight terms depends on the relative ordering of the indices /p,q,r,s/.</i></font>
 <a name="line-160"></a><font color=Blue><i>-- </i></font>
 <a name="line-161"></a><font color=Blue><i>-- &gt; [image b4-template.png] </i></font>
 <a name="line-162"></a>
@@ -172,13 +172,13 @@
 <a name="line-165"></a>
 <a name="line-166"></a><font color=Blue><i>-- $ As noted above, our algorithm found the following template for the</i></font>
 <a name="line-167"></a><font color=Blue><i>-- Coulomb operator </i></font>
-<a name="line-168"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /q/]/a/[sub /p/]:</i></font>
+<a name="line-168"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/]:</i></font>
 <a name="line-169"></a><font color=Blue><i>-- </i></font>
 <a name="line-170"></a><font color=Blue><i>-- &gt; [image b2-template.png]</i></font>
 <a name="line-171"></a><font color=Blue><i>-- </i></font>
 <a name="line-172"></a><font color=Blue><i>-- This is simpler than the template given in [Whitfield et al.], even</i></font>
 <a name="line-173"></a><font color=Blue><i>-- after one accounts for the cost of decomposing the additional</i></font>
-<a name="line-174"></a><font color=Blue><i>-- controlled /T/(&#952;) gate into elementary gates. However, an</i></font>
+<a name="line-174"></a><font color=Blue><i>-- controlled /T/(&#x03b8;) gate into elementary gates. However, an</i></font>
 <a name="line-175"></a><font color=Blue><i>-- equivalent circuit can also be given that is more similar to the</i></font>
 <a name="line-176"></a><font color=Blue><i>-- one in [Whitfield et al.] (but with corrected rotation angles):</i></font>
 <a name="line-177"></a><font color=Blue><i>-- </i></font>
@@ -224,14 +224,14 @@
 <a name="line-217"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-218"></a><font color=Blue><i>-- * Basic Gates</i></font>
 <a name="line-219"></a>
-<a name="line-220"></a><a name="rotZ_at"></a><font color=Blue><i>-- | Apply a /R/[sub z](&#952;)=[exp -/i/&#952;/Z/\/2] gate. The parameter &#952; is a</i></font>
+<a name="line-220"></a><a name="rotZ_at"></a><font color=Blue><i>-- | Apply a /R/[sub z](&#x03b8;)=[exp -/i/&#x03b8;/Z/\/2] gate. The parameter &#x03b8; is a</i></font>
 <a name="line-221"></a><font color=Blue><i>-- Bloch sphere angle.</i></font>
 <a name="line-222"></a><font color=Blue><i>-- </i></font>
 <a name="line-223"></a><font color=Blue><i>-- \[image Rz.png]</i></font>
 <a name="line-224"></a><font color=Blue>rotZ_at</font> <font color=Red>::</font> Double <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> Circ ()
 <a name="line-225"></a><font color=Blue>rotZ_at</font> theta q <font color=Red>=</font> named_rotation_at <font color=Magenta>"Rz(%)"</font> theta q
 <a name="line-226"></a>
-<a name="line-227"></a><a name="gse_G_at"></a><font color=Blue><i>-- | Apply a /G/(&#952;) gate. This is a global phase change of [exp -/i/&#952;],</i></font>
+<a name="line-227"></a><a name="gse_G_at"></a><font color=Blue><i>-- | Apply a /G/(&#x03b8;) gate. This is a global phase change of [exp -/i/&#x03b8;],</i></font>
 <a name="line-228"></a><font color=Blue><i>-- so this gate only \"does\" something when it is controlled.</i></font>
 <a name="line-229"></a><font color=Blue><i>-- Although it is logically a 0-ary gate, we give it a qubit argument</i></font>
 <a name="line-230"></a><font color=Blue><i>-- to specify where the gate can be drawn in circuit diagrams.</i></font>
@@ -240,8 +240,8 @@
 <a name="line-233"></a><font color=Blue>gse_G_at</font> <font color=Red>::</font> Double <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> Circ ()
 <a name="line-234"></a><font color=Blue>gse_G_at</font> theta q <font color=Red>=</font> named_rotation_at <font color=Magenta>"G(%)"</font> theta q
 <a name="line-235"></a>
-<a name="line-236"></a><a name="gse_T_at"></a><font color=Blue><i>-- | Apply a /T/(&#952;) gate. This is a /Z/-rotation, but differs</i></font>
-<a name="line-237"></a><font color=Blue><i>-- from /R/[sub z](-&#952;) by a global phase.</i></font>
+<a name="line-236"></a><a name="gse_T_at"></a><font color=Blue><i>-- | Apply a /T/(&#x03b8;) gate. This is a /Z/-rotation, but differs</i></font>
+<a name="line-237"></a><font color=Blue><i>-- from /R/[sub z](-&#x03b8;) by a global phase.</i></font>
 <a name="line-238"></a><font color=Blue><i>-- </i></font>
 <a name="line-239"></a><font color=Blue><i>-- \[image T.png]</i></font>
 <a name="line-240"></a><font color=Blue>gse_T_at</font> <font color=Red>::</font> Double <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> Circ ()
@@ -260,8 +260,8 @@
 <a name="line-253"></a><font color=Blue><i>-- * Basic operators</i></font>
 <a name="line-254"></a>
 <a name="line-255"></a><a name="Op"></a><font color=Blue><i>-- | This type provides a symbolic representation of certain</i></font>
-<a name="line-256"></a><a name="Op"></a><font color=Blue><i>-- operators, generated by the Pauli operators, /P/ = &#963;[sup +], and</i></font>
-<a name="line-257"></a><a name="Op"></a><font color=Blue><i>-- /M/ = &#963;[sup &#8722;]. For lack of a better term, we call these the</i></font>
+<a name="line-256"></a><a name="Op"></a><font color=Blue><i>-- operators, generated by the Pauli operators, /P/ = &#x03c3;[sup +], and</i></font>
+<a name="line-257"></a><a name="Op"></a><font color=Blue><i>-- /M/ = &#x03c3;[sup &#x2212;]. For lack of a better term, we call these the</i></font>
 <a name="line-258"></a><a name="Op"></a><font color=Blue><i>-- \"basic\" operators. Note that apart from /P/ and /M/, all of these</i></font>
 <a name="line-259"></a><a name="Op"></a><font color=Blue><i>-- are hermitian.</i></font>
 <a name="line-260"></a><a name="Op"></a><font color=Green><u>data</u></font> Op <font color=Red>=</font> 
@@ -269,14 +269,14 @@
 <a name="line-262"></a>  <font color=Red>|</font> X  <font color=Blue><i>-- ^ Pauli /X/ operator.  </i></font>
 <a name="line-263"></a>  <font color=Red>|</font> Y  <font color=Blue><i>-- ^ Pauli /Y/ operator.</i></font>
 <a name="line-264"></a>  <font color=Red>|</font> Z  <font color=Blue><i>-- ^ Pauli /Z/ operator.</i></font>
-<a name="line-265"></a>  <font color=Red>|</font> P  <font color=Blue><i>-- ^ &#963;[sup +] operator = (0,1;0,0).</i></font>
-<a name="line-266"></a>  <font color=Red>|</font> M  <font color=Blue><i>-- ^ &#963;[sup &#8722;] operator = (0,0;1,0).</i></font>
-<a name="line-267"></a>  <font color=Red>|</font> A  <font color=Blue><i>-- ^ &#963;[sup +]&#963;[sup &#8722;] operator = (1,0;0,0).</i></font>
-<a name="line-268"></a>  <font color=Red>|</font> D  <font color=Blue><i>-- ^ &#963;[sup &#8722;]&#963;[sup +] operator = (0,0;0,1).</i></font>
+<a name="line-265"></a>  <font color=Red>|</font> P  <font color=Blue><i>-- ^ &#x03c3;[sup +] operator = (0,1;0,0).</i></font>
+<a name="line-266"></a>  <font color=Red>|</font> M  <font color=Blue><i>-- ^ &#x03c3;[sup &#x2212;] operator = (0,0;1,0).</i></font>
+<a name="line-267"></a>  <font color=Red>|</font> A  <font color=Blue><i>-- ^ &#x03c3;[sup +]&#x03c3;[sup &#x2212;] operator = (1,0;0,0).</i></font>
+<a name="line-268"></a>  <font color=Red>|</font> D  <font color=Blue><i>-- ^ &#x03c3;[sup &#x2212;]&#x03c3;[sup +] operator = (0,0;0,1).</i></font>
 <a name="line-269"></a>  <font color=Green><u>deriving</u></font> <font color=Cyan>(</font>Show<font color=Cyan>,</font> Eq<font color=Cyan>,</font> Ord<font color=Cyan>)</font>
 <a name="line-270"></a>
 <a name="line-271"></a><a name="Scaled"></a><font color=Blue><i>-- | A type to represent scalar multiples. An element of ('Scaled'</i></font>
-<a name="line-272"></a><a name="Scaled"></a><font color=Blue><i>-- /a/) is a pair (&#955;, /x/) of a complex scalar &#955; and an element /x/ &#8712;</i></font>
+<a name="line-272"></a><a name="Scaled"></a><font color=Blue><i>-- /a/) is a pair (&#x03bb;, /x/) of a complex scalar &#x03bb; and an element /x/ &#x2208;</i></font>
 <a name="line-273"></a><a name="Scaled"></a><font color=Blue><i>-- /a/. </i></font>
 <a name="line-274"></a><a name="Scaled"></a><font color=Green><u>data</u></font> Scaled a <font color=Red>=</font> Scaled Scalar a
 <a name="line-275"></a>
@@ -432,14 +432,14 @@
 <a name="line-425"></a><a name="jw"></a><font color=Blue><i>-- | Construct the Jordan-Wigner annihilation operator /a/[sub /p/] =</i></font>
 <a name="line-426"></a><font color=Blue><i>-- /IIIIPZZZZZ.../ for spin-orbital index /p/. The first parameter is</i></font>
 <a name="line-427"></a><font color=Blue><i>-- /p/, and the second one is /M/ (the number of spin-orbitals).</i></font>
-<a name="line-428"></a><font color=Blue><i>-- Precondition: 0 &#8804; /p/ &lt; /M/.</i></font>
+<a name="line-428"></a><font color=Blue><i>-- Precondition: 0 &#x2264; /p/ &lt; /M/.</i></font>
 <a name="line-429"></a><font color=Blue>jw</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Scaled Tensor
 <a name="line-430"></a><font color=Blue>jw</font> p m <font color=Red>=</font> Scaled <font color=Magenta>1</font> <font color=Cyan>(</font>power p I <font color=Cyan>++</font> <font color=Red>[</font>P<font color=Red>]</font> <font color=Cyan>++</font> power <font color=Cyan>(</font>m<font color=Blue><i>-</i></font>p<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Cyan>)</font> Z<font color=Cyan>)</font>
 <a name="line-431"></a>
-<a name="line-432"></a><a name="jw_dagger"></a><font color=Blue><i>-- | Construct the Jordan-Wigner creation operator /a/[sub /p/][sup &#8224;]</i></font>
+<a name="line-432"></a><a name="jw_dagger"></a><font color=Blue><i>-- | Construct the Jordan-Wigner creation operator /a/[sub /p/][sup &#x2020;]</i></font>
 <a name="line-433"></a><font color=Blue><i>-- = /IIIIMZZZZ.../ for spin-orbital index /p/.  The first parameter</i></font>
 <a name="line-434"></a><font color=Blue><i>-- is /p/, and the second one is /M/ (the number of spin-orbitals).</i></font>
-<a name="line-435"></a><font color=Blue><i>-- Precondition: 0 &#8804; /p/ &lt; /M/.</i></font>
+<a name="line-435"></a><font color=Blue><i>-- Precondition: 0 &#x2264; /p/ &lt; /M/.</i></font>
 <a name="line-436"></a><font color=Blue>jw_dagger</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Scaled Tensor
 <a name="line-437"></a><font color=Blue>jw_dagger</font> p m <font color=Red>=</font> Scaled <font color=Magenta>1</font> <font color=Cyan>(</font>power p I <font color=Cyan>++</font> <font color=Red>[</font>M<font color=Red>]</font> <font color=Cyan>++</font> power <font color=Cyan>(</font>m<font color=Blue><i>-</i></font>p<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Cyan>)</font> Z<font color=Cyan>)</font>
 <a name="line-438"></a>
@@ -449,7 +449,7 @@
 <a name="line-442"></a><font color=Blue><i>-- ** Simple interaction terms</i></font>
 <a name="line-443"></a>
 <a name="line-444"></a><a name="one_electron_operator_simple"></a><font color=Blue><i>-- | Construct the one-electron second quantized non-hermitianized</i></font>
-<a name="line-445"></a><font color=Blue><i>-- interaction term /a/[sub /p/][sup &#8224;]/a/[sub /q/].  The parameters</i></font>
+<a name="line-445"></a><font color=Blue><i>-- interaction term /a/[sub /p/][sup &#x2020;]/a/[sub /q/].  The parameters</i></font>
 <a name="line-446"></a><font color=Blue><i>-- are /p,q/.</i></font>
 <a name="line-447"></a><font color=Blue>one_electron_operator_simple</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Scaled Tensor
 <a name="line-448"></a><font color=Blue>one_electron_operator_simple</font> p q <font color=Red>=</font> ap <font color=Cyan>*</font> aq
@@ -461,7 +461,7 @@
 <a name="line-454"></a>
 <a name="line-455"></a><a name="two_electron_operator_simple"></a><font color=Blue><i>-- | Construct the two-electron second quantized non-hermitianized</i></font>
 <a name="line-456"></a><font color=Blue><i>-- interaction term</i></font>
-<a name="line-457"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/].</i></font>
+<a name="line-457"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/].</i></font>
 <a name="line-458"></a><font color=Blue><i>-- The parameters are /p,q,r,s/.</i></font>
 <a name="line-459"></a><font color=Blue>two_electron_operator_simple</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Scaled Tensor
 <a name="line-460"></a><font color=Blue>two_electron_operator_simple</font> p q r s <font color=Red>=</font> ap <font color=Cyan>*</font> aq <font color=Cyan>*</font> ar <font color=Cyan>*</font> <font color=Green><u>as</u></font>
@@ -476,9 +476,9 @@
 <a name="line-469"></a><font color=Blue><i>-- ** Hermitian interaction terms</i></font>
 <a name="line-470"></a>
 <a name="line-471"></a><a name="one_electron_operator"></a><font color=Blue><i>-- | Construct</i></font>
-<a name="line-472"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/] </i></font>
+<a name="line-472"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/] </i></font>
 <a name="line-473"></a><font color=Blue><i>-- if /p/ = /q/, and </i></font>
-<a name="line-474"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/] + /a/[sub /q/][sup &#8224;]/a/[sub /p/] </i></font>
+<a name="line-474"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/] + /a/[sub /q/][sup &#x2020;]/a/[sub /p/] </i></font>
 <a name="line-475"></a><font color=Blue><i>-- otherwise.</i></font>
 <a name="line-476"></a><font color=Blue>one_electron_operator</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> TensorLC    
 <a name="line-477"></a><font color=Blue>one_electron_operator</font> p q <font color=Red>=</font>
@@ -490,10 +490,10 @@
 <a name="line-483"></a>      a_qp <font color=Red>=</font> one_electron_operator_simple q p
 <a name="line-484"></a>       
 <a name="line-485"></a><a name="two_electron_operator"></a><font color=Blue><i>-- | Construct</i></font>
-<a name="line-486"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/]</i></font>
+<a name="line-486"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/]</i></font>
 <a name="line-487"></a><font color=Blue><i>-- if (/p/,/q/) = (/s/,/r/), and </i></font>
-<a name="line-488"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/] +</i></font>
-<a name="line-489"></a><font color=Blue><i>-- /a/[sub /s/][sup &#8224;]/a/[sub /r/][sup &#8224;]/a/[sub /q/]/a/[sub /p/]</i></font>
+<a name="line-488"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/] +</i></font>
+<a name="line-489"></a><font color=Blue><i>-- /a/[sub /s/][sup &#x2020;]/a/[sub /r/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/]</i></font>
 <a name="line-490"></a><font color=Blue><i>-- otherwise.</i></font>
 <a name="line-491"></a><font color=Blue>two_electron_operator</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> TensorLC
 <a name="line-492"></a><font color=Blue>two_electron_operator</font> p q r s <font color=Red>=</font>
@@ -536,8 +536,8 @@
 <a name="line-529"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-530"></a><font color=Blue><i>-- * Exponentiation and circuit generation</i></font>
 <a name="line-531"></a>
-<a name="line-532"></a><font color=Blue><i>-- | Given a simple hermitian tensor /H/ and an angle &#952;, generate a</i></font>
-<a name="line-533"></a><font color=Blue><i>-- circuit for [exp -/i/&#952;/H/].  The given list of input qubits is in</i></font>
+<a name="line-532"></a><font color=Blue><i>-- | Given a simple hermitian tensor /H/ and an angle &#x03b8;, generate a</i></font>
+<a name="line-533"></a><font color=Blue><i>-- circuit for [exp -/i/&#x03b8;/H/].  The given list of input qubits is in</i></font>
 <a name="line-534"></a><font color=Blue><i>-- the same order as the operators in /H/. Precondition: /H/ is made</i></font>
 <a name="line-535"></a><font color=Blue><i>-- up of zero or more identity operators and one or more of the</i></font>
 <a name="line-536"></a><font color=Blue><i>-- operators /X/, /Y/, /Z/, and /D/. The last parameter is a list of</i></font>
@@ -573,16 +573,16 @@
 <a name="line-566"></a>    rotation alpha ds zs <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-567"></a>      <font color=Green><u>case</u></font> zs <font color=Green><u>of</u></font>
 <a name="line-568"></a>        [] <font color=Red>-&gt;</font> <font color=Blue><i>-- if there are no Z operators, produce a controlled</i></font>
-<a name="line-569"></a>              <font color=Blue><i>-- e^{-i&#945;} gate.</i></font>
+<a name="line-569"></a>              <font color=Blue><i>-- e^{-i&#x03b1;} gate.</i></font>
 <a name="line-570"></a>          <font color=Green><u>case</u></font> ds <font color=Green><u>of</u></font>
 <a name="line-571"></a>            [] <font color=Red>-&gt;</font> error <font color=Magenta>"exponentiate_simple: precondition violated"</font>
 <a name="line-572"></a>            d<font color=Red><b>:</b></font>ds' <font color=Red>-&gt;</font> gse_T_at alpha <font color=Cyan>(</font>qs <font color=Cyan>!!</font> d<font color=Cyan>)</font> <font color=Cyan>`controlled`</font> <font color=Red>[</font>qs <font color=Cyan>!!</font> d' <font color=Red>|</font> d' <font color=Red>&lt;-</font> ds'<font color=Red>]</font>
 <a name="line-573"></a>        z<font color=Red><b>:</b></font>zs' <font color=Red>-&gt;</font> <font color=Blue><i>-- if there are Z operators, produce a controlled</i></font>
-<a name="line-574"></a>                 <font color=Blue><i>-- e^{-i&#945;Z} gate.</i></font>
+<a name="line-574"></a>                 <font color=Blue><i>-- e^{-i&#x03b1;Z} gate.</i></font>
 <a name="line-575"></a>          rotZ_at <font color=Cyan>(</font><font color=Magenta>2</font><font color=Cyan>*</font>alpha<font color=Cyan>)</font> <font color=Cyan>(</font>qs <font color=Cyan>!!</font> z<font color=Cyan>)</font> <font color=Cyan>`controlled`</font> <font color=Red>[</font>qs <font color=Cyan>!!</font> d <font color=Red>|</font> d <font color=Red>&lt;-</font> ds<font color=Red>]</font>
 <a name="line-576"></a>
 <a name="line-577"></a><a name="exponentiate"></a><font color=Blue><i>-- | Given a tensor /H/ (already decomposed into commuting simple</i></font>
-<a name="line-578"></a><font color=Blue><i>-- tensors) and an angle &#952;, generate a circuit for [exp -/i/&#952;/H/].</i></font>
+<a name="line-578"></a><font color=Blue><i>-- tensors) and an angle &#x03b8;, generate a circuit for [exp -/i/&#x03b8;/H/].</i></font>
 <a name="line-579"></a><font color=Blue><i>-- The given list of input qubits is in the same order as the</i></font>
 <a name="line-580"></a><font color=Blue><i>-- operators in /H/.</i></font>
 <a name="line-581"></a><font color=Blue>exponentiate</font> <font color=Red>::</font> TensorLC <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ ()
@@ -594,13 +594,13 @@
 <a name="line-587"></a>
 <a name="line-588"></a><a name="one_electron_circuit"></a><font color=Blue><i>-- | @'one_electron_circuit' theta p q@: Generate the circuit for the</i></font>
 <a name="line-589"></a><font color=Blue><i>-- hermitianized one-electron interaction with spin-orbital indices</i></font>
-<a name="line-590"></a><font color=Blue><i>-- /p/, /q/. More precisely, generate [exp -/i/&#952;/H/], where</i></font>
-<a name="line-591"></a><font color=Blue><i>-- /H/ = /a/[sub /p/][sup &#8224;]/a/[sub /q/] if /p/ = /q/ and </i></font>
-<a name="line-592"></a><font color=Blue><i>-- /H/ = /a/[sub /p/][sup &#8224;]/a/[sub /q/] </i></font>
-<a name="line-593"></a><font color=Blue><i>-- + /a/[sub /q/][sup &#8224;]/a/[sub /p/] otherwise.</i></font>
+<a name="line-590"></a><font color=Blue><i>-- /p/, /q/. More precisely, generate [exp -/i/&#x03b8;/H/], where</i></font>
+<a name="line-591"></a><font color=Blue><i>-- /H/ = /a/[sub /p/][sup &#x2020;]/a/[sub /q/] if /p/ = /q/ and </i></font>
+<a name="line-592"></a><font color=Blue><i>-- /H/ = /a/[sub /p/][sup &#x2020;]/a/[sub /q/] </i></font>
+<a name="line-593"></a><font color=Blue><i>-- + /a/[sub /q/][sup &#x2020;]/a/[sub /p/] otherwise.</i></font>
 <a name="line-594"></a><font color=Blue><i>-- </i></font>
-<a name="line-595"></a><font color=Blue><i>-- This function recognizes an important special case: if &#952;=0.0, don't</i></font>
-<a name="line-596"></a><font color=Blue><i>-- generate any gates at all. The case &#952;=0.0 frequently arises because</i></font>
+<a name="line-595"></a><font color=Blue><i>-- This function recognizes an important special case: if &#x03b8;=0.0, don't</i></font>
+<a name="line-596"></a><font color=Blue><i>-- generate any gates at all. The case &#x03b8;=0.0 frequently arises because</i></font>
 <a name="line-597"></a><font color=Blue><i>-- of the conversion from spatial orbitals to spin orbitals.</i></font>
 <a name="line-598"></a><font color=Blue>one_electron_circuit</font> <font color=Red>::</font> Double <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ ()
 <a name="line-599"></a><font color=Blue>one_electron_circuit</font> <font color=Magenta>0.0</font> p q qs ctl <font color=Red>=</font> return ()
@@ -614,15 +614,15 @@
 <a name="line-607"></a><a name="two_electron_circuit"></a><font color=Blue><i>-- | @'two_electron_circuit' theta p q r s@:</i></font>
 <a name="line-608"></a><font color=Blue><i>-- Generate the circuit for the hermitianized two-electron interaction</i></font>
 <a name="line-609"></a><font color=Blue><i>-- with spin-orbital indices /p/, /q/, /r/, /s/. More precisely, generate </i></font>
-<a name="line-610"></a><font color=Blue><i>-- [exp -/i/&#952;/H/], where </i></font>
-<a name="line-611"></a><font color=Blue><i>-- /H/ = /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/] if </i></font>
+<a name="line-610"></a><font color=Blue><i>-- [exp -/i/&#x03b8;/H/], where </i></font>
+<a name="line-611"></a><font color=Blue><i>-- /H/ = /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/] if </i></font>
 <a name="line-612"></a><font color=Blue><i>-- (/p/,/q/) = (/s/,/r/) and /H/ =</i></font>
-<a name="line-613"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/] +</i></font>
-<a name="line-614"></a><font color=Blue><i>-- /a/[sub /s/][sup &#8224;]/a/[sub /r/][sup &#8224;]/a/[sub /q/]/a/[sub /p/]</i></font>
+<a name="line-613"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/] +</i></font>
+<a name="line-614"></a><font color=Blue><i>-- /a/[sub /s/][sup &#x2020;]/a/[sub /r/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/]</i></font>
 <a name="line-615"></a><font color=Blue><i>-- otherwise.</i></font>
 <a name="line-616"></a><font color=Blue><i>-- </i></font>
-<a name="line-617"></a><font color=Blue><i>-- This function recognizes an important special case: if &#952;=0.0, don't</i></font>
-<a name="line-618"></a><font color=Blue><i>-- generate any gates at all. The case &#952;=0.0 frequently arises because</i></font>
+<a name="line-617"></a><font color=Blue><i>-- This function recognizes an important special case: if &#x03b8;=0.0, don't</i></font>
+<a name="line-618"></a><font color=Blue><i>-- generate any gates at all. The case &#x03b8;=0.0 frequently arises because</i></font>
 <a name="line-619"></a><font color=Blue><i>-- of the conversion from spatial orbitals to spin orbitals.</i></font>
 <a name="line-620"></a><font color=Blue>two_electron_circuit</font> <font color=Red>::</font> Double <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ ()
 <a name="line-621"></a><font color=Blue>two_electron_circuit</font> <font color=Magenta>0.0</font> p q r s qs ctl <font color=Red>=</font> return ()
@@ -634,8 +634,8 @@
 <a name="line-627"></a>    op <font color=Red>=</font> decompose_tensor_lc <font color=Cyan>(</font>two_electron_operator p q r s<font color=Cyan>)</font>
 <a name="line-628"></a>      
 <a name="line-629"></a><font color=Blue><i>-- | Like 'two_electron_circuit', but use the \"orthodox\" circuit</i></font>
-<a name="line-630"></a><font color=Blue><i>-- template for the Coulomb operator /a/[sub /p/][sup &#8224;]/a/[sub</i></font>
-<a name="line-631"></a><font color=Blue><i>-- /q/][sup &#8224;]/a/[sub /q/]/a/[sub /p/]. This generates a circuit using</i></font>
+<a name="line-630"></a><font color=Blue><i>-- template for the Coulomb operator /a/[sub /p/][sup &#x2020;]/a/[sub</i></font>
+<a name="line-631"></a><font color=Blue><i>-- /q/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/]. This generates a circuit using</i></font>
 <a name="line-632"></a><font color=Blue><i>-- three rotations, similar to [Whitfield et al.], but with corrected</i></font>
 <a name="line-633"></a><font color=Blue><i>-- angles,</i></font>
 <a name="line-634"></a><font color=Blue><i>--     </i></font>
@@ -672,7 +672,7 @@
 <a name="line-665"></a><font color=Blue><i>-- that allow the user to display individual templates. </i></font>
 <a name="line-666"></a>
 <a name="line-667"></a><a name="show_one_electron"></a><font color=Blue><i>-- | Display the circuit for the hermitianized one-electron interaction,</i></font>
-<a name="line-668"></a><font color=Blue><i>-- with &#952;=1.</i></font>
+<a name="line-668"></a><font color=Blue><i>-- with &#x03b8;=1.</i></font>
 <a name="line-669"></a><font color=Blue>show_one_electron</font> <font color=Red>::</font> Format <font color=Red>-&gt;</font> GateBase <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> IO ()
 <a name="line-670"></a><font color=Blue>show_one_electron</font> format gatebase p q <font color=Red>=</font> 
 <a name="line-671"></a>  print_generic format <font color=Cyan>(</font>decompose_generic gatebase circuit<font color=Cyan>)</font> <font color=Cyan>(</font>replicate <font color=Cyan>(</font>n<font color=Blue><i>-</i></font>m<font color=Cyan>)</font> qubit<font color=Cyan>)</font> <font color=Green><u>where</u></font>
@@ -681,7 +681,7 @@
 <a name="line-674"></a>    m <font color=Red>=</font> minimum <font color=Red>[</font>p<font color=Cyan>,</font>q<font color=Red>]</font>
 <a name="line-675"></a>
 <a name="line-676"></a><a name="show_two_electron"></a><font color=Blue><i>-- | Display the circuit for the hermitianized two-electron interaction, </i></font>
-<a name="line-677"></a><font color=Blue><i>-- with &#952;=1. </i></font>
+<a name="line-677"></a><font color=Blue><i>-- with &#x03b8;=1. </i></font>
 <a name="line-678"></a><font color=Blue>show_two_electron</font> <font color=Red>::</font> Format <font color=Red>-&gt;</font> GateBase <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> IO ()
 <a name="line-679"></a><font color=Blue>show_two_electron</font> format gatebase p q r s <font color=Red>=</font> 
 <a name="line-680"></a>  print_generic format <font color=Cyan>(</font>decompose_generic gatebase circuit<font color=Cyan>)</font> <font color=Cyan>(</font>replicate <font color=Cyan>(</font>n<font color=Blue><i>-</i></font>m<font color=Cyan>)</font> qubit<font color=Cyan>)</font> <font color=Green><u>where</u></font>

@@ -302,7 +302,7 @@
 <a name="line-295"></a><font color=Blue><i>-- &gt; (x,y) &lt;- qc_init_with_shape (bit,[qubit]) (True, [False,True])</i></font>
 <a name="line-296"></a><font color=Blue><i>-- </i></font>
 <a name="line-297"></a><font color=Blue><i>-- This will assign to /x/ a classical bit initialized to 1, and to</i></font>
-<a name="line-298"></a><font color=Blue><i>-- /y/ a list of two qubits initialized to |0&#9002; and |1&#9002;, respectively.</i></font>
+<a name="line-298"></a><font color=Blue><i>-- /y/ a list of two qubits initialized to |0&#x232a; and |1&#x232a;, respectively.</i></font>
 <a name="line-299"></a><font color=Blue>qc_init_with_shape</font> <font color=Red>::</font> <font color=Cyan>(</font>QCData qc<font color=Cyan>)</font> <font color=Red>=&gt;</font> qc <font color=Red>-&gt;</font> BType qc <font color=Red>-&gt;</font> Circ qc
 <a name="line-300"></a><font color=Blue>qc_init_with_shape</font> shape bs <font color=Red>=</font> qcdata_mapM shape qinit_qubit cinit_bit bs
 <a name="line-301"></a>
@@ -1108,7 +1108,7 @@
 <a name="line-1101"></a><font color=Blue><i>-- &gt; reverse_generic f         :: x -&gt; y -&gt; ((z,w) -&gt; Circ (x,y))</i></font>
 <a name="line-1102"></a><font color=Blue><i>-- &gt; reverse_generic_curried f :: x -&gt; y -&gt; (z -&gt; w -&gt; Circ (x,y))</i></font>
 <a name="line-1103"></a><font color=Blue><i>-- </i></font>
-<a name="line-1104"></a><font color=Blue><i>-- Note: the output /must/ be a /n/-tuple, where /n/ = 0 or /n/ &#8805;</i></font>
+<a name="line-1104"></a><font color=Blue><i>-- Note: the output /must/ be a /n/-tuple, where /n/ = 0 or /n/ &#x2265;</i></font>
 <a name="line-1105"></a><font color=Blue><i>-- 2. Applying this to a circuit whose output is a non-tuple type is a</i></font>
 <a name="line-1106"></a><font color=Blue><i>-- type error; in this case, 'reverse_generic' should be used.</i></font>
 <a name="line-1107"></a><font color=Blue>reverse_generic_curried</font> <font color=Red>::</font> <font color=Cyan>(</font>QCData x<font color=Cyan>,</font> QCData y<font color=Cyan>,</font> TupleOrUnary xt x<font color=Cyan>,</font> Tuple yt y<font color=Cyan>,</font> QCurry x_yt x yt<font color=Cyan>,</font> QCurry y_xt y xt<font color=Cyan>,</font> Curry x_y_xt x y_xt<font color=Cyan>)</font> <font color=Red>=&gt;</font> x_yt <font color=Red>-&gt;</font> x_y_xt
@@ -1138,7 +1138,7 @@
 <a name="line-1131"></a><font color=Blue><i>-- </i></font>
 <a name="line-1132"></a><font color=Blue><i>-- &gt; reverse_simple_curried :: (QCData_Simple x, QCData y, QCData z) =&gt; (x -&gt; Circ (y,z)) -&gt; (y -&gt; z -&gt; Circ x)</i></font>
 <a name="line-1133"></a><font color=Blue><i>-- </i></font>
-<a name="line-1134"></a><font color=Blue><i>-- Note: the output /must/ be a /n/-tuple, where /n/ = 0 or /n/ &#8805;</i></font>
+<a name="line-1134"></a><font color=Blue><i>-- Note: the output /must/ be a /n/-tuple, where /n/ = 0 or /n/ &#x2265;</i></font>
 <a name="line-1135"></a><font color=Blue><i>-- 2. Applying this to a circuit whose output is a non-tuple type is a</i></font>
 <a name="line-1136"></a><font color=Blue><i>-- type error; in this case, 'reverse_generic' should be used.</i></font>
 <a name="line-1137"></a><font color=Blue>reverse_simple_curried</font> <font color=Red>::</font> <font color=Cyan>(</font>QCData_Simple x<font color=Cyan>,</font> QCData y<font color=Cyan>,</font> TupleOrUnary xt x<font color=Cyan>,</font> Tuple yt y<font color=Cyan>,</font> QCurry x_yt x yt<font color=Cyan>,</font> QCurry y_xt y xt<font color=Cyan>)</font>
@@ -1198,7 +1198,7 @@
 <a name="line-1191"></a><font color=Blue><i>-- except that the result type is guarded by the 'Circ' monad. It</i></font>
 <a name="line-1192"></a><font color=Blue><i>-- provides a family of type isomorphisms</i></font>
 <a name="line-1193"></a><font color=Blue><i>-- </i></font>
-<a name="line-1194"></a><font color=Blue><i>-- @fun  &#8773;  args -&gt; Circ res,@</i></font>
+<a name="line-1194"></a><font color=Blue><i>-- @fun  &#x2245;  args -&gt; Circ res,@</i></font>
 <a name="line-1195"></a><font color=Blue><i>-- </i></font>
 <a name="line-1196"></a><font color=Blue><i>-- where</i></font>
 <a name="line-1197"></a><font color=Blue><i>-- </i></font>
@@ -1305,7 +1305,7 @@
 <a name="line-1298"></a><font color=Blue><i>-- | Apply the given transformer to a circuit.  Unlike</i></font>
 <a name="line-1299"></a><font color=Blue><i>-- 'transform_unary', this function can be applied to a</i></font>
 <a name="line-1300"></a><font color=Blue><i>-- circuit-generating function in curried form with /n/ arguments, for</i></font>
-<a name="line-1301"></a><font color=Blue><i>-- any /n/ &#8805; 0.</i></font>
+<a name="line-1301"></a><font color=Blue><i>-- any /n/ &#x2265; 0.</i></font>
 <a name="line-1302"></a><font color=Blue><i>-- </i></font>
 <a name="line-1303"></a><font color=Blue><i>-- The type of this heavily overloaded function is difficult to</i></font>
 <a name="line-1304"></a><font color=Blue><i>-- read. In more readable form, it has all of the following types:</i></font>
@@ -1344,7 +1344,7 @@
 <a name="line-1337"></a>  return qy
 <a name="line-1338"></a>
 <a name="line-1339"></a><a name="with_ancilla_list"></a><font color=Blue><i>-- | Like 'with_ancilla', but creates a list of /n/ ancillas, all</i></font>
-<a name="line-1340"></a><font color=Blue><i>-- initialized to |0&#9002;. Usage:</i></font>
+<a name="line-1340"></a><font color=Blue><i>-- initialized to |0&#x232a;. Usage:</i></font>
 <a name="line-1341"></a><font color=Blue><i>-- </i></font>
 <a name="line-1342"></a><font color=Blue><i>-- &gt; with_ancilla_list n $ \a -&gt; do {</i></font>
 <a name="line-1343"></a><font color=Blue><i>-- &gt;   &lt;&lt;&lt;code block using list of ancillas a&gt;&gt;&gt;</i></font>
@@ -1379,7 +1379,7 @@
 <a name="line-1372"></a><font color=Blue><i>-- user's responsibility to ensure that the computation can indeed be</i></font>
 <a name="line-1373"></a><font color=Blue><i>-- undone. In particular, if /computation/ contains any</i></font>
 <a name="line-1374"></a><font color=Blue><i>-- initializations, then /code/ must ensure that the corresponding</i></font>
-<a name="line-1375"></a><font color=Blue><i>-- assertions will be satisfied in /computation/[sup &#8722;1].</i></font>
+<a name="line-1375"></a><font color=Blue><i>-- assertions will be satisfied in /computation/[sup &#x2212;1].</i></font>
 <a name="line-1376"></a><font color=Blue><i>-- </i></font>
 <a name="line-1377"></a><font color=Blue><i>-- Related more specialized, but potentially safer, operations are: </i></font>
 <a name="line-1378"></a><font color=Blue><i>-- </i></font>

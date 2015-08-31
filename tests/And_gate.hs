@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -13,4 +13,4 @@ and_gate (a, b) = do
   return c
 
 main =
-  print_simple PDF and_gate
+  print_simple Preview and_gate

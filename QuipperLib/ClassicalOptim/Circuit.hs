@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -11,6 +11,9 @@ module QuipperLib.ClassicalOptim.Circuit where
 import qualified Data.Map as M
 import qualified Data.List as L
 import qualified Libraries.Auxiliary as Q
+
+import Control.Applicative (Applicative(..))
+import Control.Monad (liftM, ap)
 
 -- ----------------------------------------------------------------------
 -- * Simplified circuits
@@ -69,6 +72,13 @@ instance Monad Circ where
   (>>=) (Circ c) f = Circ (\s -> let (s',x) = c s in
                                  let (Circ c') = f x in
                                  c' s')
+
+instance Applicative Circ where
+  pure = return
+  (<*>) = ap
+
+instance Functor Circ where
+  fmap = liftM
 
 -- ----------------------------------------------------------------------
 -- * Low-level access functions

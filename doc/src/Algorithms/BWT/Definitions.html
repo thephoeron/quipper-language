@@ -35,7 +35,7 @@
 <a name="line-28"></a>  qnot_at c <font color=Cyan>`controlled`</font> <font color=Cyan>(</font>a <font color=Cyan>.==.</font> <font color=Magenta>1</font> <font color=Cyan>.&amp;&amp;.</font> b <font color=Cyan>.==.</font> <font color=Magenta>0</font><font color=Cyan>)</font>
 <a name="line-29"></a>
 <a name="line-30"></a><a name="controlledExpGate"></a><font color=Blue><i>-- | @controlledExpGate(t, r, h):@</i></font>
-<a name="line-31"></a><font color=Blue><i>-- Apply the [exp &#8722;/iZt/] gate to the qubit /h/, provided that /r/=0. </i></font>
+<a name="line-31"></a><font color=Blue><i>-- Apply the [exp &#x2212;/iZt/] gate to the qubit /h/, provided that /r/=0. </i></font>
 <a name="line-32"></a><font color=Blue>controlledExpGate</font> <font color=Red>::</font> <font color=Cyan>(</font>Timestep<font color=Cyan>,</font> Qubit<font color=Cyan>,</font> Qubit<font color=Cyan>)</font> <font color=Red>-&gt;</font> Circ ()
 <a name="line-33"></a><font color=Blue>controlledExpGate</font> <font color=Cyan>(</font>t<font color=Cyan>,</font> r<font color=Cyan>,</font> h<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-34"></a>  expZt t h <font color=Cyan>`controlled`</font> <font color=Cyan>(</font>r <font color=Cyan>.==.</font> <font color=Magenta>0</font><font color=Cyan>)</font>

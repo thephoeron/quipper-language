@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -15,13 +15,13 @@ import Quipper
 
 import Quipper.Internal
 
-import Libraries.Synthesis.CliffordT
-import Libraries.Synthesis.MultiQubitSynthesis
-import Libraries.Synthesis.Ring
-import Libraries.Synthesis.Matrix
-import Libraries.Synthesis.Newsynth
-import Libraries.Synthesis.SymReal
-import Libraries.Synthesis.EulerAngles
+import Quantum.Synthesis.CliffordT
+import Quantum.Synthesis.MultiQubitSynthesis
+import Quantum.Synthesis.Ring
+import Quantum.Synthesis.Matrix
+import Quantum.Synthesis.Newsynth
+import Quantum.Synthesis.SymReal
+import Quantum.Synthesis.EulerAngles
 
 import Libraries.Auxiliary (boollist_of_int_bh)
 
@@ -140,6 +140,29 @@ twolevel i j qlist body = aux l1 l2 qlist where
           aux2 t1 t2 q0 qs
   aux2 _ _ _ _ = error "twolevel: internal error 2" -- not reached
 
+-- | Apply a /T/[sup /m/] gate. This gate is decomposed into /Z/, /S/,
+-- /S/[sup †], /T/, and /T/[sup †] gates.
+gate_T_power_at :: Int -> Qubit -> Circ ()
+gate_T_power_at 0 q = do
+  return ()
+gate_T_power_at 1 q = do
+  gate_T_at q
+gate_T_power_at 2 q = do
+  gate_S_at q
+gate_T_power_at 3 q = do
+  gate_S_at q
+  gate_T_at q
+gate_T_power_at 4 q = do
+  gate_Z_at q
+gate_T_power_at 5 q = do
+  gate_Z_at q
+  gate_T_at q
+gate_T_power_at 6 q = do
+  gate_S_inv_at q
+gate_T_power_at 7 q = do
+  gate_T_inv_at q
+gate_T_power_at m q = gate_T_power_at (m `mod` 8) q
+
 -- | Apply a 'TwoLevel' gate to the given list of qubits. 
 -- The qubits in /qlist/ are ordered lexicographically left-to-right,
 -- e.g., [|00〉, |01〉, |10〉, |11〉].
@@ -154,18 +177,17 @@ apply_twolevel_at (TL_T m i j) qlist
   | m `mod` 8 == 0 = return ()
   | otherwise =
     twolevel i j qlist $ \q -> do
-      when (m .&. 4 /= 0) $ do
-        gate_Z_at q
-      when (m .&. 2 /= 0) $ do
-        gate_S_at q
-      when (m .&. 1 /= 0) $ do
-        gate_T_at q
-apply_twolevel_at (TL_omega m i) [] =
-  global_phase (fromIntegral (m `mod` 8) * 0.25)
-apply_twolevel_at (TL_omega m i) qlist =
-  apply_twolevel_at (TL_T m j i) qlist
+      gate_T_power_at m q
+apply_twolevel_at (TL_omega m i) qlist
+  | m' == 0 = do
+    return ()
+  | qlist == [] = do
+    global_phase (fromIntegral m' * 0.25)
+  | otherwise =
+    apply_twolevel_at (TL_T m j i) qlist
   where
     j = if i == 0 then 1 else i .&. (i-1)
+    m' = m `mod` 8
 
 -- | Apply a list of 'TwoLevel' gates to the given list of
 -- qubits. 
@@ -183,6 +205,61 @@ apply_twolevels_at :: [TwoLevel] -> [Qubit] -> Circ ()
 apply_twolevels_at ops qlist =
   sequence_ [ apply_twolevel_at g qlist | g <- reverse ops ]
 
+-- | Like 'apply_twolevel_at', but use the alternate generators for
+-- two-level gates.
+apply_twolevel_alt_at :: TwoLevelAlt -> [Qubit] -> Circ ()
+apply_twolevel_alt_at (TL_iX j l) qlist = do
+  twolevel j l qlist $ \q -> do
+    gate_iX_at q
+apply_twolevel_alt_at (TL_TiHT m j l) qlist = do
+  twolevel j l qlist $ \q -> do
+    let basischange = do
+          gate_T_power_at m q
+          gate_S_at q
+          gate_H_at q
+          gate_T_at q
+    with_basis_change basischange $ do
+      gate_iX_at q
+apply_twolevel_alt_at (TL_W m j l) qlist 
+  | m' == 0 = do
+    return ()
+  | otherwise = do
+    twolevel j l qlist $ \q -> do
+      gate_iX_at q
+      let basischange = do
+            gate_T_power_at m' q
+      with_basis_change basischange $ do
+        gate_iX_inv_at q
+  where
+    m' = m `mod` 8
+apply_twolevel_alt_at (TL_omega_alt m j) qlist
+  | m' == 0 = do
+    return ()
+  | qlist == [] = do
+    global_phase (fromIntegral m' * 0.25)
+  | otherwise = do
+    apply_twolevel_at (TL_T m l j) qlist
+  where
+    l = if j == 0 then 1 else j .&. (j-1)
+    m' = m `mod` 8
+
+-- | Apply a list of 'TwoLevelAlt' gates to the given list of
+-- qubits. 
+-- 
+-- The qubits in /qlist/ are ordered lexicographically left-to-right,
+-- e.g., [|00〉, |01〉, |10〉, |11〉].
+-- 
+-- Note: the operators in the list are applied right-to-left, i.e.,
+-- the gate list is assumed given in matrix multiplication order, but
+-- are applied in circuit order.
+
+-- Implementation note: this could be improved by combining
+-- consecutive two-level gates if they share the same i and j
+apply_twolevels_alt_at :: [TwoLevelAlt] -> [Qubit] -> Circ ()
+apply_twolevels_alt_at ops qlist =
+  sequence_ [ apply_twolevel_alt_at g qlist | g <- reverse ops ]
+
+
 -- ----------------------------------------------------------------------
 -- * Single-qubit exact synthesis
 
@@ -191,13 +268,13 @@ apply_twolevels_at ops qlist =
 -- available exact formats, i.e., any instance of the 'ToGates' class.
 -- Typical instances are:
 -- 
--- * 'U2' 'DComplex': a 2×2 unitary operator with entries from the
+-- * 'U2' 'DRComplex': a 2×2 unitary operator with entries from the
 -- ring ℤ[1\/√2, /i/];
 -- 
 -- * 'U2' 'DOmega': a 2×2 unitary operator with entries from the ring
 -- [bold D][ω];
 -- 
--- * 'SO3' 'DReal': a 3×3 Bloch sphere operator with entries from the
+-- * 'SO3' 'DRootTwo': a 3×3 Bloch sphere operator with entries from the
 -- ring ℤ[1\/√2]. In this last case, the operator will be synthesized
 -- up to an unspecified global phase.
 exact_synthesis1 :: (ToGates a) => a -> Qubit -> Circ Qubit
@@ -214,22 +291,41 @@ exact_synthesis1 op q = do
 
 -- | Decompose the given operator exactly into a Clifford+/T/ circuit.
 -- The operator must be given as an /n/×/n/-matrix with coefficients
--- in a ring that is an instance of the 'ToEComplex' class. Typical
--- examples of such rings are 'DComplex', 'DOmega', and 'EComplex'.
+-- in a ring that is an instance of the 'ToQRComplex' class. Typical
+-- examples of such rings are 'DRComplex', 'DOmega', and 'QRComplex'.
 -- 
 -- If this function is applied to a list of /m/ qubits, then we must
 -- have /n/ ≤ 2[sup /m/].
 -- 
--- The generated circuit may contain ancillas.
-exact_synthesis :: (ToEComplex a, Nat n) => Matrix n n a -> [Qubit] -> Circ [Qubit]
+-- The qubits in /qlist/ are ordered lexicographically left-to-right,
+-- e.g., [|00〉, |01〉, |10〉, |11〉].
+-- 
+-- The generated circuit contains no ancillas, but may contain
+-- multi-controlled gates whose decomposition into Clifford+/T/
+-- generators requires ancillas.
+exact_synthesis :: (ToQOmega a, Nat n) => Matrix n n a -> [Qubit] -> Circ [Qubit]
 exact_synthesis op qlist = do
   comment_with_label "ENTER: exact_synthesis" qlist "q"
   apply_twolevels_at twolevels qlist
   comment_with_label "EXIT: exact_synthesis" qlist "q"
   return qlist
   where
-    op_DComplex = matrix_map (fromDComplex . to_dyadic . toEComplex) op
-    twolevels = synthesis_nqubit op_DComplex
+    op_DOmega = matrix_map (to_dyadic . toQOmega) op
+    twolevels = synthesis_nqubit op_DOmega
+
+-- | Like 'exact_synthesis', but use the alternate algorithm from
+-- Section 6 of Giles-Selinger. This means all but at most one of the
+-- generated multi-controlled gates have determinant 1, which means
+-- they can be further decomposed without ancillas.
+exact_synthesis_alt :: (ToQOmega a, Nat n) => Matrix n n a -> [Qubit] -> Circ [Qubit]
+exact_synthesis_alt op qlist = do
+  comment_with_label "ENTER: exact_synthesis_alt" qlist "q"
+  apply_twolevels_alt_at twolevels qlist
+  comment_with_label "EXIT: exact_synthesis_alt" qlist "q"
+  return qlist
+  where
+    op_DOmega = matrix_map (to_dyadic . toQOmega) op
+    twolevels = synthesis_nqubit_alt op_DOmega
 
 -- ----------------------------------------------------------------------
 -- * Single-qubit approximate synthesis

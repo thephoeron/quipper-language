@@ -10,7 +10,7 @@
 <a name="line-3"></a><font color=Green><u>module</u></font> Libraries<font color=Cyan>.</font>Stabilizers<font color=Cyan>.</font>Pauli <font color=Green><u>where</u></font>
 <a name="line-4"></a>
 <a name="line-5"></a><font color=Green><u>import</u></font> Prelude hiding <font color=Cyan>(</font>negate<font color=Cyan>)</font>
-<a name="line-6"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Synthesis<font color=Cyan>.</font>Ring <font color=Cyan>(</font>Cplx <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font> i<font color=Cyan>)</font>
+<a name="line-6"></a><font color=Green><u>import</u></font> Quantum<font color=Cyan>.</font>Synthesis<font color=Cyan>.</font>Ring <font color=Cyan>(</font>Cplx <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font> i<font color=Cyan>)</font>
 <a name="line-7"></a>
 <a name="line-8"></a><a name="Pauli"></a><font color=Blue><i>-- | The Pauli operators can be used to generate a stabilizer group for</i></font>
 <a name="line-9"></a><a name="Pauli"></a><font color=Blue><i>-- the Clifford operators.</i></font>
@@ -43,7 +43,7 @@
 <a name="line-36"></a><font color=Blue><i>--------------------------------------</i></font>
 <a name="line-37"></a>
 <a name="line-38"></a><a name="SignPlus"></a><font color=Blue><i>-- | In general, Pauli operators can commute, or anti-commute, so we</i></font>
-<a name="line-39"></a><a name="SignPlus"></a><font color=Blue><i>-- need to add signs or &#177;/i/.</i></font>
+<a name="line-39"></a><a name="SignPlus"></a><font color=Blue><i>-- need to add signs or &#x00b1;/i/.</i></font>
 <a name="line-40"></a><a name="SignPlus"></a><font color=Green><u>data</u></font> SignPlus <font color=Red>=</font> MinusI <font color=Red>|</font> PlusI <font color=Red>|</font> One Sign
 <a name="line-41"></a>
 <a name="line-42"></a><font color=Green><u>instance</u></font> Show SignPlus <font color=Green><u>where</u></font>
@@ -98,7 +98,7 @@
 <a name="line-91"></a><font color=Blue><i>-- map (\(x,y) -&gt; (x,y,commute x y)) [(x,y) | x &lt;- [I,X,Y,Z], y &lt;- [I,X,Y,Z]]</i></font>
 <a name="line-92"></a><font color=Blue><i>-- [(I,I,( +,I)),(I,X,( +,X)),(I,Y,( +,Y)),(I,Z,( +,Z)),(X,I,( +,X)),(X,X,( +,I)),(X,Y,(+i,Z)),(X,Z,(-i,Y)),(Y,I,( +,Y)),(Y,X,(-i,Z)),(Y,Y,( +,I)),(Y,Z,(+i,X)),(Z,I,( +,Z)),(Z,X,(+i,Y)),(Z,Y,(-i,X)),(Z,Z,( +,I))]</i></font>
 <a name="line-93"></a>
-<a name="line-94"></a><a name="Matrix1"></a><font color=Blue><i>-- | Represent a 2&#215;2-matrix as a 4-tuple.</i></font>
+<a name="line-94"></a><a name="Matrix1"></a><font color=Blue><i>-- | Represent a 2&#x00d7;2-matrix as a 4-tuple.</i></font>
 <a name="line-95"></a><a name="Matrix1"></a><font color=Green><u>type</u></font> Matrix1 a <font color=Red>=</font> <font color=Cyan>(</font>a<font color=Cyan>,</font>a<font color=Cyan>,</font>a<font color=Cyan>,</font>a<font color=Cyan>)</font>
 <a name="line-96"></a>
 <a name="line-97"></a>
@@ -125,7 +125,7 @@
 <a name="line-118"></a> <font color=Green><u>where</u></font>
 <a name="line-119"></a>  ixyz <font color=Red>=</font> <font color=Red>[</font>I<font color=Cyan>,</font>X<font color=Cyan>,</font>Y<font color=Cyan>,</font>Z<font color=Red>]</font>
 <a name="line-120"></a>
-<a name="line-121"></a><a name="multiplyMatrix1"></a><font color=Blue><i>-- | Matrix multiplication for 2&#215;2-matrices.</i></font>
+<a name="line-121"></a><a name="multiplyMatrix1"></a><font color=Blue><i>-- | Matrix multiplication for 2&#x00d7;2-matrices.</i></font>
 <a name="line-122"></a><font color=Blue>multiplyMatrix1</font> <font color=Red>::</font> <font color=Cyan>(</font>Num a<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix1 a <font color=Red>-&gt;</font> Matrix1 a <font color=Red>-&gt;</font> Matrix1 a
 <a name="line-123"></a><font color=Blue>multiplyMatrix1</font> <font color=Cyan>(</font>a00<font color=Cyan>,</font>a01<font color=Cyan>,</font>a10<font color=Cyan>,</font>a11<font color=Cyan>)</font> <font color=Cyan>(</font>b00<font color=Cyan>,</font>b01<font color=Cyan>,</font>b10<font color=Cyan>,</font>b11<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>c00<font color=Cyan>,</font>c01<font color=Cyan>,</font>c10<font color=Cyan>,</font>c11<font color=Cyan>)</font>
 <a name="line-124"></a> <font color=Green><u>where</u></font>
@@ -134,7 +134,7 @@
 <a name="line-127"></a>  c10 <font color=Red>=</font> a10<font color=Cyan>*</font>b00 <font color=Cyan>+</font> a11<font color=Cyan>*</font>b10
 <a name="line-128"></a>  c11 <font color=Red>=</font> a10<font color=Cyan>*</font>b01 <font color=Cyan>+</font> a11<font color=Cyan>*</font>b11
 <a name="line-129"></a>
-<a name="line-130"></a><a name="transpose1"></a><font color=Blue><i>-- | Compute the transpose of a 2&#215;2 complex-valued matrix.</i></font>
+<a name="line-130"></a><a name="transpose1"></a><font color=Blue><i>-- | Compute the transpose of a 2&#x00d7;2 complex-valued matrix.</i></font>
 <a name="line-131"></a><font color=Blue>transpose1</font> <font color=Red>::</font> <font color=Cyan>(</font>Num r<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix1 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font> <font color=Red>-&gt;</font> Matrix1 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font>
 <a name="line-132"></a><font color=Blue>transpose1</font> <font color=Cyan>(</font>a00<font color=Cyan>,</font>a01<font color=Cyan>,</font>a10<font color=Cyan>,</font>a11<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>conjugate a00<font color=Cyan>,</font> conjugate a10<font color=Cyan>,</font> conjugate a01<font color=Cyan>,</font> conjugate a11<font color=Cyan>)</font>
 <a name="line-133"></a> <font color=Green><u>where</u></font>
@@ -144,10 +144,10 @@
 <a name="line-137"></a><font color=Blue>my_Y</font> <font color=Red>::</font> <font color=Cyan>(</font>Floating r<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix1 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font>
 <a name="line-138"></a><font color=Blue>my_Y</font> <font color=Red>=</font> scale1 i <font color=Cyan>$</font> multiplyMatrix1 <font color=Cyan>(</font>toMatrix1 X<font color=Cyan>)</font> <font color=Cyan>(</font>toMatrix1 Z<font color=Cyan>)</font>
 <a name="line-139"></a>
-<a name="line-140"></a><a name="Matrix2"></a><font color=Blue><i>-- | A 4&#215;4-matrix is represented as a 2&#215;2-matrix of 2&#215;2-matrices.</i></font>
+<a name="line-140"></a><a name="Matrix2"></a><font color=Blue><i>-- | A 4&#x00d7;4-matrix is represented as a 2&#x00d7;2-matrix of 2&#x00d7;2-matrices.</i></font>
 <a name="line-141"></a><a name="Matrix2"></a><font color=Green><u>type</u></font> Matrix2 a <font color=Red>=</font> Matrix1 <font color=Cyan>(</font>Matrix1 a<font color=Cyan>)</font>
 <a name="line-142"></a>
-<a name="line-143"></a><a name="tensor1"></a><font color=Blue><i>-- | The tensor product of two 2&#215;2-matrices is a 4&#215;4 matrix.</i></font>
+<a name="line-143"></a><a name="tensor1"></a><font color=Blue><i>-- | The tensor product of two 2&#x00d7;2-matrices is a 4&#x00d7;4 matrix.</i></font>
 <a name="line-144"></a><font color=Blue>tensor1</font> <font color=Red>::</font> <font color=Cyan>(</font>Num a<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix1 a <font color=Red>-&gt;</font> Matrix1 a <font color=Red>-&gt;</font> Matrix2 a
 <a name="line-145"></a><font color=Blue>tensor1</font> <font color=Cyan>(</font>a<font color=Cyan>,</font>b<font color=Cyan>,</font>c<font color=Cyan>,</font>d<font color=Cyan>)</font> m <font color=Red>=</font> <font color=Cyan>(</font>scale1 a m<font color=Cyan>,</font>scale1 b m<font color=Cyan>,</font>scale1 c m<font color=Cyan>,</font>scale1 d m<font color=Cyan>)</font> 
 <a name="line-146"></a>
@@ -155,11 +155,11 @@
 <a name="line-148"></a><font color=Blue>control1</font> <font color=Red>::</font> <font color=Cyan>(</font>Num a<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix1 a <font color=Red>-&gt;</font> Matrix2 a
 <a name="line-149"></a><font color=Blue>control1</font> m1 <font color=Red>=</font> <font color=Cyan>(</font><font color=Cyan>(</font><font color=Magenta>1</font><font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>,</font><font color=Magenta>1</font><font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font><font color=Magenta>0</font><font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font><font color=Magenta>0</font><font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>)</font><font color=Cyan>,</font>m1<font color=Cyan>)</font>
 <a name="line-150"></a>
-<a name="line-151"></a><a name="toMatrix2"></a><font color=Blue><i>-- | Take the tensor of a pair of Pauli operators, and return a 4&#215;4 matrix.</i></font>
+<a name="line-151"></a><a name="toMatrix2"></a><font color=Blue><i>-- | Take the tensor of a pair of Pauli operators, and return a 4&#x00d7;4 matrix.</i></font>
 <a name="line-152"></a><font color=Blue>toMatrix2</font> <font color=Red>::</font> <font color=Cyan>(</font>Floating r<font color=Cyan>)</font> <font color=Red>=&gt;</font> <font color=Cyan>(</font>Pauli<font color=Cyan>,</font>Pauli<font color=Cyan>)</font> <font color=Red>-&gt;</font> Matrix2 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font>
 <a name="line-153"></a><font color=Blue>toMatrix2</font> <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>)</font> <font color=Red>=</font> tensor1 <font color=Cyan>(</font>toMatrix1 x<font color=Cyan>)</font> <font color=Cyan>(</font>toMatrix1 y<font color=Cyan>)</font>
 <a name="line-154"></a>
-<a name="line-155"></a><a name="scale2"></a><font color=Blue><i>-- | Scale a 4&#215;4 matrix.</i></font>
+<a name="line-155"></a><a name="scale2"></a><font color=Blue><i>-- | Scale a 4&#x00d7;4 matrix.</i></font>
 <a name="line-156"></a><font color=Blue>scale2</font> <font color=Red>::</font> <font color=Cyan>(</font>Num a<font color=Cyan>)</font> <font color=Red>=&gt;</font> a <font color=Red>-&gt;</font> Matrix2 a <font color=Red>-&gt;</font> Matrix2 a
 <a name="line-157"></a><font color=Blue>scale2</font> x <font color=Cyan>(</font>a<font color=Cyan>,</font>b<font color=Cyan>,</font>c<font color=Cyan>,</font>d<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>scale1 x a<font color=Cyan>,</font>scale1 x b<font color=Cyan>,</font>scale1 x c<font color=Cyan>,</font>scale1 x d<font color=Cyan>)</font>
 <a name="line-158"></a>
@@ -174,7 +174,7 @@
 <a name="line-167"></a> <font color=Green><u>where</u></font>
 <a name="line-168"></a>  ixyz <font color=Red>=</font> <font color=Red>[</font>I<font color=Cyan>,</font>X<font color=Cyan>,</font>Y<font color=Cyan>,</font>Z<font color=Red>]</font>
 <a name="line-169"></a>
-<a name="line-170"></a><a name="multiplyMatrix2"></a><font color=Blue><i>-- | Matrix multiplication for 4&#215;4 matrices.</i></font>
+<a name="line-170"></a><a name="multiplyMatrix2"></a><font color=Blue><i>-- | Matrix multiplication for 4&#x00d7;4 matrices.</i></font>
 <a name="line-171"></a><font color=Blue>multiplyMatrix2</font> <font color=Red>::</font> <font color=Cyan>(</font>Num a<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix2 a <font color=Red>-&gt;</font> Matrix2 a <font color=Red>-&gt;</font> Matrix2 a
 <a name="line-172"></a><font color=Blue>multiplyMatrix2</font> <font color=Cyan>(</font><font color=Cyan>(</font>a00<font color=Cyan>,</font>a01<font color=Cyan>,</font>a10<font color=Cyan>,</font>a11<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>a02<font color=Cyan>,</font>a03<font color=Cyan>,</font>a12<font color=Cyan>,</font>a13<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>a20<font color=Cyan>,</font>a21<font color=Cyan>,</font>a30<font color=Cyan>,</font>a31<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>a22<font color=Cyan>,</font>a23<font color=Cyan>,</font>a32<font color=Cyan>,</font>a33<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>(</font><font color=Cyan>(</font>b00<font color=Cyan>,</font>b01<font color=Cyan>,</font>b10<font color=Cyan>,</font>b11<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>b02<font color=Cyan>,</font>b03<font color=Cyan>,</font>b12<font color=Cyan>,</font>b13<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>b20<font color=Cyan>,</font>b21<font color=Cyan>,</font>b30<font color=Cyan>,</font>b31<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>b22<font color=Cyan>,</font>b23<font color=Cyan>,</font>b32<font color=Cyan>,</font>b33<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font><font color=Cyan>(</font>c00<font color=Cyan>,</font>c01<font color=Cyan>,</font>c10<font color=Cyan>,</font>c11<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>c02<font color=Cyan>,</font>c03<font color=Cyan>,</font>c12<font color=Cyan>,</font>c13<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>c20<font color=Cyan>,</font>c21<font color=Cyan>,</font>c30<font color=Cyan>,</font>c31<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>c22<font color=Cyan>,</font>c23<font color=Cyan>,</font>c32<font color=Cyan>,</font>c33<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-173"></a> <font color=Green><u>where</u></font>
@@ -195,7 +195,7 @@
 <a name="line-188"></a>  c32 <font color=Red>=</font> a30<font color=Cyan>*</font>b02 <font color=Cyan>+</font> a31<font color=Cyan>*</font>b12 <font color=Cyan>+</font> a32<font color=Cyan>*</font>b22 <font color=Cyan>+</font> a33<font color=Cyan>*</font>b32
 <a name="line-189"></a>  c33 <font color=Red>=</font> a30<font color=Cyan>*</font>b03 <font color=Cyan>+</font> a31<font color=Cyan>*</font>b13 <font color=Cyan>+</font> a32<font color=Cyan>*</font>b23 <font color=Cyan>+</font> a33<font color=Cyan>*</font>b33
 <a name="line-190"></a>
-<a name="line-191"></a><a name="transpose2"></a><font color=Blue><i>-- | The transpose of a 4&#215;4 complex valued matrix.</i></font>
+<a name="line-191"></a><a name="transpose2"></a><font color=Blue><i>-- | The transpose of a 4&#x00d7;4 complex valued matrix.</i></font>
 <a name="line-192"></a><font color=Blue>transpose2</font> <font color=Red>::</font> <font color=Cyan>(</font>Floating r<font color=Cyan>)</font> <font color=Red>=&gt;</font> Matrix2 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font> <font color=Red>-&gt;</font> Matrix2 <font color=Cyan>(</font>Cplx r<font color=Cyan>)</font>
 <a name="line-193"></a><font color=Blue>transpose2</font> <font color=Cyan>(</font><font color=Cyan>(</font>a00<font color=Cyan>,</font>a01<font color=Cyan>,</font>a10<font color=Cyan>,</font>a11<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>a02<font color=Cyan>,</font>a03<font color=Cyan>,</font>a12<font color=Cyan>,</font>a13<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>a20<font color=Cyan>,</font>a21<font color=Cyan>,</font>a30<font color=Cyan>,</font>a31<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>a22<font color=Cyan>,</font>a23<font color=Cyan>,</font>a32<font color=Cyan>,</font>a33<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font><font color=Cyan>(</font>conjugate a00<font color=Cyan>,</font>conjugate a10<font color=Cyan>,</font>conjugate a01<font color=Cyan>,</font>conjugate a11<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>conjugate a20<font color=Cyan>,</font>conjugate a30<font color=Cyan>,</font>conjugate a21<font color=Cyan>,</font>conjugate a31<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>conjugate a02<font color=Cyan>,</font>conjugate a12<font color=Cyan>,</font>conjugate a03<font color=Cyan>,</font>conjugate a13<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>conjugate a22<font color=Cyan>,</font>conjugate a32<font color=Cyan>,</font>conjugate a23<font color=Cyan>,</font>conjugate a33<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-194"></a> <font color=Green><u>where</u></font>

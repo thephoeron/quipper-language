@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -9,7 +9,7 @@
 module Libraries.Stabilizers.Pauli where
 
 import Prelude hiding (negate)
-import Libraries.Synthesis.Ring (Cplx (..), i)
+import Quantum.Synthesis.Ring (Cplx (..), i)
 
 -- | The Pauli operators can be used to generate a stabilizer group for
 -- the Clifford operators.

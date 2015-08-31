@@ -173,7 +173,7 @@
 <a name="line-166"></a><font color=Blue><i>-- Diffuse a piece of quantum data, in the Grover search sense of </i></font>
 <a name="line-167"></a><font color=Blue><i>-- reflecting about the average. </i></font>
 <a name="line-168"></a><font color=Blue><i>-- </i></font>
-<a name="line-169"></a><font color=Blue><i>-- Note: relies on @'shape' q@ corresponding to the &#8220;all false&#8221; state. </i></font>
+<a name="line-169"></a><font color=Blue><i>-- Note: relies on @'shape' q@ corresponding to the &#x201c;all false&#x201d; state. </i></font>
 <a name="line-170"></a><font color=Blue>a7_DIFFUSE</font> <font color=Red>::</font> <font color=Cyan>(</font>QData qa<font color=Cyan>)</font> <font color=Red>=&gt;</font> qa <font color=Red>-&gt;</font> Circ qa
 <a name="line-171"></a><font color=Blue>a7_DIFFUSE</font> <font color=Red>=</font> box <font color=Magenta>"a7"</font> <font color=Cyan>$</font> <font color=Red>\</font>q <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-172"></a>  comment_with_label <font color=Magenta>"ENTER: a7_DIFFUSE"</font> q <font color=Magenta>"q"</font>
@@ -307,7 +307,7 @@
 <a name="line-300"></a>  comment_with_label <font color=Magenta>"EXIT: a14_SWAP"</font> <font color=Cyan>(</font>q<font color=Cyan>,</font>r<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"q"</font><font color=Cyan>,</font> <font color=Magenta>"r"</font><font color=Cyan>)</font>
 <a name="line-301"></a>  return <font color=Cyan>(</font>q<font color=Cyan>,</font>r<font color=Cyan>)</font>
 <a name="line-302"></a>
-<a name="line-303"></a><a name="standard_qram"></a><font color=Blue><i>-- | The qRAM operations from Algorithms 8&#8211;10 wrapped into a 'Qram' object.</i></font>
+<a name="line-303"></a><a name="standard_qram"></a><font color=Blue><i>-- | The qRAM operations from Algorithms 8&#x2013;10 wrapped into a 'Qram' object.</i></font>
 <a name="line-304"></a><font color=Blue>standard_qram</font> <font color=Red>::</font> Qram
 <a name="line-305"></a><font color=Blue>standard_qram</font> <font color=Red>=</font> Qram <font color=Cyan>{</font>
 <a name="line-306"></a>  qram_fetch <font color=Red>=</font> a8_FetchT<font color=Cyan>,</font>
@@ -331,7 +331,7 @@
 <a name="line-324"></a><font color=Blue><i>-- </i></font>
 <a name="line-325"></a><font color=Blue><i>-- 2. With two vertices from /tt/, a third anywhere in the graph.  If found, </i></font>
 <a name="line-326"></a><font color=Blue><i>-- set qubit /triTestTw/, and return the third vertex as /w/.  This is </i></font>
-<a name="line-327"></a><font color=Blue><i>-- implemented using an &#8220;inner quantum walk&#8221; to seek /w/.</i></font>
+<a name="line-327"></a><font color=Blue><i>-- implemented using an &#x201c;inner quantum walk&#x201d; to seek /w/.</i></font>
 <a name="line-328"></a><font color=Blue>a15_TestTriangleEdges</font> <font color=Red>::</font> 
 <a name="line-329"></a>  QWTFP_spec  <font color=Blue><i>-- ^ The ambient oracle.</i></font>
 <a name="line-330"></a>  <font color=Red>-&gt;</font> IntMap QNode       <font color=Blue><i>-- ^ /tt/, an /R/-tuple of nodes.</i></font>
@@ -493,7 +493,7 @@
 <a name="line-486"></a>  comment_with_label <font color=Magenta>"EXIT: a18_TriangleEdgeSearch"</font> <font color=Cyan>(</font>tt<font color=Cyan>,</font>ee<font color=Cyan>,</font>w<font color=Cyan>,</font>triTestT<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"tt"</font><font color=Cyan>,</font><font color=Magenta>"ee"</font><font color=Cyan>,</font><font color=Magenta>"w"</font><font color=Cyan>,</font><font color=Magenta>"triTestT"</font><font color=Cyan>)</font>
 <a name="line-487"></a>  return <font color=Cyan>(</font>tt<font color=Cyan>,</font>ee<font color=Cyan>,</font>w<font color=Cyan>,</font>triTestT<font color=Cyan>)</font>
 <a name="line-488"></a>
-<a name="line-489"></a><a name="a19_GCQWalk"></a><font color=Blue><i>-- | Algorithm 19: /GCQWalk/ (&#8220;Graph Collision Quantum Walk&#8221;)</i></font>
+<a name="line-489"></a><a name="a19_GCQWalk"></a><font color=Blue><i>-- | Algorithm 19: /GCQWalk/ (&#x201c;Graph Collision Quantum Walk&#x201d;)</i></font>
 <a name="line-490"></a><font color=Blue><i>-- </i></font>
 <a name="line-491"></a><font color=Blue><i>-- Perform graph collision on the /R/-tuple /tt/ and the node /w/, to determine</i></font>
 <a name="line-492"></a><font color=Blue><i>-- (with high probability) whether /w/ forms a triangle with some pair of nodes </i></font>

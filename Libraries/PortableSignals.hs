@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -25,7 +25,7 @@
 -- 
 -- * In Windows, setting a handler for any one signal automatically
 -- overrides the handlers for all signals (effectively ignoring them).
--- Also, if the 'Default' and 'Ignore' handlers is specified, it
+-- Also, if the 'Default' or 'Ignore' handler is specified, it
 -- applies to all signals.  We do not currently provide a way to
 -- specify handlers for multiple signals.
 

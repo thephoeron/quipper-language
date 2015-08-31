@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -23,7 +23,7 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 import Control.Monad.State
 import System.Random
-import Libraries.Synthesis.Ring (Cplx (..), i)
+import Quantum.Synthesis.Ring (Cplx (..), i)
 
 -- | A qubit is defined as an integer reference.
 type Qubit = Int

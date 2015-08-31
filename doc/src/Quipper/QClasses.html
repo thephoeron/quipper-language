@@ -11,7 +11,7 @@
 <a name="line-4"></a><font color=Blue><i>{-# LANGUAGE FlexibleContexts #-}</i></font>
 <a name="line-5"></a>
 <a name="line-6"></a><font color=Blue><i>-- | This module defines quantum analogues of some Haskell type</i></font>
-<a name="line-7"></a><font color=Blue><i>-- classes. For instance, Haskell&#8217;s @'Eq' a@ has one method</i></font>
+<a name="line-7"></a><font color=Blue><i>-- classes. For instance, Haskell&#x2019;s @'Eq' a@ has one method</i></font>
 <a name="line-8"></a><font color=Blue><i>-- </i></font>
 <a name="line-9"></a><font color=Blue><i>-- &gt; (==) :: a -&gt; a -&gt; Bool.  </i></font>
 <a name="line-10"></a><font color=Blue><i>-- </i></font>
@@ -34,7 +34,7 @@
 <a name="line-27"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-28"></a><font color=Blue><i>-- * The type class QEq</i></font>
 <a name="line-29"></a>
-<a name="line-30"></a><a name="QEq"></a><font color=Blue><i>-- | This is a quantum analogue of Haskell&#8217;s 'Eq' type class. Default</i></font>
+<a name="line-30"></a><a name="QEq"></a><font color=Blue><i>-- | This is a quantum analogue of Haskell&#x2019;s 'Eq' type class. Default</i></font>
 <a name="line-31"></a><a name="QEq"></a><font color=Blue><i>-- implementations are provided; by default, equality is bitwise</i></font>
 <a name="line-32"></a><a name="QEq"></a><font color=Blue><i>-- equality of the underlying data structure. However, specific</i></font>
 <a name="line-33"></a><a name="QEq"></a><font color=Blue><i>-- instances can provide custom implementations. In this case,</i></font>
@@ -128,13 +128,13 @@
 <a name="line-121"></a>  test <font color=Red>&lt;-</font> q_greater qx qy
 <a name="line-122"></a>  return <font color=Cyan>(</font>qx<font color=Cyan>,</font>qy<font color=Cyan>,</font>test<font color=Cyan>)</font>
 <a name="line-123"></a>
-<a name="line-124"></a><a name="q_le"></a><font color=Blue><i>-- | @'q_le' /qx/ /qy/@: test whether /qx/ &#8804; /qy/. A functionally typed wrapper for 'q_leq'.</i></font>
+<a name="line-124"></a><a name="q_le"></a><font color=Blue><i>-- | @'q_le' /qx/ /qy/@: test whether /qx/ &#x2264; /qy/. A functionally typed wrapper for 'q_leq'.</i></font>
 <a name="line-125"></a><font color=Blue>q_le</font> <font color=Red>::</font> <font color=Cyan>(</font>QOrd qa<font color=Cyan>)</font> <font color=Red>=&gt;</font> qa <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>,</font>Qubit<font color=Cyan>)</font>
 <a name="line-126"></a><font color=Blue>q_le</font> qx qy <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-127"></a>  test <font color=Red>&lt;-</font> q_leq qx qy
 <a name="line-128"></a>  return <font color=Cyan>(</font>qx<font color=Cyan>,</font>qy<font color=Cyan>,</font>test<font color=Cyan>)</font>
 <a name="line-129"></a>
-<a name="line-130"></a><a name="q_ge"></a><font color=Blue><i>-- | @'q_ge' /qx/ /qy/@: test whether /qx/ &#8805; /qy/. A functionally typed wrapper for 'q_geq'.</i></font>
+<a name="line-130"></a><a name="q_ge"></a><font color=Blue><i>-- | @'q_ge' /qx/ /qy/@: test whether /qx/ &#x2265; /qy/. A functionally typed wrapper for 'q_geq'.</i></font>
 <a name="line-131"></a><font color=Blue>q_ge</font> <font color=Red>::</font> <font color=Cyan>(</font>QOrd qa<font color=Cyan>)</font> <font color=Red>=&gt;</font> qa <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>,</font>Qubit<font color=Cyan>)</font>
 <a name="line-132"></a><font color=Blue>q_ge</font> qx qy <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-133"></a>  test <font color=Red>&lt;-</font> q_geq qx qy

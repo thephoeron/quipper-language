@@ -40,11 +40,11 @@
 <a name="line-33"></a><font color=Blue><i>-- </i></font>
 <a name="line-34"></a><font color=Blue><i>-- * /bb_bar/, an /n/-dimensional matrix;</i></font>
 <a name="line-35"></a><font color=Blue><i>-- </i></font>
-<a name="line-36"></a><font color=Blue><i>-- * /p/, a prime such that /n/ &#8804; /p/ &#8804; 2/n/;</i></font>
+<a name="line-36"></a><font color=Blue><i>-- * /p/, a prime such that /n/ &#x2264; /p/ &#x2264; 2/n/;</i></font>
 <a name="line-37"></a><font color=Blue><i>--</i></font>
-<a name="line-38"></a><font color=Blue><i>-- * /m/, an integer such that /1/ &#8804; /m/ &#8804; /p-1/;</i></font>
+<a name="line-38"></a><font color=Blue><i>-- * /m/, an integer such that /1/ &#x2264; /m/ &#x2264; /p-1/;</i></font>
 <a name="line-39"></a><font color=Blue><i>--</i></font>
-<a name="line-40"></a><font color=Blue><i>-- * /i0/, an integer index such that /0/ &#8804; /i0/ &#8804; /n-1/;</i></font>
+<a name="line-40"></a><font color=Blue><i>-- * /i0/, an integer index such that /0/ &#x2264; /i0/ &#x2264; /n-1/;</i></font>
 <a name="line-41"></a><font color=Blue><i>-- </i></font>
 <a name="line-42"></a><font color=Blue><i>-- * /t/, an integer (either /0/ or /1/);</i></font>
 <a name="line-43"></a><font color=Blue><i>--</i></font>
@@ -285,11 +285,11 @@
 <a name="line-278"></a><font color=Blue><i>-- * /l/, an integer approximation of the length of the </i></font>
 <a name="line-279"></a><font color=Blue><i>-- shortest vector,</i></font>
 <a name="line-280"></a><font color=Blue><i>-- </i></font>
-<a name="line-281"></a><font color=Blue><i>-- * /p/, a prime such that /n/ &#8804; /n/ &#8804; 2/n/,</i></font>
+<a name="line-281"></a><font color=Blue><i>-- * /p/, a prime such that /n/ &#x2264; /n/ &#x2264; 2/n/,</i></font>
 <a name="line-282"></a><font color=Blue><i>-- </i></font>
-<a name="line-283"></a><font color=Blue><i>-- * /m/, an integer such that /1/ &#8804; /m/ &#8804; /p-1/,</i></font>
+<a name="line-283"></a><font color=Blue><i>-- * /m/, an integer such that /1/ &#x2264; /m/ &#x2264; /p-1/,</i></font>
 <a name="line-284"></a><font color=Blue><i>-- </i></font>
-<a name="line-285"></a><font color=Blue><i>-- * /i0/, an integer index such that /0/ &#8804; /i0/ &#8804; /n-1/ and</i></font>
+<a name="line-285"></a><font color=Blue><i>-- * /i0/, an integer index such that /0/ &#x2264; /i0/ &#x2264; /n-1/ and</i></font>
 <a name="line-286"></a><font color=Blue><i>-- </i></font>
 <a name="line-287"></a><font color=Blue><i>-- * /randomgen/, a random number generator.</i></font>
 <a name="line-288"></a><font color=Blue><i>-- </i></font>
@@ -401,7 +401,7 @@
 <a name="line-394"></a><font color=Blue><i>-- paired and each pair </i></font>
 <a name="line-395"></a><font color=Blue><i>-- ((/q/[sub 1], /k/[sub 1]), (/q/[sub 2], /k/[sub 2]))</i></font>
 <a name="line-396"></a><font color=Blue><i>-- is combined into a new 'Psi_k' /(q, k)/ with</i></font>
-<a name="line-397"></a><font color=Blue><i>-- /k/= /k/[sub 1] &#177; /k/[sub 2]. </i></font>
+<a name="line-397"></a><font color=Blue><i>-- /k/= /k/[sub 1] &#x00b1; /k/[sub 2]. </i></font>
 <a name="line-398"></a><font color=Blue><i>-- If /k/= /k/[sub 1] - /k/[sub 2], the 'Psi_k' is preserved,</i></font>
 <a name="line-399"></a><font color=Blue><i>-- otherwise it is discarded.</i></font>
 <a name="line-400"></a><font color=Blue><i>--</i></font>
@@ -420,7 +420,7 @@
 <a name="line-413"></a>    <font color=Blue><i>-- Discard the states that haven't been paired.</i></font>
 <a name="line-414"></a>    qdiscard_psi_ks unpaired
 <a name="line-415"></a>    comment <font color=Magenta>"EXIT: Pairing"</font>
-<a name="line-416"></a>    <font color=Blue><i>-- Combine pairs (Psi_k, Psi_l) to get Psi_k&#177;l.</i></font>
+<a name="line-416"></a>    <font color=Blue><i>-- Combine pairs (Psi_k, Psi_l) to get Psi_k&#x00b1;l.</i></font>
 <a name="line-417"></a>    <font color=Blue><i>-- If the measurement outcome ('sign') is 0, then the </i></font>
 <a name="line-418"></a>    <font color=Blue><i>-- associated state is of the form Psi_k-l. </i></font>
 <a name="line-419"></a>    combined_states <font color=Red>&lt;-</font> mapM <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font><font color=Cyan>(</font>q<font color=Cyan>,</font>k<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>q'<font color=Cyan>,</font>l<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font> 

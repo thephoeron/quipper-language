@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -19,11 +19,11 @@ import QuipperLib.Decompose
 import Algorithms.BWT.Definitions
 import Algorithms.BWT.BWT
 
-import Libraries.Render
 import Libraries.Sampling
 import Libraries.Auxiliary
 
 -- import other stuff
+import Graphics.EasyRender
 import Text.Printf
 import Data.Bits
 

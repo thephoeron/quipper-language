@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -19,9 +19,11 @@ import Control.Monad.State
 import Data.Map (Map)
 import Data.Set (Set)
 
+import Control.Applicative (Applicative(..))
+import Control.Monad (liftM, ap)
+
 import qualified Libraries.Template.ErrorMsgQ as Err
 import Libraries.Template.ErrorMsgQ (ErrMsgQ)
-
 
 -- | State of the monad.
 data LiftState = LiftState {
@@ -51,6 +53,12 @@ instance Monad LiftQ where
            let (LiftQ y) = f x'
            y
 
+instance Applicative LiftQ where
+  pure = return
+  (<*>) = ap
+
+instance Functor LiftQ where
+  fmap = liftM
 
 -- | Retrieve the state from the monad.
 getState :: LiftQ LiftState

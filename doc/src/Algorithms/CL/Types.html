@@ -31,11 +31,11 @@
 <a name="line-24"></a>
 <a name="line-25"></a><font color=Blue><i>-- $ First, we define some type synonyms for arithmetic types, selecting which will be used in the functions for the Class Number algorithm.</i></font>
 <a name="line-26"></a><font color=Blue><i>--</i></font>
-<a name="line-27"></a><font color=Blue><i>-- We use three different integer types.  For interfacing with quantum computation, we use 'CLInt' := 'IntM'.  For efficient classical (i.e. circuit-generation time) computation on potentially large integers, we use 'CLIntP' := 'Integer', Haskell&#8217;s arbitrary-precision integers.  (&#916;, for instance, is taken to be a 'CLIntP').  For small classical integers (typically for register sizes), we use 'Int', Haskell&#8217;s bounded-precision integers.</i></font>
+<a name="line-27"></a><font color=Blue><i>-- We use three different integer types.  For interfacing with quantum computation, we use 'CLInt' := 'IntM'.  For efficient classical (i.e. circuit-generation time) computation on potentially large integers, we use 'CLIntP' := 'Integer', Haskell&#x2019;s arbitrary-precision integers.  (&#x0394;, for instance, is taken to be a 'CLIntP').  For small classical integers (typically for register sizes), we use 'Int', Haskell&#x2019;s bounded-precision integers.</i></font>
 <a name="line-28"></a><font color=Blue><i>--</i></font>
 <a name="line-29"></a><font color=Blue><i>-- For the first two of these, we define type synonyms, so that they can be swapped out to other types if desired (they are to a large extent modular).  For 'Int' we do not, since we make un-coerced use of built-in Haskell functions like 'length' which give it specifically.</i></font>
 <a name="line-30"></a><font color=Blue><i>--</i></font>
-<a name="line-31"></a><font color=Blue><i>-- Where not dictated by these conventions, integer types are generalized, i.e., @(Integral a) =&gt;@ &#8230;</i></font>
+<a name="line-31"></a><font color=Blue><i>-- Where not dictated by these conventions, integer types are generalized, i.e., @(Integral a) =&gt;@ &#x2026;</i></font>
 <a name="line-32"></a><font color=Blue><i>--</i></font>
 <a name="line-33"></a><font color=Blue><i>-- Rational and real numbers have not yet been similarly stratified.</i></font>
 <a name="line-34"></a>
@@ -59,26 +59,26 @@
 <a name="line-52"></a>
 <a name="line-53"></a><font color=Blue><i>-- $ The functions of this subsection are needed only for circuit-generation-time classical computation, not for quantum circuit computation.</i></font>
 <a name="line-54"></a>
-<a name="line-55"></a><a name="bigD_of_d"></a><font color=Blue><i>-- | Compute &#916;, given /d/.</i></font>
-<a name="line-56"></a><font color=Blue><i>-- (See [Jozsa 2003], Prop. 6 et seq.  We use &#916;, or in code 'bigD', where Jozsa uses /D/.)</i></font>
+<a name="line-55"></a><a name="bigD_of_d"></a><font color=Blue><i>-- | Compute &#x0394;, given /d/.</i></font>
+<a name="line-56"></a><font color=Blue><i>-- (See [Jozsa 2003], Prop. 6 et seq.  We use &#x0394;, or in code 'bigD', where Jozsa uses /D/.)</i></font>
 <a name="line-57"></a><font color=Blue>bigD_of_d</font> <font color=Red>::</font> Integral a <font color=Red>=&gt;</font> a <font color=Red>-&gt;</font> a
 <a name="line-58"></a><font color=Blue>bigD_of_d</font> d <font color=Red>=</font> <font color=Green><u>case</u></font> <font color=Cyan>(</font>d <font color=Cyan>`mod`</font> <font color=Magenta>4</font><font color=Cyan>)</font> <font color=Green><u>of</u></font>
 <a name="line-59"></a>  <font color=Magenta>1</font> <font color=Red>-&gt;</font> d
 <a name="line-60"></a>  <font color=Green><u>_</u></font> <font color=Red>-&gt;</font> <font color=Magenta>4</font><font color=Cyan>*</font>d
 <a name="line-61"></a>
-<a name="line-62"></a><a name="d_of_bigD"></a><font color=Blue><i>-- | Compute /d/, given &#916;.</i></font>
+<a name="line-62"></a><a name="d_of_bigD"></a><font color=Blue><i>-- | Compute /d/, given &#x0394;.</i></font>
 <a name="line-63"></a><font color=Blue><i>-- (Again, see [Jozsa 2003], Prop. 6 et seq.)</i></font>
 <a name="line-64"></a><font color=Blue>d_of_bigD</font> <font color=Red>::</font> Integral a <font color=Red>=&gt;</font> a <font color=Red>-&gt;</font> a
 <a name="line-65"></a><font color=Blue>d_of_bigD</font> bigD <font color=Red>=</font> <font color=Green><u>case</u></font> <font color=Cyan>(</font>bigD <font color=Cyan>`mod`</font> <font color=Magenta>4</font><font color=Cyan>)</font> <font color=Green><u>of</u></font>
 <a name="line-66"></a>  <font color=Magenta>0</font> <font color=Red>-&gt;</font> bigD <font color=Cyan>`div`</font> <font color=Magenta>4</font>
 <a name="line-67"></a>  <font color=Green><u>_</u></font> <font color=Red>-&gt;</font> bigD
 <a name="line-68"></a>
-<a name="line-69"></a><a name="is_valid_d"></a><font color=Blue><i>-- | Check if /d/ is a valid input to Hallgren&#8217;s algorithm,</i></font>
+<a name="line-69"></a><a name="is_valid_d"></a><font color=Blue><i>-- | Check if /d/ is a valid input to Hallgren&#x2019;s algorithm,</i></font>
 <a name="line-70"></a><font color=Blue><i>-- i.e. correctly defines a real quadratic number field.</i></font>
 <a name="line-71"></a><font color=Blue>is_valid_d</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral a<font color=Cyan>)</font> <font color=Red>=&gt;</font> a <font color=Red>-&gt;</font> Bool
 <a name="line-72"></a><font color=Blue>is_valid_d</font> d <font color=Red>=</font> d <font color=Cyan>&gt;</font> <font color=Magenta>1</font> <font color=Cyan>&amp;&amp;</font> is_square_free d
 <a name="line-73"></a>
-<a name="line-74"></a><a name="is_valid_bigD"></a><font color=Blue><i>-- | Check if /&#916;/ is a valid input to Hallgren&#8217;s algorithm,</i></font>
+<a name="line-74"></a><a name="is_valid_bigD"></a><font color=Blue><i>-- | Check if /&#x0394;/ is a valid input to Hallgren&#x2019;s algorithm,</i></font>
 <a name="line-75"></a><font color=Blue><i>-- i.e. is the discriminant of a real quadratic number field.</i></font>
 <a name="line-76"></a><font color=Blue><i>-- (Cf. &lt;<a href="http://en.wikipedia.org/wiki/Fundamental_discriminant">http://en.wikipedia.org/wiki/Fundamental_discriminant</a>&gt;)</i></font>
 <a name="line-77"></a><font color=Blue>is_valid_bigD</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral a<font color=Cyan>)</font> <font color=Red>=&gt;</font> a <font color=Red>-&gt;</font> Bool
@@ -93,7 +93,7 @@
 <a name="line-86"></a><font color=Blue>all_small_ds</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral int<font color=Cyan>)</font> <font color=Red>=&gt;</font> <font color=Red>[</font>int<font color=Red>]</font>
 <a name="line-87"></a><font color=Blue>all_small_ds</font> <font color=Red>=</font> filter <font color=Cyan>(</font><font color=Red>\</font>n <font color=Red>-&gt;</font> is_valid_d n<font color=Cyan>)</font>  <font color=Red>[</font><font color=Magenta>2</font><font color=Red>..</font><font color=Red>]</font>
 <a name="line-88"></a>
-<a name="line-89"></a><a name="all_bigDs"></a><font color=Blue><i>-- | The (infinite, lazy) list of all valid inputs &#916;, </i></font>
+<a name="line-89"></a><a name="all_bigDs"></a><font color=Blue><i>-- | The (infinite, lazy) list of all valid inputs &#x0394;, </i></font>
 <a name="line-90"></a><font color=Blue><i>-- i.e. of all discriminants of real quadratic number fields.</i></font>
 <a name="line-91"></a><font color=Blue>all_bigDs</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral int<font color=Cyan>)</font> <font color=Red>=&gt;</font> <font color=Red>[</font>int<font color=Red>]</font>
 <a name="line-92"></a><font color=Blue>all_bigDs</font> <font color=Red>=</font> map bigD_of_d all_small_ds
@@ -101,20 +101,20 @@
 <a name="line-94"></a><font color=Blue><i>-- ===========================================</i></font>
 <a name="line-95"></a><font color=Blue><i>-- ** Field elements</i></font>
 <a name="line-96"></a>
-<a name="line-97"></a><a name="AlgNumGen"></a><font color=Blue><i>-- | A data type describing a number in the algebraic number field K = &#8474;[&#8730;&#916;]: @'AlgNum' /a/ /b/ &#916;@ represents /a/ + /b/&#8730;&#916;.</i></font>
+<a name="line-97"></a><a name="AlgNumGen"></a><font color=Blue><i>-- | A data type describing a number in the algebraic number field K = &#x211a;[&#x221a;&#x0394;]: @'AlgNum' /a/ /b/ &#x0394;@ represents /a/ + /b/&#x221a;&#x0394;.</i></font>
 <a name="line-98"></a><a name="AlgNumGen"></a><font color=Blue><i>--</i></font>
 <a name="line-99"></a><a name="AlgNumGen"></a><font color=Blue><i>-- In general, the type of coefficients may be any type of (classical or quantum)</i></font>
 <a name="line-100"></a><a name="AlgNumGen"></a><font color=Blue><i>-- numbers, i.e. an instance of the 'Num' or 'QNum' class.</i></font>
-<a name="line-101"></a><a name="AlgNumGen"></a><font color=Blue><i>-- Given this, the algebraic numbers with a fixed &#916; will in turn be an instance</i></font>
+<a name="line-101"></a><a name="AlgNumGen"></a><font color=Blue><i>-- Given this, the algebraic numbers with a fixed &#x0394; will in turn be an instance</i></font>
 <a name="line-102"></a><a name="AlgNumGen"></a><font color=Blue><i>-- of 'Num' or 'QNum'.</i></font>
 <a name="line-103"></a><a name="AlgNumGen"></a><font color=Blue><i>-- </i></font>
 <a name="line-104"></a><a name="AlgNumGen"></a><font color=Blue><i>-- A value @/a/ :: /x/@ may also be used as an @'AlgNumGen' /x/@,</i></font>
-<a name="line-105"></a><a name="AlgNumGen"></a><font color=Blue><i>-- with no &#916; specified, to represent simply /a/ + 0&#8730;&#916;; this can be considered polymorphic</i></font>
-<a name="line-106"></a><a name="AlgNumGen"></a><font color=Blue><i>-- over all possible values of &#916;. </i></font>
+<a name="line-105"></a><a name="AlgNumGen"></a><font color=Blue><i>-- with no &#x0394; specified, to represent simply /a/ + 0&#x221a;&#x0394;; this can be considered polymorphic</i></font>
+<a name="line-106"></a><a name="AlgNumGen"></a><font color=Blue><i>-- over all possible values of &#x0394;. </i></font>
 <a name="line-107"></a><a name="AlgNumGen"></a><font color=Blue><i>-- </i></font>
 <a name="line-108"></a><a name="AlgNumGen"></a><font color=Blue><i>-- This is similar to the use of 'IntM's or 'FPReal's of indeterminate size, although</i></font>
 <a name="line-109"></a><a name="AlgNumGen"></a><font color=Blue><i>-- unlike for them, we do not restrict this to the classical case.  However, the</i></font>
-<a name="line-110"></a><a name="AlgNumGen"></a><font color=Blue><i>-- question of whether an 'AlgNumQ' has specified &#8730;&#916; is (like e.g. the length of</i></font>
+<a name="line-110"></a><a name="AlgNumGen"></a><font color=Blue><i>-- question of whether an 'AlgNumQ' has specified &#x221a;&#x0394; is (like e.g. the length of</i></font>
 <a name="line-111"></a><a name="AlgNumGen"></a><font color=Blue><i>-- a list) is a parameter property, known at circuit generation time, not a purely </i></font>
 <a name="line-112"></a><a name="AlgNumGen"></a><font color=Blue><i>-- quantum property.</i></font>
 <a name="line-113"></a><a name="AlgNumGen"></a><font color=Green><u>data</u></font> AlgNumGen a <font color=Red>=</font> AlgNum a a CLIntP <font color=Red>|</font> AlgNum_indet a <font color=Green><u>deriving</u></font> <font color=Cyan>(</font>Show<font color=Cyan>)</font>
@@ -135,14 +135,14 @@
 <a name="line-128"></a><font color=Green><u>instance</u></font> <font color=Cyan>(</font>Eq a<font color=Cyan>,</font> Num a<font color=Cyan>)</font> <font color=Red>=&gt;</font> Eq <font color=Cyan>(</font>AlgNumGen a<font color=Cyan>)</font> <font color=Green><u>where</u></font>
 <a name="line-129"></a>  <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>==</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> 
 <a name="line-130"></a>    <font color=Green><u>if</u></font> bigD <font color=Cyan>==</font> bigD' <font color=Green><u>then</u></font> a <font color=Cyan>==</font> a' <font color=Cyan>&amp;&amp;</font> b <font color=Cyan>==</font> b'
-<a name="line-131"></a>    <font color=Green><u>else</u></font> error <font color=Magenta>"Operation = on AlgNum: operands must have same &#916;."</font>
+<a name="line-131"></a>    <font color=Green><u>else</u></font> error <font color=Magenta>"Operation = on AlgNum: operands must have same &#x0394;."</font>
 <a name="line-132"></a>  <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>==</font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>==</font> <font color=Cyan>(</font>AlgNum a' <font color=Magenta>0</font> bigD<font color=Cyan>)</font>
 <a name="line-133"></a>  <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>==</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a <font color=Magenta>0</font> bigD'<font color=Cyan>)</font> <font color=Cyan>==</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font>
 <a name="line-134"></a>  <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>==</font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> a <font color=Cyan>==</font> a'
 <a name="line-135"></a>
 <a name="line-136"></a><a name="pretty_show_AlgNum"></a><font color=Blue><i>-- | Print a 'Number' in human-readable (though not Haskell-readable) format, as e.g. </i></font>
 <a name="line-137"></a><font color=Blue>pretty_show_AlgNum</font> <font color=Red>::</font> Show a <font color=Red>=&gt;</font> AlgNumGen a <font color=Red>-&gt;</font> String
-<a name="line-138"></a><font color=Blue>pretty_show_AlgNum</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>show a<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" + "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show b<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" &#8730;"</font> <font color=Cyan>++</font> show bigD
+<a name="line-138"></a><font color=Blue>pretty_show_AlgNum</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>show a<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" + "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show b<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" &#x221a;"</font> <font color=Cyan>++</font> show bigD
 <a name="line-139"></a><font color=Blue>pretty_show_AlgNum</font> <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Red>=</font> show a
 <a name="line-140"></a>
 <a name="line-141"></a><a name="floating_of_AlgNum"></a><font color=Blue><i>-- | Realize an algebraic number as a real number (of any 'Floating' type).</i></font>
@@ -150,11 +150,11 @@
 <a name="line-143"></a><font color=Blue>floating_of_AlgNum</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>realToFrac a<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>realToFrac b<font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>sqrt <font color=Cyan>$</font> fromIntegral bigD<font color=Cyan>)</font>
 <a name="line-144"></a><font color=Blue>floating_of_AlgNum</font> <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>realToFrac a<font color=Cyan>)</font>
 <a name="line-145"></a>
-<a name="line-146"></a><a name="number_promote"></a><font color=Blue><i>-- | Coerce one algebraic number into the field of a second, if possible.  If not possible (i.e. if their &#916;&#8217;s mismatch), throw an error.</i></font>
+<a name="line-146"></a><a name="number_promote"></a><font color=Blue><i>-- | Coerce one algebraic number into the field of a second, if possible.  If not possible (i.e. if their &#x0394;&#x2019;s mismatch), throw an error.</i></font>
 <a name="line-147"></a><font color=Blue>number_promote</font> <font color=Red>::</font> Num a <font color=Red>=&gt;</font> AlgNumGen a <font color=Red>-&gt;</font> AlgNumGen b <font color=Red>-&gt;</font> ErrMsg <font color=Red>-&gt;</font> AlgNumGen a
 <a name="line-148"></a><font color=Blue>number_promote</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>(</font>AlgNum <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> bigD'<font color=Cyan>)</font> e <font color=Red>=</font>
 <a name="line-149"></a>  <font color=Green><u>if</u></font> bigD <font color=Cyan>==</font> bigD' <font color=Green><u>then</u></font> AlgNum a b bigD
-<a name="line-150"></a>  <font color=Green><u>else</u></font> error <font color=Cyan>$</font> e <font color=Magenta>"mismatched &#916;."</font>
+<a name="line-150"></a>  <font color=Green><u>else</u></font> error <font color=Cyan>$</font> e <font color=Magenta>"mismatched &#x0394;."</font>
 <a name="line-151"></a><font color=Blue>number_promote</font> <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>(</font>AlgNum <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> bigD'<font color=Cyan>)</font> <font color=Green><u>_</u></font> <font color=Red>=</font> AlgNum a <font color=Magenta>0</font> bigD'
 <a name="line-152"></a><font color=Blue>number_promote</font> n <font color=Cyan>(</font>AlgNum_indet <font color=Green><u>_</u></font><font color=Cyan>)</font> <font color=Green><u>_</u></font> <font color=Red>=</font> n
 <a name="line-153"></a>
@@ -169,7 +169,7 @@
 <a name="line-162"></a>        <font color=Cyan>(</font>GT<font color=Cyan>,</font>LT<font color=Cyan>)</font> <font color=Red>-&gt;</font> compare <font color=Cyan>(</font><font color=Cyan>(</font>a<font color=Blue><i>-</i></font>a'<font color=Cyan>)</font><font color=Cyan>^</font><font color=Magenta>2</font><font color=Cyan>)</font> <font color=Cyan>(</font><font color=Cyan>(</font>b<font color=Blue><i>-</i></font>b'<font color=Cyan>)</font><font color=Cyan>^</font><font color=Magenta>2</font> <font color=Cyan>*</font> fromInteger bigD<font color=Cyan>)</font>
 <a name="line-163"></a>        <font color=Cyan>(</font>LT<font color=Cyan>,</font>GT<font color=Cyan>)</font> <font color=Red>-&gt;</font> compare <font color=Cyan>(</font><font color=Cyan>(</font>b<font color=Blue><i>-</i></font>b'<font color=Cyan>)</font><font color=Cyan>^</font><font color=Magenta>2</font> <font color=Cyan>*</font> fromInteger bigD<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Cyan>(</font>a<font color=Blue><i>-</i></font>a'<font color=Cyan>)</font><font color=Cyan>^</font><font color=Magenta>2</font><font color=Cyan>)</font>
 <a name="line-164"></a>    <font color=Green><u>else</u></font> 
-<a name="line-165"></a>      error <font color=Magenta>"compare // AlgNumGen: mismatched &#916;."</font>
+<a name="line-165"></a>      error <font color=Magenta>"compare // AlgNumGen: mismatched &#x0394;."</font>
 <a name="line-166"></a>  compare <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> compare <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>(</font>AlgNum a' <font color=Magenta>0</font> bigD<font color=Cyan>)</font>
 <a name="line-167"></a>  compare <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> compare <font color=Cyan>(</font>AlgNum a <font color=Magenta>0</font> bigD'<font color=Cyan>)</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font>
 <a name="line-168"></a>  compare <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> compare a a'
@@ -177,21 +177,21 @@
 <a name="line-170"></a><font color=Green><u>instance</u></font> <font color=Cyan>(</font>Ord a<font color=Cyan>,</font> Num a<font color=Cyan>)</font> <font color=Red>=&gt;</font> Num <font color=Cyan>(</font>AlgNumGen a<font color=Cyan>)</font> <font color=Green><u>where</u></font>
 <a name="line-171"></a>  <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> 
 <a name="line-172"></a>    <font color=Green><u>if</u></font> bigD <font color=Cyan>==</font> bigD' <font color=Green><u>then</u></font> AlgNum <font color=Cyan>(</font>a<font color=Cyan>+</font>a'<font color=Cyan>)</font> <font color=Cyan>(</font>b<font color=Cyan>+</font>b'<font color=Cyan>)</font> bigD
-<a name="line-173"></a>    <font color=Green><u>else</u></font> error <font color=Magenta>"Operation + on AlgNum: operands must have same &#916;."</font>
+<a name="line-173"></a>    <font color=Green><u>else</u></font> error <font color=Magenta>"Operation + on AlgNum: operands must have same &#x0394;."</font>
 <a name="line-174"></a>  <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>AlgNum a' <font color=Magenta>0</font> bigD<font color=Cyan>)</font>
 <a name="line-175"></a>  <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a <font color=Magenta>0</font> bigD'<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font>
 <a name="line-176"></a>  <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum_indet <font color=Cyan>(</font>a <font color=Cyan>+</font> a'<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-177"></a>
 <a name="line-178"></a>  <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> 
 <a name="line-179"></a>    <font color=Green><u>if</u></font> bigD <font color=Cyan>==</font> bigD' <font color=Green><u>then</u></font> AlgNum <font color=Cyan>(</font>a<font color=Cyan>*</font>a' <font color=Cyan>+</font> b<font color=Cyan>*</font>b'<font color=Cyan>*</font><font color=Cyan>(</font>fromIntegral bigD<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>(</font>a<font color=Cyan>*</font>b' <font color=Cyan>+</font> a'<font color=Cyan>*</font>b<font color=Cyan>)</font> bigD
-<a name="line-180"></a>    <font color=Green><u>else</u></font> error <font color=Magenta>"Operation * on AlgNum: operands must have same &#916;."</font>
+<a name="line-180"></a>    <font color=Green><u>else</u></font> error <font color=Magenta>"Operation * on AlgNum: operands must have same &#x0394;."</font>
 <a name="line-181"></a>  <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>AlgNum a' <font color=Magenta>0</font> bigD<font color=Cyan>)</font>
 <a name="line-182"></a>  <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a <font color=Magenta>0</font> bigD'<font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font>
 <a name="line-183"></a>  <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum_indet <font color=Cyan>(</font>a <font color=Cyan>*</font> a'<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-184"></a>
 <a name="line-185"></a>  <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Blue><i>-</i></font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> 
 <a name="line-186"></a>    <font color=Green><u>if</u></font> bigD <font color=Cyan>==</font> bigD' <font color=Green><u>then</u></font> AlgNum <font color=Cyan>(</font>a<font color=Blue><i>-</i></font>a'<font color=Cyan>)</font> <font color=Cyan>(</font>b<font color=Blue><i>-</i></font>b'<font color=Cyan>)</font> bigD
-<a name="line-187"></a>    <font color=Green><u>else</u></font> error <font color=Magenta>"Operation - on AlgNum: operands must have same &#916;."</font>
+<a name="line-187"></a>    <font color=Green><u>else</u></font> error <font color=Magenta>"Operation - on AlgNum: operands must have same &#x0394;."</font>
 <a name="line-188"></a>  <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Blue><i>-</i></font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Blue><i>-</i></font> <font color=Cyan>(</font>AlgNum a' <font color=Magenta>0</font> bigD<font color=Cyan>)</font>
 <a name="line-189"></a>  <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Blue><i>-</i></font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a <font color=Magenta>0</font> bigD'<font color=Cyan>)</font> <font color=Blue><i>-</i></font> <font color=Cyan>(</font>AlgNum a' b' bigD'<font color=Cyan>)</font>
 <a name="line-190"></a>  <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Blue><i>-</i></font> <font color=Cyan>(</font>AlgNum_indet a'<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum_indet <font color=Cyan>(</font>a <font color=Blue><i>-</i></font> a'<font color=Cyan>)</font><font color=Cyan>)</font>
@@ -219,19 +219,19 @@
 <a name="line-212"></a>  properFraction x <font color=Red>=</font> <font color=Cyan>(</font>x'<font color=Cyan>,</font>x <font color=Blue><i>-</i></font> fromIntegral x'<font color=Cyan>)</font>
 <a name="line-213"></a>    <font color=Green><u>where</u></font> x' <font color=Red>=</font> truncate <font color=Cyan>$</font> floating_of_AlgNum x
 <a name="line-214"></a>
-<a name="line-215"></a><a name="conjugate"></a><font color=Blue><i>-- | The algebraic conjugate: sends /a/ + /b/ &#8730;&#916; to /a/ - /b/ &#8730;&#916;.</i></font>
+<a name="line-215"></a><a name="conjugate"></a><font color=Blue><i>-- | The algebraic conjugate: sends /a/ + /b/ &#x221a;&#x0394; to /a/ - /b/ &#x221a;&#x0394;.</i></font>
 <a name="line-216"></a><font color=Blue>conjugate</font> <font color=Red>::</font> <font color=Cyan>(</font>Num a<font color=Cyan>)</font> <font color=Red>=&gt;</font> AlgNumGen a <font color=Red>-&gt;</font> AlgNumGen a
 <a name="line-217"></a><font color=Blue>conjugate</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum a <font color=Cyan>(</font><font color=Blue><i>-</i></font>b<font color=Cyan>)</font> bigD<font color=Cyan>)</font>
 <a name="line-218"></a><font color=Blue>conjugate</font> <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font>
 <a name="line-219"></a>
 <a name="line-220"></a><a name="is_alg_int"></a><font color=Blue><i>-- | Test whether an algebraic number is an algebraic integer.</i></font>
 <a name="line-221"></a><font color=Blue><i>--</i></font>
-<a name="line-222"></a><font color=Blue><i>-- (A number is an algebraic integer iff it can be written in the form /m/ + /n/(&#916; + &#8730;&#916;)\/2, where /m/, /n/ are integers.</i></font>
+<a name="line-222"></a><font color=Blue><i>-- (A number is an algebraic integer iff it can be written in the form /m/ + /n/(&#x0394; + &#x221a;&#x0394;)\/2, where /m/, /n/ are integers.</i></font>
 <a name="line-223"></a><font color=Blue><i>-- See [Jozsa 2003], proof of Prop. 14.)</i></font>
 <a name="line-224"></a><font color=Blue>is_alg_int</font> <font color=Red>::</font> <font color=Cyan>(</font>Ord a<font color=Cyan>,</font> RealFrac a<font color=Cyan>)</font> <font color=Red>=&gt;</font> AlgNumGen a <font color=Red>-&gt;</font> Bool
 <a name="line-225"></a><font color=Blue>is_alg_int</font> <font color=Cyan>(</font>AlgNum a b bigD<font color=Cyan>)</font> <font color=Red>=</font> is_int n <font color=Cyan>&amp;&amp;</font> is_int m
 <a name="line-226"></a>  <font color=Green><u>where</u></font>
-<a name="line-227"></a><font color=Blue><i>-- solve for m, n in the equation [a + b &#8730;D = m + n(&#916; + &#8730;&#916;)/2]</i></font>
+<a name="line-227"></a><font color=Blue><i>-- solve for m, n in the equation [a + b &#x221a;D = m + n(&#x0394; + &#x221a;&#x0394;)/2]</i></font>
 <a name="line-228"></a>    n <font color=Red>=</font> <font color=Magenta>2</font> <font color=Cyan>*</font> b
 <a name="line-229"></a>    m <font color=Red>=</font> a <font color=Blue><i>-</i></font> b <font color=Cyan>*</font> fromIntegral bigD
 <a name="line-230"></a><font color=Blue>is_alg_int</font> <font color=Cyan>(</font>AlgNum_indet a<font color=Cyan>)</font> <font color=Red>=</font> is_int a
@@ -240,7 +240,7 @@
 <a name="line-233"></a><font color=Blue>is_unit</font> <font color=Red>::</font> <font color=Cyan>(</font>Ord a<font color=Cyan>,</font> RealFrac a<font color=Cyan>)</font> <font color=Red>=&gt;</font> AlgNumGen a <font color=Red>-&gt;</font> Bool
 <a name="line-234"></a><font color=Blue>is_unit</font> n <font color=Red>=</font> <font color=Green><u>if</u></font> n <font color=Cyan>==</font> <font color=Magenta>0</font> <font color=Green><u>then</u></font> False <font color=Green><u>else</u></font> <font color=Cyan>(</font>is_alg_int n<font color=Cyan>)</font> <font color=Cyan>&amp;&amp;</font> <font color=Cyan>(</font>is_alg_int <font color=Cyan>(</font>recip n<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-235"></a>
-<a name="line-236"></a><a name="omega_of_bigD"></a><font color=Blue><i>-- | The number &#969; associated to the field /K/.</i></font>
+<a name="line-236"></a><a name="omega_of_bigD"></a><font color=Blue><i>-- | The number &#x03c9; associated to the field /K/.</i></font>
 <a name="line-237"></a><font color=Blue>omega_of_bigD</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> AlgNum
 <a name="line-238"></a><font color=Blue>omega_of_bigD</font> bigD <font color=Red>=</font>
 <a name="line-239"></a>  <font color=Green><u>if</u></font> <font color=Cyan>(</font>bigD <font color=Cyan>`mod`</font> <font color=Magenta>4</font> <font color=Cyan>==</font> <font color=Magenta>1</font><font color=Cyan>)</font>
@@ -251,17 +251,17 @@
 <a name="line-244"></a><font color=Blue><i>-- * Ideals</i></font>
 <a name="line-245"></a>
 <a name="line-246"></a><a name="IdealX"></a><font color=Blue><i>-- | Data specifying an ideal in an algebraic number field.  An ideal is described by a tuple</i></font>
-<a name="line-247"></a><a name="IdealX"></a><font color=Blue><i>-- (&#916;,/m/,/l/,/a/,/b/), representing the ideal</i></font>
+<a name="line-247"></a><a name="IdealX"></a><font color=Blue><i>-- (&#x0394;,/m/,/l/,/a/,/b/), representing the ideal</i></font>
 <a name="line-248"></a><a name="IdealX"></a><font color=Blue><i>-- </i></font>
-<a name="line-249"></a><a name="IdealX"></a><font color=Blue><i>-- /m/\//l/ (/aZ/ + (/b/+&#8730;&#916;)\/2 /Z/),</i></font>
+<a name="line-249"></a><a name="IdealX"></a><font color=Blue><i>-- /m/\//l/ (/aZ/ + (/b/+&#x221a;&#x0394;)\/2 /Z/),</i></font>
 <a name="line-250"></a><a name="IdealX"></a><font color=Blue><i>-- </i></font>
 <a name="line-251"></a><a name="IdealX"></a><font color=Blue><i>-- where moreover we assume and ensure always that the ideal is in /standard form/ ([Jozsa 2003], p.11, Prop. 16).  Specifically,</i></font>
 <a name="line-252"></a><a name="IdealX"></a><font color=Blue><i>-- </i></font>
 <a name="line-253"></a><a name="IdealX"></a><font color=Blue><i>-- * /a/,/k/,/l/ &gt; 0;</i></font>
 <a name="line-254"></a><a name="IdealX"></a><font color=Blue><i>--</i></font>
-<a name="line-255"></a><a name="IdealX"></a><font color=Blue><i>-- * 4/a/ | /b/[sup 2] &#8211; &#916;; </i></font>
+<a name="line-255"></a><a name="IdealX"></a><font color=Blue><i>-- * 4/a/ | /b/[sup 2] &#x2013; &#x0394;; </i></font>
 <a name="line-256"></a><a name="IdealX"></a><font color=Blue><i>--</i></font>
-<a name="line-257"></a><a name="IdealX"></a><font color=Blue><i>-- * /b/ = &#964;(/a/,/b/);</i></font>
+<a name="line-257"></a><a name="IdealX"></a><font color=Blue><i>-- * /b/ = &#x03c4;(/a/,/b/);</i></font>
 <a name="line-258"></a><a name="IdealX"></a><font color=Blue><i>--</i></font>
 <a name="line-259"></a><a name="IdealX"></a><font color=Blue><i>-- * gcd(/k/,/l/) = 1</i></font>
 <a name="line-260"></a><a name="IdealX"></a><font color=Blue><i>-- </i></font>
@@ -347,11 +347,11 @@
 <a name="line-340"></a>    <font color=Red>=</font> <font color=Green><u>if</u></font> <font color=Cyan>(</font>bigD <font color=Cyan>/=</font> bigD'<font color=Cyan>)</font> 
 <a name="line-341"></a>      <font color=Green><u>then</u></font> error error_string
 <a name="line-342"></a>      <font color=Green><u>else</u></font> <font color=Cyan>(</font>m <font color=Cyan>==</font> m' <font color=Cyan>&amp;&amp;</font> l' <font color=Cyan>==</font> l' <font color=Cyan>&amp;&amp;</font> a <font color=Cyan>==</font> a' <font color=Cyan>&amp;&amp;</font> b <font color=Cyan>==</font> b'<font color=Cyan>)</font>
-<a name="line-343"></a>    <font color=Green><u>where</u></font> error_string <font color=Red>=</font> <font color=Magenta>"Comparing two ideals of different &#916;: "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show i1<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>","</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show i2<font color=Cyan>)</font>
+<a name="line-343"></a>    <font color=Green><u>where</u></font> error_string <font color=Red>=</font> <font color=Magenta>"Comparing two ideals of different &#x0394;: "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show i1<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>","</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show i2<font color=Cyan>)</font>
 <a name="line-344"></a>
-<a name="line-345"></a><a name="IdealRedX"></a><font color=Blue><i>-- | Data specifying a reduced ideal, by a tuple (&#916;,/a/,/b/); this </i></font>
-<a name="line-346"></a><a name="IdealRedX"></a><font color=Blue><i>-- corresponds to the ideal specified by (&#916;,1,/a/,/a/,/b/), i.e.,</i></font>
-<a name="line-347"></a><a name="IdealRedX"></a><font color=Blue><i>-- /Z/ + (/b/+&#8730;&#916;)\/2/a/ /Z/.</i></font>
+<a name="line-345"></a><a name="IdealRedX"></a><font color=Blue><i>-- | Data specifying a reduced ideal, by a tuple (&#x0394;,/a/,/b/); this </i></font>
+<a name="line-346"></a><a name="IdealRedX"></a><font color=Blue><i>-- corresponds to the ideal specified by (&#x0394;,1,/a/,/a/,/b/), i.e.,</i></font>
+<a name="line-347"></a><a name="IdealRedX"></a><font color=Blue><i>-- /Z/ + (/b/+&#x221a;&#x0394;)\/2/a/ /Z/.</i></font>
 <a name="line-348"></a><a name="IdealRedX"></a><font color=Green><u>data</u></font> IdealRedX x <font color=Red>=</font> IdealRed CLIntP <font color=Cyan>(</font>XInt x<font color=Cyan>)</font> <font color=Cyan>(</font>XInt x<font color=Cyan>)</font> 
 <a name="line-349"></a>  <font color=Green><u>deriving</u></font> <font color=Cyan>(</font>Show<font color=Cyan>,</font> Typeable<font color=Cyan>)</font>
 <a name="line-350"></a>
@@ -376,7 +376,7 @@
 <a name="line-369"></a>    <font color=Red>=</font> <font color=Green><u>if</u></font> <font color=Cyan>(</font>bigD <font color=Cyan>/=</font> bigD'<font color=Cyan>)</font> 
 <a name="line-370"></a>      <font color=Green><u>then</u></font> error error_string
 <a name="line-371"></a>      <font color=Green><u>else</u></font> <font color=Cyan>(</font>a <font color=Cyan>==</font> a' <font color=Cyan>&amp;&amp;</font> b <font color=Cyan>==</font> b'<font color=Cyan>)</font>
-<a name="line-372"></a>    <font color=Green><u>where</u></font> error_string <font color=Red>=</font> <font color=Magenta>"Comparing two reduced ideals of different &#916;: "</font>
+<a name="line-372"></a>    <font color=Green><u>where</u></font> error_string <font color=Red>=</font> <font color=Magenta>"Comparing two reduced ideals of different &#x0394;: "</font>
 <a name="line-373"></a>                         <font color=Cyan>++</font> <font color=Cyan>(</font>show i1<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>","</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show i2<font color=Cyan>)</font>
 <a name="line-374"></a>
 <a name="line-375"></a><font color=Green><u>type</u></font> <font color=Green><u>instance</u></font> QCType x y <font color=Cyan>(</font>IdealRedX z<font color=Cyan>)</font> <font color=Red>=</font> IdealRedX <font color=Cyan>(</font>QCType x y z<font color=Cyan>)</font>
@@ -423,14 +423,14 @@
 <a name="line-416"></a>    label_rec qa sa
 <a name="line-417"></a>    label_rec qb sb
 <a name="line-418"></a>
-<a name="line-419"></a><a name="IdDist"></a><font color=Blue><i>-- | An ideal /I/, together with a distance &#948; for it &#8212; that is, /some/ representative, mod /R/, for &#948;(/I/) as defined on /G/ p.4.  </i></font>
+<a name="line-419"></a><a name="IdDist"></a><font color=Blue><i>-- | An ideal /I/, together with a distance &#x03b4; for it &#x2014; that is, /some/ representative, mod /R/, for &#x03b4;(/I/) as defined on /G/ p.4.  </i></font>
 <a name="line-420"></a><a name="IdDist"></a><font color=Blue><i>-- Most functions described as acting on ideals need in fact to be seen as a pair of an ideal and a distance for it. </i></font>
 <a name="line-421"></a><a name="IdDist"></a><font color=Green><u>type</u></font> IdDist <font color=Red>=</font> <font color=Cyan>(</font>Ideal<font color=Cyan>,</font>FPReal<font color=Cyan>)</font> 
 <a name="line-422"></a>
 <a name="line-423"></a><a name="IdDistQ"></a><font color=Blue><i>-- | Quantum analogue of 'IdDist'. </i></font>
 <a name="line-424"></a><a name="IdDistQ"></a><font color=Green><u>type</u></font> IdDistQ <font color=Red>=</font> <font color=Cyan>(</font>IdealQ<font color=Cyan>,</font>FPRealQ<font color=Cyan>)</font> 
 <a name="line-425"></a>
-<a name="line-426"></a><a name="IdRedDist"></a><font color=Blue><i>-- | A reduced ideal /I/, together with a distance &#948; for it.</i></font>
+<a name="line-426"></a><a name="IdRedDist"></a><font color=Blue><i>-- | A reduced ideal /I/, together with a distance &#x03b4; for it.</i></font>
 <a name="line-427"></a><a name="IdRedDist"></a><font color=Green><u>type</u></font> IdRedDist <font color=Red>=</font> <font color=Cyan>(</font>IdealRed<font color=Cyan>,</font>FPReal<font color=Cyan>)</font>
 <a name="line-428"></a>
 <a name="line-429"></a><a name="IdRedDistQ"></a><font color=Blue><i>-- | Quantum analogue of 'IdRedDist'. </i></font>
@@ -447,11 +447,11 @@
 <a name="line-440"></a><font color=Blue>d_of_IdealRed</font> <font color=Red>::</font> IdealRedX a <font color=Red>-&gt;</font> CLIntP 
 <a name="line-441"></a><font color=Blue>d_of_IdealRed</font> <font color=Cyan>(</font>IdealRed bigD <font color=Green><u>_</u></font> <font color=Green><u>_</u></font><font color=Cyan>)</font> <font color=Red>=</font> d_of_bigD bigD 
 <a name="line-442"></a>
-<a name="line-443"></a><a name="bigD_of_Ideal"></a><font color=Blue><i>-- | Extract &#916; from an 'IdealQ'.</i></font>
+<a name="line-443"></a><a name="bigD_of_Ideal"></a><font color=Blue><i>-- | Extract &#x0394; from an 'IdealQ'.</i></font>
 <a name="line-444"></a><font color=Blue>bigD_of_Ideal</font> <font color=Red>::</font> IdealX a <font color=Red>-&gt;</font> CLIntP 
 <a name="line-445"></a><font color=Blue>bigD_of_Ideal</font> <font color=Cyan>(</font>Ideal bigD <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> <font color=Green><u>_</u></font><font color=Cyan>)</font> <font color=Red>=</font> bigD 
 <a name="line-446"></a>
-<a name="line-447"></a><a name="bigD_of_IdealRed"></a><font color=Blue><i>-- | Extract &#916; from an 'IdealRedQ'.</i></font>
+<a name="line-447"></a><a name="bigD_of_IdealRed"></a><font color=Blue><i>-- | Extract &#x0394; from an 'IdealRedQ'.</i></font>
 <a name="line-448"></a><font color=Blue>bigD_of_IdealRed</font> <font color=Red>::</font> IdealRedX a <font color=Red>-&gt;</font> CLIntP 
 <a name="line-449"></a><font color=Blue>bigD_of_IdealRed</font> <font color=Cyan>(</font>IdealRed bigD <font color=Green><u>_</u></font> <font color=Green><u>_</u></font><font color=Cyan>)</font> <font color=Red>=</font> bigD 
 <a name="line-450"></a>
@@ -466,7 +466,7 @@
 <a name="line-459"></a><font color=Blue><i>-- This section includes functions for checking that these conditions are satisfied, and for safely </i></font>
 <a name="line-460"></a><font color=Blue><i>-- coercing between these types. </i></font>
 <a name="line-461"></a>
-<a name="line-462"></a><a name="tau"></a><font color=Blue><i>-- | @'tau' &#916; /b/ /a/@: the function &#964;(/b/,/a/).  Gives the representative for /b/ mod /2a/, in a range dependent on /a/ and &#8730;&#916;.  </i></font>
+<a name="line-462"></a><a name="tau"></a><font color=Blue><i>-- | @'tau' &#x0394; /b/ /a/@: the function &#x03c4;(/b/,/a/).  Gives the representative for /b/ mod /2a/, in a range dependent on /a/ and &#x221a;&#x0394;.  </i></font>
 <a name="line-463"></a><font color=Blue><i>--</i></font>
 <a name="line-464"></a><font color=Blue><i>-- (This doesn't quite belong here, but is included as a prerequisite of the assertions).</i></font>
 <a name="line-465"></a><font color=Blue>tau</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral int<font color=Cyan>,</font> Integral int'<font color=Cyan>)</font> <font color=Red>=&gt;</font> int' <font color=Red>-&gt;</font> int <font color=Red>-&gt;</font> int <font color=Red>-&gt;</font> int
@@ -482,12 +482,12 @@
 <a name="line-475"></a>  <font color=Cyan>&amp;&amp;</font> <font color=Cyan>(</font><font color=Cyan>(</font>bigD <font color=Blue><i>-</i></font> <font color=Cyan>(</font>fromIntegral b<font color=Cyan>)</font><font color=Cyan>^</font><font color=Magenta>2</font><font color=Cyan>)</font> <font color=Cyan>`mod`</font> <font color=Cyan>(</font><font color=Magenta>4</font> <font color=Cyan>*</font> <font color=Cyan>(</font>fromIntegral a<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>==</font> <font color=Magenta>0</font><font color=Cyan>)</font>
 <a name="line-476"></a>  <font color=Cyan>&amp;&amp;</font> b <font color=Cyan>==</font> tau bigD b a
 <a name="line-477"></a>
-<a name="line-478"></a><a name="is_reduced"></a><font color=Blue><i>-- | Test whether an 'Ideal' is reduced.  (An ideal \&lt;/m/,/l/,/a/,/b/&gt; is reduced iff /m/ = 1, /l/ = /a/, /b/ &#8805; 0 and /b/ + &#8730;&#916; &gt; 2/a/ ([Jozsa 2003], Prop. 20)). </i></font>
+<a name="line-478"></a><a name="is_reduced"></a><font color=Blue><i>-- | Test whether an 'Ideal' is reduced.  (An ideal \&lt;/m/,/l/,/a/,/b/&gt; is reduced iff /m/ = 1, /l/ = /a/, /b/ &#x2265; 0 and /b/ + &#x221a;&#x0394; &gt; 2/a/ ([Jozsa 2003], Prop. 20)). </i></font>
 <a name="line-479"></a><font color=Blue>is_reduced</font> <font color=Red>::</font> Ideal <font color=Red>-&gt;</font> Bool
 <a name="line-480"></a><font color=Blue>is_reduced</font> <font color=Cyan>(</font>Ideal bigD m l a b<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>m <font color=Cyan>==</font> <font color=Magenta>1</font><font color=Cyan>)</font> <font color=Cyan>&amp;&amp;</font> <font color=Cyan>(</font>l <font color=Cyan>==</font> a<font color=Cyan>)</font> <font color=Cyan>&amp;&amp;</font> <font color=Cyan>(</font>b <font color=Cyan>&gt;=</font> <font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>&amp;&amp;</font> <font color=Cyan>(</font>b <font color=Cyan>+</font> root_bigD <font color=Cyan>&gt;</font> <font color=Magenta>2</font> <font color=Cyan>*</font> a<font color=Cyan>)</font>
 <a name="line-481"></a>  <font color=Green><u>where</u></font> root_bigD <font color=Red>=</font> ceiling <font color=Cyan>$</font> sqrt <font color=Cyan>$</font> fromIntegral bigD 
 <a name="line-482"></a>
-<a name="line-483"></a><a name="is_really_reduced"></a><font color=Blue><i>-- | Test whether an 'IdealRed' is really reduced.  (An ideal \&lt;1,/a/,/a/,/b/&gt; is reduced iff /b/ &#8805; 0 and /b/ + &#8730;&#916; &gt; 2/a/ ([Jozsa 2003], Prop. 20)). </i></font>
+<a name="line-483"></a><a name="is_really_reduced"></a><font color=Blue><i>-- | Test whether an 'IdealRed' is really reduced.  (An ideal \&lt;1,/a/,/a/,/b/&gt; is reduced iff /b/ &#x2265; 0 and /b/ + &#x221a;&#x0394; &gt; 2/a/ ([Jozsa 2003], Prop. 20)). </i></font>
 <a name="line-484"></a><font color=Blue>is_really_reduced</font> <font color=Red>::</font> IdealRed <font color=Red>-&gt;</font> Bool
 <a name="line-485"></a><font color=Blue>is_really_reduced</font> <font color=Cyan>(</font>IdealRed bigD a b<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>b <font color=Cyan>&gt;=</font> <font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>&amp;&amp;</font> <font color=Cyan>(</font>b <font color=Cyan>+</font> root_bigD <font color=Cyan>&gt;</font> <font color=Magenta>2</font> <font color=Cyan>*</font> a<font color=Cyan>)</font>
 <a name="line-486"></a>  <font color=Green><u>where</u></font> root_bigD <font color=Red>=</font> ceiling <font color=Cyan>$</font> sqrt <font color=Cyan>$</font> fromIntegral bigD 
@@ -512,9 +512,9 @@
 <a name="line-505"></a><font color=Blue>assert_really_reduced</font> ii <font color=Red>=</font>
 <a name="line-506"></a>  assert <font color=Cyan>(</font>is_really_reduced ii<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"assert_really_reduced: ("</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show ii<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>") is not reduced."</font><font color=Cyan>)</font>
 <a name="line-507"></a>
-<a name="line-508"></a><a name="q_tau"></a><font color=Blue><i>-- | Quantum analogue of 'tau'.  @'q_tau' &#916; /qb/ /qa/@: compute the representative for /qb/ mod 2/qa/, in a range dependent on /qa/ and &#8730;&#916;.</i></font>
+<a name="line-508"></a><a name="q_tau"></a><font color=Blue><i>-- | Quantum analogue of 'tau'.  @'q_tau' &#x0394; /qb/ /qa/@: compute the representative for /qb/ mod 2/qa/, in a range dependent on /qa/ and &#x221a;&#x0394;.</i></font>
 <a name="line-509"></a><font color=Blue>q_tau</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>)</font>
-<a name="line-510"></a><font color=Blue>q_tau</font> bigD <font color=Red>=</font> box <font color=Cyan>(</font><font color=Magenta>"tau, &#916; = "</font> <font color=Cyan>++</font> show bigD<font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Red>\</font>a b <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
+<a name="line-510"></a><font color=Blue>q_tau</font> bigD <font color=Red>=</font> box <font color=Cyan>(</font><font color=Magenta>"tau, &#x0394; = "</font> <font color=Cyan>++</font> show bigD<font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Red>\</font>a b <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-511"></a>  <font color=Green><u>let</u></font> root_bigD <font color=Red>=</font> floor <font color=Cyan>$</font> sqrt <font color=Cyan>$</font> fromIntegral bigD
 <a name="line-512"></a>  t <font color=Red>&lt;-</font> with_computed
 <a name="line-513"></a>    <font color=Cyan>(</font><font color=Green><u>do</u></font> 
@@ -528,7 +528,7 @@
 <a name="line-521"></a>    qc_copy
 <a name="line-522"></a>  return <font color=Cyan>(</font>a<font color=Cyan>,</font>b<font color=Cyan>,</font>t<font color=Cyan>)</font>
 <a name="line-523"></a>
-<a name="line-524"></a><a name="q_is_reduced"></a><font color=Blue><i>-- | Test whether a given 'IdealQ' is reduced.  \&lt;/m/,/l/,/a/,/b/&gt; is reduced iff /m/ = 1, /l/ = /a/, /b/ &#8805; 0 and /b/ + &#8730;&#916; &gt; 2/a/ ([Jozsa 2003], Prop. 20).  </i></font>
+<a name="line-524"></a><a name="q_is_reduced"></a><font color=Blue><i>-- | Test whether a given 'IdealQ' is reduced.  \&lt;/m/,/l/,/a/,/b/&gt; is reduced iff /m/ = 1, /l/ = /a/, /b/ &#x2265; 0 and /b/ + &#x221a;&#x0394; &gt; 2/a/ ([Jozsa 2003], Prop. 20).  </i></font>
 <a name="line-525"></a><font color=Blue>q_is_reduced</font> <font color=Red>::</font> IdealQ <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>IdealQ<font color=Cyan>,</font>Qubit<font color=Cyan>)</font> 
 <a name="line-526"></a><font color=Blue>q_is_reduced</font> <font color=Red>=</font> box <font color=Magenta>"is_reduced"</font> <font color=Cyan>$</font> <font color=Red>\</font>qii <font color=Red>-&gt;</font>
 <a name="line-527"></a>  <font color=Green><u>let</u></font> bigD <font color=Red>=</font> bigD_of_Ideal qii <font color=Green><u>in</u></font>
@@ -547,7 +547,7 @@
 <a name="line-540"></a>      test_out <font color=Red>&lt;-</font> qnot test_out <font color=Cyan>`controlled`</font> tests
 <a name="line-541"></a>      return <font color=Cyan>(</font><font color=Cyan>(</font>tests<font color=Cyan>,</font> rest<font color=Cyan>)</font><font color=Cyan>,</font> test_out<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-542"></a>
-<a name="line-543"></a><a name="q_is_really_reduced"></a><font color=Blue><i>-- | Test whether a given 'IdealQ' is really reduced (as it should always be, if code is written correctly).  An ideal \&lt;1,/a/,/a/,/b/&gt; is reduced iff /b/ &#8805; 0 and /b/ + &#8730;&#916; &gt; 2/a/ ([Jozsa 2003], Prop. 20). </i></font>
+<a name="line-543"></a><a name="q_is_really_reduced"></a><font color=Blue><i>-- | Test whether a given 'IdealQ' is really reduced (as it should always be, if code is written correctly).  An ideal \&lt;1,/a/,/a/,/b/&gt; is reduced iff /b/ &#x2265; 0 and /b/ + &#x221a;&#x0394; &gt; 2/a/ ([Jozsa 2003], Prop. 20). </i></font>
 <a name="line-544"></a><font color=Blue>q_is_really_reduced</font> <font color=Red>::</font> IdealRedQ <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>IdealRedQ<font color=Cyan>,</font>Qubit<font color=Cyan>)</font> 
 <a name="line-545"></a><font color=Blue>q_is_really_reduced</font> <font color=Red>=</font> box <font color=Magenta>"is_really_reduced"</font> <font color=Cyan>$</font> <font color=Red>\</font>qii <font color=Red>-&gt;</font>
 <a name="line-546"></a>  <font color=Green><u>let</u></font> bigD <font color=Red>=</font> bigD_of_IdealRed qii <font color=Green><u>in</u></font>
@@ -591,31 +591,31 @@
 <a name="line-584"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-585"></a><font color=Blue><i>-- ** Bounds on coefficient sizes</i></font>
 <a name="line-586"></a>
-<a name="line-587"></a><font color=Blue><i>-- $ Given &#916;, how much space should be allocated for the coefficients of ideals?  Most of these bounds are currently missing or uncertain, as documented below.  Note these bounds are intended to be sufficient for the calculations occurring in this algorithm, /not/ for representing arbitrary ideals.</i></font>
+<a name="line-587"></a><font color=Blue><i>-- $ Given &#x0394;, how much space should be allocated for the coefficients of ideals?  Most of these bounds are currently missing or uncertain, as documented below.  Note these bounds are intended to be sufficient for the calculations occurring in this algorithm, /not/ for representing arbitrary ideals.</i></font>
 <a name="line-588"></a>
-<a name="line-589"></a><a name="length_for_ab"></a><font color=Blue><i>-- | Given &#916;, return the size of integers to be used for the coefficients /a/, /b/ of reduced ideals.</i></font>
+<a name="line-589"></a><a name="length_for_ab"></a><font color=Blue><i>-- | Given &#x0394;, return the size of integers to be used for the coefficients /a/, /b/ of reduced ideals.</i></font>
 <a name="line-590"></a><font color=Blue><i>--</i></font>
-<a name="line-591"></a><font color=Blue><i>-- Note: can we bound this more carefully?  In reduced ideals, we always have 0 &#8804; /a/,/b/ &#8804; &#8730;&#916; (see notes on 'is_standard', 'is_reduced'), and the outputs of &#961;, &#961;[sup &#8211;1] and dot-products of reduced ideals always keep |/a/| &#8804; &#916;.  However, intermediate calculations may involve larger values, so we allocate a little more space.  For now, this padding is a seat-of-the-pants estimate.  </i></font>
+<a name="line-591"></a><font color=Blue><i>-- Note: can we bound this more carefully?  In reduced ideals, we always have 0 &#x2264; /a/,/b/ &#x2264; &#x221a;&#x0394; (see notes on 'is_standard', 'is_reduced'), and the outputs of &#x03c1;, &#x03c1;[sup &#x2013;1] and dot-products of reduced ideals always keep |/a/| &#x2264; &#x0394;.  However, intermediate calculations may involve larger values, so we allocate a little more space.  For now, this padding is a seat-of-the-pants estimate.  </i></font>
 <a name="line-592"></a><font color=Blue>length_for_ab</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> Int
 <a name="line-593"></a><font color=Blue>length_for_ab</font> bigD <font color=Red>=</font> <font color=Magenta>3</font> <font color=Cyan>+</font> <font color=Cyan>(</font>ceiling <font color=Cyan>$</font> logBase <font color=Magenta>2</font> <font color=Cyan>$</font> fromIntegral bigD<font color=Cyan>)</font>
 <a name="line-594"></a>
-<a name="line-595"></a><a name="length_for_ml"></a><font color=Blue><i>-- | Given &#916;, return the size of integers to be used for the coefficients /m/, /l/ of general ideals.</i></font>
+<a name="line-595"></a><a name="length_for_ml"></a><font color=Blue><i>-- | Given &#x0394;, return the size of integers to be used for the coefficients /m/, /l/ of general ideals.</i></font>
 <a name="line-596"></a><font color=Blue><i>--</i></font>
 <a name="line-597"></a><font color=Blue><i>-- TODO: bound this!  Neither Hallgren nor [Jozsa 2003] discusses bounds on the values of /m/ and /l/ that will appear, and we do not yet have a bound.  For now we use the same length as for /a/ and /b/, for convenience; this should be considered a dummy bound, quite possibly not sufficient in general.</i></font>
 <a name="line-598"></a><font color=Blue>length_for_ml</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> Int
 <a name="line-599"></a><font color=Blue>length_for_ml</font> <font color=Red>=</font> length_for_ab
 <a name="line-600"></a>
-<a name="line-601"></a><a name="n_of_bigD"></a><font color=Blue><i>-- | Given &#916;, return the precision /n/ = log[sub 2]/N/ to be used for</i></font>
+<a name="line-601"></a><a name="n_of_bigD"></a><font color=Blue><i>-- | Given &#x0394;, return the precision /n/ = log[sub 2]/N/ to be used for</i></font>
 <a name="line-602"></a><font color=Blue><i>-- discretizing the quasi-periodic function /f/ to /f/[sub /N/].</i></font>
 <a name="line-603"></a><font color=Blue><i>--</i></font>
-<a name="line-604"></a><font color=Blue><i>-- (&#8220;Precision&#8221; here means the number of binary digits after the point).</i></font>
+<a name="line-604"></a><font color=Blue><i>-- (&#x201c;Precision&#x201d; here means the number of binary digits after the point).</i></font>
 <a name="line-605"></a><font color=Blue><i>-- </i></font>
-<a name="line-606"></a><font color=Blue><i>-- Taken to ensure 1\//N/ &lt; 3/(32 &#916; log &#916;).  (Cf. [Jozsa 2003], Prop. 36 (iii).)</i></font>
+<a name="line-606"></a><font color=Blue><i>-- Taken to ensure 1\//N/ &lt; 3/(32 &#x0394; log &#x0394;).  (Cf. [Jozsa 2003], Prop. 36 (iii).)</i></font>
 <a name="line-607"></a><font color=Blue>n_of_bigD</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral int<font color=Cyan>)</font> <font color=Red>=&gt;</font> CLIntP <font color=Red>-&gt;</font> int
 <a name="line-608"></a><font color=Blue>n_of_bigD</font> bigD <font color=Red>=</font>
 <a name="line-609"></a>  ceiling <font color=Cyan>$</font> logBase <font color=Magenta>2</font> <font color=Cyan>$</font> <font color=Magenta>32</font> <font color=Cyan>*</font> <font color=Cyan>(</font>fromIntegral bigD<font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>log <font color=Cyan>$</font> fromIntegral bigD<font color=Cyan>)</font> <font color=Cyan>/</font> <font color=Magenta>3</font>
 <a name="line-610"></a>
-<a name="line-611"></a><a name="precision_for_fN"></a><font color=Blue><i>-- | Given &#916;, /n/, /l/ (as for 'fN', 'q_fN'), return the precision required</i></font>
+<a name="line-611"></a><a name="precision_for_fN"></a><font color=Blue><i>-- | Given &#x0394;, /n/, /l/ (as for 'fN', 'q_fN'), return the precision required</i></font>
 <a name="line-612"></a><font color=Blue><i>-- for intermediate distance calculations during the computation of /f/[sub /N/].</i></font>
 <a name="line-613"></a><font color=Blue><i>--</i></font>
 <a name="line-614"></a><font color=Blue><i>-- TODO: bound this more carefully.  [Jozsa 2003] asks for the final output to be precision /n/, but does not discuss intermediate precision, and we have not yet got a confident answer.  For now, just a back-of-the-envelope estimate, which should be sufficient and /O/(correct), but is almost certainly rather larger than necessary.</i></font>

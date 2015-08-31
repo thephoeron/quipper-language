@@ -157,7 +157,7 @@
 <a name="line-150"></a>    return z<font color=Cyan>)</font> v
 <a name="line-151"></a>  return v'
 <a name="line-152"></a>
-<a name="line-153"></a><a name="matrix_mult"></a><font color=Blue><i>-- | Multiply an /n/&#215;/m/-matrix by an /m/-dimensional column </i></font>
+<a name="line-153"></a><a name="matrix_mult"></a><font color=Blue><i>-- | Multiply an /n/&#x00d7;/m/-matrix by an /m/-dimensional column </i></font>
 <a name="line-154"></a><font color=Blue><i>-- vector to obtain an /n/-dimensional column vector. The </i></font>
 <a name="line-155"></a><font color=Blue><i>-- matrix is represented as a list of /m/ columns. </i></font>
 <a name="line-156"></a><font color=Blue><i>-- </i></font>
@@ -192,7 +192,7 @@
 <a name="line-185"></a><a name="ext_euclid"></a><font color=Blue><i>-- | The extended Euclidean algorithm. 'ext_euclid' /a/ /b/ returns</i></font>
 <a name="line-186"></a><font color=Blue><i>-- (/x/, /y/, /z/, /w/, /d/) such that:</i></font>
 <a name="line-187"></a><font color=Blue><i>-- </i></font>
-<a name="line-188"></a><font color=Blue><i>-- * 0 &#8804; /d/ = gcd(/a/, /b/), the greatest common divisor of /a/ and</i></font>
+<a name="line-188"></a><font color=Blue><i>-- * 0 &#x2264; /d/ = gcd(/a/, /b/), the greatest common divisor of /a/ and</i></font>
 <a name="line-189"></a><font color=Blue><i>-- /b/;</i></font>
 <a name="line-190"></a><font color=Blue><i>-- </i></font>
 <a name="line-191"></a><font color=Blue><i>-- * /ax/ + /by/ = /d/;</i></font>
@@ -208,7 +208,7 @@
 <a name="line-201"></a>  <font color=Blue><i>-- [ x y ] [ a ]  =  [ r ]</i></font>
 <a name="line-202"></a>  <font color=Blue><i>-- [ z w ] [ b ]     [ s ]</i></font>
 <a name="line-203"></a>  <font color=Blue><i>-- </i></font>
-<a name="line-204"></a>  <font color=Blue><i>-- and det [[x y] [z w]] = t = &#177;1.</i></font>
+<a name="line-204"></a>  <font color=Blue><i>-- and det [[x y] [z w]] = t = &#x00b1;1.</i></font>
 <a name="line-205"></a>  
 <a name="line-206"></a>  ext_euclid_rec x y z w r s t <font color=Red>|</font> r <font color=Cyan>&lt;</font> <font color=Magenta>0</font> <font color=Red>=</font>
 <a name="line-207"></a>    ext_euclid_rec <font color=Cyan>(</font><font color=Blue><i>-</i></font>x<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Blue><i>-</i></font>y<font color=Cyan>)</font> z w <font color=Cyan>(</font><font color=Blue><i>-</i></font>r<font color=Cyan>)</font> s <font color=Cyan>(</font><font color=Blue><i>-</i></font>t<font color=Cyan>)</font>
@@ -219,14 +219,14 @@
 <a name="line-212"></a>  ext_euclid_rec x y z w r s t <font color=Red>|</font> <font color=Magenta>0</font> <font color=Cyan>&lt;</font> s <font color=Red>=</font>
 <a name="line-213"></a>    ext_euclid_rec z w <font color=Cyan>(</font>x<font color=Blue><i>-</i></font>q<font color=Cyan>*</font>z<font color=Cyan>)</font> <font color=Cyan>(</font>y<font color=Blue><i>-</i></font>q<font color=Cyan>*</font>w<font color=Cyan>)</font> s <font color=Cyan>(</font>r<font color=Blue><i>-</i></font>q<font color=Cyan>*</font>s<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Blue><i>-</i></font>t<font color=Cyan>)</font>
 <a name="line-214"></a>    <font color=Green><u>where</u></font> q <font color=Red>=</font> r <font color=Cyan>`div`</font> s
-<a name="line-215"></a>  ext_euclid_rec x y z w r s t <font color=Red>=</font> <font color=Blue><i>-- Note: s = 0, r &#8805; 0.</i></font>
+<a name="line-215"></a>  ext_euclid_rec x y z w r s t <font color=Red>=</font> <font color=Blue><i>-- Note: s = 0, r &#x2265; 0.</i></font>
 <a name="line-216"></a>    <font color=Cyan>(</font>x<font color=Cyan>,</font> y<font color=Cyan>,</font> t<font color=Cyan>*</font>z<font color=Cyan>,</font> t<font color=Cyan>*</font>w<font color=Cyan>,</font> r<font color=Cyan>)</font>
 <a name="line-217"></a>
 <a name="line-218"></a>
 <a name="line-219"></a><font color=Blue><i>-- ==============================================================</i></font>
 <a name="line-220"></a><font color=Blue><i>-- * Classical subroutines </i></font>
 <a name="line-221"></a>
-<a name="line-222"></a><a name="lll"></a><font color=Blue><i>-- | Reduce a basis using the Lenstra-Lenstra-Lov&#225;scz algorithm.</i></font>
+<a name="line-222"></a><a name="lll"></a><font color=Blue><i>-- | Reduce a basis using the Lenstra-Lenstra-Lov&#x00e1;scz algorithm.</i></font>
 <a name="line-223"></a><font color=Blue><i>--</i></font>
 <a name="line-224"></a><font color=Blue><i>-- Uses the corresponding Haskell library. </i></font>
 <a name="line-225"></a><font color=Blue>lll</font> <font color=Red>::</font> <font color=Red>[</font><font color=Red>[</font>Integer<font color=Red>]</font><font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font><font color=Red>[</font>Integer<font color=Red>]</font><font color=Red>]</font>
@@ -236,25 +236,25 @@
 <a name="line-229"></a>    bb_reduced <font color=Red>=</font> Math<font color=Cyan>.</font>Lattices<font color=Cyan>.</font>LLL<font color=Cyan>.</font>lll bb_rational
 <a name="line-230"></a>    bb_reduced_integral <font color=Red>=</font> map <font color=Cyan>(</font><font color=Red>\</font>v <font color=Red>-&gt;</font> map ceiling v<font color=Cyan>)</font> <font color=Cyan>(</font>elems bb_reduced<font color=Cyan>)</font>
 <a name="line-231"></a>
-<a name="line-232"></a><a name="find_prime"></a><font color=Blue><i>-- | Given an integer /m/, find the smallest prime /p/ such that /m/ &#8804;</i></font>
-<a name="line-233"></a><font color=Blue><i>-- /p/ &#8804; 2/m/.</i></font>
+<a name="line-232"></a><a name="find_prime"></a><font color=Blue><i>-- | Given an integer /m/, find the smallest prime /p/ such that /m/ &#x2264;</i></font>
+<a name="line-233"></a><font color=Blue><i>-- /p/ &#x2264; 2/m/.</i></font>
 <a name="line-234"></a><font color=Blue><i>-- </i></font>
 <a name="line-235"></a><font color=Blue><i>-- Uses preexisting 'isPrime' algorithm. </i></font>
 <a name="line-236"></a><font color=Blue>find_prime</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Int
 <a name="line-237"></a><font color=Blue>find_prime</font> m <font color=Red>=</font> head <font color=Cyan>$</font> filter isPrime <font color=Red>[</font><font color=Cyan>(</font>m<font color=Cyan>)</font><font color=Red>..</font><font color=Cyan>(</font><font color=Magenta>2</font><font color=Cyan>*</font>m<font color=Cyan>)</font><font color=Red>]</font>
 <a name="line-238"></a>
-<a name="line-239"></a><a name="is_in_lattice"></a><font color=Blue><i>-- | Given a vector /u/ and a basis /bb/ = [/b/[sub 0], &#8230;, </i></font>
+<a name="line-239"></a><a name="is_in_lattice"></a><font color=Blue><i>-- | Given a vector /u/ and a basis /bb/ = [/b/[sub 0], &#x2026;, </i></font>
 <a name="line-240"></a><font color=Blue><i>-- /b/[sub /n/-1]], determine whether /u/ belongs to the lattice</i></font>
 <a name="line-241"></a><font color=Blue><i>-- generated by /bb/, i.e., whether there exist integers /a/[sub 0],</i></font>
-<a name="line-242"></a><font color=Blue><i>-- &#8230;, /a/[sub /n/-1] such that /u/ = /a/[sub 0]/b/[sub 0] + &#8230; +</i></font>
+<a name="line-242"></a><font color=Blue><i>-- &#x2026;, /a/[sub /n/-1] such that /u/ = /a/[sub 0]/b/[sub 0] + &#x2026; +</i></font>
 <a name="line-243"></a><font color=Blue><i>-- /a/[sub /n/-1]/b/[sub /n/-1]. </i></font>
 <a name="line-244"></a><font color=Blue><i>-- </i></font>
-<a name="line-245"></a><font color=Blue><i>-- Precondition: /u/ and /b/[sub 0], &#8230;, /b/[sub /n/-1] must all be</i></font>
+<a name="line-245"></a><font color=Blue><i>-- Precondition: /u/ and /b/[sub 0], &#x2026;, /b/[sub /n/-1] must all be</i></font>
 <a name="line-246"></a><font color=Blue><i>-- of the same dimension.</i></font>
 <a name="line-247"></a><font color=Blue><i>-- </i></font>
 <a name="line-248"></a><font color=Blue><i>-- The algorithm proceeds as follows: first, do invertible integer</i></font>
-<a name="line-249"></a><font color=Blue><i>-- column operations on /b/[sub 0], &#8230;, /b/[sub /n/-1] until the top</i></font>
-<a name="line-250"></a><font color=Blue><i>-- entries of /b/[sub 1], &#8230;, /b/[sub /n/-1] are 0. This can be done</i></font>
+<a name="line-249"></a><font color=Blue><i>-- column operations on /b/[sub 0], &#x2026;, /b/[sub /n/-1] until the top</i></font>
+<a name="line-250"></a><font color=Blue><i>-- entries of /b/[sub 1], &#x2026;, /b/[sub /n/-1] are 0. This can be done</i></font>
 <a name="line-251"></a><font color=Blue><i>-- efficiently by using the extended Euclidean algorithm for two</i></font>
 <a name="line-252"></a><font color=Blue><i>-- columns at a time. Then check whether the top entry of /b/[sub 0]</i></font>
 <a name="line-253"></a><font color=Blue><i>-- divides the top entry of /u/. If no, output 'False'. Otherwise, if</i></font>
@@ -279,7 +279,7 @@
 <a name="line-272"></a>             us' <font color=Red>=</font> us <font color=Cyan>`vector_add`</font> <font color=Cyan>(</font><font color=Cyan>(</font><font color=Blue><i>-</i></font>q<font color=Cyan>)</font> <font color=Cyan>`scalar_mult`</font> c0s<font color=Cyan>)</font>
 <a name="line-273"></a>         <font color=Green><u>in</u></font> is_in_lattice us' cs
 <a name="line-274"></a>
-<a name="line-275"></a><a name="reduce_lattice"></a><font color=Blue><i>-- | Given a basis /bb/ = [/b/[sub 0], &#8230;, /b/[sub /n/-1]], find</i></font>
+<a name="line-275"></a><a name="reduce_lattice"></a><font color=Blue><i>-- | Given a basis /bb/ = [/b/[sub 0], &#x2026;, /b/[sub /n/-1]], find</i></font>
 <a name="line-276"></a><font color=Blue><i>-- another equivalent basis whose elements are linearly independent.</i></font>
 <a name="line-277"></a><font color=Blue>reduce_lattice</font> <font color=Red>::</font> <font color=Red>[</font><font color=Red>[</font>Integer<font color=Red>]</font><font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font><font color=Red>[</font>Integer<font color=Red>]</font><font color=Red>]</font>
 <a name="line-278"></a><font color=Blue>reduce_lattice</font> [] <font color=Red>=</font> []

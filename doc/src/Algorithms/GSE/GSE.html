@@ -25,15 +25,15 @@
 <a name="line-18"></a><font color=Blue><i>-- * Basic time step</i></font>
 <a name="line-19"></a>
 <a name="line-20"></a><font color=Blue><i>-- $ These functions provide one- and two-electron operators for an</i></font>
-<a name="line-21"></a><font color=Blue><i>-- individual Trotter time step &#952;. Each operator consists of a large</i></font>
+<a name="line-21"></a><font color=Blue><i>-- individual Trotter time step &#x03b8;. Each operator consists of a large</i></font>
 <a name="line-22"></a><font color=Blue><i>-- number of individual Hamiltonian terms.</i></font>
 <a name="line-23"></a>
-<a name="line-24"></a><a name="exp_pq"></a><font color=Blue><i>-- | Apply the one-electron operator [exp -/i/&#952;/H/], where</i></font>
-<a name="line-25"></a><font color=Blue><i>-- /H/ = /h/[sub /pq/] /a/[sub /p/][sup &#8224;]/a/[sub /q/] if /p/ = /q/ and</i></font>
-<a name="line-26"></a><font color=Blue><i>-- /H/ = /h/[sub /pq/] (/a/[sub /p/][sup &#8224;]/a/[sub /q/]</i></font>
-<a name="line-27"></a><font color=Blue><i>-- + /a/[sub /q/][sup &#8224;]/a/[sub /p/]) otherwise, to every pair of</i></font>
-<a name="line-28"></a><font color=Blue><i>-- qubits /p/&#8805;/q/ in a register |&#968;&#9002;. The inputs are Hamiltonian data</i></font>
-<a name="line-29"></a><font color=Blue><i>-- /h/, the angle &#952;, the register |&#968;&#9002;, and a control qubit. </i></font>
+<a name="line-24"></a><a name="exp_pq"></a><font color=Blue><i>-- | Apply the one-electron operator [exp -/i/&#x03b8;/H/], where</i></font>
+<a name="line-25"></a><font color=Blue><i>-- /H/ = /h/[sub /pq/] /a/[sub /p/][sup &#x2020;]/a/[sub /q/] if /p/ = /q/ and</i></font>
+<a name="line-26"></a><font color=Blue><i>-- /H/ = /h/[sub /pq/] (/a/[sub /p/][sup &#x2020;]/a/[sub /q/]</i></font>
+<a name="line-27"></a><font color=Blue><i>-- + /a/[sub /q/][sup &#x2020;]/a/[sub /p/]) otherwise, to every pair of</i></font>
+<a name="line-28"></a><font color=Blue><i>-- qubits /p/&#x2265;/q/ in a register |&#x03c8;&#x232a;. The inputs are Hamiltonian data</i></font>
+<a name="line-29"></a><font color=Blue><i>-- /h/, the angle &#x03b8;, the register |&#x03c8;&#x232a;, and a control qubit. </i></font>
 <a name="line-30"></a><font color=Blue>exp_pq</font> <font color=Red>::</font> <font color=Cyan>(</font><font color=Cyan>(</font>Int<font color=Cyan>,</font>Int<font color=Cyan>)</font> <font color=Red>-&gt;</font> Double<font color=Cyan>)</font> <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> Circ()
 <a name="line-31"></a><font color=Blue>exp_pq</font> h theta psi ctl <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-32"></a>  comment_with_label <font color=Cyan>(</font>printf <font color=Magenta>"ENTER: exp_pq (theta=%.3e)"</font> theta<font color=Cyan>)</font> <font color=Cyan>(</font>psi<font color=Cyan>,</font> ctl<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"psi"</font><font color=Cyan>,</font> <font color=Magenta>"ctl"</font><font color=Cyan>)</font>
@@ -46,17 +46,17 @@
 <a name="line-39"></a>  <font color=Green><u>where</u></font>
 <a name="line-40"></a>    m <font color=Red>=</font> length psi
 <a name="line-41"></a>
-<a name="line-42"></a><a name="exp_pqrs"></a><font color=Blue><i>-- | Apply the two-electron operator [exp -/i/&#952;/H/], where</i></font>
+<a name="line-42"></a><a name="exp_pqrs"></a><font color=Blue><i>-- | Apply the two-electron operator [exp -/i/&#x03b8;/H/], where</i></font>
 <a name="line-43"></a><font color=Blue><i>-- /H/ = /h/[sub /pqrs/] </i></font>
-<a name="line-44"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/] if</i></font>
+<a name="line-44"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/] if</i></font>
 <a name="line-45"></a><font color=Blue><i>-- (/p/,/q/) = (/s/,/r/) and /H/ =</i></font>
-<a name="line-46"></a><font color=Blue><i>-- /a/[sub /p/][sup &#8224;]/a/[sub /q/][sup &#8224;]/a/[sub /r/]/a/[sub /s/] +</i></font>
-<a name="line-47"></a><font color=Blue><i>-- /a/[sub /s/][sup &#8224;]/a/[sub /r/][sup &#8224;]/a/[sub /q/]/a/[sub /p/]</i></font>
+<a name="line-46"></a><font color=Blue><i>-- /a/[sub /p/][sup &#x2020;]/a/[sub /q/][sup &#x2020;]/a/[sub /r/]/a/[sub /s/] +</i></font>
+<a name="line-47"></a><font color=Blue><i>-- /a/[sub /s/][sup &#x2020;]/a/[sub /r/][sup &#x2020;]/a/[sub /q/]/a/[sub /p/]</i></font>
 <a name="line-48"></a><font color=Blue><i>-- otherwise, to every quadruple (/p/, /q/, /r/, /s/) of qubits in a </i></font>
-<a name="line-49"></a><font color=Blue><i>-- register |&#968;&#9002;. To ensure that terms are enumerated exactly once, we</i></font>
-<a name="line-50"></a><font color=Blue><i>-- only consider indices where (/p/, /q/) &#8805; (/s/, /r/) in the</i></font>
-<a name="line-51"></a><font color=Blue><i>-- lexicographic order (i.e., /p/&gt;/s/ or (/p/=/s/ and /q/&#8805;/r/).  The</i></font>
-<a name="line-52"></a><font color=Blue><i>-- inputs are Hamiltonian data /h/, the angle &#952;, the register |&#968;&#9002;,</i></font>
+<a name="line-49"></a><font color=Blue><i>-- register |&#x03c8;&#x232a;. To ensure that terms are enumerated exactly once, we</i></font>
+<a name="line-50"></a><font color=Blue><i>-- only consider indices where (/p/, /q/) &#x2265; (/s/, /r/) in the</i></font>
+<a name="line-51"></a><font color=Blue><i>-- lexicographic order (i.e., /p/&gt;/s/ or (/p/=/s/ and /q/&#x2265;/r/).  The</i></font>
+<a name="line-52"></a><font color=Blue><i>-- inputs are Hamiltonian data /h/, the angle &#x03b8;, the register |&#x03c8;&#x232a;,</i></font>
 <a name="line-53"></a><font color=Blue><i>-- and a control qubit.</i></font>
 <a name="line-54"></a><font color=Blue>exp_pqrs</font> <font color=Red>::</font> <font color=Cyan>(</font><font color=Cyan>(</font>Int<font color=Cyan>,</font>Int<font color=Cyan>,</font>Int<font color=Cyan>,</font>Int<font color=Cyan>)</font> <font color=Red>-&gt;</font> Double<font color=Cyan>)</font> <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> Circ()
 <a name="line-55"></a><font color=Blue>exp_pqrs</font> h theta psi ctl <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -95,15 +95,15 @@
 <a name="line-88"></a><font color=Blue><i>-- /N/[sub /k/] times, and also normalizes the maximum energy </i></font>
 <a name="line-89"></a><font color=Blue><i>-- /E/[sub max].</i></font>
 <a name="line-90"></a>
-<a name="line-91"></a><a name="unitary_hat_at"></a><font color=Blue><i>-- | Apply the operator &#219;[sub k] &#8776;</i></font>
-<a name="line-92"></a><font color=Blue><i>-- [exp /iE/[sub max]&#964;2[sup /k/]][exp -/iH/&#964;2[sup /k/]] to |&#968;&#9002;.</i></font>
+<a name="line-91"></a><a name="unitary_hat_at"></a><font color=Blue><i>-- | Apply the operator &#x00db;[sub k] &#x2248;</i></font>
+<a name="line-92"></a><font color=Blue><i>-- [exp /iE/[sub max]&#x03c4;2[sup /k/]][exp -/iH/&#x03c4;2[sup /k/]] to |&#x03c8;&#x232a;.</i></font>
 <a name="line-93"></a><font color=Blue>unitary_hat_at</font> <font color=Red>::</font> GSEData    <font color=Blue><i>-- ^ The integral data /h/[sub pq] and /h/[sub pqrs].</i></font>
 <a name="line-94"></a>                  <font color=Red>-&gt;</font> Int     <font color=Blue><i>-- ^ The Trotter iteration count /N/[sub /k/].</i></font>
-<a name="line-95"></a>                  <font color=Red>-&gt;</font> Double  <font color=Blue><i>-- ^ The Hamiltonian scaling parameter &#964;.</i></font>
+<a name="line-95"></a>                  <font color=Red>-&gt;</font> Double  <font color=Blue><i>-- ^ The Hamiltonian scaling parameter &#x03c4;.</i></font>
 <a name="line-96"></a>                  <font color=Red>-&gt;</font> Double  <font color=Blue><i>-- ^ The maximum energy /E/[sub max].</i></font>
 <a name="line-97"></a>                  <font color=Red>-&gt;</font> Bool    <font color=Blue><i>-- ^ Use the \"orthodox\" Coulomb operator?</i></font>
 <a name="line-98"></a>                  <font color=Red>-&gt;</font> Int     <font color=Blue><i>-- ^ The control qubit index /k/.</i></font>
-<a name="line-99"></a>                  <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Blue><i>-- ^ The state |&#968;&#9002;.</i></font>
+<a name="line-99"></a>                  <font color=Red>-&gt;</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Blue><i>-- ^ The state |&#x03c8;&#x232a;.</i></font>
 <a name="line-100"></a>                  <font color=Red>-&gt;</font> Qubit   <font color=Blue><i>-- ^ The control qubit /b/[sub /k/].</i></font>
 <a name="line-101"></a>                  <font color=Red>-&gt;</font> Circ()
 <a name="line-102"></a><font color=Blue>unitary_hat_at</font> gse_data nk tau e_max orth k psi ctl <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -139,9 +139,9 @@
 <a name="line-132"></a>       <font color=Red>-&gt;</font> Int      <font color=Blue><i>-- ^ The number of basis functions /M/.</i></font>
 <a name="line-133"></a>       <font color=Red>-&gt;</font> Int      <font color=Blue><i>-- ^ The number of occupied orbitals /N/.</i></font>
 <a name="line-134"></a>       <font color=Red>-&gt;</font> GSEData  <font color=Blue><i>-- ^ The integral data /h/[sub pq] and /h/[sub pqrs].</i></font>
-<a name="line-135"></a>       <font color=Red>-&gt;</font> Double   <font color=Blue><i>-- ^ The Hamiltonian scaling parameter &#964;.</i></font>
+<a name="line-135"></a>       <font color=Red>-&gt;</font> Double   <font color=Blue><i>-- ^ The Hamiltonian scaling parameter &#x03c4;.</i></font>
 <a name="line-136"></a>       <font color=Red>-&gt;</font> Double   <font color=Blue><i>-- ^ The maximum energy /E/[sub max].</i></font>
-<a name="line-137"></a>       <font color=Red>-&gt;</font> <font color=Cyan>(</font>Int <font color=Red>-&gt;</font> Int<font color=Cyan>)</font> <font color=Blue><i>-- ^ The function /k/ &#8614; /N/[sub /k/].</i></font>
+<a name="line-137"></a>       <font color=Red>-&gt;</font> <font color=Cyan>(</font>Int <font color=Red>-&gt;</font> Int<font color=Cyan>)</font> <font color=Blue><i>-- ^ The function /k/ &#x21a6; /N/[sub /k/].</i></font>
 <a name="line-138"></a>       <font color=Red>-&gt;</font> Bool     <font color=Blue><i>-- ^ Use the \"orthodox\" Coulomb operator?</i></font>
 <a name="line-139"></a>       <font color=Red>-&gt;</font> Circ<font color=Cyan>(</font><font color=Red>[</font>Bit<font color=Red>]</font><font color=Cyan>)</font>
 <a name="line-140"></a><font color=Blue>gse</font> b m o gse_data tau e_max nfun orth <font color=Red>=</font> <font color=Green><u>do</u></font>

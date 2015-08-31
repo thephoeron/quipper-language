@@ -16,9 +16,9 @@
 <a name="line-9"></a><font color=Green><u>import</u></font> Quipper
 <a name="line-10"></a>
 <a name="line-11"></a><font color=Green><u>import</u></font> Control<font color=Cyan>.</font>Monad <font color=Cyan>(</font>sequence<font color=Cyan>)</font>
-<a name="line-12"></a><font color=Green><u>import</u></font> Algorithms<font color=Cyan>.</font>BWT<font color=Cyan>.</font>Alternative
+<a name="line-12"></a><font color=Green><u>import</u></font> Algorithms<font color=Cyan>.</font>BWT<font color=Cyan>.</font>Alternative <font color=Cyan>(</font>Oracle<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font> Node<font color=Cyan>,</font> QNode<font color=Cyan>)</font>
 <a name="line-13"></a>
-<a name="line-14"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Auxiliary
+<a name="line-14"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Auxiliary hiding <font color=Cyan>(</font>boollist_xor<font color=Cyan>)</font>
 <a name="line-15"></a><font color=Green><u>import</u></font> QuipperLib<font color=Cyan>.</font>ClassicalOptim
 <a name="line-16"></a>
 <a name="line-17"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
@@ -91,7 +91,7 @@
 <a name="line-84"></a>
 <a name="line-85"></a>
 <a name="line-86"></a><font color=Blue><i>-- | Input an /n/+1-bit leaf node /a/:/aa/ (without the tree bit), and</i></font>
-<a name="line-87"></a><font color=Blue><i>-- return /a/:(/aa/ &#8853; /g/). The first input is the /n/-bit welding</i></font>
+<a name="line-87"></a><font color=Blue><i>-- return /a/:(/aa/ &#x2295; /g/). The first input is the /n/-bit welding</i></font>
 <a name="line-88"></a><font color=Blue><i>-- vector /g/ (a parameter to the oracle).</i></font>
 <a name="line-89"></a><font color=Blue>build_circuit</font>
 <a name="line-90"></a><a name="doweld0"></a><font color=Blue>doweld0</font> <font color=Red>::</font> Boollist <font color=Red>-&gt;</font> <font color=Red>[</font>Bool<font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font>Bool<font color=Red>]</font>

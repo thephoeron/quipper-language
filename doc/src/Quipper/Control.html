@@ -28,24 +28,24 @@
 <a name="line-21"></a><font color=Blue><i>-- * The type of controls</i></font>
 <a name="line-22"></a>
 <a name="line-23"></a><font color=Blue><i>-- $ In the most general case, a \"control\" could be an arbitrary</i></font>
-<a name="line-24"></a><font color=Blue><i>-- boolean formula built up from assertions of the form /q/ = |0&#9002; or</i></font>
-<a name="line-25"></a><font color=Blue><i>-- /q/ = |1&#9002;, where /q/ is either a qubit or a classical bit in a</i></font>
+<a name="line-24"></a><font color=Blue><i>-- boolean formula built up from assertions of the form /q/ = |0&#x232a; or</i></font>
+<a name="line-25"></a><font color=Blue><i>-- /q/ = |1&#x232a;, where /q/ is either a qubit or a classical bit in a</i></font>
 <a name="line-26"></a><font color=Blue><i>-- circuit. However, we are here interested in tracking a simpler kind</i></font>
 <a name="line-27"></a><font color=Blue><i>-- of control.</i></font>
 <a name="line-28"></a><font color=Blue><i>-- </i></font>
 <a name="line-29"></a><font color=Blue><i>-- A /control list/ is a conjunction (i.e., an \"and\") of assertions</i></font>
-<a name="line-30"></a><font color=Blue><i>-- of the form /q/ = |0&#9002; or /q/ = |1&#9002;. A special case arises when the</i></font>
+<a name="line-30"></a><font color=Blue><i>-- of the form /q/ = |0&#x232a; or /q/ = |1&#x232a;. A special case arises when the</i></font>
 <a name="line-31"></a><font color=Blue><i>-- conjunction involves two mutually exclusive conditions, such as /q/</i></font>
-<a name="line-32"></a><font color=Blue><i>-- = |0&#9002; and /q/ = |1&#9002;. In this case, the control in inconsistent: it</i></font>
+<a name="line-32"></a><font color=Blue><i>-- = |0&#x232a; and /q/ = |1&#x232a;. In this case, the control in inconsistent: it</i></font>
 <a name="line-33"></a><font color=Blue><i>-- can never be active. We use a special representation for the</i></font>
 <a name="line-34"></a><font color=Blue><i>-- inconsistent control for efficiency reasons.</i></font>
 <a name="line-35"></a><font color=Blue><i>-- </i></font>
 <a name="line-36"></a><font color=Blue><i>-- Implementation note: a 'ControlList' is either 'Inconsistent', or</i></font>
 <a name="line-37"></a><font color=Blue><i>-- else a map from a finite set of wires to booleans.  Here, the</i></font>
 <a name="line-38"></a><font color=Blue><i>-- boolean 'True' represents a positive control, i.e., one that is</i></font>
-<a name="line-39"></a><font color=Blue><i>-- active when the state is |1&#9002; (a filled dot in circuit</i></font>
+<a name="line-39"></a><font color=Blue><i>-- active when the state is |1&#x232a; (a filled dot in circuit</i></font>
 <a name="line-40"></a><font color=Blue><i>-- diagrams). The boolean 'False' represents a negative control, i.e.,</i></font>
-<a name="line-41"></a><font color=Blue><i>-- on that is active when the state is |0&#9002; (an empty dot in circuit</i></font>
+<a name="line-41"></a><font color=Blue><i>-- on that is active when the state is |0&#x232a; (an empty dot in circuit</i></font>
 <a name="line-42"></a><font color=Blue><i>-- diagrams).</i></font>
 <a name="line-43"></a>
 <a name="line-44"></a><font color=Blue><i>-- | A 'ControlList' is Quipper's internal representation of the type</i></font>

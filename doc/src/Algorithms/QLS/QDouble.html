@@ -35,7 +35,7 @@
 <a name="line-28"></a>
 <a name="line-29"></a><a name="XDouble"></a><font color=Blue><i>-- | Data type for fixed point arithmetic. </i></font>
 <a name="line-30"></a><a name="XDouble"></a><font color=Blue><i>-- </i></font>
-<a name="line-31"></a><a name="XDouble"></a><font color=Blue><i>-- 'XDouble' /k/ /n/ represents the number /n/&#8901;2[sup -/k/], where /n/</i></font>
+<a name="line-31"></a><a name="XDouble"></a><font color=Blue><i>-- 'XDouble' /k/ /n/ represents the number /n/&#x22c5;2[sup -/k/], where /n/</i></font>
 <a name="line-32"></a><a name="XDouble"></a><font color=Blue><i>-- is a signed integer and /k/ is an integer parameter.</i></font>
 <a name="line-33"></a><a name="XDouble"></a><font color=Blue><i>-- </i></font>
 <a name="line-34"></a><a name="XDouble"></a><font color=Blue><i>-- We refer to /k/ as the /exponent/ of the fixed point number.  When</i></font>
@@ -94,12 +94,12 @@
 <a name="line-87"></a><font color=Blue><i>-- (in other words, the value of this bit is 2[sup /hi/-1]), and the</i></font>
 <a name="line-88"></a><font color=Blue><i>-- least significant bit of /x/ has positional index /lo/ (in other</i></font>
 <a name="line-89"></a><font color=Blue><i>-- words, the value of this bit is 2[sup /lo/]. Typically, but not</i></font>
-<a name="line-90"></a><font color=Blue><i>-- necessarily, /hi/ &#8805; 0 and /lo/ &#8804; 0. In this case, one can also</i></font>
+<a name="line-90"></a><font color=Blue><i>-- necessarily, /hi/ &#x2265; 0 and /lo/ &#x2264; 0. In this case, one can also</i></font>
 <a name="line-91"></a><font color=Blue><i>-- think of /hi/ as \"the number of digits before the radix point\"</i></font>
-<a name="line-92"></a><font color=Blue><i>-- and &#8722;/lo/ as \"the number of digits after the radix point\". </i></font>
+<a name="line-92"></a><font color=Blue><i>-- and &#x2212;/lo/ as \"the number of digits after the radix point\". </i></font>
 <a name="line-93"></a><font color=Blue><i>-- </i></font>
 <a name="line-94"></a><font color=Blue><i>-- The exponent /k/, length /m/, and extent (/hi/,/lo/) are related by</i></font>
-<a name="line-95"></a><font color=Blue><i>-- /k/=-/lo/ and /m/=/hi/&#8722;/lo/.</i></font>
+<a name="line-95"></a><font color=Blue><i>-- /k/=-/lo/ and /m/=/hi/&#x2212;/lo/.</i></font>
 <a name="line-96"></a><font color=Blue><i>-- </i></font>
 <a name="line-97"></a><font color=Blue><i>-- Examples: </i></font>
 <a name="line-98"></a><font color=Blue><i>-- </i></font>
@@ -221,7 +221,7 @@
 <a name="line-214"></a><font color=Blue><i>-- ** Casts</i></font>
 <a name="line-215"></a>
 <a name="line-216"></a><a name="fdouble_of_double"></a><font color=Blue><i>-- | @'fdouble_of_double' /k/ /m/ /x/@: Convert /x/ to an 'FDouble' of</i></font>
-<a name="line-217"></a><font color=Blue><i>-- exponent /k/ and length /m/ &#8805; 0. Note that the exponent does not</i></font>
+<a name="line-217"></a><font color=Blue><i>-- exponent /k/ and length /m/ &#x2265; 0. Note that the exponent does not</i></font>
 <a name="line-218"></a><font color=Blue><i>-- need to be between 0 and /m/; it can even be negative.</i></font>
 <a name="line-219"></a><font color=Blue>fdouble_of_double</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> FDouble
 <a name="line-220"></a><font color=Blue>fdouble_of_double</font> k m x 

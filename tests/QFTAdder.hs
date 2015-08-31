@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -17,7 +17,7 @@ import System.Environment
 -- | Output a preview of the qft_add_in_place circuit for quantum integers of
 -- the given size
 print_qft_add :: Int -> IO ()
-print_qft_add m = print_generic PDF qft_add_in_place (qdint_shape m) (qdint_shape m)
+print_qft_add m = print_generic Preview qft_add_in_place (qdint_shape m) (qdint_shape m)
 
 -- | Simulate the running of the qft_add_in_place circuit for the given IntM inputs
 run_qft_add :: IntM -> IntM -> IO (IntM,IntM)

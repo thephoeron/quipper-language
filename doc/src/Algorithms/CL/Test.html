@@ -111,8 +111,8 @@
 <a name="line-104"></a><font color=Blue><i>-- ** Class group functions</i></font>
 <a name="line-105"></a>
 <a name="line-106"></a><a name="period_of_ideals"></a><font color=Blue><i>-- | Classical period finding (just compare the \"next\" ideal to /O/ and see if</i></font>
-<a name="line-107"></a><font color=Blue><i>--   it is the same). Takes in the /O/ ideal with appropriate &#916;, and returns</i></font>
-<a name="line-108"></a><font color=Blue><i>--   the circle length (sum &#948;(I)) and the list of ideals in the first iteration.</i></font>
+<a name="line-107"></a><font color=Blue><i>--   it is the same). Takes in the /O/ ideal with appropriate &#x0394;, and returns</i></font>
+<a name="line-108"></a><font color=Blue><i>--   the circle length (sum &#x03b4;(I)) and the list of ideals in the first iteration.</i></font>
 <a name="line-109"></a><font color=Blue>period_of_ideals</font> <font color=Red>::</font> <font color=Cyan>(</font>IdDist<font color=Red>-&gt;</font>IdDist<font color=Cyan>)</font> <font color=Red>-&gt;</font> IdDist <font color=Red>-&gt;</font> <font color=Cyan>(</font>CLReal<font color=Cyan>,</font> <font color=Red>[</font>IdDist<font color=Red>]</font><font color=Cyan>)</font>
 <a name="line-110"></a><font color=Blue>period_of_ideals</font> func o <font color=Red>=</font> <font color=Cyan>(</font>delta <font color=Cyan>$</font> last list<font color=Cyan>,</font> list<font color=Cyan>)</font>
 <a name="line-111"></a>    <font color=Green><u>where</u></font>
@@ -128,7 +128,7 @@
 <a name="line-121"></a>            <font color=Green><u>else</u></font>
 <a name="line-122"></a>                x <font color=Red><b>:</b></font> takePeriod got_first_o xs
 <a name="line-123"></a>
-<a name="line-124"></a><a name="show_period_for_bigD"></a><font color=Blue><i>-- | Show period string for a given &#916;.</i></font>
+<a name="line-124"></a><a name="show_period_for_bigD"></a><font color=Blue><i>-- | Show period string for a given &#x0394;.</i></font>
 <a name="line-125"></a><font color=Blue>show_period_for_bigD</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> String
 <a name="line-126"></a><font color=Blue>show_period_for_bigD</font> bigD <font color=Red>=</font>
 <a name="line-127"></a>    <font color=Green><u>let</u></font> <font color=Cyan>(</font>delta<font color=Cyan>,</font> ideals<font color=Cyan>)</font> <font color=Red>=</font> period_of_ideals rho_d <font color=Cyan>$</font> <font color=Cyan>(</font>unit_ideal bigD<font color=Cyan>,</font> <font color=Magenta>0</font><font color=Cyan>)</font>
@@ -136,12 +136,12 @@
 <a name="line-129"></a>                 <font color=Cyan>++</font> <font color=Cyan>(</font>show <font color=Cyan>$</font> <font color=Cyan>(</font>length ideals<font color=Cyan>)</font> <font color=Blue><i>-</i></font> <font color=Magenta>1</font><font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" ideals and sum delta is "</font>
 <a name="line-130"></a>                 <font color=Cyan>++</font> <font color=Cyan>(</font>show delta<font color=Cyan>)</font>
 <a name="line-131"></a>
-<a name="line-132"></a><a name="show_period_for_many_bigDs"></a><font color=Blue><i>-- | Show the period for the first /n/ valid &#916;'s.</i></font>
+<a name="line-132"></a><a name="show_period_for_many_bigDs"></a><font color=Blue><i>-- | Show the period for the first /n/ valid &#x0394;'s.</i></font>
 <a name="line-133"></a><font color=Blue>show_period_for_many_bigDs</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> IO()
 <a name="line-134"></a><font color=Blue>show_period_for_many_bigDs</font> n <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-135"></a>   putStrLn <font color=Cyan>$</font> unlines <font color=Cyan>$</font> map <font color=Cyan>(</font><font color=Red>\</font>bigD <font color=Red>-&gt;</font> show_period_for_bigD bigD<font color=Cyan>)</font> <font color=Cyan>$</font> sort <font color=Cyan>$</font> take n all_bigDs
 <a name="line-136"></a>
-<a name="line-137"></a><a name="show_period_for_some_bigD"></a><font color=Blue><i>-- | Show period string and the list of ideals for a given &#916;.</i></font>
+<a name="line-137"></a><a name="show_period_for_some_bigD"></a><font color=Blue><i>-- | Show period string and the list of ideals for a given &#x0394;.</i></font>
 <a name="line-138"></a><font color=Blue>show_period_for_some_bigD</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> IO()
 <a name="line-139"></a><font color=Blue>show_period_for_some_bigD</font> bigD <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-140"></a>    putStrLn <font color=Cyan>$</font> show_period_for_bigD bigD
@@ -157,12 +157,12 @@
 <a name="line-150"></a>            <font color=Cyan>++</font> <font color=Magenta>" Reduced: "</font>
 <a name="line-151"></a>            <font color=Cyan>++</font> <font color=Green><u>if</u></font> <font color=Cyan>(</font>is_reduced <font color=Cyan>$</font> fst ideal<font color=Cyan>)</font> <font color=Green><u>then</u></font> <font color=Magenta>"true"</font> <font color=Green><u>else</u></font> <font color=Magenta>"false"</font>
 <a name="line-152"></a>
-<a name="line-153"></a><a name="show_bigDs"></a><font color=Blue><i>-- | Show a list of valid &#916;'s.</i></font>
+<a name="line-153"></a><a name="show_bigDs"></a><font color=Blue><i>-- | Show a list of valid &#x0394;'s.</i></font>
 <a name="line-154"></a><font color=Blue>show_bigDs</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> IO()
 <a name="line-155"></a><font color=Blue>show_bigDs</font> n <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-156"></a>    putStrLn <font color=Cyan>$</font> show <font color=Cyan>$</font> take n all_bigDs
 <a name="line-157"></a>
-<a name="line-158"></a><a name="first_few"></a><font color=Blue><i>-- | Explicitly compute first few ideals for some &#916;.</i></font>
+<a name="line-158"></a><a name="first_few"></a><font color=Blue><i>-- | Explicitly compute first few ideals for some &#x0394;.</i></font>
 <a name="line-159"></a><font color=Blue>first_few</font> <font color=Red>::</font> IO()
 <a name="line-160"></a><font color=Blue>first_few</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-161"></a>    putStrLn <font color=Cyan>$</font> <font color=Magenta>"O   :"</font> <font color=Cyan>++</font> show j_0
@@ -174,7 +174,7 @@
 <a name="line-167"></a>        j_05 <font color=Red>=</font> rho_d j_0
 <a name="line-168"></a>        j_1  <font color=Red>=</font> rho_d j_05
 <a name="line-169"></a>
-<a name="line-170"></a><a name="op_all_ideals"></a><font color=Blue><i>-- | Perform an operation on all ideal pairs that are generated by &#916;.</i></font>
+<a name="line-170"></a><a name="op_all_ideals"></a><font color=Blue><i>-- | Perform an operation on all ideal pairs that are generated by &#x0394;.</i></font>
 <a name="line-171"></a><font color=Blue>op_all_ideals</font> <font color=Red>::</font> <font color=Cyan>(</font>IdDist <font color=Red>-&gt;</font> IdDist <font color=Red>-&gt;</font> IdDist<font color=Cyan>)</font> <font color=Red>-&gt;</font> String <font color=Red>-&gt;</font> CLIntP <font color=Red>-&gt;</font> IO()
 <a name="line-172"></a><font color=Blue>op_all_ideals</font> op opString bigD <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-173"></a>    putStrLn <font color=Cyan>$</font> unlines <font color=Cyan>$</font> <font color=Red>[</font> doOp i j <font color=Red>|</font> i <font color=Red>&lt;-</font> ideals<font color=Cyan>,</font> j <font color=Red>&lt;-</font> ideals <font color=Red>]</font>
@@ -188,11 +188,11 @@
 <a name="line-181"></a><font color=Blue><i>--                    ++ " rho_d of:" ++ (show $ rho_d i_op_j)</i></font>
 <a name="line-182"></a>                    <font color=Green><u>where</u></font> i_op_j <font color=Red>=</font> i <font color=Cyan>`op`</font> j
 <a name="line-183"></a>
-<a name="line-184"></a><a name="dot_all_ideals"></a><font color=Blue><i>-- | The the product of all pairs of ideals for a given &#916;.</i></font>
+<a name="line-184"></a><a name="dot_all_ideals"></a><font color=Blue><i>-- | The the product of all pairs of ideals for a given &#x0394;.</i></font>
 <a name="line-185"></a><font color=Blue>dot_all_ideals</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> IO()
 <a name="line-186"></a><font color=Blue>dot_all_ideals</font> bigD <font color=Red>=</font> op_all_ideals dot <font color=Magenta>"."</font> bigD
 <a name="line-187"></a>
-<a name="line-188"></a><a name="star_all_ideals"></a><font color=Blue><i>-- | Take the star product of all pairs of ideals for a given &#916;.</i></font>
+<a name="line-188"></a><a name="star_all_ideals"></a><font color=Blue><i>-- | Take the star product of all pairs of ideals for a given &#x0394;.</i></font>
 <a name="line-189"></a><font color=Blue>star_all_ideals</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> IO()
 <a name="line-190"></a><font color=Blue>star_all_ideals</font> bigD <font color=Red>=</font> op_all_ideals star <font color=Magenta>"*"</font> bigD
 <a name="line-191"></a>

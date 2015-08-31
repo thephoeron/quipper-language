@@ -128,7 +128,7 @@
 <a name="line-121"></a>            <font color=Red>|</font> otherwise     <font color=Red>=</font> <font color=Cyan>(</font><font color=Green><u>if</u></font> p <font color=Cyan>`mod`</font> <font color=Magenta>4</font> <font color=Cyan>==</font> <font color=Magenta>3</font> <font color=Cyan>&amp;&amp;</font> a <font color=Cyan>`mod`</font> <font color=Magenta>4</font> <font color=Cyan>==</font> <font color=Magenta>3</font> <font color=Green><u>then</u></font> <font color=Blue><i>-</i></font><font color=Magenta>1</font> <font color=Green><u>else</u></font> <font color=Magenta>1</font><font color=Cyan>)</font>    <font color=Blue><i>-- Rule 6</i></font>
 <a name="line-122"></a>                              <font color=Cyan>*</font> <font color=Cyan>(</font>jacobi_symbol p a<font color=Cyan>)</font>
 <a name="line-123"></a>
-<a name="line-124"></a><a name="mod_with_max"></a><font color=Blue><i>-- | @'mod_with_max' /x/ /y/ /max/@: reduce /x/ modulo /y/, returning the unique representative /x'/ in the range /max/ &#8211; /y/ &lt; /x'/ &#8804; /max/.</i></font>
+<a name="line-124"></a><a name="mod_with_max"></a><font color=Blue><i>-- | @'mod_with_max' /x/ /y/ /max/@: reduce /x/ modulo /y/, returning the unique representative /x'/ in the range /max/ &#x2013; /y/ &lt; /x'/ &#x2264; /max/.</i></font>
 <a name="line-125"></a><font color=Blue>mod_with_max</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral a<font color=Cyan>)</font> <font color=Red>=&gt;</font> a <font color=Red>-&gt;</font> a <font color=Red>-&gt;</font> a <font color=Red>-&gt;</font> a
 <a name="line-126"></a><font color=Blue>mod_with_max</font> x y max <font color=Red>=</font> max <font color=Blue><i>-</i></font> <font color=Cyan>(</font><font color=Cyan>(</font>max <font color=Blue><i>-</i></font> x<font color=Cyan>)</font> <font color=Cyan>`mod`</font> y<font color=Cyan>)</font>
 <a name="line-127"></a>
@@ -164,12 +164,12 @@
 <a name="line-157"></a><font color=Blue><i>-- </i></font>
 <a name="line-158"></a><font color=Blue><i>-- &gt; [image contfrac.png]</i></font>
 <a name="line-159"></a><font color=Blue><i>-- </i></font>
-<a name="line-160"></a><font color=Blue><i>-- where /n/ &#8805; 0, /a/[sub 0] is an integer, /a/[sub 1], &#8230;, /a/[sub /n/] are</i></font>
-<a name="line-161"></a><font color=Blue><i>-- positive integers, and /a/[sub /n/] &#8800; 1 unless /n/=0. This is called the </i></font>
+<a name="line-160"></a><font color=Blue><i>-- where /n/ &#x2265; 0, /a/[sub 0] is an integer, /a/[sub 1], &#x2026;, /a/[sub /n/] are</i></font>
+<a name="line-161"></a><font color=Blue><i>-- positive integers, and /a/[sub /n/] &#x2260; 1 unless /n/=0. This is called the </i></font>
 <a name="line-162"></a><font color=Blue><i>-- (short) continued fraction expansion of /q/. The function 'continued_list' inputs</i></font>
 <a name="line-163"></a><font color=Blue><i>-- two integers /num/ and /denom/, computes the continued fraction expansion of </i></font>
 <a name="line-164"></a><font color=Blue><i>-- /q/ = /num/ \/ /denom/, and returns the non-empty sequence </i></font>
-<a name="line-165"></a><font color=Blue><i>-- [/a/[sub 0], &#8230;, /a/[sub /n/]].  </i></font>
+<a name="line-165"></a><font color=Blue><i>-- [/a/[sub 0], &#x2026;, /a/[sub /n/]].  </i></font>
 <a name="line-166"></a><font color=Blue>continued_list</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral int<font color=Cyan>)</font> <font color=Red>=&gt;</font> int <font color=Red>-&gt;</font> int <font color=Red>-&gt;</font> <font color=Red>[</font>int<font color=Red>]</font>
 <a name="line-167"></a><font color=Blue>continued_list</font> <font color=Green><u>_</u></font>   <font color=Magenta>0</font>     <font color=Red>=</font> []
 <a name="line-168"></a><font color=Blue>continued_list</font> num denom <font color=Red>=</font>
@@ -197,7 +197,7 @@
 <a name="line-190"></a><font color=Blue><i>-- ===========================================</i></font>
 <a name="line-191"></a><font color=Blue><i>-- ** Generic blackboxing</i></font>
 <a name="line-192"></a>
-<a name="line-193"></a><a name="blackbox"></a><font color=Blue><i>-- | Unimplemented components need to be given as black boxes &#8212; like named gates,</i></font>
+<a name="line-193"></a><a name="blackbox"></a><font color=Blue><i>-- | Unimplemented components need to be given as black boxes &#x2014; like named gates,</i></font>
 <a name="line-194"></a><font color=Blue><i>-- except their types may not just be an endomorphism; like subroutines, except</i></font>
 <a name="line-195"></a><font color=Blue><i>-- with only a placeholder on the inside.</i></font>
 <a name="line-196"></a><font color=Blue><i>--</i></font>
@@ -243,7 +243,7 @@
 <a name="line-236"></a><a name="q_add_param_in_place"></a><font color=Blue><i>-- | Boxed analogue of 'Arith.q_add_param_in_place'.</i></font>
 <a name="line-237"></a><font color=Blue>q_add_param_in_place</font> <font color=Red>::</font>IntM <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ QDInt
 <a name="line-238"></a><font color=Blue>q_add_param_in_place</font> <font color=Red>=</font> Arith<font color=Cyan>.</font>q_add_param_in_place
-<a name="line-239"></a><font color=Blue><i>{- Currently doesn&#8217;t work:
+<a name="line-239"></a><font color=Blue><i>{- Currently doesn&#x2019;t work:
 <a name="line-240"></a>q_add_param_in_place n = 
 <a name="line-241"></a>  arithbox ("q_add_param_in_place; n = " ++ show n ++ "; ") (Arith.q_add_param_in_place n)
 <a name="line-242"></a>-}</i></font>
@@ -255,7 +255,7 @@
 <a name="line-248"></a><a name="q_mult_param"></a><font color=Blue><i>-- | Boxed analogue of 'Arith.q_mult_param'.</i></font>
 <a name="line-249"></a><font color=Blue>q_mult_param</font> <font color=Red>::</font> IntM <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>)</font>
 <a name="line-250"></a><font color=Blue>q_mult_param</font> <font color=Red>=</font> Arith<font color=Cyan>.</font>q_mult_param
-<a name="line-251"></a><font color=Blue><i>{- Currently doesn&#8217;t work:
+<a name="line-251"></a><font color=Blue><i>{- Currently doesn&#x2019;t work:
 <a name="line-252"></a>q_mult_param n =
 <a name="line-253"></a>  arithbox ("q_mult_param; n = " ++ show n ++ "; ") (Arith.q_mult_param n)
 <a name="line-254"></a>-}</i></font>
@@ -342,7 +342,7 @@
 <a name="line-335"></a>    qc_copy
 <a name="line-336"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font> y<font color=Cyan>,</font> x_mod_y<font color=Cyan>)</font>
 <a name="line-337"></a>
-<a name="line-338"></a><a name="q_mod_with_max"></a><font color=Blue><i>-- | @'q_mod_with_max' /x/ /y/ /m/@: reduce /x/ modulo /y/, into the range /max/ &#8211; /y/ &lt; /x'/ &#8804; /max/.  (Compare 'mod_with_max'.)</i></font>
+<a name="line-338"></a><a name="q_mod_with_max"></a><font color=Blue><i>-- | @'q_mod_with_max' /x/ /y/ /m/@: reduce /x/ modulo /y/, into the range /max/ &#x2013; /y/ &lt; /x'/ &#x2264; /max/.  (Compare 'mod_with_max'.)</i></font>
 <a name="line-339"></a><font color=Blue>q_mod_with_max</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-340"></a><font color=Blue>q_mod_with_max</font> x y m <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-341"></a>  <font color=Blue><i>-- Goal: max - ((max - x) `mod` y)</i></font>
@@ -392,7 +392,7 @@
 <a name="line-385"></a>          <font color=Cyan>(</font>x_cur<font color=Cyan>,</font> good_now<font color=Cyan>)</font> <font color=Red>&lt;-</font> test x_cur
 <a name="line-386"></a>          <font color=Blue><i>-- If we fail now for the first time, copy the current value to the output value:</i></font>
 <a name="line-387"></a>          <font color=Cyan>(</font>x_out<font color=Cyan>,</font> x_cur<font color=Cyan>)</font> <font color=Red>&lt;-</font> controlled_not x_out x_cur <font color=Cyan>`controlled`</font> good_now <font color=Cyan>.==.</font> <font color=Magenta>0</font> <font color=Cyan>.&amp;&amp;.</font> failed_before <font color=Cyan>.==.</font> <font color=Magenta>0</font>
-<a name="line-388"></a>          <font color=Blue><i>-- Going forward, we&#8217;ve failed unless we&#8217;re good now *and* we&#8217;ve not failed before:</i></font>
+<a name="line-388"></a>          <font color=Blue><i>-- Going forward, we&#x2019;ve failed unless we&#x2019;re good now *and* we&#x2019;ve not failed before:</i></font>
 <a name="line-389"></a>          failed_now <font color=Red>&lt;-</font> qinit True
 <a name="line-390"></a>          failed_now <font color=Red>&lt;-</font> qnot failed_now <font color=Cyan>`controlled`</font> good_now <font color=Cyan>.==.</font> <font color=Magenta>1</font> <font color=Cyan>.&amp;&amp;.</font> failed_before <font color=Cyan>.==.</font> <font color=Magenta>0</font>
 <a name="line-391"></a>          <font color=Blue><i>-- In any case, apply the body again:</i></font>
@@ -459,11 +459,11 @@
 <a name="line-452"></a>      <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>x<font color=Cyan>,</font>ys<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font> <font color=Cyan>(</font>x<font color=Cyan>,</font>y_new<font color=Cyan>)</font> <font color=Red>&lt;-</font> body x<font color=Cyan>;</font> return <font color=Cyan>(</font>x<font color=Cyan>,</font>y_new<font color=Red><b>:</b></font>ys<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-453"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font>x'<font color=Cyan>,</font>ys<font color=Cyan>)</font>
 <a name="line-454"></a>
-<a name="line-455"></a><a name="q_do_until"></a><font color=Blue><i>-- | Perform a bounded &#8220;do_until&#8221; loop.  </i></font>
+<a name="line-455"></a><a name="q_do_until"></a><font color=Blue><i>-- | Perform a bounded &#x201c;do_until&#x201d; loop.  </i></font>
 <a name="line-456"></a><font color=Blue>q_do_until</font> <font color=Red>::</font> <font color=Cyan>(</font>QCData qa<font color=Cyan>)</font> <font color=Red>=&gt;</font>
 <a name="line-457"></a>  Int                      <font color=Blue><i>-- ^ a bound on the number of times the loop can run</i></font>
 <a name="line-458"></a>  <font color=Red>-&gt;</font> qa                    <font color=Blue><i>-- ^ the starting value</i></font>
-<a name="line-459"></a>  <font color=Red>-&gt;</font> <font color=Cyan>(</font>qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>Qubit<font color=Cyan>)</font><font color=Cyan>)</font>  <font color=Blue><i>-- ^ the body of the loop, producing an input to the next iteration, plus a qubit to mark if we&#8217;re finished yet. </i></font>
+<a name="line-459"></a>  <font color=Red>-&gt;</font> <font color=Cyan>(</font>qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>Qubit<font color=Cyan>)</font><font color=Cyan>)</font>  <font color=Blue><i>-- ^ the body of the loop, producing an input to the next iteration, plus a qubit to mark if we&#x2019;re finished yet. </i></font>
 <a name="line-460"></a>  <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>)</font>          <font color=Blue><i>-- ^ return the initial and final values</i></font>
 <a name="line-461"></a><font color=Blue>q_do_until</font> bound x body <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-462"></a>  with_computed_fun x body

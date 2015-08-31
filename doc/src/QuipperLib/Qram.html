@@ -51,14 +51,14 @@
 <a name="line-44"></a>  return a
 <a name="line-45"></a>
 <a name="line-46"></a><a name="indexed_fetch_at"></a><font color=Blue><i>-- | @'indexed_fetch_at' /a/ /i/ /q/@: </i></font>
-<a name="line-47"></a><font color=Blue><i>-- Perform /q/ &#8853;= /a/[/i/].</i></font>
+<a name="line-47"></a><font color=Blue><i>-- Perform /q/ &#x2295;= /a/[/i/].</i></font>
 <a name="line-48"></a><font color=Blue>indexed_fetch_at</font> <font color=Red>::</font> <font color=Cyan>(</font>QData qa<font color=Cyan>)</font> <font color=Red>=&gt;</font> <font color=Red>[</font>qa<font color=Red>]</font> <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ ()
 <a name="line-49"></a><font color=Blue>indexed_fetch_at</font> <font color=Green><u>as</u></font> i q <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-50"></a>  with_computed <font color=Cyan>(</font>indexed_access <font color=Green><u>as</u></font> i<font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Red>\</font>x <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-51"></a>    controlled_not_at q x
 <a name="line-52"></a>
 <a name="line-53"></a><a name="indexed_store_at"></a><font color=Blue><i>-- | @'indexed_store_at' /a/ /i/ /q/@:</i></font>
-<a name="line-54"></a><font color=Blue><i>-- Perform /a/[/i/] &#8853;= /q/.</i></font>
+<a name="line-54"></a><font color=Blue><i>-- Perform /a/[/i/] &#x2295;= /q/.</i></font>
 <a name="line-55"></a><font color=Blue>indexed_store_at</font> <font color=Red>::</font> <font color=Cyan>(</font>QData qa<font color=Cyan>)</font> <font color=Red>=&gt;</font> <font color=Red>[</font>qa<font color=Red>]</font> <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ ()
 <a name="line-56"></a><font color=Blue>indexed_store_at</font> <font color=Green><u>as</u></font> i q <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-57"></a>  with_computed <font color=Cyan>(</font>indexed_access <font color=Green><u>as</u></font> i<font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Red>\</font>x <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>

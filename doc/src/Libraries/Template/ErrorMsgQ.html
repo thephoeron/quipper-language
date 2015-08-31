@@ -12,46 +12,55 @@
 <a name="line-5"></a>
 <a name="line-6"></a><font color=Green><u>import</u></font> Language<font color=Cyan>.</font>Haskell<font color=Cyan>.</font>TH
 <a name="line-7"></a>
-<a name="line-8"></a><a name="ErrMsg"></a><font color=Blue><i>-- | Shortcut for 'Either String a'.</i></font>
-<a name="line-9"></a><a name="ErrMsg"></a><font color=Green><u>type</u></font> ErrMsg a <font color=Red>=</font> Either String a
+<a name="line-8"></a><font color=Green><u>import</u></font> Control<font color=Cyan>.</font>Applicative <font color=Cyan>(</font>Applicative<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>)</font>
+<a name="line-9"></a><font color=Green><u>import</u></font> Control<font color=Cyan>.</font>Monad <font color=Cyan>(</font>liftM<font color=Cyan>,</font> ap<font color=Cyan>)</font>
 <a name="line-10"></a>
-<a name="line-11"></a><a name="ErrMsgQ"></a><font color=Blue><i>-- | Type for the monad encapsulating error messages.</i></font>
-<a name="line-12"></a><a name="ErrMsgQ"></a><font color=Green><u>data</u></font> ErrMsgQ a <font color=Red>=</font> ErrMsgQ <font color=Cyan>(</font>Q <font color=Cyan>(</font>ErrMsg a<font color=Cyan>)</font><font color=Cyan>)</font>
+<a name="line-11"></a><a name="ErrMsg"></a><font color=Blue><i>-- | Shortcut for 'Either String a'.</i></font>
+<a name="line-12"></a><a name="ErrMsg"></a><font color=Green><u>type</u></font> ErrMsg a <font color=Red>=</font> Either String a
 <a name="line-13"></a>
-<a name="line-14"></a><font color=Green><u>instance</u></font> Monad ErrMsgQ <font color=Green><u>where</u></font>
-<a name="line-15"></a>    return x <font color=Red>=</font> ErrMsgQ <font color=Cyan>$</font> return <font color=Cyan>$</font> return x
-<a name="line-16"></a>    <font color=Cyan>(</font><font color=Cyan>&gt;&gt;=</font><font color=Cyan>)</font> <font color=Cyan>(</font>ErrMsgQ x<font color=Cyan>)</font> f <font color=Red>=</font> ErrMsgQ <font color=Cyan>$</font> <font color=Green><u>do</u></font>
-<a name="line-17"></a>              x' <font color=Red>&lt;-</font> x
-<a name="line-18"></a>              <font color=Green><u>case</u></font> x' <font color=Green><u>of</u></font> 
-<a name="line-19"></a>                 Left s <font color=Red>-&gt;</font> return <font color=Cyan>(</font>Left s<font color=Cyan>)</font>
-<a name="line-20"></a>                 Right r <font color=Red>-&gt;</font> <font color=Green><u>let</u></font> <font color=Cyan>(</font>ErrMsgQ y<font color=Cyan>)</font> <font color=Red>=</font> f r <font color=Green><u>in</u></font> y
-<a name="line-21"></a>
-<a name="line-22"></a>
-<a name="line-23"></a><a name="errorMsg"></a><font color=Blue><i>-- | Set an error message, to be thrown.</i></font>
-<a name="line-24"></a><font color=Blue><i>-- Usage:                 </i></font>
-<a name="line-25"></a><font color=Blue><i>--                  </i></font>
-<a name="line-26"></a><font color=Blue><i>-- &gt; errorMsg "an error happened"                 </i></font>
-<a name="line-27"></a><font color=Blue>errorMsg</font> <font color=Red>::</font> String <font color=Red>-&gt;</font> ErrMsgQ a
-<a name="line-28"></a><font color=Blue>errorMsg</font> s <font color=Red>=</font> ErrMsgQ <font color=Cyan>(</font>return <font color=Cyan>(</font>Left s<font color=Cyan>)</font><font color=Cyan>)</font>
-<a name="line-29"></a>
-<a name="line-30"></a><a name="embedQ"></a><font color=Blue><i>-- | Make a 'Q' computation error-message aware.</i></font>
-<a name="line-31"></a><font color=Blue>embedQ</font> <font color=Red>::</font> Q a <font color=Red>-&gt;</font> ErrMsgQ a
-<a name="line-32"></a><font color=Blue>embedQ</font> x <font color=Red>=</font> ErrMsgQ <font color=Cyan>$</font> <font color=Green><u>do</u></font> x' <font color=Red>&lt;-</font> x<font color=Cyan>;</font> return <font color=Cyan>(</font>return x'<font color=Cyan>)</font>
-<a name="line-33"></a>
-<a name="line-34"></a><a name="extractQ"></a><font color=Blue><i>-- | Throw the error that has been created, using the given string as</i></font>
-<a name="line-35"></a><font color=Blue><i>-- a prefix. Usage:</i></font>
-<a name="line-36"></a><font color=Blue><i>-- </i></font>
-<a name="line-37"></a><font color=Blue><i>-- &gt; extractQ "name of function: " $ do</i></font>
-<a name="line-38"></a><font color=Blue><i>-- &gt;   &lt;&lt;commands that may thow an error&gt;&gt;</i></font>
-<a name="line-39"></a><font color=Blue>extractQ</font> <font color=Red>::</font> String <font color=Red>-&gt;</font> ErrMsgQ a <font color=Red>-&gt;</font> Q a
-<a name="line-40"></a><font color=Blue>extractQ</font> prefix <font color=Cyan>(</font>ErrMsgQ x<font color=Cyan>)</font> <font color=Red>=</font> 
-<a name="line-41"></a>  <font color=Green><u>do</u></font>
-<a name="line-42"></a>    x' <font color=Red>&lt;-</font> x
-<a name="line-43"></a>    <font color=Green><u>case</u></font> x' <font color=Green><u>of</u></font>
-<a name="line-44"></a>      Left s <font color=Red>-&gt;</font> error <font color=Cyan>(</font>prefix <font color=Cyan>++</font> s<font color=Cyan>)</font>
-<a name="line-45"></a>      Right x <font color=Red>-&gt;</font> return x
-<a name="line-46"></a>
-<a name="line-47"></a>
+<a name="line-14"></a><a name="ErrMsgQ"></a><font color=Blue><i>-- | Type for the monad encapsulating error messages.</i></font>
+<a name="line-15"></a><a name="ErrMsgQ"></a><font color=Green><u>data</u></font> ErrMsgQ a <font color=Red>=</font> ErrMsgQ <font color=Cyan>(</font>Q <font color=Cyan>(</font>ErrMsg a<font color=Cyan>)</font><font color=Cyan>)</font>
+<a name="line-16"></a>
+<a name="line-17"></a><font color=Green><u>instance</u></font> Monad ErrMsgQ <font color=Green><u>where</u></font>
+<a name="line-18"></a>    return x <font color=Red>=</font> ErrMsgQ <font color=Cyan>$</font> return <font color=Cyan>$</font> return x
+<a name="line-19"></a>    <font color=Cyan>(</font><font color=Cyan>&gt;&gt;=</font><font color=Cyan>)</font> <font color=Cyan>(</font>ErrMsgQ x<font color=Cyan>)</font> f <font color=Red>=</font> ErrMsgQ <font color=Cyan>$</font> <font color=Green><u>do</u></font>
+<a name="line-20"></a>              x' <font color=Red>&lt;-</font> x
+<a name="line-21"></a>              <font color=Green><u>case</u></font> x' <font color=Green><u>of</u></font> 
+<a name="line-22"></a>                 Left s <font color=Red>-&gt;</font> return <font color=Cyan>(</font>Left s<font color=Cyan>)</font>
+<a name="line-23"></a>                 Right r <font color=Red>-&gt;</font> <font color=Green><u>let</u></font> <font color=Cyan>(</font>ErrMsgQ y<font color=Cyan>)</font> <font color=Red>=</font> f r <font color=Green><u>in</u></font> y
+<a name="line-24"></a>
+<a name="line-25"></a><font color=Green><u>instance</u></font> Applicative ErrMsgQ <font color=Green><u>where</u></font>
+<a name="line-26"></a>  pure <font color=Red>=</font> return
+<a name="line-27"></a>  <font color=Cyan>(</font><font color=Cyan>&lt;*&gt;</font><font color=Cyan>)</font> <font color=Red>=</font> ap
+<a name="line-28"></a>
+<a name="line-29"></a><font color=Green><u>instance</u></font> Functor ErrMsgQ <font color=Green><u>where</u></font>
+<a name="line-30"></a>  fmap <font color=Red>=</font> liftM
+<a name="line-31"></a>
+<a name="line-32"></a><a name="errorMsg"></a><font color=Blue><i>-- | Set an error message, to be thrown.</i></font>
+<a name="line-33"></a><font color=Blue><i>-- Usage:                 </i></font>
+<a name="line-34"></a><font color=Blue><i>--                  </i></font>
+<a name="line-35"></a><font color=Blue><i>-- &gt; errorMsg "an error happened"                 </i></font>
+<a name="line-36"></a><font color=Blue>errorMsg</font> <font color=Red>::</font> String <font color=Red>-&gt;</font> ErrMsgQ a
+<a name="line-37"></a><font color=Blue>errorMsg</font> s <font color=Red>=</font> ErrMsgQ <font color=Cyan>(</font>return <font color=Cyan>(</font>Left s<font color=Cyan>)</font><font color=Cyan>)</font>
+<a name="line-38"></a>
+<a name="line-39"></a><a name="embedQ"></a><font color=Blue><i>-- | Make a 'Q' computation error-message aware.</i></font>
+<a name="line-40"></a><font color=Blue>embedQ</font> <font color=Red>::</font> Q a <font color=Red>-&gt;</font> ErrMsgQ a
+<a name="line-41"></a><font color=Blue>embedQ</font> x <font color=Red>=</font> ErrMsgQ <font color=Cyan>$</font> <font color=Green><u>do</u></font> x' <font color=Red>&lt;-</font> x<font color=Cyan>;</font> return <font color=Cyan>(</font>return x'<font color=Cyan>)</font>
+<a name="line-42"></a>
+<a name="line-43"></a><a name="extractQ"></a><font color=Blue><i>-- | Throw the error that has been created, using the given string as</i></font>
+<a name="line-44"></a><font color=Blue><i>-- a prefix. Usage:</i></font>
+<a name="line-45"></a><font color=Blue><i>-- </i></font>
+<a name="line-46"></a><font color=Blue><i>-- &gt; extractQ "name of function: " $ do</i></font>
+<a name="line-47"></a><font color=Blue><i>-- &gt;   &lt;&lt;commands that may thow an error&gt;&gt;</i></font>
+<a name="line-48"></a><font color=Blue>extractQ</font> <font color=Red>::</font> String <font color=Red>-&gt;</font> ErrMsgQ a <font color=Red>-&gt;</font> Q a
+<a name="line-49"></a><font color=Blue>extractQ</font> prefix <font color=Cyan>(</font>ErrMsgQ x<font color=Cyan>)</font> <font color=Red>=</font> 
+<a name="line-50"></a>  <font color=Green><u>do</u></font>
+<a name="line-51"></a>    x' <font color=Red>&lt;-</font> x
+<a name="line-52"></a>    <font color=Green><u>case</u></font> x' <font color=Green><u>of</u></font>
+<a name="line-53"></a>      Left s <font color=Red>-&gt;</font> error <font color=Cyan>(</font>prefix <font color=Cyan>++</font> s<font color=Cyan>)</font>
+<a name="line-54"></a>      Right x <font color=Red>-&gt;</font> return x
+<a name="line-55"></a>
+<a name="line-56"></a>
 </pre>
 </body>
 </html>

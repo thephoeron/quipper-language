@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -45,6 +45,7 @@ module Quipper (
   rGate,
   gate_W,
   gate_iX,
+  gate_iX_inv,
   global_phase,
   global_phase_anchored,
   qmultinot,
@@ -74,6 +75,7 @@ module Quipper (
   rGate_at,
   gate_W_at,
   gate_iX_at,
+  gate_iX_inv_at,
   qmultinot_at,
   cnot_at,
   swap_at,
@@ -291,7 +293,7 @@ import Libraries.Auxiliary
 -- This section contains various elementary gates that can be used as
 -- building blocks for constructing circuits.
 
--- $FUNCTIONAL_ANCHOR #Reversible gates in functional style#
+-- $FUNCTIONAL_ANCHOR #FUNCTIONAL#
 
 -- $FUNCTIONAL
 -- 
@@ -307,9 +309,9 @@ import Libraries.Auxiliary
 -- > (out0, out1) <- gate_W in0 in1
 -- 
 -- For each of these gates, we also provide a version in imperative
--- style, see <#Reversible gates in imperative style> below.
+-- style, see <#IMPERATIVE Reversible gates in imperative style> below.
 
--- $IMPERATIVE_ANCHOR #Reversible gates in imperative style#
+-- $IMPERATIVE_ANCHOR #IMPERATIVE#
 
 -- $IMPERATIVE
 -- 
@@ -324,7 +326,7 @@ import Libraries.Auxiliary
 -- > gate_W_at q0 q1
 -- 
 -- For each of these gates, we also provide a version in functional
--- style, see <#Reversible gates in functional style> above.
+-- style, see <#FUNCTIONAL Reversible gates in functional style> above.
 
 -- * Snippets of additional documentation lifted from import modules:
 

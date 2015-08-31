@@ -37,11 +37,11 @@
 <a name="line-30"></a><font color=Blue><i>-- version of the Hidden Subgroup Problem (HSP) Algorithm is used to</i></font>
 <a name="line-31"></a><font color=Blue><i>-- estimate the (irrational) period of the function /f/ [sub /N/]</i></font>
 <a name="line-32"></a><font color=Blue><i>-- ('fN', 'q_fN'); this is the function /h/ of [Jozsa 2003], Sec. 9,</i></font>
-<a name="line-33"></a><font color=Blue><i>-- discretized with precision /N/ = 2 [super &#8722;/n/], and so has weak</i></font>
+<a name="line-33"></a><font color=Blue><i>-- discretized with precision /N/ = 2 [super &#x2212;/n/], and so has weak</i></font>
 <a name="line-34"></a><font color=Blue><i>-- period /S/ = /NR/.  The precision /n/ is determined by 'n_of_bigD'.</i></font>
 <a name="line-35"></a><font color=Blue><i>--</i></font>
-<a name="line-36"></a><font color=Blue><i>-- Inputs: &#916;; /i/, an assumed bound such that /S/ &#8804; 2[sup /i/]; </i></font>
-<a name="line-37"></a><font color=Blue><i>-- and a random &#8220;jitter&#8221; parameter.</i></font>
+<a name="line-36"></a><font color=Blue><i>-- Inputs: &#x0394;; /i/, an assumed bound such that /S/ &#x2264; 2[sup /i/]; </i></font>
+<a name="line-37"></a><font color=Blue><i>-- and a random &#x201c;jitter&#x201d; parameter.</i></font>
 <a name="line-38"></a><font color=Blue>approximate_regulator_circuit</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> CLIntP <font color=Red>-&gt;</font> <font color=Cyan>(</font>Circ CInt<font color=Cyan>)</font>
 <a name="line-39"></a><font color=Blue>approximate_regulator_circuit</font> bigD i jitter <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-40"></a>    <font color=Green><u>let</u></font> n <font color=Red>=</font> n_of_bigD bigD
@@ -57,7 +57,7 @@
 <a name="line-50"></a>
 <a name="line-51"></a>    <font color=Blue><i>-- Step 1 - apply Hadamard transform to register 1</i></font>
 <a name="line-52"></a>    reg1 <font color=Red>&lt;-</font> qinit <font color=Cyan>$</font> qc_false <font color=Cyan>$</font> qshape <font color=Cyan>$</font> intm q <font color=Magenta>0</font>
-<a name="line-53"></a>      <font color=Blue><i>-- Note: the [qc_false $ qshape] is currently redundant, since 0 is encoded as |00&#8230;00&gt;.</i></font>
+<a name="line-53"></a>      <font color=Blue><i>-- Note: the [qc_false $ qshape] is currently redundant, since 0 is encoded as |00&#x2026;00&gt;.</i></font>
 <a name="line-54"></a>      <font color=Blue><i>-- However, that is dependent on the specific representation of integers;</i></font>
 <a name="line-55"></a>      <font color=Blue><i>-- using qc_false specifies the all-0 state independently of the</i></font>
 <a name="line-56"></a>      <font color=Blue><i>-- representation of integers.</i></font>
@@ -78,7 +78,7 @@
 <a name="line-71"></a>    return reg1_c
 <a name="line-72"></a>
 <a name="line-73"></a><a name="try_approximate_regulator"></a><font color=Blue><i>-- | Attempt to approximate the regulator /R/, given an assumed </i></font>
-<a name="line-74"></a><font color=Blue><i>-- bound /i/ such that /S/ &#8804; 2[sup /i/], using the probabilistic </i></font>
+<a name="line-74"></a><font color=Blue><i>-- bound /i/ such that /S/ &#x2264; 2[sup /i/], using the probabilistic </i></font>
 <a name="line-75"></a><font color=Blue><i>-- quantum computation @approximate_regulator_circuit@ twice as</i></font>
 <a name="line-76"></a><font color=Blue><i>-- described in [Jozsa 2003], Sec. 10.</i></font>
 <a name="line-77"></a><font color=Blue><i>-- </i></font>
@@ -108,10 +108,10 @@
 <a name="line-101"></a>             <font color=Green><u>then</u></font> Nothing
 <a name="line-102"></a>             <font color=Green><u>else</u></font> <font color=Cyan>(</font>Just <font color=Cyan>(</font>fprealx <font color=Cyan>(</font><font color=Blue><i>-</i></font>n<font color=Cyan>)</font> <font color=Cyan>(</font>head <font color=Cyan>$</font> sort <font color=Cyan>$</font> candidate_ms<font color=Cyan>)</font><font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-103"></a>
-<a name="line-104"></a><a name="verify_period_multiple"></a><font color=Blue><i>-- | @'verify_period_multiple' &#916; /n/ /m/@: </i></font>
+<a name="line-104"></a><a name="verify_period_multiple"></a><font color=Blue><i>-- | @'verify_period_multiple' &#x0394; /n/ /m/@: </i></font>
 <a name="line-105"></a><font color=Blue><i>-- check whether /m/ is within 1 of a multiple of the period /S/ of /f/[sub /N/].</i></font>
 <a name="line-106"></a><font color=Blue><i>--</i></font>
-<a name="line-107"></a><font color=Blue><i>-- Since for any ideal /I/, &#961;(&#961;(/I/)) is distance &gt; ln 2 from /I/, it suffices </i></font>
+<a name="line-107"></a><font color=Blue><i>-- Since for any ideal /I/, &#x03c1;(&#x03c1;(/I/)) is distance &gt; ln 2 from /I/, it suffices </i></font>
 <a name="line-108"></a><font color=Blue><i>-- to check whether the unit ideal is within 4 steps either way of /f/[sub /N/](m).</i></font>
 <a name="line-109"></a><font color=Blue>verify_period_multiple</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> CLInt <font color=Red>-&gt;</font> Bool
 <a name="line-110"></a><font color=Blue>verify_period_multiple</font> bigD n m <font color=Red>=</font>
@@ -119,14 +119,14 @@
 <a name="line-112"></a>  <font color=Green><u>in</u></font> <font color=Cyan>(</font>unit_ideal bigD<font color=Cyan>)</font>
 <a name="line-113"></a>    <font color=Cyan>`elem`</font> <font color=Cyan>(</font><font color=Red>[</font>jj<font color=Red>]</font> <font color=Cyan>++</font> <font color=Cyan>(</font>take <font color=Magenta>4</font> <font color=Cyan>$</font> iterate rho jj<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Cyan>(</font>take <font color=Magenta>4</font> <font color=Cyan>$</font> iterate rho_inv jj<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-114"></a>
-<a name="line-115"></a><a name="approximate_regulator"></a><font color=Blue><i>-- | Approximate the regulator for a given &#916; (/bigD/).</i></font>
+<a name="line-115"></a><a name="approximate_regulator"></a><font color=Blue><i>-- | Approximate the regulator for a given &#x0394; (/bigD/).</i></font>
 <a name="line-116"></a><font color=Blue><i>--</i></font>
 <a name="line-117"></a><font color=Blue><i>-- Repeatedly run @'try_approximate_regulator'@ enough times, with increasing</i></font>
 <a name="line-118"></a><font color=Blue><i>-- /i/, that it eventually succeeds with high probability. </i></font>
 <a name="line-119"></a><font color=Blue>approximate_regulator</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> IO CLReal
 <a name="line-120"></a><font color=Blue>approximate_regulator</font> bigD <font color=Red>=</font>
 <a name="line-121"></a>    <font color=Blue><i>-- Create a (infinite and lazy) list of attempts to approximate the</i></font>
-<a name="line-122"></a>    <font color=Blue><i>-- regulator, assuming S &#8804; 2^i for i = 1, 2, &#8230;</i></font>
+<a name="line-122"></a>    <font color=Blue><i>-- regulator, assuming S &#x2264; 2^i for i = 1, 2, &#x2026;</i></font>
 <a name="line-123"></a>    <font color=Blue><i>-- (For each value of /i/, make (36 * i) attempts.)</i></font>
 <a name="line-124"></a>    <font color=Blue><i>-- Run the attempts until one succeeds; return its answer.</i></font>
 <a name="line-125"></a>    fmap <font color=Cyan>(</font>fromJust <font color=Cyan>.</font> fromJust<font color=Cyan>)</font> <font color=Cyan>$</font> sequence_until isJust <font color=Cyan>$</font> concat
@@ -137,7 +137,7 @@
 <a name="line-130"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-131"></a>
 <a name="line-132"></a><a name="improve_regulator_accuracy"></a><font color=Blue><i>-- | Improve the precision of the initial estimate of the regulator /R/, for </i></font>
-<a name="line-133"></a><font color=Blue><i>-- a quadratic discriminant &#916;.</i></font>
+<a name="line-133"></a><font color=Blue><i>-- a quadratic discriminant &#x0394;.</i></font>
 <a name="line-134"></a><font color=Blue><i>--</i></font>
 <a name="line-135"></a><font color=Blue><i>-- The implementation is essentially based on the proof of Theorem 5 of </i></font>
 <a name="line-136"></a><font color=Blue><i>-- [Jozsa 2003].</i></font>
@@ -234,7 +234,7 @@
 <a name="line-227"></a><font color=Blue><i>-- </i></font>
 <a name="line-228"></a><font color=Blue><i>-- Implementation: assuming the Generalized Riemann Hypothesis, it is</i></font>
 <a name="line-229"></a><font color=Blue><i>-- enough to enumerate the non-principal prime ideals arising as</i></font>
-<a name="line-230"></a><font color=Blue><i>-- factors of (/p/), for primes /p/ &#8804; 12(ln &#916;)[super 2]. ([Haase and</i></font>
+<a name="line-230"></a><font color=Blue><i>-- factors of (/p/), for primes /p/ &#x2264; 12(ln &#x0394;)[super 2]. ([Haase and</i></font>
 <a name="line-231"></a><font color=Blue><i>-- Maier 2006], Prop. 4.4.)  For each /p/, there are at most two such</i></font>
 <a name="line-232"></a><font color=Blue><i>-- prime ideals, and they are easily described.</i></font>
 <a name="line-233"></a><font color=Blue>compute_generators</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> <font color=Red>[</font>IdealRed<font color=Red>]</font>
@@ -266,7 +266,7 @@
 <a name="line-259"></a>          c <font color=Red>=</font> fromIntegral <font color=Cyan>$</font> head <font color=Red>[</font> x <font color=Red>|</font> x <font color=Red>&lt;-</font> <font color=Red>[</font><font color=Magenta>0</font><font color=Red>..</font>p<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Red>]</font><font color=Cyan>,</font> <font color=Cyan>(</font>f x<font color=Cyan>)</font> <font color=Cyan>`mod`</font> p <font color=Cyan>==</font> <font color=Magenta>0</font> <font color=Red>]</font> 
 <a name="line-260"></a>
 <a name="line-261"></a>      <font color=Blue><i>-- give the standard form of the ideal generated by (p,x),</i></font>
-<a name="line-262"></a>      <font color=Blue><i>-- provided that x is of the form (b + &#8730;&#916;)/2</i></font>
+<a name="line-262"></a>      <font color=Blue><i>-- provided that x is of the form (b + &#x221a;&#x0394;)/2</i></font>
 <a name="line-263"></a>      ideal_from_generator <font color=Red>::</font> <font color=Cyan>(</font>CLIntP<font color=Cyan>,</font> AlgNum<font color=Cyan>)</font> <font color=Red>-&gt;</font> Ideal
 <a name="line-264"></a>      ideal_from_generator <font color=Cyan>(</font>p<font color=Cyan>,</font> w<font color=Cyan>)</font> <font color=Red>=</font>
 <a name="line-265"></a>        <font color=Green><u>let</u></font> b <font color=Red>=</font> <font color=Cyan>(</font><font color=Magenta>2</font><font color=Cyan>*</font>w <font color=Blue><i>-</i></font> <font color=Cyan>(</font>AlgNum <font color=Magenta>0</font> <font color=Magenta>1</font> bigD<font color=Cyan>)</font><font color=Cyan>)</font>
@@ -307,7 +307,7 @@
 <a name="line-300"></a>        ideal_J'' <font color=Red>=</font> fst <font color=Cyan>$</font> fN_d b j n l <font color=Cyan>(</font>bigD_of_Ideal <font color=Cyan>$</font> fst ideal_I<font color=Cyan>)</font>        
 <a name="line-301"></a>        ideal_K'' <font color=Red>=</font> ideal_K' <font color=Cyan>`star`</font> ideal_J''                        
 <a name="line-302"></a>
-<a name="line-303"></a><a name="compute_ghat"></a><font color=Blue><i>-- | Compute the ideals from the generators (&#285; function).</i></font>
+<a name="line-303"></a><a name="compute_ghat"></a><font color=Blue><i>-- | Compute the ideals from the generators (&#x011d; function).</i></font>
 <a name="line-304"></a><font color=Blue>compute_ghat</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral int<font color=Cyan>)</font> <font color=Red>=&gt;</font> <font color=Red>[</font>IdDist<font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Red>[</font>int<font color=Red>]</font> <font color=Red>-&gt;</font> IdDist
 <a name="line-305"></a><font color=Blue>compute_ghat</font> gs is <font color=Red>=</font>
 <a name="line-306"></a>    foldl1 <font color=Cyan>(</font><font color=Red>\</font>g_i g_j <font color=Red>-&gt;</font> g_i <font color=Cyan>`star`</font> g_j<font color=Cyan>)</font> <font color=Cyan>$</font>
@@ -326,9 +326,9 @@
 <a name="line-319"></a>
 <a name="line-320"></a>
 <a name="line-321"></a><a name="register_sizes"></a><font color=Blue><i>-- | Compute register sizes for @structure_circuit@, given</i></font>
-<a name="line-322"></a><font color=Blue><i>--  &#916; and a precise estimate of /R/. Return a 7-tuple</i></font>
+<a name="line-322"></a><font color=Blue><i>--  &#x0394; and a precise estimate of /R/. Return a 7-tuple</i></font>
 <a name="line-323"></a><font color=Blue><i>--   (/q/,1,2,3,4,5,6) where /q/ is the size of the first</i></font>
-<a name="line-324"></a><font color=Blue><i>--   /k/ registers, and 1&#8230;6 are the sizes of registers /k/+1&#8230;/k/+6.</i></font>
+<a name="line-324"></a><font color=Blue><i>--   /k/ registers, and 1&#x2026;6 are the sizes of registers /k/+1&#x2026;/k/+6.</i></font>
 <a name="line-325"></a><font color=Blue>register_sizes</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> CLReal <font color=Red>-&gt;</font> <font color=Cyan>(</font>Int<font color=Cyan>,</font>Int<font color=Cyan>,</font>Int<font color=Cyan>,</font>Int<font color=Cyan>,</font>Int<font color=Cyan>,</font>Int<font color=Cyan>,</font>Int<font color=Cyan>)</font>
 <a name="line-326"></a><font color=Blue>register_sizes</font> bigD r <font color=Red>=</font>
 <a name="line-327"></a>    <font color=Cyan>(</font>q<font color=Cyan>,</font> r1<font color=Cyan>,</font> r2<font color=Cyan>,</font> r3<font color=Cyan>,</font> r4<font color=Cyan>,</font> r5<font color=Cyan>,</font> r6<font color=Cyan>)</font>
@@ -390,7 +390,7 @@
 <a name="line-383"></a>
 <a name="line-384"></a>
 <a name="line-385"></a><a name="structure_circuit"></a><font color=Blue><i>-- | The quantum circuit used in computing the structure of /CL/(/K/),</i></font>
-<a name="line-386"></a><font color=Blue><i>-- given &#916;, a precise estimate of /R/, and a generating set for /CL/(/K/).</i></font>
+<a name="line-386"></a><font color=Blue><i>-- given &#x0394;, a precise estimate of /R/, and a generating set for /CL/(/K/).</i></font>
 <a name="line-387"></a><font color=Blue>structure_circuit</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> CLReal <font color=Red>-&gt;</font> <font color=Red>[</font>IdealRed<font color=Red>]</font> <font color=Red>-&gt;</font> <font color=Cyan>(</font>Circ <font color=Red>[</font>CInt<font color=Red>]</font><font color=Cyan>)</font>
 <a name="line-388"></a><font color=Blue>structure_circuit</font> bigD r gs <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-389"></a>    <font color=Blue><i>-- Apply H to first k registers of size 'q' each</i></font>
@@ -455,9 +455,9 @@
 <a name="line-448"></a><font color=Blue><i>-- * Section 5 (classical): compute class number.</i></font>
 <a name="line-449"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-450"></a>
-<a name="line-451"></a><a name="class_number"></a><font color=Blue><i>-- | The full implementation of Hallgren&#8217;s algorithm.</i></font>
+<a name="line-451"></a><a name="class_number"></a><font color=Blue><i>-- | The full implementation of Hallgren&#x2019;s algorithm.</i></font>
 <a name="line-452"></a><font color=Blue><i>-- </i></font>
-<a name="line-453"></a><font color=Blue><i>-- @class_number dd t@: computes the class number |/CL/(/K/)| for &#916; = /dd/,</i></font>
+<a name="line-453"></a><font color=Blue><i>-- @class_number dd t@: computes the class number |/CL/(/K/)| for &#x0394; = /dd/,</i></font>
 <a name="line-454"></a><font color=Blue><i>-- with success probability at least (1 - 1\/2[sup /t/]).</i></font>
 <a name="line-455"></a><font color=Blue>class_number</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> Int <font color=Red>-&gt;</font> IO<font color=Cyan>(</font>CLInt<font color=Cyan>)</font>
 <a name="line-456"></a><font color=Blue>class_number</font> bigD t <font color=Red>=</font> <font color=Green><u>do</u></font>

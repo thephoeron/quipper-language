@@ -46,486 +46,488 @@
 <a name="line-39"></a>  rGate<font color=Cyan>,</font>
 <a name="line-40"></a>  gate_W<font color=Cyan>,</font>
 <a name="line-41"></a>  gate_iX<font color=Cyan>,</font>
-<a name="line-42"></a>  global_phase<font color=Cyan>,</font>
-<a name="line-43"></a>  global_phase_anchored<font color=Cyan>,</font>
-<a name="line-44"></a>  qmultinot<font color=Cyan>,</font>
-<a name="line-45"></a>  cnot<font color=Cyan>,</font>
-<a name="line-46"></a>  swap<font color=Cyan>,</font>
-<a name="line-47"></a>  
-<a name="line-48"></a>  <font color=Blue><i>-- $IMPERATIVE_ANCHOR</i></font>
-<a name="line-49"></a>  
-<a name="line-50"></a>  <font color=Blue><i>-- ** Reversible gates in imperative style </i></font>
-<a name="line-51"></a>  <font color=Blue><i>-- $IMPERATIVE </i></font>
-<a name="line-52"></a>  qnot_at<font color=Cyan>,</font>
-<a name="line-53"></a>  hadamard_at<font color=Cyan>,</font>
-<a name="line-54"></a>  gate_H_at<font color=Cyan>,</font>
-<a name="line-55"></a>  gate_X_at<font color=Cyan>,</font>
-<a name="line-56"></a>  gate_Y_at<font color=Cyan>,</font>
-<a name="line-57"></a>  gate_Z_at<font color=Cyan>,</font>
-<a name="line-58"></a>  gate_S_at<font color=Cyan>,</font>
-<a name="line-59"></a>  gate_S_inv_at<font color=Cyan>,</font>
-<a name="line-60"></a>  gate_T_at<font color=Cyan>,</font>
-<a name="line-61"></a>  gate_T_inv_at<font color=Cyan>,</font>
-<a name="line-62"></a>  gate_E_at<font color=Cyan>,</font>
-<a name="line-63"></a>  gate_E_inv_at<font color=Cyan>,</font>
-<a name="line-64"></a>  gate_omega_at<font color=Cyan>,</font>
-<a name="line-65"></a>  gate_V_at<font color=Cyan>,</font>
-<a name="line-66"></a>  gate_V_inv_at<font color=Cyan>,</font>
-<a name="line-67"></a>  expZt_at<font color=Cyan>,</font>
-<a name="line-68"></a>  rGate_at<font color=Cyan>,</font>
-<a name="line-69"></a>  gate_W_at<font color=Cyan>,</font>
-<a name="line-70"></a>  gate_iX_at<font color=Cyan>,</font>
-<a name="line-71"></a>  qmultinot_at<font color=Cyan>,</font>
-<a name="line-72"></a>  cnot_at<font color=Cyan>,</font>
-<a name="line-73"></a>  swap_at<font color=Cyan>,</font>
-<a name="line-74"></a>  
-<a name="line-75"></a>  <font color=Blue><i>-- ** Gates for state preparation and termination</i></font>
-<a name="line-76"></a>  qinit<font color=Cyan>,</font>
-<a name="line-77"></a>  qterm<font color=Cyan>,</font>
-<a name="line-78"></a>  qdiscard<font color=Cyan>,</font>
-<a name="line-79"></a>  cinit<font color=Cyan>,</font>
-<a name="line-80"></a>  cterm<font color=Cyan>,</font>
-<a name="line-81"></a>  cdiscard<font color=Cyan>,</font>
-<a name="line-82"></a>  qc_init<font color=Cyan>,</font>
-<a name="line-83"></a>  qc_init_with_shape<font color=Cyan>,</font>
-<a name="line-84"></a>  qc_term<font color=Cyan>,</font>
-<a name="line-85"></a>  qc_discard<font color=Cyan>,</font>
-<a name="line-86"></a>  measure<font color=Cyan>,</font>
-<a name="line-87"></a>  prepare<font color=Cyan>,</font>
-<a name="line-88"></a>  qc_measure<font color=Cyan>,</font>
-<a name="line-89"></a>  qc_prepare<font color=Cyan>,</font>
-<a name="line-90"></a>  
-<a name="line-91"></a>  <font color=Blue><i>-- ** Gates for classical circuits</i></font>
-<a name="line-92"></a>  <font color=Blue><i>-- $CLASSICAL</i></font>
-<a name="line-93"></a>  cgate_xor<font color=Cyan>,</font>  
-<a name="line-94"></a>  cgate_eq<font color=Cyan>,</font>
-<a name="line-95"></a>  cgate_not<font color=Cyan>,</font>
-<a name="line-96"></a>  cgate_and<font color=Cyan>,</font>
-<a name="line-97"></a>  cgate_or<font color=Cyan>,</font>
-<a name="line-98"></a>  cgate_if<font color=Cyan>,</font>
-<a name="line-99"></a>  circ_if<font color=Cyan>,</font>
-<a name="line-100"></a>  
-<a name="line-101"></a>  <font color=Blue><i>-- ** User-defined gates</i></font>
-<a name="line-102"></a>  named_gate<font color=Cyan>,</font>
-<a name="line-103"></a>  named_gate_at<font color=Cyan>,</font>
-<a name="line-104"></a>  named_rotation<font color=Cyan>,</font>
-<a name="line-105"></a>  named_rotation_at<font color=Cyan>,</font>
-<a name="line-106"></a>  extended_named_gate<font color=Cyan>,</font>
-<a name="line-107"></a>  extended_named_gate_at<font color=Cyan>,</font>
-<a name="line-108"></a>  
-<a name="line-109"></a>  <font color=Blue><i>-- ** Dynamic lifting</i></font>
-<a name="line-110"></a>  dynamic_lift<font color=Cyan>,</font>
-<a name="line-111"></a>  
-<a name="line-112"></a>  <font color=Blue><i>-- * Other circuit-building functions</i></font>
-<a name="line-113"></a>  qinit_plusminus<font color=Cyan>,</font>
-<a name="line-114"></a>  qinit_of_char<font color=Cyan>,</font>
-<a name="line-115"></a>  qinit_of_string<font color=Cyan>,</font>
-<a name="line-116"></a>  map_hadamard<font color=Cyan>,</font>
-<a name="line-117"></a>  map_hadamard_at<font color=Cyan>,</font>
-<a name="line-118"></a>  controlled_not<font color=Cyan>,</font>
-<a name="line-119"></a>  controlled_not_at<font color=Cyan>,</font>
-<a name="line-120"></a>  bool_controlled_not<font color=Cyan>,</font>
-<a name="line-121"></a>  bool_controlled_not_at<font color=Cyan>,</font>
-<a name="line-122"></a>  qc_copy<font color=Cyan>,</font>
-<a name="line-123"></a>  qc_uncopy<font color=Cyan>,</font>
-<a name="line-124"></a>  qc_copy_fun<font color=Cyan>,</font>
-<a name="line-125"></a>  qc_uncopy_fun<font color=Cyan>,</font>
-<a name="line-126"></a>  mapUnary<font color=Cyan>,</font>
-<a name="line-127"></a>  mapBinary<font color=Cyan>,</font>
-<a name="line-128"></a>  mapBinary_c<font color=Cyan>,</font>
-<a name="line-129"></a>  qc_mapBinary<font color=Cyan>,</font>
-<a name="line-130"></a>  
-<a name="line-131"></a>  <font color=Blue><i>-- * Notation for controls</i></font>
-<a name="line-132"></a>  <font color=Blue><i>-- $CONTROLS</i></font>
-<a name="line-133"></a>  ControlSource<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-134"></a>  ControlList<font color=Cyan>,</font>
-<a name="line-135"></a>  <font color=Cyan>(</font><font color=Cyan>.&amp;&amp;.</font><font color=Cyan>)</font><font color=Cyan>,</font> 
-<a name="line-136"></a>  <font color=Cyan>(</font><font color=Cyan>.==.</font><font color=Cyan>)</font><font color=Cyan>,</font> 
-<a name="line-137"></a>  <font color=Cyan>(</font><font color=Cyan>./=.</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-138"></a>  controlled<font color=Cyan>,</font>
-<a name="line-139"></a>  
-<a name="line-140"></a>  <font color=Blue><i>-- * Signed items</i></font>
-<a name="line-141"></a>  Signed<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-142"></a>  from_signed<font color=Cyan>,</font>
-<a name="line-143"></a>  get_sign<font color=Cyan>,</font>
-<a name="line-144"></a>  
-<a name="line-145"></a>  <font color=Blue><i>-- * Comments and labelling</i></font>
-<a name="line-146"></a>  comment<font color=Cyan>,</font>
-<a name="line-147"></a>  label<font color=Cyan>,</font>
-<a name="line-148"></a>  comment_with_label<font color=Cyan>,</font>
-<a name="line-149"></a>  without_comments<font color=Cyan>,</font>
-<a name="line-150"></a>  Labelable<font color=Cyan>,</font>
-<a name="line-151"></a>  
-<a name="line-152"></a>  <font color=Blue><i>-- * Hierarchical circuits</i></font>
-<a name="line-153"></a>  box<font color=Cyan>,</font>
-<a name="line-154"></a>  nbox<font color=Cyan>,</font>
-<a name="line-155"></a>  box_loopM<font color=Cyan>,</font>
-<a name="line-156"></a>  loopM_boxed_if<font color=Cyan>,</font>
-<a name="line-157"></a>
-<a name="line-158"></a>  <font color=Blue><i>-- * Block structure</i></font>
-<a name="line-159"></a>  <font color=Blue><i>-- $BLOCK</i></font>
-<a name="line-160"></a>  
-<a name="line-161"></a>  <font color=Blue><i>-- ** Ancillas</i></font>
-<a name="line-162"></a>  <font color=Blue><i>-- $WITHANCILLA</i></font>
-<a name="line-163"></a>  with_ancilla<font color=Cyan>,</font>
-<a name="line-164"></a>  with_ancilla_list<font color=Cyan>,</font>
-<a name="line-165"></a>  with_ancilla_init<font color=Cyan>,</font>
-<a name="line-166"></a>  <font color=Blue><i>-- ** Automatic uncomputing</i></font>
-<a name="line-167"></a>  with_computed_fun<font color=Cyan>,</font>
-<a name="line-168"></a>  with_computed<font color=Cyan>,</font>
-<a name="line-169"></a>  with_basis_change<font color=Cyan>,</font>
-<a name="line-170"></a>  <font color=Blue><i>-- ** Controls</i></font>
-<a name="line-171"></a>  with_controls<font color=Cyan>,</font>
-<a name="line-172"></a>  with_classical_control<font color=Cyan>,</font>
-<a name="line-173"></a>  without_controls<font color=Cyan>,</font>
-<a name="line-174"></a>  without_controls_if<font color=Cyan>,</font>
-<a name="line-175"></a>  <font color=Blue><i>-- ** Loops</i></font>
-<a name="line-176"></a>  for<font color=Cyan>,</font>
-<a name="line-177"></a>  endfor<font color=Cyan>,</font>
-<a name="line-178"></a>  foreach<font color=Cyan>,</font>
-<a name="line-179"></a>  loop<font color=Cyan>,</font>
-<a name="line-180"></a>  loop_with_index<font color=Cyan>,</font>
-<a name="line-181"></a>  loopM<font color=Cyan>,</font>
-<a name="line-182"></a>  loop_with_indexM<font color=Cyan>,</font>
-<a name="line-183"></a>  
-<a name="line-184"></a>  <font color=Blue><i>-- * Operations on circuits</i></font>
-<a name="line-185"></a>  <font color=Blue><i>-- ** Reversing</i></font>
-<a name="line-186"></a>  reverse_generic<font color=Cyan>,</font>
-<a name="line-187"></a>  reverse_simple<font color=Cyan>,</font>
-<a name="line-188"></a>  reverse_generic_endo<font color=Cyan>,</font>
-<a name="line-189"></a>  reverse_generic_imp<font color=Cyan>,</font>
-<a name="line-190"></a>  reverse_generic_curried<font color=Cyan>,</font>
-<a name="line-191"></a>  reverse_simple_curried<font color=Cyan>,</font>
-<a name="line-192"></a>  reverse_endo_if<font color=Cyan>,</font>
-<a name="line-193"></a>  reverse_imp_if<font color=Cyan>,</font>
-<a name="line-194"></a>  
-<a name="line-195"></a>  <font color=Blue><i>-- ** Printing</i></font>
-<a name="line-196"></a>  Format <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-197"></a>  FormatStyle<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-198"></a>  format_enum<font color=Cyan>,</font>
-<a name="line-199"></a>  print_unary<font color=Cyan>,</font>
-<a name="line-200"></a>  print_generic<font color=Cyan>,</font>
-<a name="line-201"></a>  print_simple<font color=Cyan>,</font>
-<a name="line-202"></a>  print_of_document<font color=Cyan>,</font>
-<a name="line-203"></a>  print_of_document_custom<font color=Cyan>,</font>
-<a name="line-204"></a>  
-<a name="line-205"></a>  <font color=Blue><i>-- ** Classical circuits  </i></font>
-<a name="line-206"></a>  classical_to_cnot<font color=Cyan>,</font>
-<a name="line-207"></a>  classical_to_quantum<font color=Cyan>,</font>
-<a name="line-208"></a>  <font color=Blue><i>-- ** Ancilla uncomputation</i></font>
-<a name="line-209"></a>  classical_to_reversible<font color=Cyan>,</font>
-<a name="line-210"></a>  
-<a name="line-211"></a>  <font color=Blue><i>-- * Circuit transformers</i></font>
-<a name="line-212"></a>  <font color=Blue><i>-- $TRANSFORMATION</i></font>
-<a name="line-213"></a>  
-<a name="line-214"></a>  <font color=Blue><i>-- ** User-definable transformers</i></font>
-<a name="line-215"></a>  Transformer<font color=Cyan>,</font>
-<a name="line-216"></a>  T_Gate<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-217"></a>  <font color=Blue><i>-- ** Pre-defined transformers</i></font>
-<a name="line-218"></a>  identity_transformer<font color=Cyan>,</font>
-<a name="line-219"></a>  <font color=Blue><i>-- ** An example transformer</i></font>
-<a name="line-220"></a>  <font color=Blue><i>-- $TRANSEXAMPLE</i></font>
-<a name="line-221"></a>  
-<a name="line-222"></a>  <font color=Blue><i>-- ** Applying transformers to circuits</i></font>
-<a name="line-223"></a>  transform_generic<font color=Cyan>,</font>
-<a name="line-224"></a>  transform_generic_shape<font color=Cyan>,</font>
-<a name="line-225"></a>  
-<a name="line-226"></a>  <font color=Blue><i>-- ** Auxiliary type definitions</i></font>
-<a name="line-227"></a>  InverseFlag<font color=Cyan>,</font>
-<a name="line-228"></a>  NoControlFlag<font color=Cyan>,</font>
-<a name="line-229"></a>  B_Endpoint<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-230"></a>  Endpoint<font color=Cyan>,</font>
-<a name="line-231"></a>  Ctrls<font color=Cyan>,</font>  
-<a name="line-232"></a>
-<a name="line-233"></a>  <font color=Blue><i>-- * Automatic circuit generation from classical code</i></font>
-<a name="line-234"></a>  <font color=Blue><i>-- $TEMPLATE</i></font>
-<a name="line-235"></a>  <font color=Green><u>module</u></font> Quipper<font color=Cyan>.</font>CircLifting<font color=Cyan>,</font>
-<a name="line-236"></a>  <font color=Green><u>module</u></font> Libraries<font color=Cyan>.</font>Template<font color=Cyan>,</font>
-<a name="line-237"></a>
-<a name="line-238"></a>  <font color=Blue><i>-- * Extended quantum data types</i></font>
-<a name="line-239"></a>  <font color=Blue><i>-- ** Homogeneous quantum data types</i></font>
-<a name="line-240"></a>  QShape<font color=Cyan>,</font>
-<a name="line-241"></a>  QData<font color=Cyan>,</font>
-<a name="line-242"></a>  CData<font color=Cyan>,</font>
-<a name="line-243"></a>  BData<font color=Cyan>,</font>
-<a name="line-244"></a>  
-<a name="line-245"></a>  <font color=Blue><i>-- ** Heterogeneous quantum data types</i></font>
-<a name="line-246"></a>  QCData<font color=Cyan>,</font>
-<a name="line-247"></a>  QCDataPlus<font color=Cyan>,</font>
-<a name="line-248"></a>  
-<a name="line-249"></a>  <font color=Blue><i>-- ** Shape-related operations</i></font>
-<a name="line-250"></a>  <font color=Blue><i>-- $SHAPE</i></font>
-<a name="line-251"></a>  bit<font color=Cyan>,</font>
-<a name="line-252"></a>  qubit<font color=Cyan>,</font>
-<a name="line-253"></a>  qshape<font color=Cyan>,</font>
-<a name="line-254"></a>  qc_false<font color=Cyan>,</font>
-<a name="line-255"></a>  
-<a name="line-256"></a>  <font color=Blue><i>-- ** Quantum type classes</i></font>
-<a name="line-257"></a>  <font color=Blue><i>-- $QCLASSES</i></font>
-<a name="line-258"></a>  QEq <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-259"></a>  QOrd <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
-<a name="line-260"></a>  q_lt<font color=Cyan>,</font>
-<a name="line-261"></a>  q_gt<font color=Cyan>,</font>
-<a name="line-262"></a>  q_le<font color=Cyan>,</font>
-<a name="line-263"></a>  q_ge<font color=Cyan>,</font>
-<a name="line-264"></a>  
-<a name="line-265"></a>  <font color=Cyan>)</font> <font color=Green><u>where</u></font>
-<a name="line-266"></a>
-<a name="line-267"></a>
-<a name="line-268"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Monad
-<a name="line-269"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Generic
-<a name="line-270"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>QData
-<a name="line-271"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>QClasses
-<a name="line-272"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Control
-<a name="line-273"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>CircLifting
-<a name="line-274"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Transformer <font color=Cyan>(</font>T_Gate<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font> Transformer<font color=Cyan>,</font> Ctrls<font color=Cyan>,</font> B_Endpoint<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>)</font>
-<a name="line-275"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Circuit <font color=Cyan>(</font>InverseFlag<font color=Cyan>,</font> NoControlFlag<font color=Cyan>,</font> from_signed<font color=Cyan>,</font> get_sign<font color=Cyan>)</font>
-<a name="line-276"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Classical
-<a name="line-277"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Printing
-<a name="line-278"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Labels
-<a name="line-279"></a>
-<a name="line-280"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Template
-<a name="line-281"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Auxiliary
-<a name="line-282"></a>
-<a name="line-283"></a><font color=Blue><i>-- $BASIC</i></font>
-<a name="line-284"></a><font color=Blue><i>-- </i></font>
-<a name="line-285"></a><font color=Blue><i>-- This section contains various elementary gates that can be used as</i></font>
-<a name="line-286"></a><font color=Blue><i>-- building blocks for constructing circuits.</i></font>
-<a name="line-287"></a>
-<a name="line-288"></a><font color=Blue><i>-- $FUNCTIONAL_ANCHOR #Reversible gates in functional style#</i></font>
+<a name="line-42"></a>  gate_iX_inv<font color=Cyan>,</font>
+<a name="line-43"></a>  global_phase<font color=Cyan>,</font>
+<a name="line-44"></a>  global_phase_anchored<font color=Cyan>,</font>
+<a name="line-45"></a>  qmultinot<font color=Cyan>,</font>
+<a name="line-46"></a>  cnot<font color=Cyan>,</font>
+<a name="line-47"></a>  swap<font color=Cyan>,</font>
+<a name="line-48"></a>  
+<a name="line-49"></a>  <font color=Blue><i>-- $IMPERATIVE_ANCHOR</i></font>
+<a name="line-50"></a>  
+<a name="line-51"></a>  <font color=Blue><i>-- ** Reversible gates in imperative style </i></font>
+<a name="line-52"></a>  <font color=Blue><i>-- $IMPERATIVE </i></font>
+<a name="line-53"></a>  qnot_at<font color=Cyan>,</font>
+<a name="line-54"></a>  hadamard_at<font color=Cyan>,</font>
+<a name="line-55"></a>  gate_H_at<font color=Cyan>,</font>
+<a name="line-56"></a>  gate_X_at<font color=Cyan>,</font>
+<a name="line-57"></a>  gate_Y_at<font color=Cyan>,</font>
+<a name="line-58"></a>  gate_Z_at<font color=Cyan>,</font>
+<a name="line-59"></a>  gate_S_at<font color=Cyan>,</font>
+<a name="line-60"></a>  gate_S_inv_at<font color=Cyan>,</font>
+<a name="line-61"></a>  gate_T_at<font color=Cyan>,</font>
+<a name="line-62"></a>  gate_T_inv_at<font color=Cyan>,</font>
+<a name="line-63"></a>  gate_E_at<font color=Cyan>,</font>
+<a name="line-64"></a>  gate_E_inv_at<font color=Cyan>,</font>
+<a name="line-65"></a>  gate_omega_at<font color=Cyan>,</font>
+<a name="line-66"></a>  gate_V_at<font color=Cyan>,</font>
+<a name="line-67"></a>  gate_V_inv_at<font color=Cyan>,</font>
+<a name="line-68"></a>  expZt_at<font color=Cyan>,</font>
+<a name="line-69"></a>  rGate_at<font color=Cyan>,</font>
+<a name="line-70"></a>  gate_W_at<font color=Cyan>,</font>
+<a name="line-71"></a>  gate_iX_at<font color=Cyan>,</font>
+<a name="line-72"></a>  gate_iX_inv_at<font color=Cyan>,</font>
+<a name="line-73"></a>  qmultinot_at<font color=Cyan>,</font>
+<a name="line-74"></a>  cnot_at<font color=Cyan>,</font>
+<a name="line-75"></a>  swap_at<font color=Cyan>,</font>
+<a name="line-76"></a>  
+<a name="line-77"></a>  <font color=Blue><i>-- ** Gates for state preparation and termination</i></font>
+<a name="line-78"></a>  qinit<font color=Cyan>,</font>
+<a name="line-79"></a>  qterm<font color=Cyan>,</font>
+<a name="line-80"></a>  qdiscard<font color=Cyan>,</font>
+<a name="line-81"></a>  cinit<font color=Cyan>,</font>
+<a name="line-82"></a>  cterm<font color=Cyan>,</font>
+<a name="line-83"></a>  cdiscard<font color=Cyan>,</font>
+<a name="line-84"></a>  qc_init<font color=Cyan>,</font>
+<a name="line-85"></a>  qc_init_with_shape<font color=Cyan>,</font>
+<a name="line-86"></a>  qc_term<font color=Cyan>,</font>
+<a name="line-87"></a>  qc_discard<font color=Cyan>,</font>
+<a name="line-88"></a>  measure<font color=Cyan>,</font>
+<a name="line-89"></a>  prepare<font color=Cyan>,</font>
+<a name="line-90"></a>  qc_measure<font color=Cyan>,</font>
+<a name="line-91"></a>  qc_prepare<font color=Cyan>,</font>
+<a name="line-92"></a>  
+<a name="line-93"></a>  <font color=Blue><i>-- ** Gates for classical circuits</i></font>
+<a name="line-94"></a>  <font color=Blue><i>-- $CLASSICAL</i></font>
+<a name="line-95"></a>  cgate_xor<font color=Cyan>,</font>  
+<a name="line-96"></a>  cgate_eq<font color=Cyan>,</font>
+<a name="line-97"></a>  cgate_not<font color=Cyan>,</font>
+<a name="line-98"></a>  cgate_and<font color=Cyan>,</font>
+<a name="line-99"></a>  cgate_or<font color=Cyan>,</font>
+<a name="line-100"></a>  cgate_if<font color=Cyan>,</font>
+<a name="line-101"></a>  circ_if<font color=Cyan>,</font>
+<a name="line-102"></a>  
+<a name="line-103"></a>  <font color=Blue><i>-- ** User-defined gates</i></font>
+<a name="line-104"></a>  named_gate<font color=Cyan>,</font>
+<a name="line-105"></a>  named_gate_at<font color=Cyan>,</font>
+<a name="line-106"></a>  named_rotation<font color=Cyan>,</font>
+<a name="line-107"></a>  named_rotation_at<font color=Cyan>,</font>
+<a name="line-108"></a>  extended_named_gate<font color=Cyan>,</font>
+<a name="line-109"></a>  extended_named_gate_at<font color=Cyan>,</font>
+<a name="line-110"></a>  
+<a name="line-111"></a>  <font color=Blue><i>-- ** Dynamic lifting</i></font>
+<a name="line-112"></a>  dynamic_lift<font color=Cyan>,</font>
+<a name="line-113"></a>  
+<a name="line-114"></a>  <font color=Blue><i>-- * Other circuit-building functions</i></font>
+<a name="line-115"></a>  qinit_plusminus<font color=Cyan>,</font>
+<a name="line-116"></a>  qinit_of_char<font color=Cyan>,</font>
+<a name="line-117"></a>  qinit_of_string<font color=Cyan>,</font>
+<a name="line-118"></a>  map_hadamard<font color=Cyan>,</font>
+<a name="line-119"></a>  map_hadamard_at<font color=Cyan>,</font>
+<a name="line-120"></a>  controlled_not<font color=Cyan>,</font>
+<a name="line-121"></a>  controlled_not_at<font color=Cyan>,</font>
+<a name="line-122"></a>  bool_controlled_not<font color=Cyan>,</font>
+<a name="line-123"></a>  bool_controlled_not_at<font color=Cyan>,</font>
+<a name="line-124"></a>  qc_copy<font color=Cyan>,</font>
+<a name="line-125"></a>  qc_uncopy<font color=Cyan>,</font>
+<a name="line-126"></a>  qc_copy_fun<font color=Cyan>,</font>
+<a name="line-127"></a>  qc_uncopy_fun<font color=Cyan>,</font>
+<a name="line-128"></a>  mapUnary<font color=Cyan>,</font>
+<a name="line-129"></a>  mapBinary<font color=Cyan>,</font>
+<a name="line-130"></a>  mapBinary_c<font color=Cyan>,</font>
+<a name="line-131"></a>  qc_mapBinary<font color=Cyan>,</font>
+<a name="line-132"></a>  
+<a name="line-133"></a>  <font color=Blue><i>-- * Notation for controls</i></font>
+<a name="line-134"></a>  <font color=Blue><i>-- $CONTROLS</i></font>
+<a name="line-135"></a>  ControlSource<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-136"></a>  ControlList<font color=Cyan>,</font>
+<a name="line-137"></a>  <font color=Cyan>(</font><font color=Cyan>.&amp;&amp;.</font><font color=Cyan>)</font><font color=Cyan>,</font> 
+<a name="line-138"></a>  <font color=Cyan>(</font><font color=Cyan>.==.</font><font color=Cyan>)</font><font color=Cyan>,</font> 
+<a name="line-139"></a>  <font color=Cyan>(</font><font color=Cyan>./=.</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-140"></a>  controlled<font color=Cyan>,</font>
+<a name="line-141"></a>  
+<a name="line-142"></a>  <font color=Blue><i>-- * Signed items</i></font>
+<a name="line-143"></a>  Signed<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-144"></a>  from_signed<font color=Cyan>,</font>
+<a name="line-145"></a>  get_sign<font color=Cyan>,</font>
+<a name="line-146"></a>  
+<a name="line-147"></a>  <font color=Blue><i>-- * Comments and labelling</i></font>
+<a name="line-148"></a>  comment<font color=Cyan>,</font>
+<a name="line-149"></a>  label<font color=Cyan>,</font>
+<a name="line-150"></a>  comment_with_label<font color=Cyan>,</font>
+<a name="line-151"></a>  without_comments<font color=Cyan>,</font>
+<a name="line-152"></a>  Labelable<font color=Cyan>,</font>
+<a name="line-153"></a>  
+<a name="line-154"></a>  <font color=Blue><i>-- * Hierarchical circuits</i></font>
+<a name="line-155"></a>  box<font color=Cyan>,</font>
+<a name="line-156"></a>  nbox<font color=Cyan>,</font>
+<a name="line-157"></a>  box_loopM<font color=Cyan>,</font>
+<a name="line-158"></a>  loopM_boxed_if<font color=Cyan>,</font>
+<a name="line-159"></a>
+<a name="line-160"></a>  <font color=Blue><i>-- * Block structure</i></font>
+<a name="line-161"></a>  <font color=Blue><i>-- $BLOCK</i></font>
+<a name="line-162"></a>  
+<a name="line-163"></a>  <font color=Blue><i>-- ** Ancillas</i></font>
+<a name="line-164"></a>  <font color=Blue><i>-- $WITHANCILLA</i></font>
+<a name="line-165"></a>  with_ancilla<font color=Cyan>,</font>
+<a name="line-166"></a>  with_ancilla_list<font color=Cyan>,</font>
+<a name="line-167"></a>  with_ancilla_init<font color=Cyan>,</font>
+<a name="line-168"></a>  <font color=Blue><i>-- ** Automatic uncomputing</i></font>
+<a name="line-169"></a>  with_computed_fun<font color=Cyan>,</font>
+<a name="line-170"></a>  with_computed<font color=Cyan>,</font>
+<a name="line-171"></a>  with_basis_change<font color=Cyan>,</font>
+<a name="line-172"></a>  <font color=Blue><i>-- ** Controls</i></font>
+<a name="line-173"></a>  with_controls<font color=Cyan>,</font>
+<a name="line-174"></a>  with_classical_control<font color=Cyan>,</font>
+<a name="line-175"></a>  without_controls<font color=Cyan>,</font>
+<a name="line-176"></a>  without_controls_if<font color=Cyan>,</font>
+<a name="line-177"></a>  <font color=Blue><i>-- ** Loops</i></font>
+<a name="line-178"></a>  for<font color=Cyan>,</font>
+<a name="line-179"></a>  endfor<font color=Cyan>,</font>
+<a name="line-180"></a>  foreach<font color=Cyan>,</font>
+<a name="line-181"></a>  loop<font color=Cyan>,</font>
+<a name="line-182"></a>  loop_with_index<font color=Cyan>,</font>
+<a name="line-183"></a>  loopM<font color=Cyan>,</font>
+<a name="line-184"></a>  loop_with_indexM<font color=Cyan>,</font>
+<a name="line-185"></a>  
+<a name="line-186"></a>  <font color=Blue><i>-- * Operations on circuits</i></font>
+<a name="line-187"></a>  <font color=Blue><i>-- ** Reversing</i></font>
+<a name="line-188"></a>  reverse_generic<font color=Cyan>,</font>
+<a name="line-189"></a>  reverse_simple<font color=Cyan>,</font>
+<a name="line-190"></a>  reverse_generic_endo<font color=Cyan>,</font>
+<a name="line-191"></a>  reverse_generic_imp<font color=Cyan>,</font>
+<a name="line-192"></a>  reverse_generic_curried<font color=Cyan>,</font>
+<a name="line-193"></a>  reverse_simple_curried<font color=Cyan>,</font>
+<a name="line-194"></a>  reverse_endo_if<font color=Cyan>,</font>
+<a name="line-195"></a>  reverse_imp_if<font color=Cyan>,</font>
+<a name="line-196"></a>  
+<a name="line-197"></a>  <font color=Blue><i>-- ** Printing</i></font>
+<a name="line-198"></a>  Format <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-199"></a>  FormatStyle<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-200"></a>  format_enum<font color=Cyan>,</font>
+<a name="line-201"></a>  print_unary<font color=Cyan>,</font>
+<a name="line-202"></a>  print_generic<font color=Cyan>,</font>
+<a name="line-203"></a>  print_simple<font color=Cyan>,</font>
+<a name="line-204"></a>  print_of_document<font color=Cyan>,</font>
+<a name="line-205"></a>  print_of_document_custom<font color=Cyan>,</font>
+<a name="line-206"></a>  
+<a name="line-207"></a>  <font color=Blue><i>-- ** Classical circuits  </i></font>
+<a name="line-208"></a>  classical_to_cnot<font color=Cyan>,</font>
+<a name="line-209"></a>  classical_to_quantum<font color=Cyan>,</font>
+<a name="line-210"></a>  <font color=Blue><i>-- ** Ancilla uncomputation</i></font>
+<a name="line-211"></a>  classical_to_reversible<font color=Cyan>,</font>
+<a name="line-212"></a>  
+<a name="line-213"></a>  <font color=Blue><i>-- * Circuit transformers</i></font>
+<a name="line-214"></a>  <font color=Blue><i>-- $TRANSFORMATION</i></font>
+<a name="line-215"></a>  
+<a name="line-216"></a>  <font color=Blue><i>-- ** User-definable transformers</i></font>
+<a name="line-217"></a>  Transformer<font color=Cyan>,</font>
+<a name="line-218"></a>  T_Gate<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-219"></a>  <font color=Blue><i>-- ** Pre-defined transformers</i></font>
+<a name="line-220"></a>  identity_transformer<font color=Cyan>,</font>
+<a name="line-221"></a>  <font color=Blue><i>-- ** An example transformer</i></font>
+<a name="line-222"></a>  <font color=Blue><i>-- $TRANSEXAMPLE</i></font>
+<a name="line-223"></a>  
+<a name="line-224"></a>  <font color=Blue><i>-- ** Applying transformers to circuits</i></font>
+<a name="line-225"></a>  transform_generic<font color=Cyan>,</font>
+<a name="line-226"></a>  transform_generic_shape<font color=Cyan>,</font>
+<a name="line-227"></a>  
+<a name="line-228"></a>  <font color=Blue><i>-- ** Auxiliary type definitions</i></font>
+<a name="line-229"></a>  InverseFlag<font color=Cyan>,</font>
+<a name="line-230"></a>  NoControlFlag<font color=Cyan>,</font>
+<a name="line-231"></a>  B_Endpoint<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-232"></a>  Endpoint<font color=Cyan>,</font>
+<a name="line-233"></a>  Ctrls<font color=Cyan>,</font>  
+<a name="line-234"></a>
+<a name="line-235"></a>  <font color=Blue><i>-- * Automatic circuit generation from classical code</i></font>
+<a name="line-236"></a>  <font color=Blue><i>-- $TEMPLATE</i></font>
+<a name="line-237"></a>  <font color=Green><u>module</u></font> Quipper<font color=Cyan>.</font>CircLifting<font color=Cyan>,</font>
+<a name="line-238"></a>  <font color=Green><u>module</u></font> Libraries<font color=Cyan>.</font>Template<font color=Cyan>,</font>
+<a name="line-239"></a>
+<a name="line-240"></a>  <font color=Blue><i>-- * Extended quantum data types</i></font>
+<a name="line-241"></a>  <font color=Blue><i>-- ** Homogeneous quantum data types</i></font>
+<a name="line-242"></a>  QShape<font color=Cyan>,</font>
+<a name="line-243"></a>  QData<font color=Cyan>,</font>
+<a name="line-244"></a>  CData<font color=Cyan>,</font>
+<a name="line-245"></a>  BData<font color=Cyan>,</font>
+<a name="line-246"></a>  
+<a name="line-247"></a>  <font color=Blue><i>-- ** Heterogeneous quantum data types</i></font>
+<a name="line-248"></a>  QCData<font color=Cyan>,</font>
+<a name="line-249"></a>  QCDataPlus<font color=Cyan>,</font>
+<a name="line-250"></a>  
+<a name="line-251"></a>  <font color=Blue><i>-- ** Shape-related operations</i></font>
+<a name="line-252"></a>  <font color=Blue><i>-- $SHAPE</i></font>
+<a name="line-253"></a>  bit<font color=Cyan>,</font>
+<a name="line-254"></a>  qubit<font color=Cyan>,</font>
+<a name="line-255"></a>  qshape<font color=Cyan>,</font>
+<a name="line-256"></a>  qc_false<font color=Cyan>,</font>
+<a name="line-257"></a>  
+<a name="line-258"></a>  <font color=Blue><i>-- ** Quantum type classes</i></font>
+<a name="line-259"></a>  <font color=Blue><i>-- $QCLASSES</i></font>
+<a name="line-260"></a>  QEq <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-261"></a>  QOrd <font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font>
+<a name="line-262"></a>  q_lt<font color=Cyan>,</font>
+<a name="line-263"></a>  q_gt<font color=Cyan>,</font>
+<a name="line-264"></a>  q_le<font color=Cyan>,</font>
+<a name="line-265"></a>  q_ge<font color=Cyan>,</font>
+<a name="line-266"></a>  
+<a name="line-267"></a>  <font color=Cyan>)</font> <font color=Green><u>where</u></font>
+<a name="line-268"></a>
+<a name="line-269"></a>
+<a name="line-270"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Monad
+<a name="line-271"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Generic
+<a name="line-272"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>QData
+<a name="line-273"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>QClasses
+<a name="line-274"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Control
+<a name="line-275"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>CircLifting
+<a name="line-276"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Transformer <font color=Cyan>(</font>T_Gate<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>,</font> Transformer<font color=Cyan>,</font> Ctrls<font color=Cyan>,</font> B_Endpoint<font color=Cyan>(</font><font color=Red>..</font><font color=Cyan>)</font><font color=Cyan>)</font>
+<a name="line-277"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Circuit <font color=Cyan>(</font>InverseFlag<font color=Cyan>,</font> NoControlFlag<font color=Cyan>,</font> from_signed<font color=Cyan>,</font> get_sign<font color=Cyan>)</font>
+<a name="line-278"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Classical
+<a name="line-279"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Printing
+<a name="line-280"></a><font color=Green><u>import</u></font> Quipper<font color=Cyan>.</font>Labels
+<a name="line-281"></a>
+<a name="line-282"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Template
+<a name="line-283"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Auxiliary
+<a name="line-284"></a>
+<a name="line-285"></a><font color=Blue><i>-- $BASIC</i></font>
+<a name="line-286"></a><font color=Blue><i>-- </i></font>
+<a name="line-287"></a><font color=Blue><i>-- This section contains various elementary gates that can be used as</i></font>
+<a name="line-288"></a><font color=Blue><i>-- building blocks for constructing circuits.</i></font>
 <a name="line-289"></a>
-<a name="line-290"></a><font color=Blue><i>-- $FUNCTIONAL</i></font>
-<a name="line-291"></a><font color=Blue><i>-- </i></font>
-<a name="line-292"></a><font color=Blue><i>-- The gates in this section are in \"functional\" style, which means</i></font>
-<a name="line-293"></a><font color=Blue><i>-- that they return something. For example, the 'qnot' gate consumes a</i></font>
-<a name="line-294"></a><font color=Blue><i>-- 'Qubit', performs an operation, and outputs a new 'Qubit'. The</i></font>
-<a name="line-295"></a><font color=Blue><i>-- gates should be used like this:</i></font>
-<a name="line-296"></a><font color=Blue><i>-- </i></font>
-<a name="line-297"></a><font color=Blue><i>-- &gt; output &lt;- qnot input</i></font>
+<a name="line-290"></a><font color=Blue><i>-- $FUNCTIONAL_ANCHOR #FUNCTIONAL#</i></font>
+<a name="line-291"></a>
+<a name="line-292"></a><font color=Blue><i>-- $FUNCTIONAL</i></font>
+<a name="line-293"></a><font color=Blue><i>-- </i></font>
+<a name="line-294"></a><font color=Blue><i>-- The gates in this section are in \"functional\" style, which means</i></font>
+<a name="line-295"></a><font color=Blue><i>-- that they return something. For example, the 'qnot' gate consumes a</i></font>
+<a name="line-296"></a><font color=Blue><i>-- 'Qubit', performs an operation, and outputs a new 'Qubit'. The</i></font>
+<a name="line-297"></a><font color=Blue><i>-- gates should be used like this:</i></font>
 <a name="line-298"></a><font color=Blue><i>-- </i></font>
-<a name="line-299"></a><font color=Blue><i>-- or, for a binary gate:</i></font>
+<a name="line-299"></a><font color=Blue><i>-- &gt; output &lt;- qnot input</i></font>
 <a name="line-300"></a><font color=Blue><i>-- </i></font>
-<a name="line-301"></a><font color=Blue><i>-- &gt; (out0, out1) &lt;- gate_W in0 in1</i></font>
+<a name="line-301"></a><font color=Blue><i>-- or, for a binary gate:</i></font>
 <a name="line-302"></a><font color=Blue><i>-- </i></font>
-<a name="line-303"></a><font color=Blue><i>-- For each of these gates, we also provide a version in imperative</i></font>
-<a name="line-304"></a><font color=Blue><i>-- style, see &lt;#Reversible gates in imperative style&gt; below.</i></font>
-<a name="line-305"></a>
-<a name="line-306"></a><font color=Blue><i>-- $IMPERATIVE_ANCHOR #Reversible gates in imperative style#</i></font>
+<a name="line-303"></a><font color=Blue><i>-- &gt; (out0, out1) &lt;- gate_W in0 in1</i></font>
+<a name="line-304"></a><font color=Blue><i>-- </i></font>
+<a name="line-305"></a><font color=Blue><i>-- For each of these gates, we also provide a version in imperative</i></font>
+<a name="line-306"></a><font color=Blue><i>-- style, see &lt;#IMPERATIVE Reversible gates in imperative style&gt; below.</i></font>
 <a name="line-307"></a>
-<a name="line-308"></a><font color=Blue><i>-- $IMPERATIVE</i></font>
-<a name="line-309"></a><font color=Blue><i>-- </i></font>
-<a name="line-310"></a><font color=Blue><i>-- The gates in this section are in \"imperative\" style, which means</i></font>
-<a name="line-311"></a><font color=Blue><i>-- that they operate on a qubit \"in place\" and do not return</i></font>
-<a name="line-312"></a><font color=Blue><i>-- anything. The gates should be used like this:</i></font>
-<a name="line-313"></a><font color=Blue><i>-- </i></font>
-<a name="line-314"></a><font color=Blue><i>-- &gt; qnot_at q</i></font>
+<a name="line-308"></a><font color=Blue><i>-- $IMPERATIVE_ANCHOR #IMPERATIVE#</i></font>
+<a name="line-309"></a>
+<a name="line-310"></a><font color=Blue><i>-- $IMPERATIVE</i></font>
+<a name="line-311"></a><font color=Blue><i>-- </i></font>
+<a name="line-312"></a><font color=Blue><i>-- The gates in this section are in \"imperative\" style, which means</i></font>
+<a name="line-313"></a><font color=Blue><i>-- that they operate on a qubit \"in place\" and do not return</i></font>
+<a name="line-314"></a><font color=Blue><i>-- anything. The gates should be used like this:</i></font>
 <a name="line-315"></a><font color=Blue><i>-- </i></font>
-<a name="line-316"></a><font color=Blue><i>-- or, for a binary gate:</i></font>
+<a name="line-316"></a><font color=Blue><i>-- &gt; qnot_at q</i></font>
 <a name="line-317"></a><font color=Blue><i>-- </i></font>
-<a name="line-318"></a><font color=Blue><i>-- &gt; gate_W_at q0 q1</i></font>
+<a name="line-318"></a><font color=Blue><i>-- or, for a binary gate:</i></font>
 <a name="line-319"></a><font color=Blue><i>-- </i></font>
-<a name="line-320"></a><font color=Blue><i>-- For each of these gates, we also provide a version in functional</i></font>
-<a name="line-321"></a><font color=Blue><i>-- style, see &lt;#Reversible gates in functional style&gt; above.</i></font>
-<a name="line-322"></a>
-<a name="line-323"></a><font color=Blue><i>-- * Snippets of additional documentation lifted from import modules:</i></font>
+<a name="line-320"></a><font color=Blue><i>-- &gt; gate_W_at q0 q1</i></font>
+<a name="line-321"></a><font color=Blue><i>-- </i></font>
+<a name="line-322"></a><font color=Blue><i>-- For each of these gates, we also provide a version in functional</i></font>
+<a name="line-323"></a><font color=Blue><i>-- style, see &lt;#FUNCTIONAL Reversible gates in functional style&gt; above.</i></font>
 <a name="line-324"></a>
-<a name="line-325"></a><font color=Blue><i>-- $CLASSICAL</i></font>
-<a name="line-326"></a><font color=Blue><i>--</i></font>
-<a name="line-327"></a><font color=Blue><i>-- The gates in this section are for constructing classical circuits. </i></font>
-<a name="line-328"></a><font color=Blue><i>-- None of these gates alter or discard their inputs; each gate produces </i></font>
-<a name="line-329"></a><font color=Blue><i>-- a new wire holding the output of the gate.</i></font>
-<a name="line-330"></a>
-<a name="line-331"></a><font color=Blue><i>-- $CONTROLS</i></font>
-<a name="line-332"></a><font color=Blue><i>-- </i></font>
-<a name="line-333"></a><font color=Blue><i>-- Some gates can be controlled by a condition involving one of more</i></font>
-<a name="line-334"></a><font color=Blue><i>-- \"control\" qubits and/or classical bits at circuit execution time.</i></font>
-<a name="line-335"></a><font color=Blue><i>-- Such gates can also be controlled by boolean conditions that are</i></font>
-<a name="line-336"></a><font color=Blue><i>-- known at circuit generation time (in which case the gate will not</i></font>
-<a name="line-337"></a><font color=Blue><i>-- be generated when the control condition is false). This section</i></font>
-<a name="line-338"></a><font color=Blue><i>-- provides a convenient and flexible syntax for specifying controls.</i></font>
-<a name="line-339"></a><font color=Blue><i>-- </i></font>
-<a name="line-340"></a><font color=Blue><i>-- In Quipper, controls can be written in a way that is</i></font>
-<a name="line-341"></a><font color=Blue><i>-- reminiscent of (a restricted set of) ordinary boolean</i></font>
-<a name="line-342"></a><font color=Blue><i>-- expressions. Here are some examples:</i></font>
-<a name="line-343"></a><font color=Blue><i>-- </i></font>
-<a name="line-344"></a><font color=Blue><i>-- &gt; q1 .==. 0 .&amp;&amp;. q2 .==. 1   for Qubits q1, q2</i></font>
+<a name="line-325"></a><font color=Blue><i>-- * Snippets of additional documentation lifted from import modules:</i></font>
+<a name="line-326"></a>
+<a name="line-327"></a><font color=Blue><i>-- $CLASSICAL</i></font>
+<a name="line-328"></a><font color=Blue><i>--</i></font>
+<a name="line-329"></a><font color=Blue><i>-- The gates in this section are for constructing classical circuits. </i></font>
+<a name="line-330"></a><font color=Blue><i>-- None of these gates alter or discard their inputs; each gate produces </i></font>
+<a name="line-331"></a><font color=Blue><i>-- a new wire holding the output of the gate.</i></font>
+<a name="line-332"></a>
+<a name="line-333"></a><font color=Blue><i>-- $CONTROLS</i></font>
+<a name="line-334"></a><font color=Blue><i>-- </i></font>
+<a name="line-335"></a><font color=Blue><i>-- Some gates can be controlled by a condition involving one of more</i></font>
+<a name="line-336"></a><font color=Blue><i>-- \"control\" qubits and/or classical bits at circuit execution time.</i></font>
+<a name="line-337"></a><font color=Blue><i>-- Such gates can also be controlled by boolean conditions that are</i></font>
+<a name="line-338"></a><font color=Blue><i>-- known at circuit generation time (in which case the gate will not</i></font>
+<a name="line-339"></a><font color=Blue><i>-- be generated when the control condition is false). This section</i></font>
+<a name="line-340"></a><font color=Blue><i>-- provides a convenient and flexible syntax for specifying controls.</i></font>
+<a name="line-341"></a><font color=Blue><i>-- </i></font>
+<a name="line-342"></a><font color=Blue><i>-- In Quipper, controls can be written in a way that is</i></font>
+<a name="line-343"></a><font color=Blue><i>-- reminiscent of (a restricted set of) ordinary boolean</i></font>
+<a name="line-344"></a><font color=Blue><i>-- expressions. Here are some examples:</i></font>
 <a name="line-345"></a><font color=Blue><i>-- </i></font>
-<a name="line-346"></a><font color=Blue><i>-- &gt; q .&amp;&amp;. p                   means  q .==. 1  .&amp;&amp;.  p .==. 1</i></font>
+<a name="line-346"></a><font color=Blue><i>-- &gt; q1 .==. 0 .&amp;&amp;. q2 .==. 1   for Qubits q1, q2</i></font>
 <a name="line-347"></a><font color=Blue><i>-- </i></font>
-<a name="line-348"></a><font color=Blue><i>-- &gt; qx .==. 5                  for a QDInt qx</i></font>
+<a name="line-348"></a><font color=Blue><i>-- &gt; q .&amp;&amp;. p                   means  q .==. 1  .&amp;&amp;.  p .==. 1</i></font>
 <a name="line-349"></a><font color=Blue><i>-- </i></font>
-<a name="line-350"></a><font color=Blue><i>-- &gt; q1 .==. 0 .&amp;&amp;. z &lt;= 7      combines quantum and classical controls</i></font>
+<a name="line-350"></a><font color=Blue><i>-- &gt; qx .==. 5                  for a QDInt qx</i></font>
 <a name="line-351"></a><font color=Blue><i>-- </i></font>
-<a name="line-352"></a><font color=Blue><i>-- &gt; q ./=. b                   the negation of q .==. b;</i></font>
-<a name="line-353"></a><font color=Blue><i>-- &gt;                            here b is a boolean.</i></font>
-<a name="line-354"></a><font color=Blue><i>-- </i></font>
-<a name="line-355"></a><font color=Blue><i>-- &gt; [p,q,r,s]                  a list of positive controls</i></font>
+<a name="line-352"></a><font color=Blue><i>-- &gt; q1 .==. 0 .&amp;&amp;. z &lt;= 7      combines quantum and classical controls</i></font>
+<a name="line-353"></a><font color=Blue><i>-- </i></font>
+<a name="line-354"></a><font color=Blue><i>-- &gt; q ./=. b                   the negation of q .==. b;</i></font>
+<a name="line-355"></a><font color=Blue><i>-- &gt;                            here b is a boolean.</i></font>
 <a name="line-356"></a><font color=Blue><i>-- </i></font>
-<a name="line-357"></a><font color=Blue><i>-- &gt; [(p, True), (q, False), (r, False), (s, True)]</i></font>
-<a name="line-358"></a><font color=Blue><i>-- &gt;                            a list of positive and negative controls</i></font>
-<a name="line-359"></a><font color=Blue><i>--</i></font>
-<a name="line-360"></a><font color=Blue><i>-- Among these infix operators, @(.&amp;&amp;.)@ binds more weakly than</i></font>
-<a name="line-361"></a><font color=Blue><i>-- @(.==.)@, @(./=.)@.</i></font>
-<a name="line-362"></a><font color=Blue><i>-- </i></font>
-<a name="line-363"></a><font color=Blue><i>-- Controls can be attached to a gate by means of the infix</i></font>
-<a name="line-364"></a><font color=Blue><i>-- operator 'controlled':</i></font>
-<a name="line-365"></a><font color=Blue><i>-- </i></font>
-<a name="line-366"></a><font color=Blue><i>-- &gt; gate `controlled` &lt;&lt;controls&gt;&gt;   </i></font>
-<a name="line-367"></a>
-<a name="line-368"></a><font color=Blue><i>-- $BLOCK</i></font>
-<a name="line-369"></a><font color=Blue><i>-- </i></font>
-<a name="line-370"></a><font color=Blue><i>-- The following are higher-order functions that provide a way to</i></font>
-<a name="line-371"></a><font color=Blue><i>-- structure quantum programs into blocks. A block can contain local</i></font>
-<a name="line-372"></a><font color=Blue><i>-- ancillas or local controls.</i></font>
-<a name="line-373"></a>
-<a name="line-374"></a><font color=Blue><i>-- $WITHANCILLA The use of the 'with_ancilla' family of operators is</i></font>
-<a name="line-375"></a><font color=Blue><i>-- preferable to using 'qinit' and 'qterm' directly. In particular, it</i></font>
-<a name="line-376"></a><font color=Blue><i>-- is possible to add controls to a block created with one of the</i></font>
-<a name="line-377"></a><font color=Blue><i>-- 'with_ancilla' family of operators, whereas 'qinit' and 'qterm',</i></font>
-<a name="line-378"></a><font color=Blue><i>-- when used individually, cannot be controlled.</i></font>
-<a name="line-379"></a>
-<a name="line-380"></a><font color=Blue><i>-- $TEMPLATE</i></font>
-<a name="line-381"></a><font color=Blue><i>-- </i></font>
-<a name="line-382"></a><font color=Blue><i>-- The following two modules provide functions that are useful for</i></font>
-<a name="line-383"></a><font color=Blue><i>-- automatic circuit generation from classical code. Please see</i></font>
-<a name="line-384"></a><font color=Blue><i>-- "Quipper.CircLifting" for a more detailed explanation of how to use</i></font>
-<a name="line-385"></a><font color=Blue><i>-- this feature.</i></font>
-<a name="line-386"></a>
-<a name="line-387"></a><font color=Blue><i>-- $TRANSFORMATION</i></font>
-<a name="line-388"></a><font color=Blue><i>-- </i></font>
-<a name="line-389"></a><font color=Blue><i>-- Transformers are a very general way of defining mappings over</i></font>
-<a name="line-390"></a><font color=Blue><i>-- circuits. Possible uses of this include:</i></font>
-<a name="line-391"></a><font color=Blue><i>-- </i></font>
-<a name="line-392"></a><font color=Blue><i>-- * gate transformations, where a whole circuit is transformed by</i></font>
-<a name="line-393"></a><font color=Blue><i>-- replacing each kind of gate with another gate or circuit;</i></font>
-<a name="line-394"></a><font color=Blue><i>-- </i></font>
-<a name="line-395"></a><font color=Blue><i>-- * error correcting codes, where a whole circuit is transformed</i></font>
-<a name="line-396"></a><font color=Blue><i>-- replacing each qubit by some fixed number of qubits, and each gate</i></font>
-<a name="line-397"></a><font color=Blue><i>-- by a circuit; and</i></font>
-<a name="line-398"></a><font color=Blue><i>-- </i></font>
-<a name="line-399"></a><font color=Blue><i>-- * simulations, where a whole circuit is mapped to a semantic</i></font>
-<a name="line-400"></a><font color=Blue><i>-- function by specifying a semantic function for each gate.</i></font>
-<a name="line-401"></a><font color=Blue><i>-- </i></font>
-<a name="line-402"></a><font color=Blue><i>-- The interface is designed to allow the programmer to specify new</i></font>
-<a name="line-403"></a><font color=Blue><i>-- transformers easily. To define a specific transformation, the</i></font>
-<a name="line-404"></a><font color=Blue><i>-- programmer has to specify only three pieces of information:</i></font>
-<a name="line-405"></a><font color=Blue><i>-- </i></font>
-<a name="line-406"></a><font color=Blue><i>-- * Types /a/=&#10214;Qubit&#10215; and /b/=&#10214;Bit&#10215;, to serve as semantic domains.</i></font>
+<a name="line-357"></a><font color=Blue><i>-- &gt; [p,q,r,s]                  a list of positive controls</i></font>
+<a name="line-358"></a><font color=Blue><i>-- </i></font>
+<a name="line-359"></a><font color=Blue><i>-- &gt; [(p, True), (q, False), (r, False), (s, True)]</i></font>
+<a name="line-360"></a><font color=Blue><i>-- &gt;                            a list of positive and negative controls</i></font>
+<a name="line-361"></a><font color=Blue><i>--</i></font>
+<a name="line-362"></a><font color=Blue><i>-- Among these infix operators, @(.&amp;&amp;.)@ binds more weakly than</i></font>
+<a name="line-363"></a><font color=Blue><i>-- @(.==.)@, @(./=.)@.</i></font>
+<a name="line-364"></a><font color=Blue><i>-- </i></font>
+<a name="line-365"></a><font color=Blue><i>-- Controls can be attached to a gate by means of the infix</i></font>
+<a name="line-366"></a><font color=Blue><i>-- operator 'controlled':</i></font>
+<a name="line-367"></a><font color=Blue><i>-- </i></font>
+<a name="line-368"></a><font color=Blue><i>-- &gt; gate `controlled` &lt;&lt;controls&gt;&gt;   </i></font>
+<a name="line-369"></a>
+<a name="line-370"></a><font color=Blue><i>-- $BLOCK</i></font>
+<a name="line-371"></a><font color=Blue><i>-- </i></font>
+<a name="line-372"></a><font color=Blue><i>-- The following are higher-order functions that provide a way to</i></font>
+<a name="line-373"></a><font color=Blue><i>-- structure quantum programs into blocks. A block can contain local</i></font>
+<a name="line-374"></a><font color=Blue><i>-- ancillas or local controls.</i></font>
+<a name="line-375"></a>
+<a name="line-376"></a><font color=Blue><i>-- $WITHANCILLA The use of the 'with_ancilla' family of operators is</i></font>
+<a name="line-377"></a><font color=Blue><i>-- preferable to using 'qinit' and 'qterm' directly. In particular, it</i></font>
+<a name="line-378"></a><font color=Blue><i>-- is possible to add controls to a block created with one of the</i></font>
+<a name="line-379"></a><font color=Blue><i>-- 'with_ancilla' family of operators, whereas 'qinit' and 'qterm',</i></font>
+<a name="line-380"></a><font color=Blue><i>-- when used individually, cannot be controlled.</i></font>
+<a name="line-381"></a>
+<a name="line-382"></a><font color=Blue><i>-- $TEMPLATE</i></font>
+<a name="line-383"></a><font color=Blue><i>-- </i></font>
+<a name="line-384"></a><font color=Blue><i>-- The following two modules provide functions that are useful for</i></font>
+<a name="line-385"></a><font color=Blue><i>-- automatic circuit generation from classical code. Please see</i></font>
+<a name="line-386"></a><font color=Blue><i>-- "Quipper.CircLifting" for a more detailed explanation of how to use</i></font>
+<a name="line-387"></a><font color=Blue><i>-- this feature.</i></font>
+<a name="line-388"></a>
+<a name="line-389"></a><font color=Blue><i>-- $TRANSFORMATION</i></font>
+<a name="line-390"></a><font color=Blue><i>-- </i></font>
+<a name="line-391"></a><font color=Blue><i>-- Transformers are a very general way of defining mappings over</i></font>
+<a name="line-392"></a><font color=Blue><i>-- circuits. Possible uses of this include:</i></font>
+<a name="line-393"></a><font color=Blue><i>-- </i></font>
+<a name="line-394"></a><font color=Blue><i>-- * gate transformations, where a whole circuit is transformed by</i></font>
+<a name="line-395"></a><font color=Blue><i>-- replacing each kind of gate with another gate or circuit;</i></font>
+<a name="line-396"></a><font color=Blue><i>-- </i></font>
+<a name="line-397"></a><font color=Blue><i>-- * error correcting codes, where a whole circuit is transformed</i></font>
+<a name="line-398"></a><font color=Blue><i>-- replacing each qubit by some fixed number of qubits, and each gate</i></font>
+<a name="line-399"></a><font color=Blue><i>-- by a circuit; and</i></font>
+<a name="line-400"></a><font color=Blue><i>-- </i></font>
+<a name="line-401"></a><font color=Blue><i>-- * simulations, where a whole circuit is mapped to a semantic</i></font>
+<a name="line-402"></a><font color=Blue><i>-- function by specifying a semantic function for each gate.</i></font>
+<a name="line-403"></a><font color=Blue><i>-- </i></font>
+<a name="line-404"></a><font color=Blue><i>-- The interface is designed to allow the programmer to specify new</i></font>
+<a name="line-405"></a><font color=Blue><i>-- transformers easily. To define a specific transformation, the</i></font>
+<a name="line-406"></a><font color=Blue><i>-- programmer has to specify only three pieces of information:</i></font>
 <a name="line-407"></a><font color=Blue><i>-- </i></font>
-<a name="line-408"></a><font color=Blue><i>-- * A monad /m/. This is to allow translations to have side effects</i></font>
-<a name="line-409"></a><font color=Blue><i>-- if desired; one can use the identity monad otherwise.</i></font>
-<a name="line-410"></a><font color=Blue><i>-- </i></font>
-<a name="line-411"></a><font color=Blue><i>-- * For every gate /G/, a corresponding semantic function &#10214;/G/&#10215;.  The</i></font>
-<a name="line-412"></a><font color=Blue><i>-- type of this function depends on what kind of gate /G/ is. For example:</i></font>
-<a name="line-413"></a><font color=Blue><i>-- </i></font>
-<a name="line-414"></a><font color=Blue><i>-- @</i></font>
-<a name="line-415"></a><font color=Blue><i>-- If /G/ :: Qubit -&gt; Circ Qubit, then &#10214;/G/&#10215; :: /a/ -&gt; /m/ /a/. </i></font>
-<a name="line-416"></a><font color=Blue><i>-- If /G/ :: (Qubit, Bit) -&gt; Circ (Bit, Bit), then &#10214;/G/&#10215; :: (/a/, /b/) -&gt; /m/ (/b/, /b/).</i></font>
-<a name="line-417"></a><font color=Blue><i>-- @ </i></font>
-<a name="line-418"></a><font color=Blue><i>-- </i></font>
-<a name="line-419"></a><font color=Blue><i>-- The programmer provides this information by defining a function of</i></font>
-<a name="line-420"></a><font color=Blue><i>-- type 'Transformer' /m/ /a/ /b/, see below. Once a</i></font>
-<a name="line-421"></a><font color=Blue><i>-- particular transformer has been defined, it can then be applied to</i></font>
-<a name="line-422"></a><font color=Blue><i>-- entire circuits. For example, for a circuit with 1 inputs and 2</i></font>
-<a name="line-423"></a><font color=Blue><i>-- outputs:</i></font>
-<a name="line-424"></a><font color=Blue><i>-- </i></font>
-<a name="line-425"></a><font color=Blue><i>-- @</i></font>
-<a name="line-426"></a><font color=Blue><i>-- If /C/ :: Qubit -&gt; (Qubit, Qubit), then &#10214;/C/&#10215; :: /a/ -&gt; /m/ (/a/, /a/).</i></font>
+<a name="line-408"></a><font color=Blue><i>-- * Types /a/=&#x27e6;Qubit&#x27e7; and /b/=&#x27e6;Bit&#x27e7;, to serve as semantic domains.</i></font>
+<a name="line-409"></a><font color=Blue><i>-- </i></font>
+<a name="line-410"></a><font color=Blue><i>-- * A monad /m/. This is to allow translations to have side effects</i></font>
+<a name="line-411"></a><font color=Blue><i>-- if desired; one can use the identity monad otherwise.</i></font>
+<a name="line-412"></a><font color=Blue><i>-- </i></font>
+<a name="line-413"></a><font color=Blue><i>-- * For every gate /G/, a corresponding semantic function &#x27e6;/G/&#x27e7;.  The</i></font>
+<a name="line-414"></a><font color=Blue><i>-- type of this function depends on what kind of gate /G/ is. For example:</i></font>
+<a name="line-415"></a><font color=Blue><i>-- </i></font>
+<a name="line-416"></a><font color=Blue><i>-- @</i></font>
+<a name="line-417"></a><font color=Blue><i>-- If /G/ :: Qubit -&gt; Circ Qubit, then &#x27e6;/G/&#x27e7; :: /a/ -&gt; /m/ /a/. </i></font>
+<a name="line-418"></a><font color=Blue><i>-- If /G/ :: (Qubit, Bit) -&gt; Circ (Bit, Bit), then &#x27e6;/G/&#x27e7; :: (/a/, /b/) -&gt; /m/ (/b/, /b/).</i></font>
+<a name="line-419"></a><font color=Blue><i>-- @ </i></font>
+<a name="line-420"></a><font color=Blue><i>-- </i></font>
+<a name="line-421"></a><font color=Blue><i>-- The programmer provides this information by defining a function of</i></font>
+<a name="line-422"></a><font color=Blue><i>-- type 'Transformer' /m/ /a/ /b/, see below. Once a</i></font>
+<a name="line-423"></a><font color=Blue><i>-- particular transformer has been defined, it can then be applied to</i></font>
+<a name="line-424"></a><font color=Blue><i>-- entire circuits. For example, for a circuit with 1 inputs and 2</i></font>
+<a name="line-425"></a><font color=Blue><i>-- outputs:</i></font>
+<a name="line-426"></a><font color=Blue><i>-- </i></font>
 <a name="line-427"></a><font color=Blue><i>-- @</i></font>
-<a name="line-428"></a>
-<a name="line-429"></a><font color=Blue><i>-- $TRANSEXAMPLE</i></font>
-<a name="line-430"></a><font color=Blue><i>-- </i></font>
-<a name="line-431"></a><font color=Blue><i>-- The following is a short but complete example of how to write and</i></font>
-<a name="line-432"></a><font color=Blue><i>-- use a simple transformer. As usual, we start by importing Quipper:</i></font>
-<a name="line-433"></a><font color=Blue><i>-- </i></font>
-<a name="line-434"></a><font color=Blue><i>-- &gt; import Quipper</i></font>
+<a name="line-428"></a><font color=Blue><i>-- If /C/ :: Qubit -&gt; (Qubit, Qubit), then &#x27e6;/C/&#x27e7; :: /a/ -&gt; /m/ (/a/, /a/).</i></font>
+<a name="line-429"></a><font color=Blue><i>-- @</i></font>
+<a name="line-430"></a>
+<a name="line-431"></a><font color=Blue><i>-- $TRANSEXAMPLE</i></font>
+<a name="line-432"></a><font color=Blue><i>-- </i></font>
+<a name="line-433"></a><font color=Blue><i>-- The following is a short but complete example of how to write and</i></font>
+<a name="line-434"></a><font color=Blue><i>-- use a simple transformer. As usual, we start by importing Quipper:</i></font>
 <a name="line-435"></a><font color=Blue><i>-- </i></font>
-<a name="line-436"></a><font color=Blue><i>-- We will write a transformer called @sample_transformer@, which maps</i></font>
-<a name="line-437"></a><font color=Blue><i>-- every swap gate to a sequence of three controlled-not gates, and</i></font>
-<a name="line-438"></a><font color=Blue><i>-- leaves all other gates unchanged. For convenience, Quipper</i></font>
-<a name="line-439"></a><font color=Blue><i>-- pre-defines an 'identity_transformer', which can be used as a</i></font>
-<a name="line-440"></a><font color=Blue><i>-- catch-all clause to take care of all the gates that don't need to</i></font>
-<a name="line-441"></a><font color=Blue><i>-- be rewritten.</i></font>
-<a name="line-442"></a><font color=Blue><i>-- </i></font>
-<a name="line-443"></a><font color=Blue><i>-- &gt; mytransformer :: Transformer Circ Qubit Bit</i></font>
-<a name="line-444"></a><font color=Blue><i>-- &gt; mytransformer (T_QGate "swap" 2 0 _ ncf f) = f $</i></font>
-<a name="line-445"></a><font color=Blue><i>-- &gt;   \[q0, q1] [] ctrls -&gt; do</i></font>
-<a name="line-446"></a><font color=Blue><i>-- &gt;     without_controls_if ncf $ do</i></font>
-<a name="line-447"></a><font color=Blue><i>-- &gt;       with_controls ctrls $ do</i></font>
-<a name="line-448"></a><font color=Blue><i>-- &gt;         qnot_at q0 `controlled` q1</i></font>
-<a name="line-449"></a><font color=Blue><i>-- &gt;         qnot_at q1 `controlled` q0</i></font>
+<a name="line-436"></a><font color=Blue><i>-- &gt; import Quipper</i></font>
+<a name="line-437"></a><font color=Blue><i>-- </i></font>
+<a name="line-438"></a><font color=Blue><i>-- We will write a transformer called @sample_transformer@, which maps</i></font>
+<a name="line-439"></a><font color=Blue><i>-- every swap gate to a sequence of three controlled-not gates, and</i></font>
+<a name="line-440"></a><font color=Blue><i>-- leaves all other gates unchanged. For convenience, Quipper</i></font>
+<a name="line-441"></a><font color=Blue><i>-- pre-defines an 'identity_transformer', which can be used as a</i></font>
+<a name="line-442"></a><font color=Blue><i>-- catch-all clause to take care of all the gates that don't need to</i></font>
+<a name="line-443"></a><font color=Blue><i>-- be rewritten.</i></font>
+<a name="line-444"></a><font color=Blue><i>-- </i></font>
+<a name="line-445"></a><font color=Blue><i>-- &gt; mytransformer :: Transformer Circ Qubit Bit</i></font>
+<a name="line-446"></a><font color=Blue><i>-- &gt; mytransformer (T_QGate "swap" 2 0 _ ncf f) = f $</i></font>
+<a name="line-447"></a><font color=Blue><i>-- &gt;   \[q0, q1] [] ctrls -&gt; do</i></font>
+<a name="line-448"></a><font color=Blue><i>-- &gt;     without_controls_if ncf $ do</i></font>
+<a name="line-449"></a><font color=Blue><i>-- &gt;       with_controls ctrls $ do</i></font>
 <a name="line-450"></a><font color=Blue><i>-- &gt;         qnot_at q0 `controlled` q1</i></font>
-<a name="line-451"></a><font color=Blue><i>-- &gt;         return ([q0, q1], [], ctrls)</i></font>
-<a name="line-452"></a><font color=Blue><i>-- &gt; mytransformer g = identity_transformer g</i></font>
-<a name="line-453"></a><font color=Blue><i>-- </i></font>
-<a name="line-454"></a><font color=Blue><i>-- Note how Quipper syntax has been used to define the replacement</i></font>
-<a name="line-455"></a><font color=Blue><i>-- circuit @new_swap@, consisting of three controlled-not gates. Also,</i></font>
-<a name="line-456"></a><font color=Blue><i>-- since the original swap gate may have been controlled, we have</i></font>
-<a name="line-457"></a><font color=Blue><i>-- added the additional controls with a 'with_controls'</i></font>
-<a name="line-458"></a><font color=Blue><i>-- operator. Finally, the 'without_controls_if' operator ensures that</i></font>
-<a name="line-459"></a><font color=Blue><i>-- if the 'NoControlFlag' is set on the original swap gate, then it</i></font>
-<a name="line-460"></a><font color=Blue><i>-- will also be set on the replacement circuit.</i></font>
-<a name="line-461"></a><font color=Blue><i>-- </i></font>
-<a name="line-462"></a><font color=Blue><i>-- To try this out, we define some random circuit using swap gates:</i></font>
+<a name="line-451"></a><font color=Blue><i>-- &gt;         qnot_at q1 `controlled` q0</i></font>
+<a name="line-452"></a><font color=Blue><i>-- &gt;         qnot_at q0 `controlled` q1</i></font>
+<a name="line-453"></a><font color=Blue><i>-- &gt;         return ([q0, q1], [], ctrls)</i></font>
+<a name="line-454"></a><font color=Blue><i>-- &gt; mytransformer g = identity_transformer g</i></font>
+<a name="line-455"></a><font color=Blue><i>-- </i></font>
+<a name="line-456"></a><font color=Blue><i>-- Note how Quipper syntax has been used to define the replacement</i></font>
+<a name="line-457"></a><font color=Blue><i>-- circuit @new_swap@, consisting of three controlled-not gates. Also,</i></font>
+<a name="line-458"></a><font color=Blue><i>-- since the original swap gate may have been controlled, we have</i></font>
+<a name="line-459"></a><font color=Blue><i>-- added the additional controls with a 'with_controls'</i></font>
+<a name="line-460"></a><font color=Blue><i>-- operator. Finally, the 'without_controls_if' operator ensures that</i></font>
+<a name="line-461"></a><font color=Blue><i>-- if the 'NoControlFlag' is set on the original swap gate, then it</i></font>
+<a name="line-462"></a><font color=Blue><i>-- will also be set on the replacement circuit.</i></font>
 <a name="line-463"></a><font color=Blue><i>-- </i></font>
-<a name="line-464"></a><font color=Blue><i>-- &gt; mycirc a b c d = do</i></font>
-<a name="line-465"></a><font color=Blue><i>-- &gt;   swap_at a b</i></font>
-<a name="line-466"></a><font color=Blue><i>-- &gt;   hadamard_at b</i></font>
-<a name="line-467"></a><font color=Blue><i>-- &gt;   swap_at b c `controlled` [a, d]</i></font>
-<a name="line-468"></a><font color=Blue><i>-- &gt;   hadamard_at c</i></font>
-<a name="line-469"></a><font color=Blue><i>-- &gt;   swap_at c d</i></font>
-<a name="line-470"></a><font color=Blue><i>-- </i></font>
-<a name="line-471"></a><font color=Blue><i>-- To apply the transformer to this circuit, we use the generic</i></font>
-<a name="line-472"></a><font color=Blue><i>-- operator 'transform_generic':</i></font>
-<a name="line-473"></a><font color=Blue><i>-- </i></font>
-<a name="line-474"></a><font color=Blue><i>-- &gt; mycirc2 = transform_generic mytransformer mycirc</i></font>
-<a name="line-475"></a><font color=Blue><i>--</i></font>
-<a name="line-476"></a><font color=Blue><i>-- Finally, we use a @main@ function to display the original circuit</i></font>
-<a name="line-477"></a><font color=Blue><i>-- and then the transformed one:</i></font>
-<a name="line-478"></a><font color=Blue><i>--</i></font>
-<a name="line-479"></a><font color=Blue><i>-- &gt; main = do</i></font>
-<a name="line-480"></a><font color=Blue><i>-- &gt;   print_simple Preview mycirc</i></font>
-<a name="line-481"></a><font color=Blue><i>-- &gt;   print_simple Preview mycirc2</i></font>
-<a name="line-482"></a>
-<a name="line-483"></a><font color=Blue><i>-- $QCLASSES</i></font>
-<a name="line-484"></a><font color=Blue><i>--</i></font>
-<a name="line-485"></a><font color=Blue><i>-- Haskell provides many convenient type classes: 'Eq', 'Ord', 'Num', etc.</i></font>
-<a name="line-486"></a><font color=Blue><i>-- Quipper provides quantum analogues of some of these.</i></font>
-<a name="line-487"></a><font color=Blue><i>-- For instance, Haskell&#8217;s @'Eq' a@ has the method</i></font>
-<a name="line-488"></a><font color=Blue><i>-- </i></font>
-<a name="line-489"></a><font color=Blue><i>-- &gt; (==) :: a -&gt; a -&gt; Bool.  </i></font>
+<a name="line-464"></a><font color=Blue><i>-- To try this out, we define some random circuit using swap gates:</i></font>
+<a name="line-465"></a><font color=Blue><i>-- </i></font>
+<a name="line-466"></a><font color=Blue><i>-- &gt; mycirc a b c d = do</i></font>
+<a name="line-467"></a><font color=Blue><i>-- &gt;   swap_at a b</i></font>
+<a name="line-468"></a><font color=Blue><i>-- &gt;   hadamard_at b</i></font>
+<a name="line-469"></a><font color=Blue><i>-- &gt;   swap_at b c `controlled` [a, d]</i></font>
+<a name="line-470"></a><font color=Blue><i>-- &gt;   hadamard_at c</i></font>
+<a name="line-471"></a><font color=Blue><i>-- &gt;   swap_at c d</i></font>
+<a name="line-472"></a><font color=Blue><i>-- </i></font>
+<a name="line-473"></a><font color=Blue><i>-- To apply the transformer to this circuit, we use the generic</i></font>
+<a name="line-474"></a><font color=Blue><i>-- operator 'transform_generic':</i></font>
+<a name="line-475"></a><font color=Blue><i>-- </i></font>
+<a name="line-476"></a><font color=Blue><i>-- &gt; mycirc2 = transform_generic mytransformer mycirc</i></font>
+<a name="line-477"></a><font color=Blue><i>--</i></font>
+<a name="line-478"></a><font color=Blue><i>-- Finally, we use a @main@ function to display the original circuit</i></font>
+<a name="line-479"></a><font color=Blue><i>-- and then the transformed one:</i></font>
+<a name="line-480"></a><font color=Blue><i>--</i></font>
+<a name="line-481"></a><font color=Blue><i>-- &gt; main = do</i></font>
+<a name="line-482"></a><font color=Blue><i>-- &gt;   print_simple Preview mycirc</i></font>
+<a name="line-483"></a><font color=Blue><i>-- &gt;   print_simple Preview mycirc2</i></font>
+<a name="line-484"></a>
+<a name="line-485"></a><font color=Blue><i>-- $QCLASSES</i></font>
+<a name="line-486"></a><font color=Blue><i>--</i></font>
+<a name="line-487"></a><font color=Blue><i>-- Haskell provides many convenient type classes: 'Eq', 'Ord', 'Num', etc.</i></font>
+<a name="line-488"></a><font color=Blue><i>-- Quipper provides quantum analogues of some of these.</i></font>
+<a name="line-489"></a><font color=Blue><i>-- For instance, Haskell&#x2019;s @'Eq' a@ has the method</i></font>
 <a name="line-490"></a><font color=Blue><i>-- </i></font>
-<a name="line-491"></a><font color=Blue><i>-- Correspondingly, our @'QEq' a qa ca@ has a method</i></font>
+<a name="line-491"></a><font color=Blue><i>-- &gt; (==) :: a -&gt; a -&gt; Bool.  </i></font>
 <a name="line-492"></a><font color=Blue><i>-- </i></font>
-<a name="line-493"></a><font color=Blue><i>-- &gt; q_is_equal :: qa -&gt; qa -&gt; Circ (qa,qa,Qubit).  </i></font>
+<a name="line-493"></a><font color=Blue><i>-- Correspondingly, our @'QEq' a qa ca@ has a method</i></font>
 <a name="line-494"></a><font color=Blue><i>-- </i></font>
-<a name="line-495"></a><font color=Blue><i>-- Similarly, where Haskell&#8217;s 'Num' class has methods '+', '*', 'signum',</i></font>
-<a name="line-496"></a><font color=Blue><i>-- the class 'QNum' has 'q_add', 'q_mult', 'q_signum', and so on.  </i></font>
-<a name="line-497"></a><font color=Blue><i>-- ('QNum' is defined in "QuipperLib.Arith".)</i></font>
-<a name="line-498"></a><font color=Blue><i>--</i></font>
-<a name="line-499"></a><font color=Blue><i>-- All quantum type classes assume (a) that their instance types are</i></font>
-<a name="line-500"></a><font color=Blue><i>-- 'QCData', and (b) that the corresponding classical parameter types</i></font>
-<a name="line-501"></a><font color=Blue><i>-- are instances of the corresponding Haskell type classes.</i></font>
-<a name="line-502"></a><font color=Blue><i>-- </i></font>
-<a name="line-503"></a><font color=Blue><i>-- Quantum type classes are designed to work well with the automatic</i></font>
-<a name="line-504"></a><font color=Blue><i>-- circuit generation of "Quipper.CircLifting": the methods of</i></font>
-<a name="line-505"></a><font color=Blue><i>-- Haskell&#8217;s standard type classes are translated into their quantum</i></font>
-<a name="line-506"></a><font color=Blue><i>-- analogues, where available.</i></font>
-<a name="line-507"></a>
-<a name="line-508"></a><font color=Blue><i>-- $SHAPE Some Quipper functions, such as 'print_generic', require a</i></font>
-<a name="line-509"></a><font color=Blue><i>-- /shape parameter/. A shape parameter is a parameter passed to a</i></font>
-<a name="line-510"></a><font color=Blue><i>-- function for the sole purpose of specifying the type or size of</i></font>
-<a name="line-511"></a><font color=Blue><i>-- some data structure, without actually specifying any data.</i></font>
-<a name="line-512"></a><font color=Blue><i>-- Example: given a circuit</i></font>
-<a name="line-513"></a><font color=Blue><i>-- </i></font>
-<a name="line-514"></a><font color=Blue><i>-- &gt; circuit :: ([Qubit], Bit) -&gt; Circ Qubit,</i></font>
+<a name="line-495"></a><font color=Blue><i>-- &gt; q_is_equal :: qa -&gt; qa -&gt; Circ (qa,qa,Qubit).  </i></font>
+<a name="line-496"></a><font color=Blue><i>-- </i></font>
+<a name="line-497"></a><font color=Blue><i>-- Similarly, where Haskell&#x2019;s 'Num' class has methods '+', '*', 'signum',</i></font>
+<a name="line-498"></a><font color=Blue><i>-- the class 'QNum' has 'q_add', 'q_mult', 'q_signum', and so on.  </i></font>
+<a name="line-499"></a><font color=Blue><i>-- ('QNum' is defined in "QuipperLib.Arith".)</i></font>
+<a name="line-500"></a><font color=Blue><i>--</i></font>
+<a name="line-501"></a><font color=Blue><i>-- All quantum type classes assume (a) that their instance types are</i></font>
+<a name="line-502"></a><font color=Blue><i>-- 'QCData', and (b) that the corresponding classical parameter types</i></font>
+<a name="line-503"></a><font color=Blue><i>-- are instances of the corresponding Haskell type classes.</i></font>
+<a name="line-504"></a><font color=Blue><i>-- </i></font>
+<a name="line-505"></a><font color=Blue><i>-- Quantum type classes are designed to work well with the automatic</i></font>
+<a name="line-506"></a><font color=Blue><i>-- circuit generation of "Quipper.CircLifting": the methods of</i></font>
+<a name="line-507"></a><font color=Blue><i>-- Haskell&#x2019;s standard type classes are translated into their quantum</i></font>
+<a name="line-508"></a><font color=Blue><i>-- analogues, where available.</i></font>
+<a name="line-509"></a>
+<a name="line-510"></a><font color=Blue><i>-- $SHAPE Some Quipper functions, such as 'print_generic', require a</i></font>
+<a name="line-511"></a><font color=Blue><i>-- /shape parameter/. A shape parameter is a parameter passed to a</i></font>
+<a name="line-512"></a><font color=Blue><i>-- function for the sole purpose of specifying the type or size of</i></font>
+<a name="line-513"></a><font color=Blue><i>-- some data structure, without actually specifying any data.</i></font>
+<a name="line-514"></a><font color=Blue><i>-- Example: given a circuit</i></font>
 <a name="line-515"></a><font color=Blue><i>-- </i></font>
-<a name="line-516"></a><font color=Blue><i>-- the command</i></font>
+<a name="line-516"></a><font color=Blue><i>-- &gt; circuit :: ([Qubit], Bit) -&gt; Circ Qubit,</i></font>
 <a name="line-517"></a><font color=Blue><i>-- </i></font>
-<a name="line-518"></a><font color=Blue><i>-- &gt; print_generic Preview circuit ([qubit,qubit,qubit], bit)</i></font>
+<a name="line-518"></a><font color=Blue><i>-- the command</i></font>
 <a name="line-519"></a><font color=Blue><i>-- </i></font>
-<a name="line-520"></a><font color=Blue><i>-- tells Quipper to preview the circuit for a problem size of 3 qubits</i></font>
-<a name="line-521"></a><font color=Blue><i>-- and 1 bit.</i></font>
+<a name="line-520"></a><font color=Blue><i>-- &gt; print_generic Preview circuit ([qubit,qubit,qubit], bit)</i></font>
+<a name="line-521"></a><font color=Blue><i>-- </i></font>
+<a name="line-522"></a><font color=Blue><i>-- tells Quipper to preview the circuit for a problem size of 3 qubits</i></font>
+<a name="line-523"></a><font color=Blue><i>-- and 1 bit.</i></font>
 </pre>
 </body>
 </html>

@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -12,6 +12,8 @@
 -- Note that it is possible to interrupt the circuit generation with
 -- Ctrl-C; in this case, the circuit generated up to that point will
 -- be displayed. A second Ctrl-C will kill the program.
+-- 
+-- Interrupting with Ctrl-C may not work in the Windows operating system.
 
 module Main where
 

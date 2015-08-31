@@ -17,14 +17,14 @@
 <a name="line-10"></a><font color=Blue><i>-- | This library provides a type of quantum integers, as well as</i></font>
 <a name="line-11"></a><font color=Blue><i>-- basic arithmetic functions on them.</i></font>
 <a name="line-12"></a><font color=Blue><i>-- </i></font>
-<a name="line-13"></a><font color=Blue><i>-- The type 'QDInt' holds a fixed-size, &#8467;-qubit quantum integer,</i></font>
-<a name="line-14"></a><font color=Blue><i>-- considered modulo 2[sup &#8467;]. The integers may be regarded as</i></font>
+<a name="line-13"></a><font color=Blue><i>-- The type 'QDInt' holds a fixed-size, &#x2113;-qubit quantum integer,</i></font>
+<a name="line-14"></a><font color=Blue><i>-- considered modulo 2[sup &#x2113;]. The integers may be regarded as</i></font>
 <a name="line-15"></a><font color=Blue><i>-- signed or unsigned, depending on the operation. If signs are used,</i></font>
 <a name="line-16"></a><font color=Blue><i>-- they are assumed to be in two's complement.</i></font>
 <a name="line-17"></a><font color=Blue><i>-- </i></font>
 <a name="line-18"></a><font color=Blue><i>-- Some of the arithmetic operations are adapted from the GFI for the</i></font>
 <a name="line-19"></a><font color=Blue><i>-- Triangle Finding algorithm. Most algorithms used are, for now, very</i></font>
-<a name="line-20"></a><font color=Blue><i>-- na&#239;ve (ripple adders, etc).  Gate count estimates are given in the</i></font>
+<a name="line-20"></a><font color=Blue><i>-- na&#x00ef;ve (ripple adders, etc).  Gate count estimates are given in the</i></font>
 <a name="line-21"></a><font color=Blue><i>-- Toffoli gatebase.</i></font>
 <a name="line-22"></a>
 <a name="line-23"></a><font color=Blue><i>-- Documentation note: the table of contents is organized slightly</i></font>
@@ -256,7 +256,7 @@
 <a name="line-249"></a><font color=Blue><i>-- $ The operations in this section are the only ones intended to use</i></font>
 <a name="line-250"></a><font color=Blue><i>-- 'xint_case' directly.</i></font>
 <a name="line-251"></a>
-<a name="line-252"></a><a name="xint_set_length"></a><font color=Blue><i>-- | Set the length of an 'XInt' to /m/ &#8805; 0. This operation is only</i></font>
+<a name="line-252"></a><a name="xint_set_length"></a><font color=Blue><i>-- | Set the length of an 'XInt' to /m/ &#x2265; 0. This operation is only</i></font>
 <a name="line-253"></a><font color=Blue><i>-- legal if the input (a) has indeterminate length or (b) has</i></font>
 <a name="line-254"></a><font color=Blue><i>-- determinate length already equal to /m/. In particular, it cannot</i></font>
 <a name="line-255"></a><font color=Blue><i>-- be used to change the length from anything other than from</i></font>
@@ -266,7 +266,7 @@
 <a name="line-259"></a><font color=Blue><i>-- coincide, throw an error. The 'String' argument is used as an error</i></font>
 <a name="line-260"></a><font color=Blue><i>-- message in that case.</i></font>
 <a name="line-261"></a><font color=Blue><i>-- </i></font>
-<a name="line-262"></a><font color=Blue><i>-- Note that if /x/ &#8800; 'Bool', the input is guaranteed to have</i></font>
+<a name="line-262"></a><font color=Blue><i>-- Note that if /x/ &#x2260; 'Bool', the input is guaranteed to have</i></font>
 <a name="line-263"></a><font color=Blue><i>-- determinate length. However, we cannot test for equality of types</i></font>
 <a name="line-264"></a><font color=Blue><i>-- in a polymorphic function. This is where the 'id' argument to</i></font>
 <a name="line-265"></a><font color=Blue><i>-- 'XInt_indet' is used.</i></font>
@@ -306,7 +306,7 @@
 <a name="line-299"></a>    Right <font color=Green><u>_</u></font> <font color=Red>-&gt;</font> Nothing
 <a name="line-300"></a>
 <a name="line-301"></a><a name="integer_of_intm_unsigned"></a><font color=Blue><i>-- | Convert an 'IntM' of length /m/ to an 'Integer' in the range {0,</i></font>
-<a name="line-302"></a><font color=Blue><i>-- &#8230;, 2[sup /m/]-1}. If the 'IntM' has indeterminate length, return the</i></font>
+<a name="line-302"></a><font color=Blue><i>-- &#x2026;, 2[sup /m/]-1}. If the 'IntM' has indeterminate length, return the</i></font>
 <a name="line-303"></a><font color=Blue><i>-- original 'Integer'.</i></font>
 <a name="line-304"></a><font color=Blue>integer_of_intm_unsigned</font> <font color=Red>::</font> IntM <font color=Red>-&gt;</font> Integer
 <a name="line-305"></a><font color=Blue>integer_of_intm_unsigned</font> x <font color=Red>=</font> 
@@ -315,7 +315,7 @@
 <a name="line-308"></a>    Right <font color=Cyan>(</font>n<font color=Cyan>,</font> id<font color=Cyan>)</font> <font color=Red>-&gt;</font> n
 <a name="line-309"></a>
 <a name="line-310"></a><a name="integer_of_intm_signed"></a><font color=Blue><i>-- | Convert an 'IntM' of length /m/ to an 'Integer' in the range</i></font>
-<a name="line-311"></a><font color=Blue><i>-- {-2[sup /m/-1], &#8230;, 2[sup /m/-1]-1}. If the 'IntM' has indeterminate</i></font>
+<a name="line-311"></a><font color=Blue><i>-- {-2[sup /m/-1], &#x2026;, 2[sup /m/-1]-1}. If the 'IntM' has indeterminate</i></font>
 <a name="line-312"></a><font color=Blue><i>-- length, return the original 'Integer'.</i></font>
 <a name="line-313"></a><font color=Blue>integer_of_intm_signed</font> <font color=Red>::</font> IntM <font color=Red>-&gt;</font> Integer
 <a name="line-314"></a><font color=Blue>integer_of_intm_signed</font> x <font color=Red>=</font>
@@ -422,7 +422,7 @@
 <a name="line-415"></a><font color=Blue>intm</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> Integer <font color=Red>-&gt;</font> IntM
 <a name="line-416"></a><font color=Blue>intm</font> m n <font color=Red>=</font> intm_set_length m <font color=Cyan>(</font>intm_of_integer n<font color=Cyan>)</font> <font color=Magenta>"intm: internal error"</font>
 <a name="line-417"></a>
-<a name="line-418"></a><a name="intm_set_length"></a><font color=Blue><i>-- | Set the length of an 'IntM' to /m/ &#8805; 0. This operation is only</i></font>
+<a name="line-418"></a><a name="intm_set_length"></a><font color=Blue><i>-- | Set the length of an 'IntM' to /m/ &#x2265; 0. This operation is only</i></font>
 <a name="line-419"></a><font color=Blue><i>-- legal if the input (a) has indeterminate length or (b) has</i></font>
 <a name="line-420"></a><font color=Blue><i>-- determinate length already equal to /m/. In particular, it cannot</i></font>
 <a name="line-421"></a><font color=Blue><i>-- be used to change the length from anything other than from</i></font>
@@ -742,7 +742,7 @@
 <a name="line-735"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-736"></a><font color=Blue><i>-- ** Incrementing and decrementing</i></font>
 <a name="line-737"></a>
-<a name="line-738"></a><a name="q_increment"></a><font color=Blue><i>-- | Increment a 'QDInt' in place.  /O/(&#8467;) gates. </i></font>
+<a name="line-738"></a><a name="q_increment"></a><font color=Blue><i>-- | Increment a 'QDInt' in place.  /O/(&#x2113;) gates. </i></font>
 <a name="line-739"></a><font color=Blue><i>-- </i></font>
 <a name="line-740"></a><font color=Blue><i>-- Implementation note: currently tries to minimize gate count, at the cost of a rather long Quipper description.  Can the latter be reduced without increasing the former?  </i></font>
 <a name="line-741"></a><font color=Blue>q_increment</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> Circ QDInt
@@ -790,14 +790,14 @@
 <a name="line-783"></a>        return <font color=Cyan>(</font>b<font color=Cyan>,</font>x_0<font color=Cyan>,</font>x_higher<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-784"></a>      return <font color=Cyan>(</font>b<font color=Cyan>,</font> <font color=Cyan>(</font>x_0<font color=Red><b>:</b></font>x_higher<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-785"></a>    
-<a name="line-786"></a><a name="q_decrement"></a><font color=Blue><i>-- | Decrement a 'QDInt' in place.  Inverse of 'q_increment'. /O/(&#8467;).</i></font>
+<a name="line-786"></a><a name="q_decrement"></a><font color=Blue><i>-- | Decrement a 'QDInt' in place.  Inverse of 'q_increment'. /O/(&#x2113;).</i></font>
 <a name="line-787"></a><font color=Blue>q_decrement</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> Circ QDInt
 <a name="line-788"></a><font color=Blue>q_decrement</font> <font color=Red>=</font> reverse_generic_endo q_increment
 <a name="line-789"></a>
 <a name="line-790"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-791"></a><font color=Blue><i>-- ** Addition and subtraction</i></font>
 <a name="line-792"></a>
-<a name="line-793"></a><a name="q_add_qdint"></a><font color=Blue><i>-- | Add two 'QDInt's into a fresh one.  Arguments are assumed to be of equal size.  /O/(&#8467;) gates, both before and after transformation to Toffoli.</i></font>
+<a name="line-793"></a><a name="q_add_qdint"></a><font color=Blue><i>-- | Add two 'QDInt's into a fresh one.  Arguments are assumed to be of equal size.  /O/(&#x2113;) gates, both before and after transformation to Toffoli.</i></font>
 <a name="line-794"></a><font color=Blue>q_add_qdint</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>)</font>
 <a name="line-795"></a><font color=Blue>q_add_qdint</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-796"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -821,7 +821,7 @@
 <a name="line-814"></a>      s <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate l False<font color=Cyan>)</font> <font color=Blue><i>-- holds the eventual sum</i></font>
 <a name="line-815"></a>      c <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate l False<font color=Cyan>)</font> <font color=Blue><i>-- holds the carries</i></font>
 <a name="line-816"></a>
-<a name="line-817"></a>      <font color=Blue><i>-- bring the lists&#8217; indexing in line with usual numeric indexing of binary expansons</i></font>
+<a name="line-817"></a>      <font color=Blue><i>-- bring the lists&#x2019; indexing in line with usual numeric indexing of binary expansons</i></font>
 <a name="line-818"></a>      x <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse x
 <a name="line-819"></a>      y <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse y
 <a name="line-820"></a>      s <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse s
@@ -863,7 +863,7 @@
 <a name="line-856"></a>      return <font color=Cyan>(</font><font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>,</font>s<font color=Cyan>,</font>c<font color=Cyan>)</font><font color=Cyan>,</font> s_out<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-857"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font> y<font color=Cyan>,</font> s_out<font color=Cyan>)</font>
 <a name="line-858"></a>
-<a name="line-859"></a><a name="q_sub_qdint"></a><font color=Blue><i>-- | Subtract two 'QDInt's, into a fresh one.  Arguments are assumed to be of equal size.  /O/(&#8467;).</i></font>
+<a name="line-859"></a><a name="q_sub_qdint"></a><font color=Blue><i>-- | Subtract two 'QDInt's, into a fresh one.  Arguments are assumed to be of equal size.  /O/(&#x2113;).</i></font>
 <a name="line-860"></a><font color=Blue>q_sub_qdint</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-861"></a><font color=Blue>q_sub_qdint</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-862"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -887,7 +887,7 @@
 <a name="line-880"></a>      d <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate l False<font color=Cyan>)</font> <font color=Blue><i>-- holds the eventual difference</i></font>
 <a name="line-881"></a>      b <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate l False<font color=Cyan>)</font> <font color=Blue><i>-- holds the borrows</i></font>
 <a name="line-882"></a>
-<a name="line-883"></a>      <font color=Blue><i>-- bring the lists&#8217; indexing in line with usual numeric indexing of binary expansons</i></font>
+<a name="line-883"></a>      <font color=Blue><i>-- bring the lists&#x2019; indexing in line with usual numeric indexing of binary expansons</i></font>
 <a name="line-884"></a>      x <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse x
 <a name="line-885"></a>      y <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse y
 <a name="line-886"></a>      d <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse d
@@ -916,7 +916,7 @@
 <a name="line-909"></a>      d_l1 <font color=Red>&lt;-</font> qnot d_l1 <font color=Cyan>`controlled`</font> <font color=Cyan>(</font>b<font color=Cyan>!!</font><font color=Cyan>(</font>l<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Cyan>)</font><font color=Cyan>)</font> 
 <a name="line-910"></a>      d <font color=Red>&lt;-</font> return <font color=Cyan>$</font> overwriteAt <font color=Cyan>(</font>l<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Cyan>)</font> d_l1 d
 <a name="line-911"></a>
-<a name="line-912"></a>      <font color=Blue><i>-- bring the lists&#8217; indexing in line with usual numeric indexing of binary expansons</i></font>
+<a name="line-912"></a>      <font color=Blue><i>-- bring the lists&#x2019; indexing in line with usual numeric indexing of binary expansons</i></font>
 <a name="line-913"></a>      x <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse x
 <a name="line-914"></a>      y <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse y
 <a name="line-915"></a>      d <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse d
@@ -929,7 +929,7 @@
 <a name="line-922"></a>      return <font color=Cyan>(</font><font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>,</font>d<font color=Cyan>,</font>b<font color=Cyan>)</font><font color=Cyan>,</font> d_out<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-923"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font> y<font color=Cyan>,</font> d_out<font color=Cyan>)</font>
 <a name="line-924"></a>
-<a name="line-925"></a><a name="q_add_in_place"></a><font color=Blue><i>-- | Add one 'QDInt' onto a second, in place; i.e. (/x/,/y/) &#8614; (/x/,/x/+/y/).  Arguments are assumed to be of equal size.  /O/(&#8467;) gates.</i></font>
+<a name="line-925"></a><a name="q_add_in_place"></a><font color=Blue><i>-- | Add one 'QDInt' onto a second, in place; i.e. (/x/,/y/) &#x21a6; (/x/,/x/+/y/).  Arguments are assumed to be of equal size.  /O/(&#x2113;) gates.</i></font>
 <a name="line-926"></a><font color=Blue>q_add_in_place</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-927"></a><font color=Blue>q_add_in_place</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-928"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -986,7 +986,7 @@
 <a name="line-979"></a>      return <font color=Cyan>(</font>x0<font color=Red><b>:</b></font>xs<font color=Cyan>,</font>y0<font color=Red><b>:</b></font>ys<font color=Cyan>,</font>c<font color=Cyan>)</font>
 <a name="line-980"></a>    q_add_aux <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> <font color=Red>=</font> error <font color=Magenta>"q_add_in_place: cannot add integers of different sizes."</font>
 <a name="line-981"></a>
-<a name="line-982"></a><a name="q_sub_in_place"></a><font color=Blue><i>-- | Subtract one 'QDInt' from a second, in place; i.e. (/x/,/y/) &#8614; (/x/,/y/&#8211;/x/).  Arguments are assumed to be of equal size.  /O/(&#8467;) gates.</i></font>
+<a name="line-982"></a><a name="q_sub_in_place"></a><font color=Blue><i>-- | Subtract one 'QDInt' from a second, in place; i.e. (/x/,/y/) &#x21a6; (/x/,/y/&#x2013;/x/).  Arguments are assumed to be of equal size.  /O/(&#x2113;) gates.</i></font>
 <a name="line-983"></a><font color=Blue>q_sub_in_place</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-984"></a><font color=Blue>q_sub_in_place</font> x y <font color=Red>=</font> reverse_generic_endo <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>x<font color=Cyan>,</font>d<font color=Cyan>)</font> <font color=Red>-&gt;</font> q_add_in_place x d<font color=Cyan>)</font> <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>)</font>
 <a name="line-985"></a>
@@ -998,7 +998,7 @@
 <a name="line-991"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-992"></a><font color=Blue><i>-- ** Arithmetic with parameters</i></font>
 <a name="line-993"></a>
-<a name="line-994"></a><a name="q_add_param"></a><font color=Blue><i>-- | Add a parameter 'IntM' and a 'QDInt', into a fresh 'QDInt': (/x/, /y/) &#8614; (/y/, /x/+/y/).  The parameter /x/ must be of the same length as /y/, or /x/ can also be of undetermined length.  /O/(&#8467;).</i></font>
+<a name="line-994"></a><a name="q_add_param"></a><font color=Blue><i>-- | Add a parameter 'IntM' and a 'QDInt', into a fresh 'QDInt': (/x/, /y/) &#x21a6; (/y/, /x/+/y/).  The parameter /x/ must be of the same length as /y/, or /x/ can also be of undetermined length.  /O/(&#x2113;).</i></font>
 <a name="line-995"></a><font color=Blue>q_add_param</font> <font color=Red>::</font> IntM <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-996"></a><font color=Blue>q_add_param</font> x1 y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-997"></a>  <font color=Green><u>let</u></font> x <font color=Red>=</font> intm_promote x1 y <font color=Magenta>"q_add_param: inputs must have equal length"</font>
@@ -1015,7 +1015,7 @@
 <a name="line-1008"></a><font color=Blue>q_add_param_qulist</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font> 
 <a name="line-1009"></a>  <font color=Blue><i>-- Implementation note: compare with q_add_qdint.  The code is almost verbatim identical, but since x consists of parameter Bools, `controlled` will omit gates when appropriate.</i></font>
 <a name="line-1010"></a>
-<a name="line-1011"></a>  <font color=Blue><i>-- Further slight optimisation would be possible, since if x doesn&#8217;t have low bits then no low carry qubits are required. </i></font>
+<a name="line-1011"></a>  <font color=Blue><i>-- Further slight optimisation would be possible, since if x doesn&#x2019;t have low bits then no low carry qubits are required. </i></font>
 <a name="line-1012"></a>
 <a name="line-1013"></a>  <font color=Blue><i>-- Implementation note: once we have a general-purpose classical</i></font>
 <a name="line-1014"></a>  <font color=Blue><i>-- circuit optimizer (even a primitive one), then this kind of</i></font>
@@ -1028,7 +1028,7 @@
 <a name="line-1021"></a>      s <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate l False<font color=Cyan>)</font> <font color=Blue><i>-- holds the eventual sum</i></font>
 <a name="line-1022"></a>      c <font color=Red>&lt;-</font> qinit <font color=Cyan>(</font>replicate l False<font color=Cyan>)</font> <font color=Blue><i>-- holds the carries</i></font>
 <a name="line-1023"></a>
-<a name="line-1024"></a>      <font color=Blue><i>-- bring the lists&#8217; indexing in line with usual numeric indexing of binary expansons</i></font>
+<a name="line-1024"></a>      <font color=Blue><i>-- bring the lists&#x2019; indexing in line with usual numeric indexing of binary expansons</i></font>
 <a name="line-1025"></a>      x <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse x
 <a name="line-1026"></a>      y <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse y
 <a name="line-1027"></a>      s <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse s
@@ -1070,11 +1070,11 @@
 <a name="line-1063"></a>      return <font color=Cyan>(</font><font color=Cyan>(</font>y<font color=Cyan>,</font>s<font color=Cyan>,</font>c<font color=Cyan>)</font><font color=Cyan>,</font> s_out<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-1064"></a>  return <font color=Cyan>(</font>y<font color=Cyan>,</font> s_out<font color=Cyan>)</font>
 <a name="line-1065"></a>
-<a name="line-1066"></a><a name="q_sub_param"></a><font color=Blue><i>-- | Subtract a parameter 'IntM' from a 'QDInt', into a fresh 'QDInt'.  The 'IntM' cannot be shorter than the 'QDInt' (that would give ill-defined behavior), but can be of undetermined length.  /O/(&#8467;).</i></font>
+<a name="line-1066"></a><a name="q_sub_param"></a><font color=Blue><i>-- | Subtract a parameter 'IntM' from a 'QDInt', into a fresh 'QDInt'.  The 'IntM' cannot be shorter than the 'QDInt' (that would give ill-defined behavior), but can be of undetermined length.  /O/(&#x2113;).</i></font>
 <a name="line-1067"></a><font color=Blue>q_sub_param</font> <font color=Red>::</font> IntM <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1068"></a><font color=Blue>q_sub_param</font> x y <font color=Red>=</font> q_add_param <font color=Cyan>(</font><font color=Blue><i>-</i></font>x<font color=Cyan>)</font> y
 <a name="line-1069"></a>
-<a name="line-1070"></a><a name="q_add_param_in_place"></a><font color=Blue><i>-- | Add a parameter 'IntM' onto a 'QDInt', in place; i.e. (/x/,/y/) &#8614; /x/+/y/. The parameter /x/ must be of the same length as /y/, or /x/ can also be of undetermined length.  /O/(&#8467;).</i></font>
+<a name="line-1070"></a><a name="q_add_param_in_place"></a><font color=Blue><i>-- | Add a parameter 'IntM' onto a 'QDInt', in place; i.e. (/x/,/y/) &#x21a6; /x/+/y/. The parameter /x/ must be of the same length as /y/, or /x/ can also be of undetermined length.  /O/(&#x2113;).</i></font>
 <a name="line-1071"></a><font color=Blue>q_add_param_in_place</font> <font color=Red>::</font> IntM <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ QDInt
 <a name="line-1072"></a><font color=Blue>q_add_param_in_place</font> x1 y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1073"></a>  <font color=Green><u>let</u></font> x <font color=Red>=</font> intm_promote x1 y <font color=Magenta>"q_add_param_in_place: inputs must have equal length"</font>
@@ -1135,11 +1135,11 @@
 <a name="line-1128"></a>      return <font color=Cyan>(</font>y0<font color=Red><b>:</b></font>ys<font color=Cyan>,</font>c<font color=Cyan>)</font>
 <a name="line-1129"></a>    q_add_aux <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> <font color=Red>=</font> error <font color=Magenta>"q_add_in_place: cannot add integers of different sizes."</font>
 <a name="line-1130"></a>
-<a name="line-1131"></a><a name="q_sub_param_in_place"></a><font color=Blue><i>-- | Subtract a parameter 'IntM' from a 'QDInt', in place; i.e. (/x/,/y/) &#8614; (/x/,/x/-/y/).  /x/ cannot be shorter than /y/.  /O/(/l/) gates.</i></font>
+<a name="line-1131"></a><a name="q_sub_param_in_place"></a><font color=Blue><i>-- | Subtract a parameter 'IntM' from a 'QDInt', in place; i.e. (/x/,/y/) &#x21a6; (/x/,/x/-/y/).  /x/ cannot be shorter than /y/.  /O/(/l/) gates.</i></font>
 <a name="line-1132"></a><font color=Blue>q_sub_param_in_place</font> <font color=Red>::</font> IntM <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ QDInt
 <a name="line-1133"></a><font color=Blue>q_sub_param_in_place</font> x <font color=Red>=</font> q_add_param_in_place <font color=Cyan>(</font><font color=Blue><i>-</i></font>x<font color=Cyan>)</font>
 <a name="line-1134"></a>
-<a name="line-1135"></a><a name="q_mult_param"></a><font color=Blue><i>-- | Multiply a parameter 'IntM' by a 'QDInt', into a fresh 'QDInt'.  The 'IntM' cannot be shorter than the 'QDInt' (that would give ill-defined behavior), but can be of undetermined length.  /O/(&#8467;).</i></font>
+<a name="line-1135"></a><a name="q_mult_param"></a><font color=Blue><i>-- | Multiply a parameter 'IntM' by a 'QDInt', into a fresh 'QDInt'.  The 'IntM' cannot be shorter than the 'QDInt' (that would give ill-defined behavior), but can be of undetermined length.  /O/(&#x2113;).</i></font>
 <a name="line-1136"></a><font color=Blue>q_mult_param</font> <font color=Red>::</font> IntM <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1137"></a><font color=Blue>q_mult_param</font> x1 y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1138"></a>  <font color=Green><u>let</u></font> x <font color=Red>=</font> intm_promote x1 y <font color=Magenta>"q_add_param: inputs must have equal length"</font>
@@ -1172,7 +1172,7 @@
 <a name="line-1165"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-1166"></a><font color=Blue><i>-- ** Sign and negation</i></font>
 <a name="line-1167"></a>
-<a name="line-1168"></a><a name="q_negate_in_place"></a><font color=Blue><i>-- | Negate a (signed) 'QDInt' in place. /O/(&#8467;).</i></font>
+<a name="line-1168"></a><a name="q_negate_in_place"></a><font color=Blue><i>-- | Negate a (signed) 'QDInt' in place. /O/(&#x2113;).</i></font>
 <a name="line-1169"></a><font color=Blue>q_negate_in_place</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> Circ QDInt
 <a name="line-1170"></a><font color=Blue>q_negate_in_place</font> x <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1171"></a>  x <font color=Red>&lt;-</font> mapUnary qnot x
@@ -1184,18 +1184,18 @@
 <a name="line-1177"></a><font color=Blue>q_negate_in_place_qulist</font> <font color=Red>::</font> <font color=Red>[</font>Qubit<font color=Red>]</font> <font color=Red>-&gt;</font> Circ <font color=Red>[</font>Qubit<font color=Red>]</font>
 <a name="line-1178"></a><font color=Blue>q_negate_in_place_qulist</font> <font color=Red>=</font> mmap list_of_xint_bh <font color=Cyan>.</font> q_negate_in_place <font color=Cyan>.</font> xint_of_list_bh
 <a name="line-1179"></a>
-<a name="line-1180"></a><a name="q_negate_qdint"></a><font color=Blue><i>-- | Compute the negation of a (signed) 'QDInt'. /O/(&#8467;).</i></font>
+<a name="line-1180"></a><a name="q_negate_qdint"></a><font color=Blue><i>-- | Compute the negation of a (signed) 'QDInt'. /O/(&#x2113;).</i></font>
 <a name="line-1181"></a><font color=Blue><i>-- </i></font>
-<a name="line-1182"></a><font color=Blue><i>-- (Fixes the minimum value, consistently with Haskell&#8217;s @'negate' 'minBound' :: 'Int'@.) </i></font>
+<a name="line-1182"></a><font color=Blue><i>-- (Fixes the minimum value, consistently with Haskell&#x2019;s @'negate' 'minBound' :: 'Int'@.) </i></font>
 <a name="line-1183"></a><font color=Blue>q_negate_qdint</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1184"></a><font color=Blue>q_negate_qdint</font> x <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1185"></a>  <font color=Cyan>(</font>x<font color=Cyan>,</font>nx<font color=Cyan>)</font> <font color=Red>&lt;-</font> qc_copy_fun x
 <a name="line-1186"></a>  nx <font color=Red>&lt;-</font> q_negate_in_place nx
 <a name="line-1187"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font>nx<font color=Cyan>)</font>
 <a name="line-1188"></a>
-<a name="line-1189"></a><a name="q_abs_qdint"></a><font color=Blue><i>-- | Compute the absolute value of a (signed) 'QDInt'.  /O/(&#8467;).</i></font>
+<a name="line-1189"></a><a name="q_abs_qdint"></a><font color=Blue><i>-- | Compute the absolute value of a (signed) 'QDInt'.  /O/(&#x2113;).</i></font>
 <a name="line-1190"></a><font color=Blue><i>-- </i></font>
-<a name="line-1191"></a><font color=Blue><i>-- (Fixes the minimum value, consistently with Haskell&#8217;s @'abs' 'minBound' :: 'Int'@.) </i></font>
+<a name="line-1191"></a><font color=Blue><i>-- (Fixes the minimum value, consistently with Haskell&#x2019;s @'abs' 'minBound' :: 'Int'@.) </i></font>
 <a name="line-1192"></a><font color=Blue>q_abs_qdint</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1193"></a><font color=Blue>q_abs_qdint</font> x <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1194"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1216,7 +1216,7 @@
 <a name="line-1209"></a>  a <font color=Red>&lt;-</font> q_increment_qulist a <font color=Cyan>`controlled`</font> x_high
 <a name="line-1210"></a>  return <font color=Cyan>(</font>x_high<font color=Red><b>:</b></font>x_lower<font color=Cyan>,</font> a<font color=Cyan>)</font>
 <a name="line-1211"></a>
-<a name="line-1212"></a><a name="q_signum_qdint"></a><font color=Blue><i>-- | Compute a 'QDInt' of the same length as the input, with value 1, 0, or &#8211;1, depending on the sign of the input.  Analogous to Haskell&#8217;s 'signum'.  /O/(&#8467;).</i></font>
+<a name="line-1212"></a><a name="q_signum_qdint"></a><font color=Blue><i>-- | Compute a 'QDInt' of the same length as the input, with value 1, 0, or &#x2013;1, depending on the sign of the input.  Analogous to Haskell&#x2019;s 'signum'.  /O/(&#x2113;).</i></font>
 <a name="line-1213"></a><font color=Blue>q_signum_qdint</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1214"></a><font color=Blue>q_signum_qdint</font> x <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1215"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1243,7 +1243,7 @@
 <a name="line-1236"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-1237"></a><font color=Blue><i>-- ** Comparison</i></font>
 <a name="line-1238"></a>
-<a name="line-1239"></a><a name="q_le_unsigned"></a><font color=Blue><i>-- | Comparison of two 'QDInt's, considered as unsigned.  /O/(&#8467;).</i></font>
+<a name="line-1239"></a><a name="q_le_unsigned"></a><font color=Blue><i>-- | Comparison of two 'QDInt's, considered as unsigned.  /O/(&#x2113;).</i></font>
 <a name="line-1240"></a><font color=Blue>q_le_unsigned</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>,</font>Qubit<font color=Cyan>)</font>
 <a name="line-1241"></a><font color=Blue>q_le_unsigned</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1242"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1264,22 +1264,22 @@
 <a name="line-1257"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>,</font>le_out<font color=Cyan>)</font>
 <a name="line-1258"></a>
 <a name="line-1259"></a><a name="q_le_unsigned_aux"></a><font color=Blue><i>-- | Same as 'q_le_unsigned', but uncurried, represents integers as</i></font>
-<a name="line-1260"></a><font color=Blue><i>-- big-headian qubit lists, and doesn&#8217;t clean up its garbage.  (If</i></font>
+<a name="line-1260"></a><font color=Blue><i>-- big-headian qubit lists, and doesn&#x2019;t clean up its garbage.  (If</i></font>
 <a name="line-1261"></a><font color=Blue><i>-- each recursive call cleans up its own garbage, gate use becomes</i></font>
 <a name="line-1262"></a><font color=Blue><i>-- /O/(2[sup /n/]).)</i></font>
 <a name="line-1263"></a><font color=Blue>q_le_unsigned_aux</font> <font color=Red>::</font> <font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font> <font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>)</font> <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>)</font>
 <a name="line-1264"></a><font color=Blue>q_le_unsigned_aux</font> <font color=Cyan>(</font>[]<font color=Cyan>,</font> []<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font> q <font color=Red>&lt;-</font> qinit True<font color=Cyan>;</font> return <font color=Cyan>(</font>[]<font color=Cyan>,</font> []<font color=Cyan>,</font> <font color=Red>[</font>q<font color=Red>]</font><font color=Cyan>)</font>
 <a name="line-1265"></a><font color=Blue>q_le_unsigned_aux</font> <font color=Cyan>(</font>x_high<font color=Red><b>:</b></font>x_lower<font color=Cyan>,</font> y_high<font color=Red><b>:</b></font>y_lower<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
-<a name="line-1266"></a>  <font color=Blue><i>-- Classically, one would make the recursive call only if needed; but quantumly, it&#8217;s cheaper to do it unconditionally. </i></font>
+<a name="line-1266"></a>  <font color=Blue><i>-- Classically, one would make the recursive call only if needed; but quantumly, it&#x2019;s cheaper to do it unconditionally. </i></font>
 <a name="line-1267"></a>  <font color=Cyan>(</font>x_lower<font color=Cyan>,</font> y_lower<font color=Cyan>,</font> le_lower<font color=Red><b>:</b></font>garbage<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_le_unsigned_aux <font color=Cyan>(</font>x_lower<font color=Cyan>,</font> y_lower<font color=Cyan>)</font>
 <a name="line-1268"></a>  <font color=Cyan>(</font>x_high<font color=Cyan>,</font>y_high<font color=Cyan>,</font>eq_high<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_is_equal x_high y_high
 <a name="line-1269"></a>  le <font color=Red>&lt;-</font> qinit False
 <a name="line-1270"></a>  le <font color=Red>&lt;-</font> qnot le <font color=Cyan>`controlled`</font> <font color=Cyan>(</font>x_high <font color=Cyan>.==.</font> <font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>.&amp;&amp;.</font> <font color=Cyan>(</font>y_high <font color=Cyan>.==.</font> <font color=Magenta>1</font><font color=Cyan>)</font>
 <a name="line-1271"></a>  le <font color=Red>&lt;-</font> qnot le <font color=Cyan>`controlled`</font> eq_high <font color=Cyan>.&amp;&amp;.</font> le_lower
 <a name="line-1272"></a>  return <font color=Cyan>(</font>x_high<font color=Red><b>:</b></font>x_lower<font color=Cyan>,</font> y_high<font color=Red><b>:</b></font>y_lower<font color=Cyan>,</font> le<font color=Red><b>:</b></font>eq_high<font color=Red><b>:</b></font>le_lower<font color=Red><b>:</b></font>garbage<font color=Cyan>)</font>
-<a name="line-1273"></a><font color=Blue>q_le_unsigned_aux</font> <font color=Green><u>_</u></font> <font color=Red>=</font> error <font color=Magenta>"q_le // QDInt: cannot compare QDInt&#8217;s of different lengths."</font>
+<a name="line-1273"></a><font color=Blue>q_le_unsigned_aux</font> <font color=Green><u>_</u></font> <font color=Red>=</font> error <font color=Magenta>"q_le // QDInt: cannot compare QDInt&#x2019;s of different lengths."</font>
 <a name="line-1274"></a>
-<a name="line-1275"></a><a name="q_le_signed"></a><font color=Blue><i>-- | Comparison of two 'QDInt's, considered as signed.  Used in @instance 'QOrd' 'QDInt'@.  /O/(&#8467;).</i></font>
+<a name="line-1275"></a><a name="q_le_signed"></a><font color=Blue><i>-- | Comparison of two 'QDInt's, considered as signed.  Used in @instance 'QOrd' 'QDInt'@.  /O/(&#x2113;).</i></font>
 <a name="line-1276"></a><font color=Blue>q_le_signed</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>,</font>Qubit<font color=Cyan>)</font>
 <a name="line-1277"></a><font color=Blue>q_le_signed</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1278"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1298,7 +1298,7 @@
 <a name="line-1291"></a><font color=Blue>q_le_signed_qulist</font> <font color=Cyan>(</font>x_high<font color=Red><b>:</b></font>x_lower<font color=Cyan>)</font> <font color=Cyan>(</font>y_high<font color=Red><b>:</b></font>y_lower<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1292"></a>  <font color=Cyan>(</font><font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>)</font><font color=Cyan>,</font> x_le_y<font color=Cyan>)</font> <font color=Red>&lt;-</font> with_computed_fun <font color=Cyan>(</font>x_high<font color=Red><b>:</b></font>x_lower<font color=Cyan>,</font> y_high<font color=Red><b>:</b></font>y_lower<font color=Cyan>)</font>
 <a name="line-1293"></a>    <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>x_high<font color=Red><b>:</b></font>x_lower<font color=Cyan>,</font> y_high<font color=Red><b>:</b></font>y_lower<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font> 
-<a name="line-1294"></a>  <font color=Blue><i>-- Classically, one would make the recursive call only if needed; but quantumly, it&#8217;s cheaper to do it unconditionally. </i></font>
+<a name="line-1294"></a>  <font color=Blue><i>-- Classically, one would make the recursive call only if needed; but quantumly, it&#x2019;s cheaper to do it unconditionally. </i></font>
 <a name="line-1295"></a>      <font color=Cyan>(</font>x_lower<font color=Cyan>,</font> y_lower<font color=Cyan>,</font> le_lower<font color=Red><b>:</b></font>garbage<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_le_unsigned_aux <font color=Cyan>(</font>x_lower<font color=Cyan>,</font> y_lower<font color=Cyan>)</font>
 <a name="line-1296"></a>      <font color=Cyan>(</font>x_high<font color=Cyan>,</font>y_high<font color=Cyan>,</font>eq_high<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_is_equal x_high y_high
 <a name="line-1297"></a>      return <font color=Cyan>(</font>x_high<font color=Cyan>,</font> y_high<font color=Cyan>,</font> x_lower<font color=Cyan>,</font> y_lower<font color=Cyan>,</font> le_lower<font color=Cyan>,</font> eq_high<font color=Cyan>,</font> garbage<font color=Cyan>)</font><font color=Cyan>)</font>
@@ -1308,9 +1308,9 @@
 <a name="line-1301"></a>      le <font color=Red>&lt;-</font> qnot le <font color=Cyan>`controlled`</font> eq_high <font color=Cyan>.&amp;&amp;.</font> le_lower
 <a name="line-1302"></a>      return <font color=Cyan>(</font><font color=Cyan>(</font>x_high<font color=Cyan>,</font> y_high<font color=Cyan>,</font> x_lower<font color=Cyan>,</font> y_lower<font color=Cyan>,</font> le_lower<font color=Cyan>,</font> eq_high<font color=Cyan>,</font> garbage<font color=Cyan>)</font><font color=Cyan>,</font> le<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-1303"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>,</font>x_le_y<font color=Cyan>)</font>
-<a name="line-1304"></a><font color=Blue>q_le_signed_qulist</font> <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> <font color=Red>=</font> error <font color=Magenta>"q_le // QDInt: cannot compare QDInt&#8217;s of different lengths."</font>
+<a name="line-1304"></a><font color=Blue>q_le_signed_qulist</font> <font color=Green><u>_</u></font> <font color=Green><u>_</u></font> <font color=Red>=</font> error <font color=Magenta>"q_le // QDInt: cannot compare QDInt&#x2019;s of different lengths."</font>
 <a name="line-1305"></a>
-<a name="line-1306"></a><a name="q_lt_signed"></a><font color=Blue><i>-- | Comparison of two 'QDInt's, considered as signed.  Used in @instance 'QOrd' 'QDInt'@. /O/(&#8467;).</i></font>
+<a name="line-1306"></a><a name="q_lt_signed"></a><font color=Blue><i>-- | Comparison of two 'QDInt's, considered as signed.  Used in @instance 'QOrd' 'QDInt'@. /O/(&#x2113;).</i></font>
 <a name="line-1307"></a><font color=Blue>q_lt_signed</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>,</font>Qubit<font color=Cyan>)</font>
 <a name="line-1308"></a><font color=Blue>q_lt_signed</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1309"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1335,7 +1335,7 @@
 <a name="line-1328"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-1329"></a><font color=Blue><i>-- ** Multiplication</i></font>
 <a name="line-1330"></a>
-<a name="line-1331"></a><a name="q_mult_qdint"></a><font color=Blue><i>-- | Multiply two 'QDInt's into a fresh third.  Arguments are assumed to be of equal size.  /O/(&#8467;[sup 2]).</i></font>
+<a name="line-1331"></a><a name="q_mult_qdint"></a><font color=Blue><i>-- | Multiply two 'QDInt's into a fresh third.  Arguments are assumed to be of equal size.  /O/(&#x2113;[sup 2]).</i></font>
 <a name="line-1332"></a><font color=Blue>q_mult_qdint</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1333"></a><font color=Blue>q_mult_qdint</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1334"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1367,11 +1367,11 @@
 <a name="line-1360"></a><font color=Blue><i>-- ** Division and remainder</i></font>
 <a name="line-1361"></a>
 <a name="line-1362"></a><a name="q_moddiv_unsigned_in_place"></a><font color=Blue><i>-- | Reduce one 'QDInt' modulo another, in place, returning also the</i></font>
-<a name="line-1363"></a><font color=Blue><i>-- integer quotient, i.e. (/x/, /y/) &#8614; (/x/ mod /y/, /y/, /x/ div /y/).</i></font>
+<a name="line-1363"></a><font color=Blue><i>-- integer quotient, i.e. (/x/, /y/) &#x21a6; (/x/ mod /y/, /y/, /x/ div /y/).</i></font>
 <a name="line-1364"></a><font color=Blue><i>-- All inputs and outputs are considered unsigned.  Inputs are assumed</i></font>
 <a name="line-1365"></a><font color=Blue><i>-- to have the same length.  Division by zero returns (/x/,0,-1).</i></font>
 <a name="line-1366"></a><font color=Blue><i>-- </i></font>
-<a name="line-1367"></a><font color=Blue><i>-- /O/(&#8467;[sup 2]) gates, /O/(&#8467;) qubits.</i></font>
+<a name="line-1367"></a><font color=Blue><i>-- /O/(&#x2113;[sup 2]) gates, /O/(&#x2113;) qubits.</i></font>
 <a name="line-1368"></a><font color=Blue>q_moddiv_unsigned_in_place</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1369"></a><font color=Blue>q_moddiv_unsigned_in_place</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1370"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1416,7 +1416,7 @@
 <a name="line-1409"></a>            return <font color=Cyan>(</font>y_init<font color=Cyan>,</font>y_2j<font color=Cyan>,</font>rem<font color=Cyan>,</font>quot_bits<font color=Cyan>,</font>le1<font color=Cyan>,</font>le2<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-1410"></a>          <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>y_init<font color=Cyan>,</font>y_2j<font color=Cyan>,</font>rem<font color=Cyan>,</font>quot_bits<font color=Cyan>,</font>le1<font color=Cyan>,</font>le2<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-1411"></a>            <font color=Blue><i>-- flip jth bit of quot, if appropriate</i></font>
-<a name="line-1412"></a>            <font color=Blue><i>-- (leave rem unchanged for now, since it&#8217;s needed to uncompute le1)</i></font>
+<a name="line-1412"></a>            <font color=Blue><i>-- (leave rem unchanged for now, since it&#x2019;s needed to uncompute le1)</i></font>
 <a name="line-1413"></a>            q_j <font color=Red>&lt;-</font> qnot <font color=Cyan>(</font>quot_bits <font color=Cyan>!!</font> <font color=Cyan>(</font>l<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Blue><i>-</i></font>j<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>`controlled`</font> le1 <font color=Cyan>.&amp;&amp;.</font> le2
 <a name="line-1414"></a>            return <font color=Cyan>(</font><font color=Cyan>(</font>y_init<font color=Cyan>,</font>y_2j<font color=Cyan>,</font>rem<font color=Cyan>,</font><font color=Cyan>(</font>overwriteAt <font color=Cyan>(</font>l<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Blue><i>-</i></font>j<font color=Cyan>)</font> q_j quot_bits<font color=Cyan>)</font><font color=Cyan>,</font>le1<font color=Cyan>,</font>le2<font color=Cyan>)</font><font color=Cyan>,</font>()<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-1415"></a>        <font color=Blue><i>-- now, subtract (2^j) from rem, if appropriate.</i></font>
@@ -1427,11 +1427,11 @@
 <a name="line-1420"></a>        return <font color=Cyan>(</font>y<font color=Cyan>,</font>scratch<font color=Cyan>,</font>quot_bits<font color=Cyan>,</font>rem<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-1421"></a>    return <font color=Cyan>(</font>rem<font color=Cyan>,</font> y<font color=Cyan>,</font> quot_bits<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-1422"></a>
-<a name="line-1423"></a><a name="q_mod_unsigned"></a><font color=Blue><i>-- | Reduce one 'QDInt' modulo another, i.e. (/x/, /y/) &#8614; (/x/, /y/, /x/ mod /y/).</i></font>
+<a name="line-1423"></a><a name="q_mod_unsigned"></a><font color=Blue><i>-- | Reduce one 'QDInt' modulo another, i.e. (/x/, /y/) &#x21a6; (/x/, /y/, /x/ mod /y/).</i></font>
 <a name="line-1424"></a><font color=Blue><i>-- All inputs and outputs are considered unsigned.  Inputs are assumed</i></font>
 <a name="line-1425"></a><font color=Blue><i>-- to have the same length.  If /y/ = 0, returns (/x/,0,/x/).</i></font>
 <a name="line-1426"></a><font color=Blue><i>-- </i></font>
-<a name="line-1427"></a><font color=Blue><i>-- /O/(&#8467;[sup 2]) gates, /O/(&#8467;) qubits.</i></font>
+<a name="line-1427"></a><font color=Blue><i>-- /O/(&#x2113;[sup 2]) gates, /O/(&#x2113;) qubits.</i></font>
 <a name="line-1428"></a><font color=Blue>q_mod_unsigned</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1429"></a><font color=Blue>q_mod_unsigned</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1430"></a>  <font color=Cyan>(</font><font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>)</font><font color=Cyan>,</font>x_mod_y<font color=Cyan>)</font> <font color=Red>&lt;-</font> with_computed_fun <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>)</font>
@@ -1442,12 +1442,12 @@
 <a name="line-1435"></a>  return <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>,</font>x_mod_y<font color=Cyan>)</font>
 <a name="line-1436"></a>
 <a name="line-1437"></a><a name="q_divrem_unsigned"></a><font color=Blue><i>-- | Integer division of two 'QDInt's, returning the quotient and remainder,</i></font>
-<a name="line-1438"></a><font color=Blue><i>-- i.e. (/x/,/y/) &#8614; (/x/,/y/,/x/ div /y/,/x/ mod /y/). </i></font>
+<a name="line-1438"></a><font color=Blue><i>-- i.e. (/x/,/y/) &#x21a6; (/x/,/y/,/x/ div /y/,/x/ mod /y/). </i></font>
 <a name="line-1439"></a><font color=Blue><i>-- All inputs and outputs are considered unsigned.</i></font>
 <a name="line-1440"></a><font color=Blue><i>-- Inputs are assumed to have the same length.</i></font>
 <a name="line-1441"></a><font color=Blue><i>-- Division by zero returns (-1,/x/).</i></font>
 <a name="line-1442"></a><font color=Blue><i>--</i></font>
-<a name="line-1443"></a><font color=Blue><i>-- /O/(&#8467;[sup 2]) gates, /O/(&#8467;) qubits.</i></font>
+<a name="line-1443"></a><font color=Blue><i>-- /O/(&#x2113;[sup 2]) gates, /O/(&#x2113;) qubits.</i></font>
 <a name="line-1444"></a><font color=Blue>q_divrem_unsigned</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1445"></a><font color=Blue>q_divrem_unsigned</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1446"></a>  <font color=Cyan>(</font>x<font color=Cyan>,</font>rem<font color=Cyan>)</font> <font color=Red>&lt;-</font> qc_copy_fun x
@@ -1457,9 +1457,9 @@
 <a name="line-1450"></a><font color=Blue><i>-- | Integer division of two 'QDInt's, returning just the quotient.  </i></font>
 <a name="line-1451"></a><font color=Blue><i>-- All inputs/outputs considered unsigned.</i></font>
 <a name="line-1452"></a><font color=Blue><i>-- Inputs are assumed to have the same length.</i></font>
-<a name="line-1453"></a><font color=Blue><i>-- Division by zero returns &#8211;1.</i></font>
+<a name="line-1453"></a><font color=Blue><i>-- Division by zero returns &#x2013;1.</i></font>
 <a name="line-1454"></a><font color=Blue><i>-- </i></font>
-<a name="line-1455"></a><font color=Blue><i>-- /O/(&#8467;[sup 2]) gates, /O/(&#8467;) qubits.</i></font>
+<a name="line-1455"></a><font color=Blue><i>-- /O/(&#x2113;[sup 2]) gates, /O/(&#x2113;) qubits.</i></font>
 <a name="line-1456"></a>
 <a name="line-1457"></a><a name="q_div_unsigned"></a><font color=Blue><i>-- Implementation note: We use a multiplication to do the</i></font>
 <a name="line-1458"></a><font color=Blue><i>-- uncomputation of the remainder, because this uses fewer total gates</i></font>
@@ -1489,13 +1489,13 @@
 <a name="line-1482"></a>  <font color=Green><u>let</u></font> q' <font color=Red>=</font> list_of_xint_bh q
 <a name="line-1483"></a>  return <font color=Cyan>(</font>x'<font color=Cyan>,</font> y'<font color=Cyan>,</font> q'<font color=Cyan>)</font>
 <a name="line-1484"></a>
-<a name="line-1485"></a><a name="q_div"></a><font color=Blue><i>-- | Integer division of two 'QDInt's into a fresh third, rounding towards &#8211;&#8734;. </i></font>
+<a name="line-1485"></a><a name="q_div"></a><font color=Blue><i>-- | Integer division of two 'QDInt's into a fresh third, rounding towards &#x2013;&#x221e;. </i></font>
 <a name="line-1486"></a><font color=Blue><i>-- The first argument is the numerator, and is assumed to be signed.</i></font>
 <a name="line-1487"></a><font color=Blue><i>-- The second argument is the denominator, and is assumed to be unsigned.</i></font>
 <a name="line-1488"></a><font color=Blue><i>-- The output is signed.</i></font>
 <a name="line-1489"></a><font color=Blue><i>-- Inputs are assumed to have the same length.</i></font>
 <a name="line-1490"></a><font color=Blue><i>-- </i></font>
-<a name="line-1491"></a><font color=Blue><i>-- /O/(&#8467;[sup 2]) gates, /O/(&#8467;) qubits.</i></font>
+<a name="line-1491"></a><font color=Blue><i>-- /O/(&#x2113;[sup 2]) gates, /O/(&#x2113;) qubits.</i></font>
 <a name="line-1492"></a><font color=Blue>q_div</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>)</font>
 <a name="line-1493"></a><font color=Blue>q_div</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1494"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1535,7 +1535,7 @@
 <a name="line-1528"></a><font color=Blue><i>-- The output is signed.</i></font>
 <a name="line-1529"></a><font color=Blue><i>-- Inputs are assumed to have the same length.</i></font>
 <a name="line-1530"></a><font color=Blue><i>-- </i></font>
-<a name="line-1531"></a><font color=Blue><i>-- /O/(&#8467;[sup 2]) gates, /O/(&#8467;) qubits.</i></font>
+<a name="line-1531"></a><font color=Blue><i>-- /O/(&#x2113;[sup 2]) gates, /O/(&#x2113;) qubits.</i></font>
 <a name="line-1532"></a><font color=Blue>q_quot</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>)</font>
 <a name="line-1533"></a><font color=Blue>q_quot</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1534"></a>  <font color=Green><u>let</u></font> x' <font color=Red>=</font> list_of_xint_bh x
@@ -1573,7 +1573,7 @@
 <a name="line-1566"></a><font color=Blue><i>-- All inputs/outputs considered unsigned.</i></font>
 <a name="line-1567"></a><font color=Blue><i>-- Inputs are assumed to have the same length.</i></font>
 <a name="line-1568"></a><font color=Blue><i>-- </i></font>
-<a name="line-1569"></a><font color=Blue><i>-- /O/(&#8467;[sup 2]) gates, /O/(&#8467;) qubits.</i></font>
+<a name="line-1569"></a><font color=Blue><i>-- /O/(&#x2113;[sup 2]) gates, /O/(&#x2113;) qubits.</i></font>
 <a name="line-1570"></a><font color=Blue>q_div_exact_unsigned</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1571"></a><font color=Blue>q_div_exact_unsigned</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1572"></a>  <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>,</font>quot<font color=Cyan>,</font>rem<font color=Cyan>)</font> <font color=Red>&lt;-</font> q_divrem_unsigned x y
@@ -1586,7 +1586,7 @@
 <a name="line-1579"></a><font color=Blue><i>-- The second argument is the denominator, considered unsigned.</i></font>
 <a name="line-1580"></a><font color=Blue><i>-- The output is signed.</i></font>
 <a name="line-1581"></a><font color=Blue><i>-- </i></font>
-<a name="line-1582"></a><font color=Blue><i>-- /O/(&#8467;[sup 2]) gates, /O/(&#8467;) qubits.</i></font>
+<a name="line-1582"></a><font color=Blue><i>-- /O/(&#x2113;[sup 2]) gates, /O/(&#x2113;) qubits.</i></font>
 <a name="line-1583"></a><font color=Blue>q_div_exact</font> <font color=Red>::</font> QDInt <font color=Red>-&gt;</font> QDInt <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> QDInt<font color=Cyan>,</font>QDInt<font color=Cyan>)</font>
 <a name="line-1584"></a><font color=Blue>q_div_exact</font> x y <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-1585"></a>  <font color=Cyan>(</font>x<font color=Cyan>,</font><font color=Cyan>(</font>y<font color=Cyan>,</font>quot<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>&lt;-</font> with_computed_fun x
@@ -1603,11 +1603,11 @@
 <a name="line-1596"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-1597"></a><font color=Blue><i>-- * The QNum type class</i></font>
 <a name="line-1598"></a>
-<a name="line-1599"></a><font color=Blue><i>-- $ This section defines a quantum analogue of Haskell&#8217;s 'Num' type</i></font>
+<a name="line-1599"></a><font color=Blue><i>-- $ This section defines a quantum analogue of Haskell&#x2019;s 'Num' type</i></font>
 <a name="line-1600"></a><font color=Blue><i>-- class.  See "Quipper.QClasses" for the general philosophy behind</i></font>
 <a name="line-1601"></a><font color=Blue><i>-- quantum type classes.</i></font>
 <a name="line-1602"></a><font color=Blue><i>-- </i></font>
-<a name="line-1603"></a><font color=Blue><i>-- The type class 'QNum' corresponds to Haskell&#8217;s 'Num', with methods</i></font>
+<a name="line-1603"></a><font color=Blue><i>-- The type class 'QNum' corresponds to Haskell&#x2019;s 'Num', with methods</i></font>
 <a name="line-1604"></a><font color=Blue><i>-- including </i></font>
 <a name="line-1605"></a><font color=Blue><i>-- </i></font>
 <a name="line-1606"></a><font color=Blue><i>-- &gt; add_q :: (QNum qa) =&gt; qa -&gt; qa -&gt; Circ (qa,qa,qa), </i></font>
@@ -1617,38 +1617,38 @@
 <a name="line-1610"></a><font color=Blue><i>-- Note: type class instances don't show up in the documentation. View</i></font>
 <a name="line-1611"></a><font color=Blue><i>-- the source code to see them.</i></font>
 <a name="line-1612"></a>
-<a name="line-1613"></a><font color=Blue><i>-- | Quantum analogue of Haskell&#8217;s 'Num' type class. This provides</i></font>
+<a name="line-1613"></a><font color=Blue><i>-- | Quantum analogue of Haskell&#x2019;s 'Num' type class. This provides</i></font>
 <a name="line-1614"></a><font color=Blue><i>-- basic addition, subtraction, multiplication, sign operations, and</i></font>
 <a name="line-1615"></a><font color=Blue><i>-- conversion from integers.</i></font>
 <a name="line-1616"></a>
 <a name="line-1617"></a><a name="QNum"></a><font color=Green><u>class</u></font> <font color=Cyan>(</font>QData qa<font color=Cyan>)</font> <font color=Red>=&gt;</font> QNum qa <font color=Green><u>where</u></font>
 <a name="line-1618"></a>  <font color=Blue><i>-- | Add two quantum numbers into a fresh one. The arguments are</i></font>
-<a name="line-1619"></a>  <font color=Blue><i>-- assumed to be of equal size. The 'QDInt' instance uses /O/(&#8467;)</i></font>
+<a name="line-1619"></a>  <font color=Blue><i>-- assumed to be of equal size. The 'QDInt' instance uses /O/(&#x2113;)</i></font>
 <a name="line-1620"></a>  <font color=Blue><i>-- gates, both before and after transformation to Toffoli.</i></font>
 <a name="line-1621"></a>  q_add <font color=Red>::</font> qa <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>,</font>qa<font color=Cyan>)</font>
 <a name="line-1622"></a>  
 <a name="line-1623"></a>  <font color=Blue><i>-- | Multiply two quantum numbers into a fresh third. The arguments</i></font>
 <a name="line-1624"></a>  <font color=Blue><i>-- are assumed to be of equal size.  The 'QDInt' instance is</i></font>
-<a name="line-1625"></a>  <font color=Blue><i>-- /O/(&#8467;[sup 2]).</i></font>
+<a name="line-1625"></a>  <font color=Blue><i>-- /O/(&#x2113;[sup 2]).</i></font>
 <a name="line-1626"></a>  q_mult <font color=Red>::</font> qa <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>,</font>qa<font color=Cyan>)</font>
 <a name="line-1627"></a>  
 <a name="line-1628"></a>  <font color=Blue><i>-- | Subtract two quantum numbers into a fresh one. The arguments</i></font>
-<a name="line-1629"></a>  <font color=Blue><i>-- are assumed to be of equal size. The 'QDInt' instance uses /O/(&#8467;)</i></font>
+<a name="line-1629"></a>  <font color=Blue><i>-- are assumed to be of equal size. The 'QDInt' instance uses /O/(&#x2113;)</i></font>
 <a name="line-1630"></a>  <font color=Blue><i>-- gates, both before and after transformation to Toffoli.</i></font>
 <a name="line-1631"></a>  q_sub <font color=Red>::</font> qa <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>,</font>qa<font color=Cyan>)</font>
 <a name="line-1632"></a>  
 <a name="line-1633"></a>  <font color=Blue><i>-- | Compute the absolute value of a (signed) quantum number. The</i></font>
-<a name="line-1634"></a>  <font color=Blue><i>-- 'QDInt' instance is /O/(&#8467;).</i></font>
+<a name="line-1634"></a>  <font color=Blue><i>-- 'QDInt' instance is /O/(&#x2113;).</i></font>
 <a name="line-1635"></a>  q_abs <font color=Red>::</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>)</font>
 <a name="line-1636"></a>  
 <a name="line-1637"></a>  <font color=Blue><i>-- | Compute the negation of a (signed) quantum number. The 'QDInt'</i></font>
-<a name="line-1638"></a>  <font color=Blue><i>-- instance is /O/(&#8467;).</i></font>
+<a name="line-1638"></a>  <font color=Blue><i>-- instance is /O/(&#x2113;).</i></font>
 <a name="line-1639"></a>  q_negate <font color=Red>::</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>)</font>
 <a name="line-1640"></a>  
 <a name="line-1641"></a>  <font color=Blue><i>-- | Compute a quantum number of the same precision as the input,</i></font>
-<a name="line-1642"></a>  <font color=Blue><i>-- with value 1, 0, or &#8211;1, depending on the sign of the</i></font>
-<a name="line-1643"></a>  <font color=Blue><i>-- input. Analogous to Haskell&#8217;s 'signum'. The 'QDInt' instance is</i></font>
-<a name="line-1644"></a>  <font color=Blue><i>-- /O/(&#8467;).</i></font>
+<a name="line-1642"></a>  <font color=Blue><i>-- with value 1, 0, or &#x2013;1, depending on the sign of the</i></font>
+<a name="line-1643"></a>  <font color=Blue><i>-- input. Analogous to Haskell&#x2019;s 'signum'. The 'QDInt' instance is</i></font>
+<a name="line-1644"></a>  <font color=Blue><i>-- /O/(&#x2113;).</i></font>
 <a name="line-1645"></a>  q_signum <font color=Red>::</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>qa<font color=Cyan>,</font>qa<font color=Cyan>)</font>
 <a name="line-1646"></a>  
 <a name="line-1647"></a>  <font color=Blue><i>-- | Convert a 'QDInt' to a quantum number. For the 'QDInt'</i></font>
@@ -1738,7 +1738,7 @@
 <a name="line-1731"></a>  return <font color=Cyan>(</font>a<font color=Cyan>,</font>b<font color=Cyan>,</font>x<font color=Cyan>,</font>y<font color=Cyan>,</font>gcd<font color=Cyan>)</font>
 <a name="line-1732"></a>
 <a name="line-1733"></a>  <font color=Green><u>where</u></font>
-<a name="line-1734"></a>  <font color=Blue><i>-- Classical bound on running time (Lam&#233;&#8217;s theorem), assuming b &lt; a:</i></font>
+<a name="line-1734"></a>  <font color=Blue><i>-- Classical bound on running time (Lam&#x00e9;&#x2019;s theorem), assuming b &lt; a:</i></font>
 <a name="line-1735"></a>  <font color=Blue><i>-- t &lt;= 1 + log_{phi} b &lt;= 1 + l / (log_2 phi)</i></font>
 <a name="line-1736"></a>  <font color=Blue><i>--  </i></font>
 <a name="line-1737"></a>  <font color=Blue><i>-- We allow one extra step since we may have a &lt; b, in which case first step swaps them.</i></font>

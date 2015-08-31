@@ -26,19 +26,19 @@
 <a name="line-19"></a><font color=Blue><i>-- transformers easily. To define a specific transformation, the</i></font>
 <a name="line-20"></a><font color=Blue><i>-- programmer has to specify only four pieces of information:</i></font>
 <a name="line-21"></a><font color=Blue><i>-- </i></font>
-<a name="line-22"></a><font color=Blue><i>-- * A type /a/=&#10214;Qubit&#10215;, to serve as a semantic domain for qubits.</i></font>
+<a name="line-22"></a><font color=Blue><i>-- * A type /a/=&#x27e6;Qubit&#x27e7;, to serve as a semantic domain for qubits.</i></font>
 <a name="line-23"></a><font color=Blue><i>-- </i></font>
-<a name="line-24"></a><font color=Blue><i>-- * A type /b/=&#10214;Bit&#10215;, to serve as a semantic domain for bits.</i></font>
+<a name="line-24"></a><font color=Blue><i>-- * A type /b/=&#x27e6;Bit&#x27e7;, to serve as a semantic domain for bits.</i></font>
 <a name="line-25"></a><font color=Blue><i>-- </i></font>
 <a name="line-26"></a><font color=Blue><i>-- * A monad /m/. This is to allow translations to have side effects</i></font>
 <a name="line-27"></a><font color=Blue><i>-- if desired; one can use the identity monad otherwise.</i></font>
 <a name="line-28"></a><font color=Blue><i>-- </i></font>
-<a name="line-29"></a><font color=Blue><i>-- * For every gate /G/, a corresponding semantic function &#10214;/G/&#10215;.  The</i></font>
+<a name="line-29"></a><font color=Blue><i>-- * For every gate /G/, a corresponding semantic function &#x27e6;/G/&#x27e7;.  The</i></font>
 <a name="line-30"></a><font color=Blue><i>-- type of this function depends on what kind of gate /G/ is. For example:</i></font>
 <a name="line-31"></a><font color=Blue><i>-- </i></font>
 <a name="line-32"></a><font color=Blue><i>-- @</i></font>
-<a name="line-33"></a><font color=Blue><i>-- If /G/ :: Qubit -&gt; Circ Qubit, then &#10214;/G/&#10215; :: /a/ -&gt; /m/ /a/. </i></font>
-<a name="line-34"></a><font color=Blue><i>-- If /G/ :: (Qubit, Bit) -&gt; Circ (Bit, Bit), then &#10214;/G/&#10215; :: (/a/, /b/) -&gt; /m/ (/b/, /b/).</i></font>
+<a name="line-33"></a><font color=Blue><i>-- If /G/ :: Qubit -&gt; Circ Qubit, then &#x27e6;/G/&#x27e7; :: /a/ -&gt; /m/ /a/. </i></font>
+<a name="line-34"></a><font color=Blue><i>-- If /G/ :: (Qubit, Bit) -&gt; Circ (Bit, Bit), then &#x27e6;/G/&#x27e7; :: (/a/, /b/) -&gt; /m/ (/b/, /b/).</i></font>
 <a name="line-35"></a><font color=Blue><i>-- @ </i></font>
 <a name="line-36"></a><font color=Blue><i>-- </i></font>
 <a name="line-37"></a><font color=Blue><i>-- The programmer provides this information by defining a function of</i></font>
@@ -48,7 +48,7 @@
 <a name="line-41"></a><font color=Blue><i>-- outputs:</i></font>
 <a name="line-42"></a><font color=Blue><i>-- </i></font>
 <a name="line-43"></a><font color=Blue><i>-- @</i></font>
-<a name="line-44"></a><font color=Blue><i>-- If /C/ :: Qubit -&gt; (Bit, Qubit), then &#10214;/C/&#10215; :: /a/ -&gt; /m/ (/b/, /a/).</i></font>
+<a name="line-44"></a><font color=Blue><i>-- If /C/ :: Qubit -&gt; (Bit, Qubit), then &#x27e6;/C/&#x27e7; :: /a/ -&gt; /m/ (/b/, /a/).</i></font>
 <a name="line-45"></a><font color=Blue><i>-- @</i></font>
 <a name="line-46"></a>
 <a name="line-47"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
@@ -141,16 +141,16 @@
 <a name="line-134"></a><font color=Blue><i>-- </i></font>
 <a name="line-135"></a><font color=Blue><i>-- To iterate through a circuit, one will typically specify initial</i></font>
 <a name="line-136"></a><font color=Blue><i>-- bindings for the input wires. This encodes the input of the function</i></font>
-<a name="line-137"></a><font color=Blue><i>-- &#10214;/C/&#10215; mentioned in the introduction. The bindings are updated as</i></font>
+<a name="line-137"></a><font color=Blue><i>-- &#x27e6;/C/&#x27e7; mentioned in the introduction. The bindings are updated as</i></font>
 <a name="line-138"></a><font color=Blue><i>-- one passes through each gate. When the iteration is finished, the</i></font>
 <a name="line-139"></a><font color=Blue><i>-- final bindings assign a value to each output wire of the</i></font>
-<a name="line-140"></a><font color=Blue><i>-- circuit. This encodes the output of the function &#10214;/C/&#10215;. Therefore,</i></font>
+<a name="line-140"></a><font color=Blue><i>-- circuit. This encodes the output of the function &#x27e6;/C/&#x27e7;. Therefore,</i></font>
 <a name="line-141"></a><font color=Blue><i>-- the interpretation of a circuit is representable as a function from</i></font>
 <a name="line-142"></a><font color=Blue><i>-- bindings (of input wires) to bindings (of output wires), i.e., it</i></font>
-<a name="line-143"></a><font color=Blue><i>-- has the type &#10214;/C/&#10215; :: 'Bindings' /a/ /b/ -&gt; 'Bindings' /a/ /b/.</i></font>
+<a name="line-143"></a><font color=Blue><i>-- has the type &#x27e6;/C/&#x27e7; :: 'Bindings' /a/ /b/ -&gt; 'Bindings' /a/ /b/.</i></font>
 <a name="line-144"></a>
 <a name="line-145"></a><a name="B_Endpoint"></a><font color=Blue><i>-- | An /endpoint/ is either a /qubit/ or a /bit/. In a transformer,</i></font>
-<a name="line-146"></a><a name="B_Endpoint"></a><font color=Blue><i>-- we have &#10214;Endpoint Qubit Bit&#10215; = &#10214;Qubit&#10215; + &#10214;Bit&#10215;. The type 'Endpoint'</i></font>
+<a name="line-146"></a><a name="B_Endpoint"></a><font color=Blue><i>-- we have &#x27e6;Endpoint Qubit Bit&#x27e7; = &#x27e6;Qubit&#x27e7; + &#x27e6;Bit&#x27e7;. The type 'Endpoint'</i></font>
 <a name="line-147"></a><a name="B_Endpoint"></a><font color=Blue><i>-- /a/ /b/ is the same as 'Either' /a/ /b/, but we use more suggestive</i></font>
 <a name="line-148"></a><a name="B_Endpoint"></a><font color=Blue><i>-- field names.</i></font>
 <a name="line-149"></a><a name="B_Endpoint"></a><font color=Green><u>data</u></font> B_Endpoint a b <font color=Red>=</font>
@@ -241,7 +241,7 @@
 <a name="line-234"></a><font color=Blue>unbind_bit_wire_list</font> bindings ws <font color=Red>=</font>
 <a name="line-235"></a>  map <font color=Cyan>(</font>unbind_bit_wire bindings<font color=Cyan>)</font> ws
 <a name="line-236"></a>    
-<a name="line-237"></a><a name="Ctrls"></a><font color=Blue><i>-- | A list of signed values of type &#10214;Endpoint&#10215;. This type is an</i></font>
+<a name="line-237"></a><a name="Ctrls"></a><font color=Blue><i>-- | A list of signed values of type &#x27e6;Endpoint&#x27e7;. This type is an</i></font>
 <a name="line-238"></a><a name="Ctrls"></a><font color=Blue><i>-- abbreviation defined for convenience.</i></font>
 <a name="line-239"></a><a name="Ctrls"></a><font color=Green><u>type</u></font> Ctrls a b <font color=Red>=</font> <font color=Red>[</font>Signed <font color=Cyan>(</font>B_Endpoint a b<font color=Cyan>)</font><font color=Red>]</font>
 <a name="line-240"></a>
@@ -348,7 +348,7 @@
 <a name="line-341"></a>
 <a name="line-342"></a><font color=Blue><i>-- | A circuit transformer is specified by defining a function of type</i></font>
 <a name="line-343"></a><font color=Blue><i>-- 'Transformer' /m/ /a/ /b/. This involves specifying a monad /m/,</i></font>
-<a name="line-344"></a><font color=Blue><i>-- semantic domains /a/=&#10214;Qubit&#10215; and /b/=&#10214;Bit&#10215;, and a semantic function</i></font>
+<a name="line-344"></a><font color=Blue><i>-- semantic domains /a/=&#x27e6;Qubit&#x27e7; and /b/=&#x27e6;Bit&#x27e7;, and a semantic function</i></font>
 <a name="line-345"></a><font color=Blue><i>-- for each gate, like this:</i></font>
 <a name="line-346"></a><font color=Blue><i>-- </i></font>
 <a name="line-347"></a><font color=Blue><i>-- &gt; my_transformer :: Transformer m a b</i></font>
@@ -554,8 +554,8 @@
 <a name="line-547"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
 <a name="line-548"></a><font color=Blue><i>-- * Applying transformers to circuits</i></font>
 <a name="line-549"></a>
-<a name="line-550"></a><a name="transform_circuit"></a><font color=Blue><i>-- | Apply a 'Transformer' &#10214;-&#10215; to a 'Circuit' /C/, and output the</i></font>
-<a name="line-551"></a><font color=Blue><i>-- semantic function &#10214;/C/&#10215; :: bindings -&gt; bindings.</i></font>
+<a name="line-550"></a><a name="transform_circuit"></a><font color=Blue><i>-- | Apply a 'Transformer' &#x27e6;-&#x27e7; to a 'Circuit' /C/, and output the</i></font>
+<a name="line-551"></a><font color=Blue><i>-- semantic function &#x27e6;/C/&#x27e7; :: bindings -&gt; bindings.</i></font>
 <a name="line-552"></a><font color=Blue>transform_circuit</font> <font color=Red>::</font> Monad m <font color=Red>=&gt;</font> Transformer m a b <font color=Red>-&gt;</font> Circuit <font color=Red>-&gt;</font> Bindings a b <font color=Red>-&gt;</font> m <font color=Cyan>(</font>Bindings a b<font color=Cyan>)</font>
 <a name="line-553"></a><font color=Blue>transform_circuit</font> transformer c bindings <font color=Red>=</font>
 <a name="line-554"></a>  foldM apply bindings gs

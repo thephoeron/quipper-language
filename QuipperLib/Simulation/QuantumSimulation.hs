@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -41,7 +41,7 @@ import Libraries.Auxiliary
 -- we use the state monad to hold our \"quantum\" state
 import Control.Monad.State
 -- we use complex numbers as our probability amplitudes
-import Libraries.Synthesis.Ring (Cplx (..), i)
+import Quantum.Synthesis.Ring (Cplx (..), i)
 -- we use a random number generator to simulate \"quantum randomness\"
 import System.Random hiding (split)
 -- we store \"basis\" states as a map, 
@@ -49,6 +49,9 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 
 import Data.List (partition)
+
+import Control.Applicative (Applicative(..))
+import Control.Monad (liftM, ap)
 
 import qualified Debug.Trace -- used in tracing the simulation of quipper computations
 
@@ -291,6 +294,13 @@ instance (Floating r, Random r, Ord r, RandomGen g) => PMonad r (State g) where
 instance (Num n) => Monad (Vector n) where
 	return a = Vector [(a,1)]
 	(Vector ps) >>= f = Vector [(b,i*j) | (a,i) <- ps, (b,j) <- removeVector (f a)] where removeVector (Vector as) = as 
+
+instance (Num n) => Applicative (Vector n) where
+  pure = return
+  (<*>) = ap
+
+instance (Num n) => Functor (Vector n) where
+  fmap = liftM
 
 -- | We can show certain vectors, ignoring any 0 probabilities, and
 -- combining equal terms.

@@ -5,7 +5,7 @@
 <title>Haskell code</title>
 </head>
 <body>
-<pre><a name="line-1"></a><font color=Blue><i>-- | This module implements the classical operations on ideals used in Hallgren&#8217;s</i></font>
+<pre><a name="line-1"></a><font color=Blue><i>-- | This module implements the classical operations on ideals used in Hallgren&#x2019;s</i></font>
 <a name="line-2"></a><font color=Blue><i>-- algorithm (including also classical versions of the quantum operations required).</i></font>
 <a name="line-3"></a> 
 <a name="line-4"></a><font color=Green><u>module</u></font> Algorithms<font color=Cyan>.</font>CL<font color=Cyan>.</font>RegulatorClassical <font color=Green><u>where</u></font>
@@ -21,7 +21,7 @@
 <a name="line-14"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-15"></a><font color=Blue><i>-- * Basic operations on ideals</i></font>
 <a name="line-16"></a>
-<a name="line-17"></a><a name="unit_ideal"></a><font color=Blue><i>-- | @'unit_ideal' /bigD/ /l/@: the unit ideal /O/, for &#916; = /bigD/, with the ideal&#8217;s coefficients given as /l/-bit integers.  </i></font>
+<a name="line-17"></a><a name="unit_ideal"></a><font color=Blue><i>-- | @'unit_ideal' /bigD/ /l/@: the unit ideal /O/, for &#x0394; = /bigD/, with the ideal&#x2019;s coefficients given as /l/-bit integers.  </i></font>
 <a name="line-18"></a><font color=Blue><i>-- ([Jozsa 2003], Prop. 14.)</i></font>
 <a name="line-19"></a><font color=Blue>unit_ideal</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> Ideal
 <a name="line-20"></a><font color=Blue>unit_ideal</font> <font color=Red>=</font> forget_reduced <font color=Cyan>.</font> unit_idealRed 
@@ -33,7 +33,7 @@
 <a name="line-26"></a>
 <a name="line-27"></a><a name="c_of_ideal"></a><font color=Blue><i>-- | The integer constant /c/ of an ideal.</i></font>
 <a name="line-28"></a><font color=Blue><i>--   ([Jozsa 2003], page 14 bottom: \"Since 4/a/ divides /b/[sup 2]-/D/</i></font>
-<a name="line-29"></a><font color=Blue><i>--   (cf. proposition 16) we introduce the integer /c/ = |/D/ &#8722; /b/[sup 2]|\/(4/a/)\")</i></font>
+<a name="line-29"></a><font color=Blue><i>--   (cf. proposition 16) we introduce the integer /c/ = |/D/ &#x2212; /b/[sup 2]|\/(4/a/)\")</i></font>
 <a name="line-30"></a><font color=Blue>c_of_ideal</font> <font color=Red>::</font> Ideal <font color=Red>-&gt;</font> CLInt
 <a name="line-31"></a><font color=Blue>c_of_ideal</font> i<font color=Red>@</font><font color=Cyan>(</font>Ideal bigD m l a b<font color=Cyan>)</font> <font color=Red>=</font>
 <a name="line-32"></a>    <font color=Green><u>if</u></font> <font color=Cyan>(</font>num <font color=Cyan>`mod`</font> denom <font color=Cyan>==</font> <font color=Magenta>0</font><font color=Cyan>)</font> <font color=Green><u>then</u></font> num <font color=Cyan>`div`</font> denom
@@ -42,16 +42,16 @@
 <a name="line-35"></a>          denom <font color=Red>=</font> <font color=Magenta>4</font><font color=Cyan>*</font>a
 <a name="line-36"></a>          error_string <font color=Red>=</font> <font color=Magenta>"rho of ideal ["</font> <font color=Cyan>++</font> show i <font color=Cyan>++</font> <font color=Magenta>"] produces non-integer c"</font>
 <a name="line-37"></a>
-<a name="line-38"></a><a name="gamma_of_ideal"></a><font color=Blue><i>-- | &#947;(/I/) = (/b/+&#8730;&#916;)\/(2/a/) for a given ideal /I/.</i></font>
+<a name="line-38"></a><a name="gamma_of_ideal"></a><font color=Blue><i>-- | &#x03b3;(/I/) = (/b/+&#x221a;&#x0394;)\/(2/a/) for a given ideal /I/.</i></font>
 <a name="line-39"></a><font color=Blue><i>--   ([Jozsa 2003], Sec. 6.2.)</i></font>
 <a name="line-40"></a><font color=Blue>gamma_of_ideal</font> <font color=Red>::</font> Ideal <font color=Red>-&gt;</font> AlgNum
 <a name="line-41"></a><font color=Blue>gamma_of_ideal</font> <font color=Cyan>(</font>Ideal bigD m l a b<font color=Cyan>)</font> <font color=Red>=</font> AlgNum a' b' bigD
 <a name="line-42"></a>    <font color=Green><u>where</u></font>
 <a name="line-43"></a>        a' <font color=Red>=</font> <font color=Cyan>(</font>fromIntegral b <font color=Cyan>/</font> fromIntegral <font color=Cyan>(</font><font color=Magenta>2</font><font color=Cyan>*</font>a<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>::</font> CLRational
 <a name="line-44"></a>        b' <font color=Red>=</font> <font color=Cyan>(</font>fromIntegral <font color=Magenta>1</font> <font color=Cyan>/</font> fromIntegral <font color=Cyan>(</font><font color=Magenta>2</font><font color=Cyan>*</font>a<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Red>::</font> CLRational
-<a name="line-45"></a>  <font color=Blue><i>-- Recall: @'AlgNum' u v bigD@ represents (u + v * &#8730;bigD).</i></font>
+<a name="line-45"></a>  <font color=Blue><i>-- Recall: @'AlgNum' u v bigD@ represents (u + v * &#x221a;bigD).</i></font>
 <a name="line-46"></a>
-<a name="line-47"></a><a name="rho"></a><font color=Blue><i>-- | The reduction function &#961; on ideals.</i></font>
+<a name="line-47"></a><a name="rho"></a><font color=Blue><i>-- | The reduction function &#x03c1; on ideals.</i></font>
 <a name="line-48"></a><font color=Blue><i>-- ([Jozsa 2003], Sec. 6.2.)</i></font>
 <a name="line-49"></a><font color=Blue>rho</font> <font color=Red>::</font> Ideal <font color=Red>-&gt;</font> Ideal
 <a name="line-50"></a><font color=Blue>rho</font> ii<font color=Red>@</font><font color=Cyan>(</font>Ideal bigD m l a b<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>Ideal bigD m'' l'' a' b'<font color=Cyan>)</font>
@@ -65,7 +65,7 @@
 <a name="line-58"></a>        a'   <font color=Red>=</font> c_of_ideal ii
 <a name="line-59"></a>        b'   <font color=Red>=</font> tau bigD <font color=Cyan>(</font><font color=Blue><i>-</i></font>b<font color=Cyan>)</font> a'
 <a name="line-60"></a>
-<a name="line-61"></a><a name="rho_inv"></a><font color=Blue><i>-- | The &#961;[sup -1] function on ideals.  Inverse to 'rho'.</i></font>
+<a name="line-61"></a><a name="rho_inv"></a><font color=Blue><i>-- | The &#x03c1;[sup -1] function on ideals.  Inverse to 'rho'.</i></font>
 <a name="line-62"></a><font color=Blue><i>-- ([Jozsa 2003], Sec. 6.4.)</i></font>
 <a name="line-63"></a><font color=Blue>rho_inv</font> <font color=Red>::</font> Ideal <font color=Red>-&gt;</font> Ideal
 <a name="line-64"></a><font color=Blue>rho_inv</font> <font color=Cyan>(</font>Ideal bigD m l a b<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>Ideal bigD m'' l'' a'' b''<font color=Cyan>)</font>
@@ -82,15 +82,15 @@
 <a name="line-75"></a>        a''   <font color=Red>=</font> <font color=Cyan>(</font><font color=Cyan>(</font>fromIntegral bigD<font color=Cyan>)</font> <font color=Blue><i>-</i></font> b'<font color=Cyan>*</font>b'<font color=Cyan>)</font> <font color=Cyan>`divchk`</font> <font color=Cyan>(</font><font color=Magenta>4</font><font color=Cyan>*</font>a<font color=Cyan>)</font>
 <a name="line-76"></a>        b''   <font color=Red>=</font> tau bigD b' a''
 <a name="line-77"></a>
-<a name="line-78"></a><a name="rho_red"></a><font color=Blue><i>-- | The &#961; operation on reduced ideals.</i></font>
+<a name="line-78"></a><a name="rho_red"></a><font color=Blue><i>-- | The &#x03c1; operation on reduced ideals.</i></font>
 <a name="line-79"></a><font color=Blue>rho_red</font> <font color=Red>::</font> IdealRed <font color=Red>-&gt;</font> IdealRed
 <a name="line-80"></a><font color=Blue>rho_red</font> <font color=Red>=</font> to_reduced <font color=Cyan>.</font> rho <font color=Cyan>.</font> forget_reduced
 <a name="line-81"></a>
-<a name="line-82"></a><a name="rho_inv_red"></a><font color=Blue><i>-- | The &#961;[sup &#8211;1] operation on reduced ideals.</i></font>
+<a name="line-82"></a><a name="rho_inv_red"></a><font color=Blue><i>-- | The &#x03c1;[sup &#x2013;1] operation on reduced ideals.</i></font>
 <a name="line-83"></a><font color=Blue>rho_inv_red</font> <font color=Red>::</font> IdealRed <font color=Red>-&gt;</font> IdealRed
 <a name="line-84"></a><font color=Blue>rho_inv_red</font> <font color=Red>=</font> to_reduced <font color=Cyan>.</font> rho_inv <font color=Cyan>.</font> forget_reduced
 <a name="line-85"></a>
-<a name="line-86"></a><a name="rho_d"></a><font color=Blue><i>-- | The &#961; operation on ideals-with-distance.</i></font>
+<a name="line-86"></a><a name="rho_d"></a><font color=Blue><i>-- | The &#x03c1; operation on ideals-with-distance.</i></font>
 <a name="line-87"></a><font color=Blue>rho_d</font> <font color=Red>::</font> IdDist <font color=Red>-&gt;</font> IdDist
 <a name="line-88"></a><font color=Blue>rho_d</font> <font color=Cyan>(</font>ii<font color=Cyan>,</font> del<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>rho ii<font color=Cyan>,</font> del <font color=Cyan>+</font> del_change<font color=Cyan>)</font>
 <a name="line-89"></a>  <font color=Green><u>where</u></font>
@@ -98,7 +98,7 @@
 <a name="line-91"></a>    gamma_bar_by_gamma <font color=Red>=</font> <font color=Cyan>(</font>floating_of_AlgNum <font color=Cyan>$</font> conjugate gamma<font color=Cyan>)</font> <font color=Cyan>/</font> <font color=Cyan>(</font>floating_of_AlgNum gamma<font color=Cyan>)</font>
 <a name="line-92"></a>    del_change <font color=Red>=</font> <font color=Cyan>(</font>log <font color=Cyan>$</font> abs gamma_bar_by_gamma<font color=Cyan>)</font> <font color=Cyan>/</font> <font color=Magenta>2</font>
 <a name="line-93"></a>
-<a name="line-94"></a><a name="rho_inv_d"></a><font color=Blue><i>-- | The &#961;[sup &#8211;1] operation on ideals-with-distance.</i></font>
+<a name="line-94"></a><a name="rho_inv_d"></a><font color=Blue><i>-- | The &#x03c1;[sup &#x2013;1] operation on ideals-with-distance.</i></font>
 <a name="line-95"></a><font color=Blue>rho_inv_d</font> <font color=Red>::</font> IdDist <font color=Red>-&gt;</font> IdDist
 <a name="line-96"></a><font color=Blue>rho_inv_d</font> <font color=Cyan>(</font>ii<font color=Cyan>,</font> del<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>ii'<font color=Cyan>,</font> del <font color=Blue><i>-</i></font> del_change<font color=Cyan>)</font>
 <a name="line-97"></a>  <font color=Green><u>where</u></font>
@@ -107,22 +107,22 @@
 <a name="line-100"></a>    gamma_bar_by_gamma <font color=Red>=</font> <font color=Cyan>(</font>floating_of_AlgNum <font color=Cyan>$</font> conjugate gamma<font color=Cyan>)</font> <font color=Cyan>/</font> <font color=Cyan>(</font>floating_of_AlgNum gamma<font color=Cyan>)</font>
 <a name="line-101"></a>    del_change <font color=Red>=</font> <font color=Cyan>(</font>log <font color=Cyan>$</font> abs gamma_bar_by_gamma<font color=Cyan>)</font> <font color=Cyan>/</font> <font color=Magenta>2</font>
 <a name="line-102"></a>
-<a name="line-103"></a><a name="rho_num"></a><font color=Blue><i>-- | The &#961; operation on ideals-with-generator (i.e. pairs of an ideal /I/ and an 'AlgNum' /x/ such that /I/ is the principal ideal (/x/)).</i></font>
+<a name="line-103"></a><a name="rho_num"></a><font color=Blue><i>-- | The &#x03c1; operation on ideals-with-generator (i.e. pairs of an ideal /I/ and an 'AlgNum' /x/ such that /I/ is the principal ideal (/x/)).</i></font>
 <a name="line-104"></a><font color=Blue>rho_num</font> <font color=Red>::</font> <font color=Cyan>(</font>Ideal<font color=Cyan>,</font>AlgNum<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Cyan>(</font>Ideal<font color=Cyan>,</font>AlgNum<font color=Cyan>)</font>
 <a name="line-105"></a><font color=Blue>rho_num</font> <font color=Cyan>(</font>ii<font color=Cyan>,</font> gen<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>rho ii<font color=Cyan>,</font> gen <font color=Cyan>/</font> <font color=Cyan>(</font>gamma_of_ideal ii<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-106"></a>
-<a name="line-107"></a><a name="rho_red_num"></a><font color=Blue><i>-- | Apply &#961; to an reduced-ideals-with-generator</i></font>
+<a name="line-107"></a><a name="rho_red_num"></a><font color=Blue><i>-- | Apply &#x03c1; to an reduced-ideals-with-generator</i></font>
 <a name="line-108"></a><font color=Blue>rho_red_num</font> <font color=Red>::</font> <font color=Cyan>(</font>IdealRed<font color=Cyan>,</font>AlgNum<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Cyan>(</font>IdealRed<font color=Cyan>,</font>AlgNum<font color=Cyan>)</font>
 <a name="line-109"></a><font color=Blue>rho_red_num</font> <font color=Cyan>(</font>ii<font color=Cyan>,</font> gen<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font>rho_red ii<font color=Cyan>,</font> gen <font color=Cyan>/</font> <font color=Cyan>(</font>gamma_of_ideal <font color=Cyan>$</font> forget_reduced ii<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-110"></a>
 <a name="line-111"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-112"></a><font color=Blue><i>-- * Ideal reductions (bounded)</i></font>
 <a name="line-113"></a>
-<a name="line-114"></a><a name="reduce"></a><font color=Blue><i>-- | Reduce an ideal, by repeatedly applying &#961;.</i></font>
+<a name="line-114"></a><a name="reduce"></a><font color=Blue><i>-- | Reduce an ideal, by repeatedly applying &#x03c1;.</i></font>
 <a name="line-115"></a><font color=Blue>reduce</font> <font color=Red>::</font> Ideal <font color=Red>-&gt;</font> IdealRed
 <a name="line-116"></a><font color=Blue>reduce</font> ii <font color=Red>=</font> to_reduced <font color=Cyan>$</font> while <font color=Cyan>(</font>not <font color=Cyan>.</font> is_reduced<font color=Cyan>)</font> rho ii
 <a name="line-117"></a>
-<a name="line-118"></a><a name="bounded_reduce"></a><font color=Blue><i>-- | Reduce an ideal within a bounded loop. Applies the &#961; function</i></font>
+<a name="line-118"></a><a name="bounded_reduce"></a><font color=Blue><i>-- | Reduce an ideal within a bounded loop. Applies the &#x03c1; function</i></font>
 <a name="line-119"></a><font color=Blue><i>--   until the ideal is reduced. Used in 'star' and 'fJN' algorithms.</i></font>
 <a name="line-120"></a><font color=Blue>bounded_reduce</font> <font color=Red>::</font> IdDist <font color=Red>-&gt;</font> IdDist
 <a name="line-121"></a><font color=Blue>bounded_reduce</font> k<font color=Red>@</font><font color=Cyan>(</font>ideal<font color=Red>@</font><font color=Cyan>(</font>Ideal bigD m l a b<font color=Cyan>)</font><font color=Cyan>,</font>dist<font color=Cyan>)</font> <font color=Red>=</font> 
@@ -137,8 +137,8 @@
 <a name="line-130"></a>        condition <font color=Cyan>(</font>k<font color=Cyan>,</font>itr<font color=Cyan>)</font> <font color=Red>=</font> not <font color=Cyan>$</font> is_reduced <font color=Cyan>$</font> fst k
 <a name="line-131"></a>        func      <font color=Cyan>(</font>k<font color=Cyan>,</font>itr<font color=Cyan>)</font> <font color=Red>=</font> <font color=Cyan>(</font><font color=Cyan>(</font>rho_d k<font color=Cyan>)</font><font color=Cyan>,</font><font color=Cyan>(</font>itr<font color=Cyan>+</font><font color=Magenta>1</font><font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-132"></a>
-<a name="line-133"></a><a name="bounded_step"></a><font color=Blue><i>-- | Apply a function (like &#961;,&#961;[sup -1],&#961;[sup 2]) to an ideal, bounded</i></font>
-<a name="line-134"></a><font color=Blue><i>--   by 3*ln(&#916;)\/2*ln(2). Execute while satisfies condition function.</i></font>
+<a name="line-133"></a><a name="bounded_step"></a><font color=Blue><i>-- | Apply a function (like &#x03c1;,&#x03c1;[sup -1],&#x03c1;[sup 2]) to an ideal, bounded</i></font>
+<a name="line-134"></a><font color=Blue><i>--   by 3*ln(&#x0394;)\/2*ln(2). Execute while satisfies condition function.</i></font>
 <a name="line-135"></a><font color=Blue>bounded_step</font> <font color=Red>::</font> <font color=Cyan>(</font>IdDist <font color=Red>-&gt;</font> Bool<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Cyan>(</font>IdDist <font color=Red>-&gt;</font> IdDist<font color=Cyan>)</font> <font color=Red>-&gt;</font> IdDist <font color=Red>-&gt;</font> IdDist
 <a name="line-136"></a><font color=Blue>bounded_step</font> condition step_function ideal <font color=Red>=</font>
 <a name="line-137"></a>    <font color=Blue><i>-- Execute a bounded while loop</i></font>
@@ -158,7 +158,7 @@
 <a name="line-151"></a>
 <a name="line-152"></a><font color=Blue><i>-- | The ordinary (not necessarily reduced) product of two reduced fractional ideals.</i></font>
 <a name="line-153"></a><font color=Blue><i>-- </i></font>
-<a name="line-154"></a><font color=Blue><i>-- /I/&#8901;/J/ of [Jozsa 2003], Sec 7.1, following the description</i></font>
+<a name="line-154"></a><font color=Blue><i>-- /I/&#x22c5;/J/ of [Jozsa 2003], Sec 7.1, following the description</i></font>
 <a name="line-155"></a><font color=Blue><i>-- given in Prop. 34.</i></font>
 <a name="line-156"></a>
 <a name="line-157"></a><a name="dot"></a><font color=Blue><i>-- NOTE: assumes I, J reduced.  Type should reflect this!</i></font>
@@ -182,7 +182,7 @@
 <a name="line-175"></a>        l <font color=Red>=</font> a3
 <a name="line-176"></a>        del <font color=Red>=</font> <font color=Cyan>(</font><font color=Cyan>(</font>delta i1<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>delta i2<font color=Cyan>)</font><font color=Cyan>)</font>
 <a name="line-177"></a>
-<a name="line-178"></a><a name="dot'"></a><font color=Blue><i>-- | The dot-square /I/&#8901;/I/ of an ideal-with-distance /I/.</i></font>
+<a name="line-178"></a><a name="dot'"></a><font color=Blue><i>-- | The dot-square /I/&#x22c5;/I/ of an ideal-with-distance /I/.</i></font>
 <a name="line-179"></a><font color=Blue>dot'</font> <font color=Red>::</font> IdDist <font color=Red>-&gt;</font> IdDist
 <a name="line-180"></a><font color=Blue>dot'</font> i1<font color=Red>@</font><font color=Cyan>(</font>Ideal bigD1 m1 l1 a1 b1<font color=Cyan>,</font> delta1<font color=Cyan>)</font> <font color=Red>=</font>
 <a name="line-181"></a>    assert_reduced <font color=Cyan>(</font>fst i1<font color=Cyan>)</font> <font color=Cyan>$</font>
@@ -204,7 +204,7 @@
 <a name="line-197"></a><font color=Blue><i>-- | The star-product of two ideals-with-distance.</i></font>
 <a name="line-198"></a><font color=Blue><i>--</i></font>
 <a name="line-199"></a><font color=Blue><i>-- This is /I/*/J/ of [Jozsa 2003], Sec. 7.1, defined as the first reduced</i></font>
-<a name="line-200"></a><font color=Blue><i>-- ideal-with-distance following /I/&#8901;/J/.</i></font>
+<a name="line-200"></a><font color=Blue><i>-- ideal-with-distance following /I/&#x22c5;/J/.</i></font>
 <a name="line-201"></a>
 <a name="line-202"></a><a name="star"></a><font color=Blue><i>-- NOTE: assumes I, J reduced.  Type should reflect this!</i></font>
 <a name="line-203"></a><font color=Blue>star</font> <font color=Red>::</font> IdDist <font color=Red>-&gt;</font> IdDist <font color=Red>-&gt;</font> IdDist
@@ -226,9 +226,9 @@
 <a name="line-219"></a><font color=Blue>compute_injl</font> i nn j ll <font color=Red>=</font>
 <a name="line-220"></a>    <font color=Cyan>(</font>fromIntegral i<font color=Cyan>)</font><font color=Cyan>/</font><font color=Cyan>(</font>fromIntegral nn<font color=Cyan>)</font> <font color=Cyan>+</font> <font color=Cyan>(</font>fromIntegral j<font color=Cyan>)</font><font color=Cyan>/</font><font color=Cyan>(</font>fromIntegral ll<font color=Cyan>)</font>
 <a name="line-221"></a>
-<a name="line-222"></a><a name="fN"></a><font color=Blue><i>-- |  @'fN' /i/ /j/ /n/ /l/ &#916;@: find the minimal ideal-with-distance (/J/,&#948;[sub /J/]) such that &#948;[sub /J/] &gt; /x/, where /x/ = /i/\//N/ + /j/\//L/, where /N/ = 2[sup /n/], /L/ = 2[sup /l/]. Return (/i/,/J/,&#948;[sub /J/]&#8211;/x/).  Work under the assumption that /R/ &lt; 2[sup /s/].</i></font>
+<a name="line-222"></a><a name="fN"></a><font color=Blue><i>-- |  @'fN' /i/ /j/ /n/ /l/ &#x0394;@: find the minimal ideal-with-distance (/J/,&#x03b4;[sub /J/]) such that &#x03b4;[sub /J/] &gt; /x/, where /x/ = /i/\//N/ + /j/\//L/, where /N/ = 2[sup /n/], /L/ = 2[sup /l/]. Return (/i/,/J/,&#x03b4;[sub /J/]&#x2013;/x/).  Work under the assumption that /R/ &lt; 2[sup /s/].</i></font>
 <a name="line-223"></a><font color=Blue><i>--</i></font>
-<a name="line-224"></a><font color=Blue><i>-- This is the function /h/ of [Jozsa 2003, Section 9], discretized with precision 1\//N/ = 2[sup &#8722;/n/],</i></font>
+<a name="line-224"></a><font color=Blue><i>-- This is the function /h/ of [Jozsa 2003, Section 9], discretized with precision 1\//N/ = 2[sup &#x2212;/n/],</i></font>
 <a name="line-225"></a><font color=Blue><i>-- and perturbed by the jitter parameter /j/\//L/.</i></font>
 <a name="line-226"></a><font color=Blue>fN</font> <font color=Red>::</font> <font color=Cyan>(</font>Integral int<font color=Cyan>)</font> <font color=Red>=&gt;</font> CLInt <font color=Red>-&gt;</font> CLInt <font color=Red>-&gt;</font> int <font color=Red>-&gt;</font> int <font color=Red>-&gt;</font> CLIntP <font color=Red>-&gt;</font> <font color=Cyan>(</font>Ideal<font color=Cyan>,</font> CLInt<font color=Cyan>)</font>
 <a name="line-227"></a><font color=Blue>fN</font> i j nn ll bigD <font color=Red>=</font>
@@ -325,7 +325,7 @@
 <a name="line-318"></a><font color=Blue>first_return_with_projection</font> <font color=Red>::</font> <font color=Cyan>(</font>Eq b<font color=Cyan>)</font> <font color=Red>=&gt;</font> <font color=Cyan>(</font>a <font color=Red>-&gt;</font> b<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Cyan>(</font>a <font color=Red>-&gt;</font> a<font color=Cyan>)</font> <font color=Red>-&gt;</font> a <font color=Red>-&gt;</font> a
 <a name="line-319"></a><font color=Blue>first_return_with_projection</font> p f x <font color=Red>=</font> head <font color=Cyan>$</font> dropWhile <font color=Cyan>(</font><font color=Red>\</font>y <font color=Red>-&gt;</font> p y <font color=Cyan>/=</font> p x<font color=Cyan>)</font> <font color=Cyan>$</font> tail <font color=Cyan>$</font> iterate f x
 <a name="line-320"></a>
-<a name="line-321"></a><a name="first_return_with_proj_bdd"></a><font color=Blue><i>-- | Given a bound /b/, a function /p/, an endofunction /f/, and an argument /x/, return /f/[sup /n/](/x/), for the first /n/ &gt; 0 such that /p/(/f/[sup /n/](/x/)) = /p/(/x/), if there exists such an /n/ &#8804; /b/.</i></font>
+<a name="line-321"></a><a name="first_return_with_proj_bdd"></a><font color=Blue><i>-- | Given a bound /b/, a function /p/, an endofunction /f/, and an argument /x/, return /f/[sup /n/](/x/), for the first /n/ &gt; 0 such that /p/(/f/[sup /n/](/x/)) = /p/(/x/), if there exists such an /n/ &#x2264; /b/.</i></font>
 <a name="line-322"></a><font color=Blue><i>--</i></font>
 <a name="line-323"></a><font color=Blue><i>-- Method: simple brute-force search/comparison.</i></font>
 <a name="line-324"></a><font color=Blue>first_return_with_proj_bdd</font> <font color=Red>::</font> <font color=Cyan>(</font>Eq b<font color=Cyan>)</font> <font color=Red>=&gt;</font> Int <font color=Red>-&gt;</font> <font color=Cyan>(</font>a <font color=Red>-&gt;</font> b<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Cyan>(</font>a <font color=Red>-&gt;</font> a<font color=Cyan>)</font> <font color=Red>-&gt;</font> a <font color=Red>-&gt;</font> Maybe a
@@ -338,18 +338,18 @@
 <a name="line-331"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-332"></a><font color=Blue><i>-- ** Haskell native arithmetic</i></font>
 <a name="line-333"></a>
-<a name="line-334"></a><font color=Blue><i>-- $ The functions of this section use Haskell&#8217;s native integer and floating computation.</i></font>
+<a name="line-334"></a><font color=Blue><i>-- $ The functions of this section use Haskell&#x2019;s native integer and floating computation.</i></font>
 <a name="line-335"></a>
-<a name="line-336"></a><a name="regulator"></a><font color=Blue><i>-- | Find the regulator /R/ = log &#949;[sub 0] of a field, given the discriminant &#916;, </i></font>
-<a name="line-337"></a><font color=Blue><i>-- by finding (classically) the order of &#961;.  </i></font>
+<a name="line-336"></a><a name="regulator"></a><font color=Blue><i>-- | Find the regulator /R/ = log &#x03b5;[sub 0] of a field, given the discriminant &#x0394;, </i></font>
+<a name="line-337"></a><font color=Blue><i>-- by finding (classically) the order of &#x03c1;.  </i></font>
 <a name="line-338"></a><font color=Blue><i>--</i></font>
 <a name="line-339"></a><font color=Blue><i>-- Uses 'IdDist' and 'rho_d'.</i></font>
 <a name="line-340"></a><font color=Blue>regulator</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> FPReal
 <a name="line-341"></a><font color=Blue>regulator</font> bigD <font color=Red>=</font> snd <font color=Cyan>$</font> head <font color=Cyan>$</font> dropWhile <font color=Cyan>(</font><font color=Red>\</font><font color=Cyan>(</font>ii<font color=Cyan>,</font><font color=Green><u>_</u></font><font color=Cyan>)</font> <font color=Red>-&gt;</font> ii <font color=Cyan>/=</font> calO<font color=Cyan>)</font> <font color=Cyan>$</font> tail <font color=Cyan>$</font> iterate rho_d <font color=Cyan>$</font> <font color=Cyan>(</font>calO<font color=Cyan>,</font><font color=Magenta>0</font><font color=Cyan>)</font>
 <a name="line-342"></a>  <font color=Green><u>where</u></font> calO <font color=Red>=</font> unit_ideal bigD
 <a name="line-343"></a>
-<a name="line-344"></a><a name="fundamental_unit"></a><font color=Blue><i>-- | Find the fundamental unit &#949;[sub 0] of a field, given the discriminant &#916;, </i></font>
-<a name="line-345"></a><font color=Blue><i>-- by finding (classically) the order of &#961;.</i></font>
+<a name="line-344"></a><a name="fundamental_unit"></a><font color=Blue><i>-- | Find the fundamental unit &#x03b5;[sub 0] of a field, given the discriminant &#x0394;, </i></font>
+<a name="line-345"></a><font color=Blue><i>-- by finding (classically) the order of &#x03c1;.</i></font>
 <a name="line-346"></a><font color=Blue><i>--</i></font>
 <a name="line-347"></a><font color=Blue><i>-- Uses '(Ideal,Number)' and 'rho_num'.</i></font>
 <a name="line-348"></a><font color=Blue>fundamental_unit</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> AlgNum
@@ -357,13 +357,13 @@
 <a name="line-350"></a>  <font color=Green><u>where</u></font> eps <font color=Red>=</font> snd <font color=Cyan>$</font> first_return_with_projection fst rho_num <font color=Cyan>(</font>calO<font color=Cyan>,</font><font color=Magenta>1</font><font color=Cyan>)</font>
 <a name="line-351"></a>        calO <font color=Red>=</font> unit_ideal bigD
 <a name="line-352"></a>
-<a name="line-353"></a><a name="fundamental_solution"></a><font color=Blue><i>-- | Find the fundamental solution of Pell&#8217;s equation, given /d/.</i></font>
+<a name="line-353"></a><a name="fundamental_solution"></a><font color=Blue><i>-- | Find the fundamental solution of Pell&#x2019;s equation, given /d/.</i></font>
 <a name="line-354"></a><font color=Blue><i>--</i></font>
-<a name="line-355"></a><font color=Blue><i>-- Solutions of Pell&#8217;s equations are integer pairs (/x/,/y/) such that</i></font>
-<a name="line-356"></a><font color=Blue><i>-- /x/,/y/ &gt; 0, and (/x/ + /y/&#8730;d)(/x/ &#8211; /y/&#8730;d) = 1.</i></font>
+<a name="line-355"></a><font color=Blue><i>-- Solutions of Pell&#x2019;s equations are integer pairs (/x/,/y/) such that</i></font>
+<a name="line-356"></a><font color=Blue><i>-- /x/,/y/ &gt; 0, and (/x/ + /y/&#x221a;d)(/x/ &#x2013; /y/&#x221a;d) = 1.</i></font>
 <a name="line-357"></a><font color=Blue><i>--</i></font>
-<a name="line-358"></a><font color=Blue><i>-- In this situation, (/x/ + /y/&#8730;d) is a unit of the algebraic integers </i></font>
-<a name="line-359"></a><font color=Blue><i>-- of /K/, and is &gt;1, so we simply search the powers of &#949;[sub 0] for a</i></font>
+<a name="line-358"></a><font color=Blue><i>-- In this situation, (/x/ + /y/&#x221a;d) is a unit of the algebraic integers </i></font>
+<a name="line-359"></a><font color=Blue><i>-- of /K/, and is &gt;1, so we simply search the powers of &#x03b5;[sub 0] for a</i></font>
 <a name="line-360"></a><font color=Blue><i>-- unit of the desired form.</i></font>
 <a name="line-361"></a><font color=Blue>fundamental_solution</font> <font color=Red>::</font> CLIntP <font color=Red>-&gt;</font> <font color=Cyan>(</font>Integer<font color=Cyan>,</font>Integer<font color=Cyan>)</font>
 <a name="line-362"></a><font color=Blue>fundamental_solution</font> d <font color=Red>=</font> head pell_solutions
@@ -386,8 +386,8 @@
 <a name="line-379"></a><font color=Blue><i>-- of floating-point operations) the quantum circuit implementations, and hence allows</i></font>
 <a name="line-380"></a><font color=Blue><i>-- testing of whether the chosen precisions are accurate.</i></font>
 <a name="line-381"></a>
-<a name="line-382"></a><a name="regulator_fixed_prec"></a><font color=Blue><i>-- | Find the regulator /R/ = log &#949;[sub 0] of a field, given the discriminant &#916;, </i></font>
-<a name="line-383"></a><font color=Blue><i>-- by finding (classically) the order of &#961;</i></font>
+<a name="line-382"></a><a name="regulator_fixed_prec"></a><font color=Blue><i>-- | Find the regulator /R/ = log &#x03b5;[sub 0] of a field, given the discriminant &#x0394;, </i></font>
+<a name="line-383"></a><font color=Blue><i>-- by finding (classically) the order of &#x03c1;</i></font>
 <a name="line-384"></a><font color=Blue><i>-- using fixed-precision arithmetic: 'fix_sizes_Ideal' for 'Ideal's,</i></font>
 <a name="line-385"></a><font color=Blue><i>-- and given an assumed bound /b/ on log[sub 2] /R/.</i></font>
 <a name="line-386"></a><font color=Blue><i>--</i></font>
@@ -403,15 +403,15 @@
 <a name="line-396"></a>        l <font color=Red>=</font> <font color=Magenta>4</font> <font color=Cyan>+</font> q <font color=Cyan>+</font> n
 <a name="line-397"></a>        p <font color=Red>=</font> precision_for_fN bigD n l
 <a name="line-398"></a>        zero <font color=Red>=</font> fprealx <font color=Cyan>(</font><font color=Blue><i>-</i></font>p<font color=Cyan>)</font> <font color=Cyan>(</font>intm <font color=Cyan>(</font>q <font color=Blue><i>-</i></font> n <font color=Cyan>+</font> p<font color=Cyan>)</font> <font color=Magenta>0</font><font color=Cyan>)</font>
-<a name="line-399"></a>  <font color=Blue><i>-- &#948;(I, &#961;^2 (I)) &#8805; &#8730;2 for any I, so the order of &#961; is at most 2R / (&#8730;2 / 2):</i></font>
+<a name="line-399"></a>  <font color=Blue><i>-- &#x03b4;(I, &#x03c1;^2 (I)) &#x2265; &#x221a;2 for any I, so the order of &#x03c1; is at most 2R / (&#x221a;2 / 2):</i></font>
 <a name="line-400"></a>        b' <font color=Red>=</font> ceiling <font color=Cyan>$</font> <font color=Magenta>2</font> <font color=Cyan>*</font> sqrt<font color=Cyan>(</font><font color=Magenta>2</font><font color=Cyan>)</font> <font color=Cyan>*</font> <font color=Cyan>(</font>fromIntegral <font color=Magenta>2</font><font color=Cyan>^</font>b<font color=Cyan>)</font>
 <a name="line-401"></a>
 <a name="line-402"></a>
 <a name="line-403"></a><font color=Blue><i>{-
 <a name="line-404"></a>Waiting for 'AlgNum' to be rebased using 'IntM' instead of 'Integer'.
 <a name="line-405"></a>
-<a name="line-406"></a>-- | Find the fundamental unit &#949;[sub 0] of a field, given the discriminant &#916;, 
-<a name="line-407"></a>-- by finding (classically) the order of &#961;,
+<a name="line-406"></a>-- | Find the fundamental unit &#x03b5;[sub 0] of a field, given the discriminant &#x0394;, 
+<a name="line-407"></a>-- by finding (classically) the order of &#x03c1;,
 <a name="line-408"></a>-- using fixed-precision arithmetic: 'fix_sizes_Ideal' for 'Ideal's,
 <a name="line-409"></a>-- and a given /l/ for the 'AlgNum's generating them.
 <a name="line-410"></a>--

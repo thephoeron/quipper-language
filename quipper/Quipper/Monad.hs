@@ -1,4 +1,4 @@
--- This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+-- This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 -- file COPYRIGHT for a list of authors, copyright holders, licensing,
 -- and other details. All rights reserved.
 -- 
@@ -90,6 +90,7 @@ module Quipper.Monad (
   rGate,
   gate_W,
   gate_iX,
+  gate_iX_inv,
   global_phase,
   global_phase_anchored_list,
   qmultinot_list,
@@ -119,6 +120,7 @@ module Quipper.Monad (
   rGate_at,
   gate_W_at,
   gate_iX_at,
+  gate_iX_inv_at,
   qmultinot_list_at,
   cmultinot_list_at,
   named_gate_qulist_at,
@@ -210,6 +212,9 @@ import qualified Data.IntMap as IntMap
 import Data.IntSet (IntSet)
 import qualified Data.IntSet as IntSet
 
+import Control.Applicative (Applicative(..))
+import Control.Monad (liftM, ap)
+
 -- ======================================================================
 -- * The Circ monad
 
@@ -280,9 +285,14 @@ instance Monad Circ where
         (a, s1) <- getCirc f s0
         getCirc (g a) s1
 
+-- every monad is applicative, and so is this one
+instance Applicative Circ where
+  pure = return
+  (<*>) = ap
+
 -- every monad is a functor, and so is this one
 instance Functor Circ where
-  fmap f xs = xs >>= return . f
+  fmap = liftM
 
 -- ======================================================================
 -- ** Monad access primitives
@@ -797,6 +807,12 @@ gate_iX q = do
   named_gate_qulist "iX" False [q] []
   return q
 
+-- | Apply a −/iX/ gate. This is the inverse of 'gate_iX'.
+gate_iX_inv :: Qubit -> Circ Qubit
+gate_iX_inv q = do
+  named_gate_qulist "iX" True [q] []
+  return q
+
 -- | Apply a global phase change [exp /i/π/t/], where typically /t/ ∈
 -- [0,2].  This gate is uninteresting if not controlled; however, it
 -- has non-trivial effect if it is used as a controlled gate.
@@ -1025,6 +1041,12 @@ gate_W_at q1 q2 = do
 gate_iX_at :: Qubit -> Circ ()
 gate_iX_at q = do
   gate_iX q
+  return ()
+
+-- | Apply a −/iX/ gate. This is the inverse of 'gate_iX_at'.
+gate_iX_inv_at :: Qubit -> Circ ()
+gate_iX_inv_at q = do
+  gate_iX_inv q
   return ()
 
 -- | Apply a generic quantum gate to a given list of qubits and a

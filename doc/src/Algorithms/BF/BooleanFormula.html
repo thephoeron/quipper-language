@@ -49,10 +49,10 @@
 <a name="line-42"></a>  <font color=Blue><i>-- The number of moves remaining can</i></font>
 <a name="line-43"></a>  <font color=Blue><i>-- depend on the starting state of the HexBoard</i></font>
 <a name="line-44"></a>  oracle_s <font color=Red>::</font> Int<font color=Cyan>,</font>	 <font color=Blue><i>-- ^ Number of moves remaining.</i></font>
-<a name="line-45"></a>                         <font color=Blue><i>-- This should start as /x/&#8901;/y/, if no moves have been made.</i></font>
+<a name="line-45"></a>                         <font color=Blue><i>-- This should start as /x/&#x22c5;/y/, if no moves have been made.</i></font>
 <a name="line-46"></a>  oracle_m <font color=Red>::</font> Int<font color=Cyan>,</font>	 <font color=Blue><i>-- ^ Size of the direction register,</i></font>
 <a name="line-47"></a>                         <font color=Blue><i>-- i.e., size of labels on the BF tree.</i></font>
-<a name="line-48"></a>                         <font color=Blue><i>-- This should be the ceiling of log(/x/&#8901;/y/).</i></font>
+<a name="line-48"></a>                         <font color=Blue><i>-- This should be the ceiling of log(/x/&#x22c5;/y/).</i></font>
 <a name="line-49"></a>
 <a name="line-50"></a>   
 <a name="line-51"></a>  start_board <font color=Red>::</font> HexBoard<font color=Cyan>,</font> <font color=Blue><i>-- ^ A description of the starting state of the</i></font>
@@ -107,8 +107,8 @@
 <a name="line-100"></a><font color=Blue>full_oracle</font> <font color=Red>=</font> createOracle <font color=Magenta>9</font> <font color=Magenta>7</font> <font color=Magenta>189</font>
 <a name="line-101"></a>
 <a name="line-102"></a><a name="test_oracle"></a><font color=Blue><i>-- | A smaller oracle for testing purposes. The numbers should be</i></font>
-<a name="line-103"></a><font color=Blue><i>-- chosen such that /x/&#8901;/y/ = 2[sup /n/]&#8722;1 for some /n/. Here, we set</i></font>
-<a name="line-104"></a><font color=Blue><i>-- /x/=3 and /y/=5, to give /x/&#8901;/y/=15. We arbitrarily set the size of</i></font>
+<a name="line-103"></a><font color=Blue><i>-- chosen such that /x/&#x22c5;/y/ = 2[sup /n/]&#x2212;1 for some /n/. Here, we set</i></font>
+<a name="line-104"></a><font color=Blue><i>-- /x/=3 and /y/=5, to give /x/&#x22c5;/y/=15. We arbitrarily set the size of</i></font>
 <a name="line-105"></a><font color=Blue><i>-- the phase estimation register to /t/=4.</i></font>
 <a name="line-106"></a><font color=Blue>test_oracle</font> <font color=Red>::</font> BooleanFormulaOracle
 <a name="line-107"></a><font color=Blue>test_oracle</font> <font color=Red>=</font> createOracle <font color=Magenta>5</font> <font color=Magenta>3</font> <font color=Magenta>4</font>
@@ -116,7 +116,7 @@
 <a name="line-109"></a><font color=Blue><i>-- ** Hex boards</i></font>
 <a name="line-110"></a>
 <a name="line-111"></a><a name="HexBoard"></a><font color=Blue><i>-- | A hex board is specified by a pair of lists of booleans.  For a</i></font>
-<a name="line-112"></a><a name="HexBoard"></a><font color=Blue><i>-- board of size /x/ by /y/, each list should contain /x/&#8901;/y/</i></font>
+<a name="line-112"></a><a name="HexBoard"></a><font color=Blue><i>-- board of size /x/ by /y/, each list should contain /x/&#x22c5;/y/</i></font>
 <a name="line-113"></a><a name="HexBoard"></a><font color=Blue><i>-- elements.  The first list is the \"blue\" bitmap, and the second is</i></font>
 <a name="line-114"></a><a name="HexBoard"></a><font color=Blue><i>-- the \"red\" maskmap.</i></font>
 <a name="line-115"></a><a name="HexBoard"></a><font color=Green><u>type</u></font> HexBoard <font color=Red>=</font> <font color=Cyan>(</font><font color=Red>[</font>Bool<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Bool<font color=Red>]</font><font color=Cyan>)</font>
@@ -166,7 +166,7 @@
 <a name="line-159"></a>     <font color=Blue><i>-- the leaf and paraleaf \"flags\".</i></font>
 <a name="line-160"></a>     position_flags <font color=Red>::</font> <font color=Cyan>(</font>a<font color=Cyan>,</font>a<font color=Cyan>)</font><font color=Cyan>,</font>
 <a name="line-161"></a>       <font color=Blue><i>-- | The current position, and how we got there, i.e., directions we followed.</i></font>
-<a name="line-162"></a>       <font color=Blue><i>-- Any position can be reached by at most /x/&#8901;/y/ directions.</i></font>
+<a name="line-162"></a>       <font color=Blue><i>-- Any position can be reached by at most /x/&#x22c5;/y/ directions.</i></font>
 <a name="line-163"></a>     position <font color=Red>::</font> <font color=Red>[</font>GenericDirectionRegister a<font color=Red>]</font><font color=Cyan>,</font>
 <a name="line-164"></a>     work_leaf <font color=Red>::</font> a<font color=Cyan>,</font>     
 <a name="line-165"></a>     work_paraleaf <font color=Red>::</font> a<font color=Cyan>,</font> 

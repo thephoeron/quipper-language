@@ -56,7 +56,7 @@
 <a name="line-49"></a><font color=Blue><i>-- &gt; ((i, j), h)</i></font>
 <a name="line-50"></a><font color=Blue><i>-- </i></font>
 <a name="line-51"></a><font color=Blue><i>-- where /i/ and /j/ are integer indices in the range from /0/ to</i></font>
-<a name="line-52"></a><font color=Blue><i>-- /M/&#8722;1, and /h/ = /h/[sub i,j] is a real floating point number.</i></font>
+<a name="line-52"></a><font color=Blue><i>-- /M/&#x2212;1, and /h/ = /h/[sub i,j] is a real floating point number.</i></font>
 <a name="line-53"></a><font color=Blue><i>-- Please note that the file contains data for (/i/, /j/) and</i></font>
 <a name="line-54"></a><font color=Blue><i>-- (/j/, /i/), and that the indices /i/ and /j/ are in /spatial/</i></font>
 <a name="line-55"></a><font color=Blue><i>-- coordinates. The file data is sorted in order of increasing /i/,</i></font>
@@ -67,12 +67,12 @@
 <a name="line-60"></a><font color=Blue><i>-- &gt; ((i, j, k, l), h)</i></font>
 <a name="line-61"></a><font color=Blue><i>-- </i></font>
 <a name="line-62"></a><font color=Blue><i>-- where /i/, /j/, /k/, and /l/ are integer indices in the range from</i></font>
-<a name="line-63"></a><font color=Blue><i>-- /0/ to /M/&#8722;1, and /h/ = /h/[sub i,k,l,j] is a real floating point</i></font>
+<a name="line-63"></a><font color=Blue><i>-- /0/ to /M/&#x2212;1, and /h/ = /h/[sub i,k,l,j] is a real floating point</i></font>
 <a name="line-64"></a><font color=Blue><i>-- number. Please note that the indices /i/, /j/, /k/, and /l/ are in</i></font>
 <a name="line-65"></a><font color=Blue><i>-- /spatial/ coordinates, and the ordering of indices in the file</i></font>
 <a name="line-66"></a><font color=Blue><i>-- follows the /chemists'/ convention. Also, to save storage space,</i></font>
-<a name="line-67"></a><font color=Blue><i>-- the file only contains data for /i/ &#8805; /j/, /k/ &#8805; /l/, and either</i></font>
-<a name="line-68"></a><font color=Blue><i>-- /i/ &gt; /k/, or /i/ = /k/ and /j/ &#8805; /l/. The remaining data must be</i></font>
+<a name="line-67"></a><font color=Blue><i>-- the file only contains data for /i/ &#x2265; /j/, /k/ &#x2265; /l/, and either</i></font>
+<a name="line-68"></a><font color=Blue><i>-- /i/ &gt; /k/, or /i/ = /k/ and /j/ &#x2265; /l/. The remaining data must be</i></font>
 <a name="line-69"></a><font color=Blue><i>-- inferred from symmetries. The file data is sorted in order of</i></font>
 <a name="line-70"></a><font color=Blue><i>-- increasing /i/, then /j/, then /k/, then /l/.</i></font>
 <a name="line-71"></a><font color=Blue><i>-- </i></font>
@@ -108,7 +108,7 @@
 <a name="line-101"></a><font color=Blue><i>-- * Low-level access functions</i></font>
 <a name="line-102"></a>
 <a name="line-103"></a><a name="access_1e"></a><font color=Blue><i>-- | Access 1-electron integral data. The indices are spatial, i.e.,</i></font>
-<a name="line-104"></a><font color=Blue><i>-- they run from 0 to /M/\/2 &#8722; 1.</i></font>
+<a name="line-104"></a><font color=Blue><i>-- they run from 0 to /M/\/2 &#x2212; 1.</i></font>
 <a name="line-105"></a><font color=Blue>access_1e</font> <font color=Red>::</font> Array <font color=Cyan>(</font>Int<font color=Cyan>,</font> Int<font color=Cyan>)</font> e <font color=Red>-&gt;</font> <font color=Cyan>(</font>Int<font color=Cyan>,</font> Int<font color=Cyan>)</font> <font color=Red>-&gt;</font> e
 <a name="line-106"></a><font color=Blue>access_1e</font> arr tuple <font color=Red>=</font> arr <font color=Cyan>!</font> tuple
 <a name="line-107"></a>
@@ -116,7 +116,7 @@
 <a name="line-109"></a><font color=Blue><i>-- contains only one representative of each equivalence class), and</i></font>
 <a name="line-110"></a><font color=Blue><i>-- uses chemists' conventions. The output uses physicists'</i></font>
 <a name="line-111"></a><font color=Blue><i>-- conventions. The indices in both input and output are spatial,</i></font>
-<a name="line-112"></a><font color=Blue><i>-- i.e., they run from 0 to /M/\/2 &#8722; 1. </i></font>
+<a name="line-112"></a><font color=Blue><i>-- i.e., they run from 0 to /M/\/2 &#x2212; 1. </i></font>
 <a name="line-113"></a><font color=Blue>access_2e</font> <font color=Red>::</font> Array <font color=Cyan>(</font>Int<font color=Cyan>,</font> Int<font color=Cyan>,</font> Int<font color=Cyan>,</font> Int<font color=Cyan>)</font> e <font color=Red>-&gt;</font> <font color=Cyan>(</font>Int<font color=Cyan>,</font> Int<font color=Cyan>,</font> Int<font color=Cyan>,</font> Int<font color=Cyan>)</font> <font color=Red>-&gt;</font> e
 <a name="line-114"></a><font color=Blue>access_2e</font> arr <font color=Cyan>(</font>i<font color=Cyan>,</font>k<font color=Cyan>,</font>l<font color=Cyan>,</font>j<font color=Cyan>)</font> <font color=Red>=</font> 
 <a name="line-115"></a>    <font color=Blue><i>-- The indices are not in correct order on purpose.  We </i></font>
@@ -193,19 +193,19 @@
 <a name="line-186"></a><font color=Blue><i>-- converts /h[sub 1]/ from spatial-orbitals (/M/\/2 = 104) to spin</i></font>
 <a name="line-187"></a><font color=Blue><i>-- orbitals (/M/ = 208).</i></font>
 <a name="line-188"></a><font color=Blue><i>-- </i></font>
-<a name="line-189"></a><font color=Blue><i>-- Spin orbitals are indexed by /p/=(/i/, &#963;/[sub i]/), where /i/ is a spatial</i></font>
-<a name="line-190"></a><font color=Blue><i>-- index and &#963;/[sub i]/ is a spin (up or down). For two spin indices</i></font>
-<a name="line-191"></a><font color=Blue><i>-- /p/=(/i/, &#963;/[sub i]/) and /q/=(/j/, &#963;/[sub j]/), the transition integral</i></font>
+<a name="line-189"></a><font color=Blue><i>-- Spin orbitals are indexed by /p/=(/i/, &#x03c3;/[sub i]/), where /i/ is a spatial</i></font>
+<a name="line-190"></a><font color=Blue><i>-- index and &#x03c3;/[sub i]/ is a spin (up or down). For two spin indices</i></font>
+<a name="line-191"></a><font color=Blue><i>-- /p/=(/i/, &#x03c3;/[sub i]/) and /q/=(/j/, &#x03c3;/[sub j]/), the transition integral</i></font>
 <a name="line-192"></a><font color=Blue><i>-- h[sub pq] is given by the following formula:</i></font>
 <a name="line-193"></a><font color=Blue><i>-- </i></font>
 <a name="line-194"></a><font color=Blue><i>-- \[image spin1.png]</i></font>
 <a name="line-195"></a><font color=Blue><i>-- </i></font>
-<a name="line-196"></a><font color=Blue><i>-- The Hamiltonian vanishes for &#963;/[sub i]/ &#8800; &#963;/[sub j]/ because we</i></font>
+<a name="line-196"></a><font color=Blue><i>-- The Hamiltonian vanishes for &#x03c3;/[sub i]/ &#x2260; &#x03c3;/[sub j]/ because we</i></font>
 <a name="line-197"></a><font color=Blue><i>-- assume that there is no spin orbital coupling.</i></font>
 <a name="line-198"></a><font color=Blue><i>-- </i></font>
 <a name="line-199"></a><font color=Blue><i>-- Given /M/\/2 spatial orbitals, we re-map the spin orbitals to</i></font>
-<a name="line-200"></a><font color=Blue><i>-- integers from 0 to /M/&#8722;1 using the formula /p/ = 2/i/+&#963;/[sub i]/,</i></font>
-<a name="line-201"></a><font color=Blue><i>-- where &#963;[sub i] is 0 or 1.</i></font>
+<a name="line-200"></a><font color=Blue><i>-- integers from 0 to /M/&#x2212;1 using the formula /p/ = 2/i/+&#x03c3;/[sub i]/,</i></font>
+<a name="line-201"></a><font color=Blue><i>-- where &#x03c3;[sub i] is 0 or 1.</i></font>
 <a name="line-202"></a><font color=Blue><i>-- </i></font>
 <a name="line-203"></a><font color=Blue><i>-- The function 'spin1' inputs (/h[sub ij]/), the table of 1-electron</i></font>
 <a name="line-204"></a><font color=Blue><i>-- integrals for /M/\/2 spatial orbitals, and outputs the</i></font>
@@ -227,8 +227,8 @@
 <a name="line-220"></a><font color=Blue><i>-- </i></font>
 <a name="line-221"></a><font color=Blue><i>-- \[image spin2.png]</i></font>
 <a name="line-222"></a><font color=Blue><i>-- </i></font>
-<a name="line-223"></a><font color=Blue><i>-- The Hamiltonian vanishes for &#963;/[sub i]/ &#8800; &#963;/[sub l]/ or &#963;/[sub j]/</i></font>
-<a name="line-224"></a><font color=Blue><i>-- &#8800; &#963;/[sub k]/ because we assume that there is no spin orbital</i></font>
+<a name="line-223"></a><font color=Blue><i>-- The Hamiltonian vanishes for &#x03c3;/[sub i]/ &#x2260; &#x03c3;/[sub l]/ or &#x03c3;/[sub j]/</i></font>
+<a name="line-224"></a><font color=Blue><i>-- &#x2260; &#x03c3;/[sub k]/ because we assume that there is no spin orbital</i></font>
 <a name="line-225"></a><font color=Blue><i>-- coupling.</i></font>
 <a name="line-226"></a><font color=Blue><i>-- </i></font>
 <a name="line-227"></a><font color=Blue><i>-- The function 'spin2' inputs (/h[sub ijkl]/), the table of</i></font>

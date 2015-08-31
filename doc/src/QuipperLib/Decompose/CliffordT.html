@@ -15,27 +15,27 @@
 <a name="line-8"></a><font color=Blue><i>-- /iX/-gates to reduce the number of controls on gates. Specifically,</i></font>
 <a name="line-9"></a><font color=Blue><i>-- it ensures that not-gates, Pauli /X/-, /Y/-, and /Z/-gates, and</i></font>
 <a name="line-10"></a><font color=Blue><i>-- /iX/-gates have at most two controls; that phase gates of the form</i></font>
-<a name="line-11"></a><font color=Blue><i>-- Diag(1, &#966;) have no controls; and that all other gates have at most</i></font>
+<a name="line-11"></a><font color=Blue><i>-- Diag(1, &#x03c6;) have no controls; and that all other gates have at most</i></font>
 <a name="line-12"></a><font color=Blue><i>-- one control.</i></font>
 <a name="line-13"></a><font color=Blue><i>-- </i></font>
 <a name="line-14"></a><font color=Blue><i>-- * [bold Approximate Clifford+/T/ decomposition.] This decomposes</i></font>
 <a name="line-15"></a><font color=Blue><i>-- all rotation and phase gates into Clifford+/T/ up to a given</i></font>
-<a name="line-16"></a><font color=Blue><i>-- precision &#949;, using an approximate synthesis algorithm. Other gates</i></font>
+<a name="line-16"></a><font color=Blue><i>-- precision &#x03b5;, using an approximate synthesis algorithm. Other gates</i></font>
 <a name="line-17"></a><font color=Blue><i>-- are unchanged.</i></font>
 <a name="line-18"></a><font color=Blue><i>-- </i></font>
 <a name="line-19"></a><font color=Blue><i>-- * [bold Exact Clifford+/T/ decomposition.] This decomposes all</i></font>
 <a name="line-20"></a><font color=Blue><i>-- gates that are exactly representable in the Clifford+/T/ base into</i></font>
-<a name="line-21"></a><font color=Blue><i>-- single-qubit Clifford gates, /T/, /T/[sup &#8224;], and singly-controlled</i></font>
+<a name="line-21"></a><font color=Blue><i>-- single-qubit Clifford gates, /T/, /T/[sup &#x2020;], and singly-controlled</i></font>
 <a name="line-22"></a><font color=Blue><i>-- not-gates (with positive or negative control). Rotation and phase</i></font>
 <a name="line-23"></a><font color=Blue><i>-- gates are left unchanged.</i></font>
 <a name="line-24"></a><font color=Blue><i>-- </i></font>
 <a name="line-25"></a><font color=Blue><i>-- * [bold Standard gate set.] We define the standard gate set to</i></font>
-<a name="line-26"></a><font color=Blue><i>-- consist of the gates /X/, /Y/, /Z/, /H/, /S/, /S/[sup &#8224;], /T/,</i></font>
-<a name="line-27"></a><font color=Blue><i>-- /T/[sup &#8224;], and /CNOT/. This transformer decomposes all gates that</i></font>
+<a name="line-26"></a><font color=Blue><i>-- consist of the gates /X/, /Y/, /Z/, /H/, /S/, /S/[sup &#x2020;], /T/,</i></font>
+<a name="line-27"></a><font color=Blue><i>-- /T/[sup &#x2020;], and /CNOT/. This transformer decomposes all gates that</i></font>
 <a name="line-28"></a><font color=Blue><i>-- remain after applying both approximate and exact Clifford+/T/</i></font>
 <a name="line-29"></a><font color=Blue><i>-- decomposition into the standard gate set. If the transformer</i></font>
 <a name="line-30"></a><font color=Blue><i>-- encounters gates that are not single-qubit Clifford gates, /T/,</i></font>
-<a name="line-31"></a><font color=Blue><i>-- /T/[sup &#8224;], or singly-controlled not-gates (with positive or</i></font>
+<a name="line-31"></a><font color=Blue><i>-- /T/[sup &#x2020;], or singly-controlled not-gates (with positive or</i></font>
 <a name="line-32"></a><font color=Blue><i>-- negative control), then the output is still semantically correct,</i></font>
 <a name="line-33"></a><font color=Blue><i>-- but may not be in the standard gate set.  This transformer</i></font>
 <a name="line-34"></a><font color=Blue><i>-- suppresses global phases.</i></font>
@@ -45,7 +45,7 @@
 <a name="line-38"></a><font color=Blue><i>-- all gates that remain after applying both approximate and exact</i></font>
 <a name="line-39"></a><font color=Blue><i>-- Clifford+/T/ decomposition into the strict gate set. If the</i></font>
 <a name="line-40"></a><font color=Blue><i>-- transformer encounters gates that are not single-qubit Clifford</i></font>
-<a name="line-41"></a><font color=Blue><i>-- gates, /T/, /T/[sup &#8224;], or singly-controlled not-gates (with</i></font>
+<a name="line-41"></a><font color=Blue><i>-- gates, /T/, /T/[sup &#x2020;], or singly-controlled not-gates (with</i></font>
 <a name="line-42"></a><font color=Blue><i>-- positive or negative control), then the output is still</i></font>
 <a name="line-43"></a><font color=Blue><i>-- semantically correct, but may not be in the strict gate set. This</i></font>
 <a name="line-44"></a><font color=Blue><i>-- transformer suppresses global phases.</i></font>
@@ -77,7 +77,7 @@
 <a name="line-70"></a><font color=Green><u>import</u></font> QuipperLib<font color=Cyan>.</font>Synthesis
 <a name="line-71"></a>
 <a name="line-72"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Auxiliary <font color=Cyan>(</font>optional<font color=Cyan>)</font>
-<a name="line-73"></a><font color=Green><u>import</u></font> Libraries<font color=Cyan>.</font>Synthesis<font color=Cyan>.</font>SymReal
+<a name="line-73"></a><font color=Green><u>import</u></font> Quantum<font color=Cyan>.</font>Synthesis<font color=Cyan>.</font>SymReal
 <a name="line-74"></a>
 <a name="line-75"></a><font color=Green><u>import</u></font> Control<font color=Cyan>.</font>Monad <font color=Cyan>(</font>when<font color=Cyan>)</font>
 <a name="line-76"></a><font color=Green><u>import</u></font> System<font color=Cyan>.</font>Random
@@ -161,7 +161,7 @@
 <a name="line-154"></a>
 <a name="line-155"></a><a name="trimcontrols_transformer"></a><font color=Blue><i>-- | This transformer makes sure that not-gates, Pauli /X/-, /Y/-, and</i></font>
 <a name="line-156"></a><font color=Blue><i>-- /Z/-gates, and /iX/-gates have at most two controls; that phase</i></font>
-<a name="line-157"></a><font color=Blue><i>-- gates of the form Diag(1, &#966;) have no controls; and that all other</i></font>
+<a name="line-157"></a><font color=Blue><i>-- gates of the form Diag(1, &#x03c6;) have no controls; and that all other</i></font>
 <a name="line-158"></a><font color=Blue><i>-- gates have at most one control.</i></font>
 <a name="line-159"></a><font color=Blue>trimcontrols_transformer</font> <font color=Red>::</font> Transformer Circ Qubit Bit
 <a name="line-160"></a><font color=Blue>trimcontrols_transformer</font> <font color=Cyan>(</font>T_QGate <font color=Magenta>"not"</font> <font color=Magenta>1</font> <font color=Magenta>0</font> <font color=Green><u>_</u></font> ncf f<font color=Cyan>)</font> <font color=Red>=</font> f <font color=Cyan>$</font>
@@ -400,7 +400,7 @@
 <a name="line-393"></a><font color=Blue><i>-- </i></font>
 <a name="line-394"></a><font color=Blue><i>-- * any single-qubit Clifford gates,</i></font>
 <a name="line-395"></a><font color=Blue><i>-- </i></font>
-<a name="line-396"></a><font color=Blue><i>-- * /T/ and /T/[sup &#8224;].</i></font>
+<a name="line-396"></a><font color=Blue><i>-- * /T/ and /T/[sup &#x2020;].</i></font>
 <a name="line-397"></a><font color=Blue><i>-- </i></font>
 <a name="line-398"></a><font color=Blue><i>-- Classical controls and classical gates are not subject to the gate</i></font>
 <a name="line-399"></a><font color=Blue><i>-- base, and are left untouched.</i></font>
@@ -563,7 +563,7 @@
 <a name="line-556"></a><a name="standard_transformer"></a><font color=Blue><i>-- | This transformer decomposes a circuit into the standard gate set,</i></font>
 <a name="line-557"></a><font color=Blue><i>-- which we define to be:</i></font>
 <a name="line-558"></a><font color=Blue><i>-- </i></font>
-<a name="line-559"></a><font color=Blue><i>-- * /X/, /Y/, /Z/, /H/, /S/, /S/[sup &#8224;], /T/, /T/[sup &#8224;], and /CNOT/.</i></font>
+<a name="line-559"></a><font color=Blue><i>-- * /X/, /Y/, /Z/, /H/, /S/, /S/[sup &#x2020;], /T/, /T/[sup &#x2020;], and /CNOT/.</i></font>
 <a name="line-560"></a><font color=Blue><i>-- </i></font>
 <a name="line-561"></a><font color=Blue><i>-- As a precondition, the input circuit must only contain the</i></font>
 <a name="line-562"></a><font color=Blue><i>-- following gates:</i></font>
@@ -572,7 +572,7 @@
 <a name="line-565"></a><font color=Blue><i>-- </i></font>
 <a name="line-566"></a><font color=Blue><i>-- * any single-qubit Clifford gates,</i></font>
 <a name="line-567"></a><font color=Blue><i>-- </i></font>
-<a name="line-568"></a><font color=Blue><i>-- * /T/ and /T/[sup &#8224;].</i></font>
+<a name="line-568"></a><font color=Blue><i>-- * /T/ and /T/[sup &#x2020;].</i></font>
 <a name="line-569"></a><font color=Blue><i>-- </i></font>
 <a name="line-570"></a><font color=Blue><i>-- Global phases are suppressed. Classical controls and classical</i></font>
 <a name="line-571"></a><font color=Blue><i>-- gates are not subject to the gate base, and are left untouched.</i></font>
@@ -693,7 +693,7 @@
 <a name="line-686"></a><font color=Blue><i>-- </i></font>
 <a name="line-687"></a><font color=Blue><i>-- * any single-qubit Clifford gates,</i></font>
 <a name="line-688"></a><font color=Blue><i>-- </i></font>
-<a name="line-689"></a><font color=Blue><i>-- * /T/ and /T/[sup &#8224;].</i></font>
+<a name="line-689"></a><font color=Blue><i>-- * /T/ and /T/[sup &#x2020;].</i></font>
 <a name="line-690"></a><font color=Blue><i>-- </i></font>
 <a name="line-691"></a><font color=Blue><i>-- Global phases are suppressed. Classical controls and classical</i></font>
 <a name="line-692"></a><font color=Blue><i>-- gates are not subject to the gate base, and are left untouched.</i></font>
@@ -977,7 +977,7 @@
 <a name="line-970"></a>
 <a name="line-971"></a><a name="trimcontrols_generic"></a><font color=Blue><i>-- | This transformer makes sure that not-gates, Pauli /X/-, /Y/-, and</i></font>
 <a name="line-972"></a><font color=Blue><i>-- /Z/-gates, and /iX/-gates have at most two controls; that phase</i></font>
-<a name="line-973"></a><font color=Blue><i>-- gates of the form Diag(1, &#966;) have no controls; and that all other</i></font>
+<a name="line-973"></a><font color=Blue><i>-- gates of the form Diag(1, &#x03c6;) have no controls; and that all other</i></font>
 <a name="line-974"></a><font color=Blue><i>-- gates have at most one control.</i></font>
 <a name="line-975"></a><font color=Blue>trimcontrols_generic</font> <font color=Red>::</font> <font color=Cyan>(</font>QCData qa<font color=Cyan>,</font> QCData qb<font color=Cyan>,</font> QCurry qfun qa qb<font color=Cyan>)</font> <font color=Red>=&gt;</font> qfun <font color=Red>-&gt;</font> qfun
 <a name="line-976"></a><font color=Blue>trimcontrols_generic</font> f <font color=Red>=</font> h <font color=Green><u>where</u></font>
@@ -1004,7 +1004,7 @@
 <a name="line-997"></a><font color=Blue><i>-- </i></font>
 <a name="line-998"></a><font color=Blue><i>-- * any single-qubit Clifford gates,</i></font>
 <a name="line-999"></a><font color=Blue><i>-- </i></font>
-<a name="line-1000"></a><font color=Blue><i>-- * /T/ and /T/[sup &#8224;].</i></font>
+<a name="line-1000"></a><font color=Blue><i>-- * /T/ and /T/[sup &#x2020;].</i></font>
 <a name="line-1001"></a><font color=Blue><i>-- </i></font>
 <a name="line-1002"></a><font color=Blue><i>-- Classical controls and classical gates are not subject to the gate</i></font>
 <a name="line-1003"></a><font color=Blue><i>-- base, and are left untouched.</i></font>
@@ -1020,7 +1020,7 @@
 <a name="line-1013"></a><a name="standard_generic"></a><font color=Blue><i>-- | This transformer decomposes a circuit into the standard gate set,</i></font>
 <a name="line-1014"></a><font color=Blue><i>-- which we define to be:</i></font>
 <a name="line-1015"></a><font color=Blue><i>-- </i></font>
-<a name="line-1016"></a><font color=Blue><i>-- * /X/, /Y/, /Z/, /H/, /S/, /S/[sup &#8224;], /T/, /T/[sup &#8224;], and /CNOT/.</i></font>
+<a name="line-1016"></a><font color=Blue><i>-- * /X/, /Y/, /Z/, /H/, /S/, /S/[sup &#x2020;], /T/, /T/[sup &#x2020;], and /CNOT/.</i></font>
 <a name="line-1017"></a><font color=Blue><i>-- </i></font>
 <a name="line-1018"></a><font color=Blue><i>-- As a precondition, the input circuit must only contain the</i></font>
 <a name="line-1019"></a><font color=Blue><i>-- following gates:</i></font>
@@ -1029,7 +1029,7 @@
 <a name="line-1022"></a><font color=Blue><i>-- </i></font>
 <a name="line-1023"></a><font color=Blue><i>-- * any single-qubit Clifford gates,</i></font>
 <a name="line-1024"></a><font color=Blue><i>-- </i></font>
-<a name="line-1025"></a><font color=Blue><i>-- * /T/ and /T/[sup &#8224;].</i></font>
+<a name="line-1025"></a><font color=Blue><i>-- * /T/ and /T/[sup &#x2020;].</i></font>
 <a name="line-1026"></a><font color=Blue><i>-- </i></font>
 <a name="line-1027"></a><font color=Blue><i>-- Global phases are suppressed. Classical controls and classical</i></font>
 <a name="line-1028"></a><font color=Blue><i>-- gates are not subject to the gate base, and are left untouched.</i></font>
@@ -1057,7 +1057,7 @@
 <a name="line-1050"></a><font color=Blue><i>-- </i></font>
 <a name="line-1051"></a><font color=Blue><i>-- * any single-qubit Clifford gates,</i></font>
 <a name="line-1052"></a><font color=Blue><i>-- </i></font>
-<a name="line-1053"></a><font color=Blue><i>-- * /T/ and /T/[sup &#8224;].</i></font>
+<a name="line-1053"></a><font color=Blue><i>-- * /T/ and /T/[sup &#x2020;].</i></font>
 <a name="line-1054"></a><font color=Blue><i>-- </i></font>
 <a name="line-1055"></a><font color=Blue><i>-- Global phases are suppressed. Classical controls and classical</i></font>
 <a name="line-1056"></a><font color=Blue><i>-- gates are not subject to the gate base, and are left untouched.</i></font>

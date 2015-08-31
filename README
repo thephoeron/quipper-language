@@ -1,4 +1,4 @@
-This file is part of Quipper. Copyright (C) 2011-2013. Please see the
+This file is part of Quipper. Copyright (C) 2011-2014. Please see the
 file COPYRIGHT for a list of authors, copyright holders, licensing,
 and other details. All rights reserved.
 
@@ -14,16 +14,11 @@ See the file COPYRIGHT.
 Installing the necessary components 
 ===================================
 
-For installing on Windows: please see the instructions in
-INSTALLING.windows first, then continue to read below.
+For installing on Linux, Mac OS X, and other Unix-like systems: please
+first see the instructions in INSTALLING, then continue to read below.
 
-For installing on Linux: please see the instructions in
-INSTALLING.linux first, then continue to read below.
-
-Note: Other operating systems such as Mac OS or other Unix variants
-might work but are not officially tested.
-
-
+For installing on Windows: please first see the instructions in
+INSTALLING.windows, then continue to read below.
 
 Configuring the software environment
 =====================================
@@ -34,12 +29,14 @@ libraries:
  * random v.1.0.1.1
  * mtl v.2.1.2
  * primes v.0.2.1.0
- * Lattices v.0.0.1
+ * Lattices v.0.0.1 (note: "Lattices" must be capitalized)
  * zlib v.0.5.4.1
- * fixedprec v.0.1
+ * easyrender v.0.1.0.0
+ * fixedprec v.0.2.1.0
+ * newsynth v.0.1.0.0
  * containers v.0.5.2.1
  * set-monad v.0.1.0.0
- * quickcheck v.2.6
+ * QuickCheck v.2.6
 
 This can be done using Cabal. On the command line, use the
 following commands:
@@ -53,10 +50,22 @@ cabal install mtl
 cabal install primes
 cabal install Lattices
 cabal install zlib
+cabal install easyrender
 cabal install fixedprec
+cabal install newsynth
 cabal install containers
 cabal install set-monad
-cabal install quickcheck
+cabal install QuickCheck
+
+Note: When upgrading from a previous version of Quipper, please ensure
+that the fixedprec library is version 0.2.1.0 or newer; Quipper 0.6
+will not work with earlier versions of fixedprec. Also ensure that the
+newsynth library has been compiled against the same version of
+fixedprec as Quipper. If you get strange error messages related to
+fixedprec, try
+
+cabal install fixedprec 
+cabal install newsynth --reinstall
 
 You now have all the necessary Haskell libraries.
 
@@ -72,10 +81,10 @@ these steps:
 
 ghc-pkg unregister --force template-haskell-2.8.0.0
 
-# Reinstall quickcheck (because of a broken dependency). This will
+# Reinstall QuickCheck (because of a broken dependency). This will
 # also install template-haskell-2.7.0.0:
 
-cabal install quickcheck
+cabal install QuickCheck
 
 Browsing the documentation and source code
 ==========================================

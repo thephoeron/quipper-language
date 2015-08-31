@@ -18,11 +18,11 @@
 <a name="line-11"></a><font color=Blue><i>--</i></font>
 <a name="line-12"></a><font color=Blue><i>-- Currently still significantly experimental.  TODO: </i></font>
 <a name="line-13"></a><font color=Blue><i>--</i></font>
-<a name="line-14"></a><font color=Blue><i>-- * decide on how much access to provide to underlying representation of 'FPReal'.  Full 'fpreal_case', or more like just what&#8217;s available through Haskell&#8217;s 'RealFloat'?</i></font>
+<a name="line-14"></a><font color=Blue><i>-- * decide on how much access to provide to underlying representation of 'FPReal'.  Full 'fpreal_case', or more like just what&#x2019;s available through Haskell&#x2019;s 'RealFloat'?</i></font>
 <a name="line-15"></a><font color=Blue><i>--</i></font>
 <a name="line-16"></a><font color=Blue><i>-- * decide how to use 'ErrMsg': in internal functions only, or exported ones too?</i></font>
 <a name="line-17"></a><font color=Blue><i>--</i></font>
-<a name="line-18"></a><font color=Blue><i>-- * many specific TODO&#8217;s in code throughout this file.</i></font>
+<a name="line-18"></a><font color=Blue><i>-- * many specific TODO&#x2019;s in code throughout this file.</i></font>
 <a name="line-19"></a><font color=Blue><i>--</i></font>
 <a name="line-20"></a><font color=Blue><i>-- * write export list.</i></font>
 <a name="line-21"></a> 
@@ -158,9 +158,9 @@
 <a name="line-151"></a><font color=Blue><i>-- coincide, throw an error. The 'String' argument is used as an error</i></font>
 <a name="line-152"></a><font color=Blue><i>-- message in that case.</i></font>
 <a name="line-153"></a>
-<a name="line-154"></a><a name="fprealx_set_expt"></a><font color=Blue><i>-- Implementation note: the &#8220;intm_of_integer&#8221; may seem unnecessary,</i></font>
-<a name="line-155"></a><font color=Blue><i>-- but needed so that when /r/ is &#8220;undefined&#8221;, the result is</i></font>
-<a name="line-156"></a><font color=Blue><i>-- &#8220;intm_of_integer undefined&#8221; not just &#8220;undefined&#8221;. </i></font>
+<a name="line-154"></a><a name="fprealx_set_expt"></a><font color=Blue><i>-- Implementation note: the &#x201c;intm_of_integer&#x201d; may seem unnecessary,</i></font>
+<a name="line-155"></a><font color=Blue><i>-- but needed so that when /r/ is &#x201c;undefined&#x201d;, the result is</i></font>
+<a name="line-156"></a><font color=Blue><i>-- &#x201c;intm_of_integer undefined&#x201d; not just &#x201c;undefined&#x201d;. </i></font>
 <a name="line-157"></a><font color=Blue>fprealx_set_expt</font> <font color=Red>::</font> Int <font color=Red>-&gt;</font> FPRealX x <font color=Red>-&gt;</font> String <font color=Red>-&gt;</font> FPRealX x
 <a name="line-158"></a><font color=Blue>fprealx_set_expt</font> n xr errstr <font color=Red>=</font> <font color=Green><u>case</u></font> fprealx_case xr <font color=Green><u>of</u></font>
 <a name="line-159"></a>  Left <font color=Cyan>(</font>n'<font color=Cyan>,</font> xi<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>if</u></font> n' <font color=Cyan>==</font> n <font color=Green><u>then</u></font> fprealx n xi <font color=Green><u>else</u></font> error errstr
@@ -224,8 +224,8 @@
 <a name="line-217"></a><font color=Blue><i>-- lengths that don't coincide. In this case, the string argument is</i></font>
 <a name="line-218"></a><font color=Blue><i>-- used as an error message.</i></font>
 <a name="line-219"></a><font color=Blue><i>--</i></font>
-<a name="line-220"></a><font color=Blue><i>-- The possible &#8220;shapes&#8221; of 'FPReal's may be seen as a partial order, where </i></font>
-<a name="line-221"></a><font color=Blue><i>-- /s1/ &#8804; /s2/ means that values of shape /s1/ are coercible to values of shape</i></font>
+<a name="line-220"></a><font color=Blue><i>-- The possible &#x201c;shapes&#x201d; of 'FPReal's may be seen as a partial order, where </i></font>
+<a name="line-221"></a><font color=Blue><i>-- /s1/ &#x2264; /s2/ means that values of shape /s1/ are coercible to values of shape</i></font>
 <a name="line-222"></a><font color=Blue><i>-- /s2/.  'fpreal_promote' may be seen as taking the binary /sup/ in this poset.</i></font>
 <a name="line-223"></a><font color=Blue>fpreal_promote</font> <font color=Red>::</font> FPReal <font color=Red>-&gt;</font> FPRealX x <font color=Red>-&gt;</font> ErrMsg <font color=Red>-&gt;</font> FPReal
 <a name="line-224"></a><font color=Blue>fpreal_promote</font> br xr errmsg <font color=Red>=</font> 
@@ -311,8 +311,8 @@
 <a name="line-304"></a>  abs <font color=Red>=</font> fpreal_unop abs
 <a name="line-305"></a>  signum <font color=Red>=</font> fpreal_unop signum
 <a name="line-306"></a>  <font color=Blue><i>-- Note: signum on determinate exponent/length FPReals has slightly </i></font>
-<a name="line-307"></a>  <font color=Blue><i>-- surprising behavior if /n/ &#8804; &#8211;/l/: this will give </i></font>
-<a name="line-308"></a>  <font color=Blue><i>-- 0, since then 1 = &#8211;1 = 0 mod 2^{l + n}. In other words, the</i></font>
+<a name="line-307"></a>  <font color=Blue><i>-- surprising behavior if /n/ &#x2264; &#x2013;/l/: this will give </i></font>
+<a name="line-308"></a>  <font color=Blue><i>-- 0, since then 1 = &#x2013;1 = 0 mod 2^{l + n}. In other words, the</i></font>
 <a name="line-309"></a>  <font color=Blue><i>-- output 1.0 or -1.0 is not representable in this fixed-precision format.</i></font>
 <a name="line-310"></a>  fromInteger <font color=Red>=</font> fpreal_of_double <font color=Cyan>.</font> fromInteger
 <a name="line-311"></a>
@@ -411,7 +411,7 @@
 <a name="line-404"></a><a name="fpreal_fix_shape_auto"></a><font color=Blue><i>-- Implementation note: aim to use as few bits as possible, while retaining accuracy.</i></font>
 <a name="line-405"></a><font color=Blue><i>--</i></font>
 <a name="line-406"></a><font color=Blue><i>-- Not clear what should be done in case denominator not a power of 2.  However,</i></font>
-<a name="line-407"></a><font color=Blue><i>-- Haskell&#8217;s 'Double' has radix 2, so ordinarily denominator always should be a power of 2.</i></font>
+<a name="line-407"></a><font color=Blue><i>-- Haskell&#x2019;s 'Double' has radix 2, so ordinarily denominator always should be a power of 2.</i></font>
 <a name="line-408"></a><font color=Blue><i>--</i></font>
 <a name="line-409"></a><font color=Blue><i>-- However, this does give pretty high-precision by default!  Is that good?  Seems expensive in qubits.</i></font>
 <a name="line-410"></a><font color=Blue>fpreal_fix_shape_auto</font> <font color=Red>::</font> FPReal <font color=Red>-&gt;</font> FPReal

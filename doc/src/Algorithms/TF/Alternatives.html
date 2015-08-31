@@ -23,31 +23,31 @@
 <a name="line-16"></a><font color=Blue><i>-- ======================================================================</i></font>
 <a name="line-17"></a><font color=Blue><i>-- * Arithmetic functions</i></font>
 <a name="line-18"></a>
-<a name="line-19"></a><a name="increment_TF"></a><font color=Blue><i>-- | Increment a 'QIntTF' (i.e., little-endian, mod 2[sup /l/] &#8211; 1) </i></font>
+<a name="line-19"></a><a name="increment_TF"></a><font color=Blue><i>-- | Increment a 'QIntTF' (i.e., little-endian, mod 2[sup /l/] &#x2013; 1) </i></font>
 <a name="line-20"></a><font color=Blue><i>-- in place.</i></font>
 <a name="line-21"></a><font color=Blue><i>--</i></font>
 <a name="line-22"></a><font color=Blue><i>-- This and 'decrement_TF' assume as precondition that the input is never </i></font>
-<a name="line-23"></a><font color=Blue><i>-- 11&#8230;11, and preserve this condition, by fixing 11&#8230;11.  This means these</i></font>
+<a name="line-23"></a><font color=Blue><i>-- 11&#x2026;11, and preserve this condition, by fixing 11&#x2026;11.  This means these</i></font>
 <a name="line-24"></a><font color=Blue><i>--  are /not/ correct if 'IntTF' is treated as a formal quotient of </i></font>
 <a name="line-25"></a><font color=Blue><i>-- 2[sup /l/] ; with that approach, incrementing/decrementing in place </i></font>
-<a name="line-26"></a><font color=Blue><i>-- cannot be a quantum operation (since it must map 00&#8230;00 and 11&#8230;11 both </i></font>
-<a name="line-27"></a><font color=Blue><i>-- to 00&#8230;01, so would have nonzero kernel).  These are however correct if </i></font>
+<a name="line-26"></a><font color=Blue><i>-- cannot be a quantum operation (since it must map 00&#x2026;00 and 11&#x2026;11 both </i></font>
+<a name="line-27"></a><font color=Blue><i>-- to 00&#x2026;01, so would have nonzero kernel).  These are however correct if </i></font>
 <a name="line-28"></a><font color=Blue><i>-- 'IntTF' is considered as a formal /subspace/ of 2[sup /l/] (in which </i></font>
 <a name="line-29"></a><font color=Blue><i>-- case the other arithmetic routines are unsound, since they may break </i></font>
 <a name="line-30"></a><font color=Blue><i>-- the precondition).</i></font>
 <a name="line-31"></a><font color=Blue>increment_TF</font> <font color=Red>::</font> QIntTF <font color=Red>-&gt;</font> Circ QIntTF
 <a name="line-32"></a><font color=Blue>increment_TF</font> l1 <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-33"></a>  <font color=Green><u>let</u></font> l <font color=Red>=</font> qulist_of_qinttf_lh l1
-<a name="line-34"></a>  <font color=Blue><i>-- mark whether /l/ is initially in forbidden state &#8220;all true&#8221;:</i></font>
+<a name="line-34"></a>  <font color=Blue><i>-- mark whether /l/ is initially in forbidden state &#x201c;all true&#x201d;:</i></font>
 <a name="line-35"></a>  is_bad <font color=Red>&lt;-</font> qinit False
 <a name="line-36"></a>  is_bad <font color=Red>&lt;-</font> qnot is_bad <font color=Cyan>`controlled`</font> <font color=Red>[</font> q <font color=Cyan>.==.</font> <font color=Magenta>1</font> <font color=Red>|</font> q <font color=Red>&lt;-</font> l <font color=Red>]</font>
 <a name="line-37"></a>  <font color=Blue><i>-- now, increment /l/ treating it mod 2^/n/:</i></font>
 <a name="line-38"></a>  l' <font color=Red>&lt;-</font> increment_big <font color=Cyan>(</font>reverse l<font color=Cyan>)</font>
 <a name="line-39"></a>  l <font color=Red>&lt;-</font> return <font color=Cyan>$</font> reverse l'
-<a name="line-40"></a>  <font color=Blue><i>-- now mark if the /incremented/ /l/ is &#8220;all true&#8221;:</i></font>
+<a name="line-40"></a>  <font color=Blue><i>-- now mark if the /incremented/ /l/ is &#x201c;all true&#x201d;:</i></font>
 <a name="line-41"></a>  needs_rollover <font color=Red>&lt;-</font> qinit False 
 <a name="line-42"></a>  needs_rollover <font color=Red>&lt;-</font> qnot needs_rollover <font color=Cyan>`controlled`</font> <font color=Red>[</font> q <font color=Cyan>.==.</font> <font color=Magenta>1</font> <font color=Red>|</font> q <font color=Red>&lt;-</font> l <font color=Red>]</font>
-<a name="line-43"></a>  <font color=Blue><i>-- if it&#8217;s now &#8220;all true&#8221;, roll it over; or if it initially was, roll it back: </i></font>
+<a name="line-43"></a>  <font color=Blue><i>-- if it&#x2019;s now &#x201c;all true&#x201d;, roll it over; or if it initially was, roll it back: </i></font>
 <a name="line-44"></a>  l <font color=Red>&lt;-</font> mapM <font color=Cyan>(</font><font color=Red>\</font>q <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-45"></a>              q <font color=Red>&lt;-</font> qnot q <font color=Cyan>`controlled`</font> is_bad
 <a name="line-46"></a>              q <font color=Red>&lt;-</font> qnot q <font color=Cyan>`controlled`</font> needs_rollover
@@ -65,10 +65,10 @@
 <a name="line-58"></a><font color=Blue>decrement_TF</font> <font color=Red>::</font> QIntTF <font color=Red>-&gt;</font> Circ QIntTF
 <a name="line-59"></a><font color=Blue>decrement_TF</font> l1 <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-60"></a>  <font color=Green><u>let</u></font> l <font color=Red>=</font> qulist_of_qinttf_lh l1
-<a name="line-61"></a>  <font color=Blue><i>-- mark whether /l/ is initially in forbidden state &#8220;all true&#8221;:</i></font>
+<a name="line-61"></a>  <font color=Blue><i>-- mark whether /l/ is initially in forbidden state &#x201c;all true&#x201d;:</i></font>
 <a name="line-62"></a>  with_ancilla <font color=Cyan>$</font> <font color=Red>\</font>is_bad <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-63"></a>    is_bad <font color=Red>&lt;-</font> qnot is_bad <font color=Cyan>`controlled`</font> <font color=Red>[</font> q <font color=Cyan>.==.</font> <font color=Magenta>1</font> <font color=Red>|</font> q <font color=Red>&lt;-</font> l <font color=Red>]</font>
-<a name="line-64"></a>  <font color=Blue><i>-- also mark if /l/ is &#8220;all false&#8221;:</i></font>
+<a name="line-64"></a>  <font color=Blue><i>-- also mark if /l/ is &#x201c;all false&#x201d;:</i></font>
 <a name="line-65"></a>    l <font color=Red>&lt;-</font> with_ancilla <font color=Cyan>$</font> <font color=Red>\</font>needs_rollover <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-66"></a>      needs_rollover <font color=Red>&lt;-</font> qnot needs_rollover <font color=Cyan>`controlled`</font> <font color=Red>[</font> q <font color=Cyan>.==.</font> <font color=Magenta>0</font> <font color=Red>|</font> q <font color=Red>&lt;-</font> l <font color=Red>]</font>
 <a name="line-67"></a>  <font color=Blue><i>-- exchange these two states:</i></font>
@@ -114,7 +114,7 @@
 <a name="line-107"></a><font color=Blue><i>-- Finding algorithm.</i></font>
 <a name="line-108"></a>
 <a name="line-109"></a><a name="indexed_fetch"></a><font color=Blue><i>-- | Efficient qRAM \"fetch\" operation. @'indexed_fetch' /i/ /m/ /q/@</i></font>
-<a name="line-110"></a><font color=Blue><i>-- performs the operation /q/ &#8853;= /m/[/i/].</i></font>
+<a name="line-110"></a><font color=Blue><i>-- performs the operation /q/ &#x2295;= /m/[/i/].</i></font>
 <a name="line-111"></a><font color=Blue>indexed_fetch</font> <font color=Red>::</font> <font color=Cyan>(</font>QData qa<font color=Cyan>)</font> <font color=Red>=&gt;</font> QDInt <font color=Red>-&gt;</font> IntMap qa <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> IntMap qa<font color=Cyan>,</font> qa<font color=Cyan>)</font>
 <a name="line-112"></a><font color=Blue>indexed_fetch</font> i m q <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-113"></a>  indexed_fetch_at qs i q
@@ -123,7 +123,7 @@
 <a name="line-116"></a>    qs <font color=Red>=</font> IntMap<font color=Cyan>.</font>elems m
 <a name="line-117"></a>    
 <a name="line-118"></a><a name="indexed_store"></a><font color=Blue><i>-- | Efficient qRAM \"store\" operation. @'indexed_store' /i/ /m/ /q/@</i></font>
-<a name="line-119"></a><font color=Blue><i>-- performs the operation /m/[/i/] &#8853;= /q/.</i></font>
+<a name="line-119"></a><font color=Blue><i>-- performs the operation /m/[/i/] &#x2295;= /q/.</i></font>
 <a name="line-120"></a><font color=Blue>indexed_store</font> <font color=Red>::</font> <font color=Cyan>(</font>QData qa<font color=Cyan>)</font> <font color=Red>=&gt;</font> QDInt <font color=Red>-&gt;</font> IntMap qa <font color=Red>-&gt;</font> qa <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font>QDInt<font color=Cyan>,</font> IntMap qa<font color=Cyan>,</font> qa<font color=Cyan>)</font>
 <a name="line-121"></a><font color=Blue>indexed_store</font> i m q <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-122"></a>  indexed_store_at qs i q

@@ -256,12 +256,12 @@
 <a name="line-249"></a>
 <a name="line-250"></a>
 <a name="line-251"></a>
-<a name="line-252"></a><a name="expYt"></a><font color=Blue><i>-- | Apply an [exp &#8722;/iYt/] gate. The timestep /t/ is a parameter.</i></font>
+<a name="line-252"></a><a name="expYt"></a><font color=Blue><i>-- | Apply an [exp &#x2212;/iYt/] gate. The timestep /t/ is a parameter.</i></font>
 <a name="line-253"></a><font color=Blue>expYt</font> <font color=Red>::</font> Timestep <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> Circ Qubit
 <a name="line-254"></a><font color=Blue>expYt</font> <font color=Red>=</font> named_rotation <font color=Magenta>"exp(-i%Y)"</font>
 <a name="line-255"></a>
 <a name="line-256"></a>
-<a name="line-257"></a><a name="expYt_at"></a><font color=Blue><i>-- | Apply an [exp &#8722;/iYt/] gate. The timestep /t/ is a parameter.</i></font>
+<a name="line-257"></a><a name="expYt_at"></a><font color=Blue><i>-- | Apply an [exp &#x2212;/iYt/] gate. The timestep /t/ is a parameter.</i></font>
 <a name="line-258"></a><font color=Blue>expYt_at</font> <font color=Red>::</font> Timestep <font color=Red>-&gt;</font> Qubit <font color=Red>-&gt;</font> Circ ()
 <a name="line-259"></a><font color=Blue>expYt_at</font> <font color=Red>=</font> named_rotation_at <font color=Magenta>"exp(-i%Y)"</font>
 <a name="line-260"></a>
@@ -290,7 +290,7 @@
 <a name="line-283"></a>
 <a name="line-284"></a><a name="qlsa_FEM_main"></a><font color=Blue><i>-- | Main function: for estimating the radar cross section for a FEM</i></font>
 <a name="line-285"></a><font color=Blue><i>-- scattering problem. The problem can be reduced to the calculation</i></font>
-<a name="line-286"></a><font color=Blue><i>-- of four angles: &#966;[sub /b/], &#966;[sub /bx/], &#966;[sub /r/1] and &#966;[sub /r/0].</i></font>
+<a name="line-286"></a><font color=Blue><i>-- of four angles: &#x03c6;[sub /b/], &#x03c6;[sub /bx/], &#x03c6;[sub /r/1] and &#x03c6;[sub /r/0].</i></font>
 <a name="line-287"></a><font color=Blue>qlsa_FEM_main</font> <font color=Red>::</font> RunTimeParam <font color=Red>-&gt;</font> Oracle <font color=Red>-&gt;</font> Circ Double
 <a name="line-288"></a><font color=Blue>qlsa_FEM_main</font> param oracle <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-289"></a>     comment <font color=Magenta>"FEM_main"</font>
@@ -307,7 +307,7 @@
 <a name="line-300"></a>
 <a name="line-301"></a><font color=Blue><i>-- * Amplitude Estimation Functions</i></font>
 <a name="line-302"></a>
-<a name="line-303"></a><a name="qlsa_AmpEst_phi_b"></a><font color=Blue><i>-- | Estimates &#966;[sub /b/], related to the probability of success for the</i></font>
+<a name="line-303"></a><a name="qlsa_AmpEst_phi_b"></a><font color=Blue><i>-- | Estimates &#x03c6;[sub /b/], related to the probability of success for the</i></font>
 <a name="line-304"></a><font color=Blue><i>-- preparation of the known state /b/, using amplitude amplification.</i></font>
 <a name="line-305"></a><font color=Blue>qlsa_AmpEst_phi_b</font> <font color=Red>::</font> RunTimeParam <font color=Red>-&gt;</font> Oracle <font color=Red>-&gt;</font> Circ Double
 <a name="line-306"></a><font color=Blue>qlsa_AmpEst_phi_b</font> param oracle <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -365,7 +365,7 @@
 <a name="line-358"></a>    print_simple Preview <font color=Cyan>(</font>qlsa_AmpEst_phi_b param dummy_oracle<font color=Cyan>)</font>
 <a name="line-359"></a>
 <a name="line-360"></a>
-<a name="line-361"></a><a name="qlsa_AmpEst_phi_bx"></a><font color=Blue><i>-- | Estimates &#966;[sub /bx/], related to the probability of success in</i></font>
+<a name="line-361"></a><a name="qlsa_AmpEst_phi_bx"></a><font color=Blue><i>-- | Estimates &#x03c6;[sub /bx/], related to the probability of success in</i></font>
 <a name="line-362"></a><font color=Blue><i>-- computing solution value /x/.</i></font>
 <a name="line-363"></a><font color=Blue>qlsa_AmpEst_phi_bx</font> <font color=Red>::</font> RunTimeParam <font color=Red>-&gt;</font> Oracle <font color=Red>-&gt;</font> Circ Double
 <a name="line-364"></a><font color=Blue>qlsa_AmpEst_phi_bx</font> param oracle  <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -416,7 +416,7 @@
 <a name="line-409"></a>
 <a name="line-410"></a>        
 <a name="line-411"></a>       
-<a name="line-412"></a><a name="qlsa_AmpEst_phi_bxr"></a><font color=Blue><i>-- | Estimates &#966;[sub /r/0] and &#966;[sub /r/1] (depending on the boolean</i></font>
+<a name="line-412"></a><a name="qlsa_AmpEst_phi_bxr"></a><font color=Blue><i>-- | Estimates &#x03c6;[sub /r/0] and &#x03c6;[sub /r/1] (depending on the boolean</i></font>
 <a name="line-413"></a><font color=Blue><i>-- parameter), related to the overlap of the solution with the</i></font>
 <a name="line-414"></a><font color=Blue><i>-- arbitrary state /r/.</i></font>
 <a name="line-415"></a><font color=Blue>qlsa_AmpEst_phi_bxr</font> <font color=Red>::</font> RunTimeParam <font color=Red>-&gt;</font> Oracle <font color=Red>-&gt;</font> Bool <font color=Red>-&gt;</font> Circ Double
@@ -515,7 +515,7 @@
 <a name="line-508"></a>
 <a name="line-509"></a><font color=Blue><i>-- * Linear System Solver Functions</i></font>
 <a name="line-510"></a>
-<a name="line-511"></a><a name="qlsa_Solve_x"></a><font color=Blue><i>-- | Implements the QLSA procedure to generate the solution state |/x/&#9002;.</i></font>
+<a name="line-511"></a><a name="qlsa_Solve_x"></a><font color=Blue><i>-- | Implements the QLSA procedure to generate the solution state |/x/&#x232a;.</i></font>
 <a name="line-512"></a><font color=Blue>qlsa_Solve_x</font> <font color=Red>::</font> RunTimeParam <font color=Red>-&gt;</font><font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font>Qubit<font color=Cyan>)</font> <font color=Red>-&gt;</font> Oracle <font color=Red>-&gt;</font> Circ ()   
 <a name="line-513"></a><font color=Blue>qlsa_Solve_x</font> param <font color=Cyan>(</font>x<font color=Cyan>,</font>s<font color=Cyan>)</font> oracle <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-514"></a>  <font color=Green><u>_</u></font> <font color=Red>&lt;-</font> <font color=Cyan>(</font>flip <font color=Cyan>$</font> box <font color=Magenta>"qlsa_Solve_x"</font><font color=Cyan>)</font> <font color=Cyan>(</font>x<font color=Cyan>,</font>s<font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Red>\</font><font color=Cyan>(</font>x<font color=Cyan>,</font>s<font color=Cyan>)</font> <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
@@ -569,8 +569,8 @@
 <a name="line-562"></a>
 <a name="line-563"></a>            
 <a name="line-564"></a><a name="qlsa_Solve_xr"></a><font color=Blue><i>-- | Implements the complete QLSA procedure to find the</i></font>
-<a name="line-565"></a><font color=Blue><i>-- solution state |/x/&#9002; and then implements the swap protocol</i></font>
-<a name="line-566"></a><font color=Blue><i>-- required for estimation of &#9001;/x/|/r/&#9002;.</i></font>
+<a name="line-565"></a><font color=Blue><i>-- solution state |/x/&#x232a; and then implements the swap protocol</i></font>
+<a name="line-566"></a><font color=Blue><i>-- required for estimation of &#x2329;/x/|/r/&#x232a;.</i></font>
 <a name="line-567"></a><font color=Blue>qlsa_Solve_xr</font> <font color=Red>::</font> RunTimeParam <font color=Red>-&gt;</font><font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font>Qubit<font color=Cyan>,</font>Qubit<font color=Cyan>,</font>Qubit<font color=Cyan>,</font>Qubit<font color=Cyan>)</font> <font color=Red>-&gt;</font> Oracle <font color=Red>-&gt;</font> Circ ()      
 <a name="line-568"></a><font color=Blue><i>-- qlsa_Solve_xr param (x,y,b,s,r,c) oracle  = named_gate_at "Solve_xr" (x,y,b,s,r,c)</i></font>
 <a name="line-569"></a><font color=Blue>qlsa_Solve_xr</font> param <font color=Cyan>(</font>x<font color=Cyan>,</font>y<font color=Cyan>,</font>b<font color=Cyan>,</font>s<font color=Cyan>,</font>r<font color=Cyan>,</font>c<font color=Cyan>)</font> oracle <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -587,7 +587,7 @@
 <a name="line-580"></a>
 <a name="line-581"></a><font color=Blue><i>-- * Hamiltonian Simulation Functions.</i></font>
 <a name="line-582"></a>
-<a name="line-583"></a><a name="qlsa_HamiltonianSimulation"></a><font color=Blue><i>-- | Uses a quantum register |/t/&#9002; to control the</i></font>
+<a name="line-583"></a><a name="qlsa_HamiltonianSimulation"></a><font color=Blue><i>-- | Uses a quantum register |/t/&#x232a; to control the</i></font>
 <a name="line-584"></a><font color=Blue><i>-- implementation of the Suzuki method for simulating a Hamiltonian</i></font>
 <a name="line-585"></a><font color=Blue><i>-- specified by an oracle function.</i></font>
 <a name="line-586"></a><font color=Blue>qlsa_HamiltonianSimulation</font> <font color=Red>::</font> 
@@ -643,7 +643,7 @@
 <a name="line-636"></a>
 <a name="line-637"></a>
 <a name="line-638"></a><a name="qlsa_HsimKernel"></a><font color=Blue><i>-- | Uses an oracle function and timestep control register (/t/) to</i></font>
-<a name="line-639"></a><font color=Blue><i>-- apply 1-sparse Hamiltonian to the input state |/t/, /x/&#9002;.</i></font>
+<a name="line-639"></a><font color=Blue><i>-- apply 1-sparse Hamiltonian to the input state |/t/, /x/&#x232a;.</i></font>
 <a name="line-640"></a><font color=Blue>qlsa_HsimKernel</font> <font color=Red>::</font> 
 <a name="line-641"></a>    RunTimeParam
 <a name="line-642"></a>    <font color=Red>-&gt;</font> <font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font> <font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>)</font> 
@@ -769,7 +769,7 @@
 <a name="line-762"></a><font color=Blue><i>-- * Controlled Logic Operations</i></font>
 <a name="line-763"></a>
 <a name="line-764"></a>
-<a name="line-765"></a><font color=Blue><i>-- | Applies a phase shift of &#966;\/2 to the signed input register |&#966;&#9002;.</i></font>
+<a name="line-765"></a><font color=Blue><i>-- | Applies a phase shift of &#x03c6;\/2 to the signed input register |&#x03c6;&#x232a;.</i></font>
 <a name="line-766"></a>
 <a name="line-767"></a><a name="qlsa_ControlledPhase"></a><font color=Blue><i>-- For c, bit locations are counted starting from 0 (least significant) to (length c - 2) (most significant)</i></font>
 <a name="line-768"></a><font color=Blue><i>-- last c (or c !! (n-1)) is the sign bit</i></font>
@@ -793,7 +793,7 @@
 <a name="line-786"></a>  return ()
 <a name="line-787"></a>
 <a name="line-788"></a>
-<a name="line-789"></a><a name="qlsa_ControlledRotation"></a><font color=Blue><i>-- | Applies a rotation of &#966;\/2 to the signed input register |&#966;&#9002;.</i></font>
+<a name="line-789"></a><a name="qlsa_ControlledRotation"></a><font color=Blue><i>-- | Applies a rotation of &#x03c6;\/2 to the signed input register |&#x03c6;&#x232a;.</i></font>
 <a name="line-790"></a><font color=Blue>qlsa_ControlledRotation</font> <font color=Red>::</font> <font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font> Qubit<font color=Cyan>)</font> <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> Bool <font color=Red>-&gt;</font> Circ ()
 <a name="line-791"></a><font color=Blue><i>-- qlsa_ControlledRotation ct phi0 f = named_gate_at "CRotate" ct</i></font>
 <a name="line-792"></a><font color=Blue>qlsa_ControlledRotation</font> <font color=Cyan>(</font>c<font color=Cyan>,</font> t<font color=Cyan>)</font> phi0 f <font color=Red>=</font> <font color=Green><u>do</u></font>
@@ -841,7 +841,7 @@
 <a name="line-834"></a>
 <a name="line-835"></a>
 <a name="line-836"></a>
-<a name="line-837"></a><a name="inline_oracle_r"></a><font color=Blue><i>-- | Implements the oracle for the arbitrary state |/r/&#9002;, using the</i></font>
+<a name="line-837"></a><a name="inline_oracle_r"></a><font color=Blue><i>-- | Implements the oracle for the arbitrary state |/r/&#x232a;, using the</i></font>
 <a name="line-838"></a><font color=Blue><i>-- Template Haskell implementation of 'calcRweights'.</i></font>
 <a name="line-839"></a><font color=Blue>inline_oracle_r</font> <font color=Red>::</font> RunTimeParam <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> <font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>)</font> <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>)</font>
 <a name="line-840"></a><font color=Blue>inline_oracle_r</font> rt factor_m factor_p <font color=Red>=</font>  box <font color=Cyan>(</font><font color=Magenta>"Or "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show factor_m<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show factor_p<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>$</font> decompose_generic Toffoli <font color=Cyan>$</font> <font color=Red>\</font><font color=Cyan>(</font>x'<font color=Cyan>,</font>m'<font color=Cyan>,</font>p'<font color=Cyan>)</font> <font color=Red>-&gt;</font>
@@ -875,7 +875,7 @@
 <a name="line-868"></a>
 <a name="line-869"></a>
 <a name="line-870"></a>
-<a name="line-871"></a><a name="inline_oracle_b"></a><font color=Blue><i>-- | Implements the oracle for the known state |/b/&#9002;, using the</i></font>
+<a name="line-871"></a><a name="inline_oracle_b"></a><font color=Blue><i>-- | Implements the oracle for the known state |/b/&#x232a;, using the</i></font>
 <a name="line-872"></a><font color=Blue><i>-- Template Haskell implementation of 'getKnownWeights'.</i></font>
 <a name="line-873"></a><font color=Blue>inline_oracle_b</font> <font color=Red>::</font> RunTimeParam <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> Double <font color=Red>-&gt;</font> <font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>)</font> <font color=Red>-&gt;</font> Circ <font color=Cyan>(</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>,</font><font color=Red>[</font>Qubit<font color=Red>]</font><font color=Cyan>)</font>
 <a name="line-874"></a><font color=Blue>inline_oracle_b</font> rt factor_m factor_p <font color=Red>=</font> box <font color=Cyan>(</font><font color=Magenta>"Ob "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show factor_m<font color=Cyan>)</font> <font color=Cyan>++</font> <font color=Magenta>" "</font> <font color=Cyan>++</font> <font color=Cyan>(</font>show factor_p<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>$</font> decompose_generic Toffoli <font color=Cyan>$</font> <font color=Red>\</font><font color=Cyan>(</font>x'<font color=Cyan>,</font>m'<font color=Cyan>,</font>p'<font color=Cyan>)</font> <font color=Red>-&gt;</font> 

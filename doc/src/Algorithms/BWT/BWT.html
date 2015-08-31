@@ -31,11 +31,11 @@
 <a name="line-24"></a><font color=Blue><i>-- and provides the following information: the tree depth /n/ (in the</i></font>
 <a name="line-25"></a><font color=Blue><i>-- above example: 3), the label length /m/ (in bits; 5 in the above</i></font>
 <a name="line-26"></a><font color=Blue><i>-- example), the number of edge colors /k/, the entrance label</i></font>
-<a name="line-27"></a><font color=Blue><i>-- /ENTRANCE/, and for each color 0 &#8804; /c/ &lt; /k/, a reversible circuit</i></font>
+<a name="line-27"></a><font color=Blue><i>-- /ENTRANCE/, and for each color 0 &#x2264; /c/ &lt; /k/, a reversible circuit</i></font>
 <a name="line-28"></a><font color=Blue><i>-- /ORACLE/[sub /c/](/a/,/b/,/r/). On basis vectors, this circuit</i></font>
 <a name="line-29"></a><font color=Blue><i>-- encodes the edge information in the following sense:</i></font>
 <a name="line-30"></a><font color=Blue><i>-- </i></font>
-<a name="line-31"></a><font color=Blue><i>-- &gt; ORACLE[sub c](a, b, r) = (a, b &#8853; v[sub c](a), r &#8853; f[sub c](a)),</i></font>
+<a name="line-31"></a><font color=Blue><i>-- &gt; ORACLE[sub c](a, b, r) = (a, b &#x2295; v[sub c](a), r &#x2295; f[sub c](a)),</i></font>
 <a name="line-32"></a><font color=Blue><i>-- </i></font>
 <a name="line-33"></a><font color=Blue><i>-- where /f/[sub /c/](/a/) is 1 if the node /a/ is connected to an</i></font>
 <a name="line-34"></a><font color=Blue><i>-- edge of color /c/, and 0 otherwise; and /v/[sub /c/](a) is the</i></font>
@@ -88,8 +88,8 @@
 <a name="line-81"></a><font color=Blue><i>-- color. Here, /a/ is an /m/-qubit registers holding (a superposition</i></font>
 <a name="line-82"></a><font color=Blue><i>-- of) the current node label. /b/ is an /m/-qubit ancilla register,</i></font>
 <a name="line-83"></a><font color=Blue><i>-- and /r/ is an ancilla qubit. Both /b/ and /r/ are expected to be</i></font>
-<a name="line-84"></a><font color=Blue><i>-- initialized to |0&#9002; by the caller, and will be returned in state</i></font>
-<a name="line-85"></a><font color=Blue><i>-- |0&#9002;.</i></font>
+<a name="line-84"></a><font color=Blue><i>-- initialized to |0&#x232a; by the caller, and will be returned in state</i></font>
+<a name="line-85"></a><font color=Blue><i>-- |0&#x232a;.</i></font>
 <a name="line-86"></a><font color=Blue>timestep</font> <font color=Red>::</font> <font color=Cyan>(</font>Qureg<font color=Cyan>,</font> Qureg<font color=Cyan>,</font> Qubit<font color=Cyan>,</font> Timestep<font color=Cyan>,</font> Int<font color=Cyan>)</font> <font color=Red>-&gt;</font> Circ ()
 <a name="line-87"></a><font color=Blue>timestep</font> <font color=Cyan>(</font>a<font color=Cyan>,</font> b<font color=Cyan>,</font> r<font color=Cyan>,</font> dt<font color=Cyan>,</font> m<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-88"></a>  comment_with_label <font color=Magenta>"ENTER: timestep"</font> <font color=Cyan>(</font>a<font color=Cyan>,</font>b<font color=Cyan>,</font>r<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"a"</font><font color=Cyan>,</font><font color=Magenta>"b"</font><font color=Cyan>,</font><font color=Magenta>"r"</font><font color=Cyan>)</font>
@@ -120,8 +120,8 @@
 <a name="line-113"></a><font color=Blue><i>-- </i></font>
 <a name="line-114"></a><font color=Blue><i>-- * two \"welding vectors\" /f/ and /g/, specifying how the leaves of</i></font>
 <a name="line-115"></a><font color=Blue><i>-- the two binary trees are connected to each other. Specifically, /f/</i></font>
-<a name="line-116"></a><font color=Blue><i>-- and /g/ encode the permutations of leaves given by a &#8614; a &#8853; f and </i></font>
-<a name="line-117"></a><font color=Blue><i>-- a &#8614; a + g, respectively, where \"&#8853;\" denotes bitwise exclusive or,</i></font>
+<a name="line-116"></a><font color=Blue><i>-- and /g/ encode the permutations of leaves given by a &#x21a6; a &#x2295; f and </i></font>
+<a name="line-117"></a><font color=Blue><i>-- a &#x21a6; a + g, respectively, where \"&#x2295;\" denotes bitwise exclusive or,</i></font>
 <a name="line-118"></a><font color=Blue><i>-- and \"+\" denotes binary addition.</i></font>
 <a name="line-119"></a>
 <a name="line-120"></a><font color=Blue><i>-- ----------------------------------------------------------------------</i></font>
@@ -284,7 +284,7 @@
 <a name="line-277"></a>
 <a name="line-278"></a><a name="setParent"></a><font color=Blue><i>-- | Input a node label /a/ of length at least /n/+2, and a flag</i></font>
 <a name="line-279"></a><font color=Blue><i>-- /isparent/ that has been initialized accordingly. Also input a</i></font>
-<a name="line-280"></a><font color=Blue><i>-- register /b/ of length at least /n/+2, initialized to |0&#9002;.  If</i></font>
+<a name="line-280"></a><font color=Blue><i>-- register /b/ of length at least /n/+2, initialized to |0&#x232a;.  If</i></font>
 <a name="line-281"></a><font color=Blue><i>-- /isparent/ is set, set /b/ to the node label of the parent of</i></font>
 <a name="line-282"></a><font color=Blue><i>-- /a/. This is self-inverse.</i></font>
 <a name="line-283"></a><font color=Blue>setParent</font> <font color=Red>::</font> <font color=Cyan>(</font>Qureg<font color=Cyan>,</font> Qureg<font color=Cyan>,</font> Qubit<font color=Cyan>,</font> Int<font color=Cyan>)</font> <font color=Red>-&gt;</font> Circ ()
@@ -370,22 +370,22 @@
 <a name="line-363"></a>  return ()
 <a name="line-364"></a>
 <a name="line-365"></a><a name="doWeld1"></a><font color=Blue><i>-- | Input a node label /a/, and a register /b/ initialized to</i></font>
-<a name="line-366"></a><font color=Blue><i>-- |0&#9002;. If /weldctrl/ is set, set /b/ to the node connected to /a/</i></font>
+<a name="line-366"></a><font color=Blue><i>-- |0&#x232a;. If /weldctrl/ is set, set /b/ to the node connected to /a/</i></font>
 <a name="line-367"></a><font color=Blue><i>-- by the welding function /f/. This is self-inverse. Here, /a/ and</i></font>
 <a name="line-368"></a><font color=Blue><i>-- /b/ are quantum registers of length at least /n/+2, and /f/ is a</i></font>
 <a name="line-369"></a><font color=Blue><i>-- boolean register of length /n/.</i></font>
 <a name="line-370"></a><font color=Blue>doWeld1</font> <font color=Red>::</font> <font color=Cyan>(</font>Qureg<font color=Cyan>,</font> Qureg<font color=Cyan>,</font> Qubit<font color=Cyan>,</font> Boolreg<font color=Cyan>,</font> Int<font color=Cyan>)</font> <font color=Red>-&gt;</font> Circ ()
-<a name="line-371"></a><font color=Blue>doWeld1</font> <font color=Cyan>(</font>a<font color=Cyan>,</font> b<font color=Cyan>,</font> weldctrl<font color=Cyan>,</font> f<font color=Cyan>,</font> n<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
+<a name="line-371"></a><font color=Blue>doWeld1</font> <font color=Cyan>(</font>a<font color=Cyan>,</font> b<font color=Cyan>,</font> weldctrl<font color=Cyan>,</font> g<font color=Cyan>,</font> n<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-372"></a>  comment_with_label <font color=Magenta>"ENTER: doWeld1"</font> <font color=Cyan>(</font>a<font color=Cyan>,</font> b<font color=Cyan>,</font> weldctrl<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"a"</font><font color=Cyan>,</font> <font color=Magenta>"b"</font><font color=Cyan>,</font> <font color=Magenta>"weldctrl"</font><font color=Cyan>)</font>
 <a name="line-373"></a>  with_ancilla <font color=Cyan>$</font> <font color=Red>\</font>addsub <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-374"></a>    with_controls <font color=Cyan>(</font>weldctrl <font color=Cyan>.==.</font> <font color=Magenta>1</font> <font color=Cyan>.&amp;&amp;.</font> a<font color=Cyan>.!</font><font color=Cyan>(</font>n<font color=Cyan>+</font><font color=Magenta>1</font><font color=Cyan>)</font> <font color=Cyan>.==.</font> <font color=Magenta>0</font><font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Green><u>do</u></font> <font color=Cyan>{</font>
 <a name="line-375"></a>      qnot_at addsub
 <a name="line-376"></a>    <font color=Cyan>}</font>
-<a name="line-377"></a>    cAddNum <font color=Cyan>(</font>addsub<font color=Cyan>,</font> b<font color=Cyan>,</font> a<font color=Cyan>,</font> f<font color=Cyan>,</font> n<font color=Cyan>)</font>
+<a name="line-377"></a>    cAddNum <font color=Cyan>(</font>addsub<font color=Cyan>,</font> b<font color=Cyan>,</font> a<font color=Cyan>,</font> g<font color=Cyan>,</font> n<font color=Cyan>)</font>
 <a name="line-378"></a>    with_controls <font color=Cyan>(</font>weldctrl <font color=Cyan>.==.</font> <font color=Magenta>1</font><font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Green><u>do</u></font> <font color=Cyan>{</font>
 <a name="line-379"></a>      qnot_at addsub
 <a name="line-380"></a>    <font color=Cyan>}</font>
-<a name="line-381"></a>    cSubNum <font color=Cyan>(</font>addsub<font color=Cyan>,</font> b<font color=Cyan>,</font> a<font color=Cyan>,</font> f<font color=Cyan>,</font> n<font color=Cyan>)</font>
+<a name="line-381"></a>    cSubNum <font color=Cyan>(</font>addsub<font color=Cyan>,</font> b<font color=Cyan>,</font> a<font color=Cyan>,</font> g<font color=Cyan>,</font> n<font color=Cyan>)</font>
 <a name="line-382"></a>    with_controls <font color=Cyan>(</font>weldctrl <font color=Cyan>.==.</font> <font color=Magenta>1</font> <font color=Cyan>.&amp;&amp;.</font> a<font color=Cyan>.!</font><font color=Cyan>(</font>n<font color=Cyan>+</font><font color=Magenta>1</font><font color=Cyan>)</font> <font color=Cyan>.==.</font> <font color=Magenta>1</font><font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Green><u>do</u></font> <font color=Cyan>{</font>
 <a name="line-383"></a>      qnot_at addsub
 <a name="line-384"></a>    <font color=Cyan>}</font>
@@ -393,16 +393,16 @@
 <a name="line-386"></a>  return ()
 <a name="line-387"></a>
 <a name="line-388"></a><a name="doWeld0"></a><font color=Blue><i>-- | Input a node label /a/, and a register /b/ initialized to</i></font>
-<a name="line-389"></a><font color=Blue><i>-- |0&#9002;. If /weldctrl/ is set, set /b/ to the node connected to /a/</i></font>
+<a name="line-389"></a><font color=Blue><i>-- |0&#x232a;. If /weldctrl/ is set, set /b/ to the node connected to /a/</i></font>
 <a name="line-390"></a><font color=Blue><i>-- by the welding function /g/. This is self-inverse. Here, /a/ and</i></font>
 <a name="line-391"></a><font color=Blue><i>-- /b/ are quantum registers of length at least /n/+2, and /g/ is a</i></font>
 <a name="line-392"></a><font color=Blue><i>-- boolean register of length /n/.</i></font>
 <a name="line-393"></a><font color=Blue>doWeld0</font> <font color=Red>::</font> <font color=Cyan>(</font>Qureg<font color=Cyan>,</font> Qureg<font color=Cyan>,</font> Qubit<font color=Cyan>,</font> Boolreg<font color=Cyan>,</font> Int<font color=Cyan>)</font> <font color=Red>-&gt;</font> Circ ()
-<a name="line-394"></a><font color=Blue>doWeld0</font> <font color=Cyan>(</font>a<font color=Cyan>,</font> b<font color=Cyan>,</font> weldctrl<font color=Cyan>,</font> g<font color=Cyan>,</font> n<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
+<a name="line-394"></a><font color=Blue>doWeld0</font> <font color=Cyan>(</font>a<font color=Cyan>,</font> b<font color=Cyan>,</font> weldctrl<font color=Cyan>,</font> f<font color=Cyan>,</font> n<font color=Cyan>)</font> <font color=Red>=</font> <font color=Green><u>do</u></font>
 <a name="line-395"></a>  comment_with_label <font color=Magenta>"ENTER: doWeld0"</font> <font color=Cyan>(</font>a<font color=Cyan>,</font> b<font color=Cyan>,</font> weldctrl<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"a"</font><font color=Cyan>,</font> <font color=Magenta>"b"</font><font color=Cyan>,</font> <font color=Magenta>"weldctrl"</font><font color=Cyan>)</font>
 <a name="line-396"></a>  for <font color=Magenta>0</font> <font color=Cyan>(</font>n<font color=Blue><i>-</i></font><font color=Magenta>1</font><font color=Cyan>)</font> <font color=Magenta>1</font> <font color=Cyan>$</font> <font color=Red>\</font>index <font color=Red>-&gt;</font> <font color=Green><u>do</u></font>
 <a name="line-397"></a>    with_controls <font color=Cyan>(</font>weldctrl <font color=Cyan>.==.</font> <font color=Magenta>1</font><font color=Cyan>)</font> <font color=Cyan>$</font> <font color=Green><u>do</u></font> <font color=Cyan>{</font>
-<a name="line-398"></a>      qnot_at <font color=Cyan>(</font>b<font color=Cyan>.!</font><font color=Cyan>(</font>index<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>`controlled`</font> a<font color=Cyan>.!</font><font color=Cyan>(</font>index<font color=Cyan>)</font> <font color=Cyan>./=.</font> g<font color=Cyan>.!</font><font color=Cyan>(</font>index<font color=Cyan>)</font>
+<a name="line-398"></a>      qnot_at <font color=Cyan>(</font>b<font color=Cyan>.!</font><font color=Cyan>(</font>index<font color=Cyan>)</font><font color=Cyan>)</font> <font color=Cyan>`controlled`</font> a<font color=Cyan>.!</font><font color=Cyan>(</font>index<font color=Cyan>)</font> <font color=Cyan>./=.</font> f<font color=Cyan>.!</font><font color=Cyan>(</font>index<font color=Cyan>)</font>
 <a name="line-399"></a>    <font color=Cyan>}</font>
 <a name="line-400"></a>  endfor
 <a name="line-401"></a>  comment_with_label <font color=Magenta>"EXIT: doWeld0"</font> <font color=Cyan>(</font>a<font color=Cyan>,</font> b<font color=Cyan>,</font> weldctrl<font color=Cyan>)</font> <font color=Cyan>(</font><font color=Magenta>"a"</font><font color=Cyan>,</font> <font color=Magenta>"b"</font><font color=Cyan>,</font> <font color=Magenta>"weldctrl"</font><font color=Cyan>)</font>
@@ -410,7 +410,7 @@
 <a name="line-403"></a>
 <a name="line-404"></a><a name="cAddNum"></a><font color=Blue><i>-- | This function implements integer addition. Input a quantum</i></font>
 <a name="line-405"></a><font color=Blue><i>-- register /input/ and a boolean register /num/, representing</i></font>
-<a name="line-406"></a><font color=Blue><i>-- integers, and a quantum register /out/ initialized to |0&#9002;. If</i></font>
+<a name="line-406"></a><font color=Blue><i>-- integers, and a quantum register /out/ initialized to |0&#x232a;. If</i></font>
 <a name="line-407"></a><font color=Blue><i>-- /control/ is set, set /out/ to /input/ + /num/, otherwise do</i></font>
 <a name="line-408"></a><font color=Blue><i>-- nothing.  Here /input/ and /out/ are quantum registers of length at</i></font>
 <a name="line-409"></a><font color=Blue><i>-- least /n/, /num/ is a boolean register of length /n/.</i></font>
