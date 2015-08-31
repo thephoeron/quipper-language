@@ -1,5 +1,12 @@
 # QUIPPER-LANGUAGE
 
+[![Build Status](https://circleci.com/gh/thephoeron/quipper-language.svg?style=shield)](https://circleci.com/gh/thephoeron/quipper-language)
+[![Coverage Status](http://coveralls.io/repos/thephoeron/quipper-language/badge.svg?branch=master&service=github)](http://coveralls.io/github/thephoeron/quipper-language?branch=master)
+[![Not yet available on Hackage](http://img.shields.io/badge/hackage-not%20available-grey.svg)](http://hackage.haskell.org/)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Join the chat at https://gitter.im/thephoeron/quipper-language](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thephoeron/quipper-language?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+
 Quipper: embedded, scalable functional programming language for quantum computing, based on the Quantum Lambda Calculus; v0.7 (10/14/2014).
 
 Unofficial fork from: http://www.mathstat.dal.ca/~selinger/quipper/
